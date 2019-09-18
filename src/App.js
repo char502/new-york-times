@@ -29,7 +29,7 @@ class App extends React.Component {
     const settings = {
       dots: true,
       infinite: true,
-      speed: 50000,
+      speed: 10000,
       slidesToShow: 1,
       slidesToScroll: 1
     };
