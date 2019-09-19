@@ -2,19 +2,17 @@ import React from "react";
 import styled from "styled-components";
 
 const NavBottomLineContainer = styled.div`
-  width: 100vw;
+  width: 100%;
   height: 45px;
-  background-color: blue;
+  background-color: yellow;
 `;
 
 const NavBottomLineContainerInner = styled.div`
   height: 100%;
   width: 100%;
   margin: 0 auto;
-  padding: 0 20px 0 20px;
   display: flex;
   align-items: center;
-  /* background-color: blue; */
 `;
 
 const NavBarItems = [
@@ -37,6 +35,86 @@ const NavBarItems = [
   "Real Estate",
   "All"
 ];
+
+// const newsSources = [
+//   {
+//     "id": "abc-news",
+//     "name": "ABC News"
+//   }
+//   {
+//     "id": "ars-technica",
+//     "name": "Ars Technica",
+//   },
+//   {
+//     "id": "bbc-news",
+//     "name": "BBC News"
+//   },
+//   {
+//     "id": "bloomberg",
+//     "name": "Bloomberg"
+//   },
+//   {
+//     "id": "crypto-coins-news",
+//     "name": "Crypto Coins News"
+//   },
+//   {
+//     "id": "hacker-news",
+//     "name": "Hacker News"
+//   },
+//   {
+//     "id": "ign",
+//     "name": "IGN",
+//   },
+//   {
+//     "id": "mashable",
+//     "name": "Mashable"
+//   },
+//   {
+//     "id": "metro",
+//     "name": "Metro"
+//   },
+//   {
+//     "id": "national-geographic",
+//     "name": "National Geographic"
+//   },
+//   {
+//     "id": "new-scientist",
+//     "name": "New Scientist"
+//   },
+//   {
+//     "id": "newsweek",
+//     "name": "Newsweek"
+//   },
+//   {
+//     "id": "next-big-future",
+//     "name": "Next Big Future",
+//   },
+//   {
+//     "id": "polygon",
+//     "name": "Polygon"
+//   },
+//   {
+//     "id": "recode",
+//     "name": "Recode"
+//   },
+//   {
+//     "id": "the-verge",
+//     "name": "The Verge"
+//   },
+//   {
+//     "id": "time",
+//     "name": "Time"
+//   },
+//   // {
+//   //   "id": /* "All" not sure */
+//   //     "name": "All",
+
+//   // },
+// ]
+
+// Api endpoint: https://newsapi.org/v2/sources?language=en&apiKey=844f83db9ed44325a55725ad85a1592c
+
+// ===========================
 
 const NewsLink = styled.div`
   padding: 5px 15px 5px 15px;
