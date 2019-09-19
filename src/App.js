@@ -1,6 +1,9 @@
 import React from "react";
-import axios from "axios";
-import Slider from "react-slick";
+import NewsApiRequest from "./components/ApiRequest/NewsApiRequest";
+
+// components
+import Nav from "./components/Nav/Nav";
+import MainCarousel from "./components/Carousel/MainCarousel";
 
 import "./App.css";
 import "./index.css";
@@ -11,11 +14,8 @@ class App extends React.Component {
   };
 
   async componentDidMount() {
-    const response = await axios.get(
-      "https://newsapi.org/v2/top-headlines?country=gb&apiKey=844f83db9ed44325a55725ad85a1592c"
-    );
+    const response = await NewsApiRequest.get();
 
-    console.log(response);
     const news = response.data.articles;
 
     this.setState({
@@ -24,26 +24,10 @@ class App extends React.Component {
   }
 
   render() {
-    console.log(this.state.news);
-
-    const settings = {
-      dots: true,
-      infinite: true,
-      speed: 10000,
-      slidesToShow: 1,
-      slidesToScroll: 1
-    };
     return (
       <div>
-        <h2>Single Item</h2>
-        {/* {this.state.news.map((article) => (
-          <div key={article.title}>{article.title}</div>
-        ))} */}
-        <Slider {...settings}>
-          {this.state.news.map((article) => (
-            <div key={article.title}>{article.title}</div>
-          ))}
-        </Slider>
+        <Nav />
+        <MainCarousel newsData={this.state.news} />
       </div>
     );
   }
