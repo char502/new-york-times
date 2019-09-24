@@ -15,19 +15,23 @@ class SearchResults extends React.Component {
   };
 
   async componentDidMount() {
+    let searchTerm = this.props.location.search.split("=")[1];
+    // console.log(searchTerm);
     this.setState({ loading: true });
-    const news = await getSearchNews(this.props.location.search);
+    const news = await getSearchNews(searchTerm);
     console.log(news);
     this.setState({ loading: false, results: news.data.articles });
     console.log(this.state.results);
   }
 
   render() {
-    console.log(this.props.location.search.searchTerm);
+    // console.log(this.props.location.search.split("=")[1]);
     return (
       <div>
         {this.state.results.map((result, index) => (
-          <div key={index}>{result.description}</div>
+          <ul>
+            <li key={index}>{result.description}</li>
+          </ul>
         ))}
       </div>
     );

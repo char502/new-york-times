@@ -64,6 +64,7 @@ class NavTopLine extends React.Component {
     // console.log(news);
     // this.setState({ loading: false, results: news.data.articles });
     // console.log(this.state.results);
+    this.setState({ searchTerm: "" });
   };
 
   render() {
