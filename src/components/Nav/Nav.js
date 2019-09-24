@@ -6,6 +6,7 @@ import styled from "styled-components/macro";
 import NavTopLine from "./NavTopLine/NavTopLine";
 import NavBottomLine from "./NavBottomLine/NavBottomLine";
 
+// ======== Styled Components ========
 const NavBarContainer = styled.div`
   width: 100vw;
   background-color: green;
@@ -17,6 +18,7 @@ const NavBarInner = styled.div`
   max-width: 1200px;
   margin: 0 auto;
 `;
+// ===================================
 
 const Nav = () => (
   <NavBarContainer>

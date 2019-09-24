@@ -1,13 +1,16 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import styled from "styled-components";
-import api from "./utils/api";
+import { getNews } from "./utils/api";
 // components
 import Nav from "./components/Nav/Nav";
 import MainCarousel from "./components/Carousel/MainCarousel";
 import "./index.css";
 import newsRoutes from "./newsSources";
 
+import SearchResults from "./components/Nav/NavTopLine/SearchResults";
+
+// ======== Styled Components ========
 const MainBodyContainer = styled.div`
   width: 100vw;
   background-color: LightSkyBlue;
@@ -19,6 +22,7 @@ const MainBodyContainerInner = styled.div`
   max-width: 1200px;
   margin: 0 auto;
 `;
+// ===================================
 
 class FetchNews extends React.Component {
   state = {
@@ -26,13 +30,15 @@ class FetchNews extends React.Component {
   };
 
   async componentDidMount() {
-    const response = await api(this.props.path.split("/")[1]);
-
-    console.log(response);
+    this.setState({ loading: true });
+    const response = await getNews(this.props.location.pathname.split("/")[1]);
+    // why include the "/" then take it away again with split
+    // Is it because Rreact-Router requires it but the api call
+    // via axios doesn't?
     const news = response.data.articles;
-
-    console.log(news);
+    console.log(this.props);
     this.setState({
+      loading: false,
       news
     });
   }
@@ -60,14 +66,14 @@ class App extends React.Component {
             {newsRoutes.map((route) => (
               <Route
                 key={route.name}
-                path={route.path}
+                path={`/${route.path}`}
+                // Just check, why is path here twice?
+                // standard Route <Route path="/create" component={ComponentToRender} />
                 exact
-                component={(props) => (
-                  <FetchNews {...props} path={route.path} />
-                )}
+                component={FetchNews}
               />
-              // Are components being generated on the fly here?
             ))}
+            <Route path="/search" component={SearchResults} />
           </div>
         </Router>
       </div>
@@ -76,3 +82,5 @@ class App extends React.Component {
 }
 
 export default App;
+
+// https://newsapi.org/v2/everything?q=france&apiKey=844f83db9ed44325a55725ad85a1592c

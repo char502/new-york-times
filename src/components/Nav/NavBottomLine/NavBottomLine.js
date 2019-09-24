@@ -32,7 +32,7 @@ const NavBottomLine = () => (
   <NavBottomLineContainer>
     <NavBottomLineContainerInner>
       {newsSources.map((link) => (
-        <NewsLink key={link.name} to={link.path}>
+        <NewsLink key={link.name} to={`/${link.path}`}>
           {link.name}
         </NewsLink>
       ))}

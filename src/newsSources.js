@@ -1,70 +1,70 @@
 export default [
   {
-    path: "/abc-news",
+    path: "abc-news",
     name: "ABC News"
   },
   {
-    path: "/ars-technica",
+    path: "ars-technica",
     name: "Ars Technica"
   },
   {
-    path: "/bbc-news",
+    path: "bbc-news",
     name: "BBC News"
   },
   {
-    path: "/bloomberg",
+    path: "bloomberg",
     name: "Bloomberg"
   },
   {
-    path: "/crypto-coins-news",
+    path: "crypto-coins-news",
     name: "Crypto Coins News"
   },
   {
-    path: "/hacker-news",
+    path: "hacker-news",
     name: "Hacker News"
   },
   {
-    path: "/ign",
+    path: "ign",
     name: "IGN"
   },
   {
-    path: "/mashable",
+    path: "mashable",
     name: "Mashable"
   },
   {
-    path: "/metro",
+    path: "metro",
     name: "Metro"
   },
   {
-    path: "/national-geographic",
+    path: "national-geographic",
     name: "National Geographic"
   },
   {
-    path: "/new-scientist",
+    path: "new-scientist",
     name: "New Scientist"
   },
   {
-    path: "/newsweek",
+    path: "newsweek",
     name: "Newsweek"
   },
   {
-    path: "/next-big-future",
+    path: "next-big-future",
     name: "Next Big Future"
   },
   {
-    path: "/polygon",
+    path: "polygon",
     name: "Polygon"
   },
   {
-    path: "/recode",
+    path: "recode",
     name: "Recode"
   },
   {
-    path: "/the-verge",
+    path: "the-verge",
     name: "The Verge"
   },
   {
-    path: "/time",
+    path: "time",
     name: "Time"
   }
 ];
