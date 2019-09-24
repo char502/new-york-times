@@ -25,21 +25,20 @@ class SearchResults extends React.Component {
   }
 
   // componentDidUpdate(prevProps, prevState) {
-  //   let searchTerm = this.props.location.search.split("=")[1];
-  //   if (searchTerm !== prevProps.searchTerm) {
-  //     console.log("they are different");
+  //   if (prevState.results) {
+  //     let searchTerm = this.props.location.search.split("=")[1];
   //     this.setState({ results: [] });
-  //     this.setState({ loading: true });
-  //     const news =  getSearchNews(searchTerm);
-
-  //     this.setState({ loading: false, results: news.data.articles });
+  //     // this.setState({ loading: true });
+  //     const news = getSearchNews(searchTerm);
+  //     console.log(news);
+  //     // this.setState({ loading: false, results: news.data.articles });
   //   }
   // }
 
   render() {
     // console.log(this.props.location.search.split("=")[1]);
     console.log(this.props.location.search.split("=")[1]);
-    console.log(this.prevProps);
+    // console.log(this.prevProps);
     return (
       <div>
         {this.state.results.map((result, index) => (

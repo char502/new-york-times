@@ -1,9 +1,9 @@
 import React from "react";
-import { withRouter, Redirect } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 // import { getSearchNews } from "../../../utils/api";
 
 // SearchResultsComponent
-import SearchResults from "./SearchResults";
+// import SearchResults from "./SearchResults";
 
 // import styled from "styled-components";
 import styled from "styled-components/macro";
