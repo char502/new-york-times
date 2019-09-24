@@ -14,7 +14,7 @@ class SearchResults extends React.Component {
     results: []
   };
 
-  async componentDidMount() {
+  async componentDidMount(prevProps) {
     let searchTerm = this.props.location.search.split("=")[1];
     // console.log(searchTerm);
     this.setState({ loading: true });
@@ -24,13 +24,27 @@ class SearchResults extends React.Component {
     console.log(this.state.results);
   }
 
+  // componentDidUpdate(prevProps, prevState) {
+  //   let searchTerm = this.props.location.search.split("=")[1];
+  //   if (searchTerm !== prevProps.searchTerm) {
+  //     console.log("they are different");
+  //     this.setState({ results: [] });
+  //     this.setState({ loading: true });
+  //     const news =  getSearchNews(searchTerm);
+
+  //     this.setState({ loading: false, results: news.data.articles });
+  //   }
+  // }
+
   render() {
     // console.log(this.props.location.search.split("=")[1]);
+    console.log(this.props.location.search.split("=")[1]);
+    console.log(this.prevProps);
     return (
       <div>
         {this.state.results.map((result, index) => (
-          <ul>
-            <li key={index}>{result.description}</li>
+          <ul key={index}>
+            <li>{result.description}</li>
           </ul>
         ))}
       </div>

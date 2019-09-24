@@ -48,8 +48,8 @@ const NavTopLineContainerInner = styled.div`
 
 class NavTopLine extends React.Component {
   state = {
-    searchTerm: "",
-    results: []
+    searchTerm: ""
+    // results: []
   };
 
   handleChange = (e) => this.setState({ searchTerm: e.target.value });
