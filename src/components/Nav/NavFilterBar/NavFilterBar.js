@@ -38,9 +38,8 @@ class NavFilterBar extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    // this.props.history.push(`/filter?filter=${this.state.filter}`);
 
-    // this.setState({ filter: "" });
+    this.props.history.push(``);
   };
 
   async componentDidMount() {
