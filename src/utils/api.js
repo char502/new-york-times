@@ -8,14 +8,18 @@ export const getNews = (path) => {
   return axios.get(link);
 };
 
-export const getSearchNews = (searchTerm) => {
-  const link = `${baseUrl}/everything?q=${searchTerm}&apiKey=${process.env.REACT_APP_API_KEY}`;
-
+export const getSearchNews = (searchTerm, sources) => {
+  let link = "";
+  if (sources) {
+    link = `${baseUrl}/everything?q=${searchTerm}&sources=${sources}&apiKey=${process.env.REACT_APP_API_KEY}`;
+  } else {
+    link = `${baseUrl}/everything?q=${searchTerm}&apiKey=${process.env.REACT_APP_API_KEY}`;
+  }
   return axios.get(link);
 };
 
-export const getfilteredNews = (source) => {
-  const link = `${baseUrl}/sources?id=${source}&apiKey=${process.env.REACT_APP_API_KEY}`;
+// export const getfilteredNews = (source) => {
+//   const link = `${baseUrl}/sources?id=${source}&apiKey=${process.env.REACT_APP_API_KEY}`;
 
-  return axios.get(link);
-};
+//   return axios.get(link);
+// };

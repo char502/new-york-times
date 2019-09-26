@@ -75,7 +75,7 @@ class App extends React.Component {
               />
             ))}
             <Route path="/search" component={SearchResults} />
-            <Route path="/filter" component={NavFilterBar} />
+            {/* <Route path="/filter" component={NavFilterBar} /> */}
             {/* <Route path="/search" component={FilterDate} /> */}
           </div>
         </Router>

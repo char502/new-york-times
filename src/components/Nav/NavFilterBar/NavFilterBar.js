@@ -25,10 +25,10 @@ const NavFilterBarContainerInner = styled.div`
 
 class NavFilterBar extends React.Component {
   state = {
-    filter: "",
-    newsURL: "",
-    results: [],
-    filteredResults: []
+    filter: ""
+    // newsURL: "",
+    // results: [],
+    // filteredResults: []
   };
 
   handleChange = (e) => {
@@ -39,25 +39,27 @@ class NavFilterBar extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
 
-    this.props.history.push(``);
+    // console.log(this.props.location.search); //"?searchTerm=jam"
+
+    let searchQuery = queryString.parse(this.props.location.search);
+    // console.log(searchQuery);
+
+    searchQuery.sources = this.state.filter;
+    // console.log(searchQuery.source);
+    // console.log(searchQuery);
+
+    const stringifiedSearchQuery = queryString.stringify(searchQuery);
+    // console.log(stringifiedSearchQuery); //searchTerm=grapes&source=bbc-news
+
+    this.props.history.push(`search/?${stringifiedSearchQuery}`);
+    // console.log(source);
   };
 
-  async componentDidMount() {
-    let query = queryString.parse(this.props.location.search);
-    console.log(query);
-
-    this.setState({ loading: true });
-    const news = await getSearchNews(query.searchTerm);
-    this.setState({ loading: false, results: news.data.articles });
-  }
-
-  // componentDidUpdate(prevProps) {
-  //   if (prevProps.location.search !== this.props.location.search) {
-  //     this.getData();
-  //   }
-  // }
-
   // https://newsapi.org/v2/everything?q=apples&sources=bbc-news&apiKey=174fa93fc630400bb21846743dcc5f64
+
+  // https://newsapi.org/v2/everything?q=grapes&sources=mashable&apiKey=174fa93fc630400bb21846743dcc5f64
+
+  // https://newsapi.org/v2/everything?q=monkeys&sources=bloomburg&apiKey=174fa93fc630400bb21846743dcc5f64
 
   displayNewsOptions = () => {
     return newsSources.map((item) => (
