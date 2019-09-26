@@ -1,14 +1,15 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import styled from "styled-components";
+import styled from "styled-components/macro";
 import { getNews } from "./utils/api";
 // components
 import Nav from "./components/Nav/Nav";
 import MainCarousel from "./components/Carousel/MainCarousel";
 import "./index.css";
 import newsRoutes from "./newsSources";
-
 import SearchResults from "./components/Nav/NavTopLine/SearchResults";
+import FilterBySource from "./components/Nav/NavFilterBar/FilterBySource";
+import NavFilterBar from "./components/Nav/NavFilterBar/NavFilterBar";
 
 // ======== Styled Components ========
 const MainBodyContainer = styled.div`
@@ -74,6 +75,8 @@ class App extends React.Component {
               />
             ))}
             <Route path="/search" component={SearchResults} />
+            <Route path="/filter" component={NavFilterBar} />
+            {/* <Route path="/search" component={FilterDate} /> */}
           </div>
         </Router>
       </div>

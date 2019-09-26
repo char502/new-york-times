@@ -1,51 +1,47 @@
 import React from "react";
+import queryString from "query-string";
 import { getSearchNews } from "../../../utils/api";
 
-// const SearchResults = (props) => {
-//   console.log(props);
-
-//   return <div>These are the Search Results</div>;
-// };
-
-// export default SearchResults;
+// import FilterBySource from "../NavFilterBar/FilterBySource";
 
 class SearchResults extends React.Component {
   state = {
     results: []
   };
 
-  async componentDidMount(prevProps) {
-    let searchTerm = this.props.location.search.split("=")[1];
-    // console.log(searchTerm);
+  getData = async () => {
+    let query = queryString.parse(this.props.location.search);
+    // console.log(query);
+
     this.setState({ loading: true });
-    const news = await getSearchNews(searchTerm);
+    const news = await getSearchNews(query.searchTerm);
     console.log(news);
+    // https://newsapi.org/v2/everything?q=apples&apiKey=174fa93fc630400bb21846743dcc5f64
+
     this.setState({ loading: false, results: news.data.articles });
-    console.log(this.state.results);
+  };
+
+  componentDidMount() {
+    this.getData();
   }
 
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (prevState.results) {
-  //     let searchTerm = this.props.location.search.split("=")[1];
-  //     this.setState({ results: [] });
-  //     // this.setState({ loading: true });
-  //     const news = getSearchNews(searchTerm);
-  //     console.log(news);
-  //     // this.setState({ loading: false, results: news.data.articles });
-  //   }
-  // }
+  componentDidUpdate(prevProps) {
+    if (prevProps.location.search !== this.props.location.search) {
+      this.getData();
+    }
+  }
 
   render() {
-    // console.log(this.props.location.search.split("=")[1]);
-    console.log(this.props.location.search.split("=")[1]);
-    // console.log(this.prevProps);
+    console.log(this.props.location);
+    const { results } = this.state;
     return (
       <div>
-        {this.state.results.map((result, index) => (
+        {results.map((result, index) => (
           <ul key={index}>
             <li>{result.description}</li>
           </ul>
         ))}
+        {/* <NavFilterBar news={} /> */}
       </div>
     );
   }
