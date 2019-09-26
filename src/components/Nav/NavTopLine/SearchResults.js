@@ -16,7 +16,7 @@ class SearchResults extends React.Component {
     console.log(this.props.location.search);
 
     let query = queryString.parse(this.props.location.search);
-    console.log(query); // {searchTerm: "dials"}
+    console.log(query); // {searchTerm: "apples"} after filter is {searchTerm: "apples", sources: "bbc-news"}
 
     this.setState({ loading: true });
     const news = await getSearchNews(query.searchTerm, query.sources);
@@ -56,7 +56,9 @@ class SearchResults extends React.Component {
       <div>
         {results.map((result, index) => (
           <ul key={index}>
-            <li>{result.description}</li>
+            <li>
+              <a href={result.url}>{result.description}</a>
+            </li>
           </ul>
         ))}
         {/* <NavFilterBar news={} /> */}
