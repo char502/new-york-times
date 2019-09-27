@@ -32,26 +32,25 @@ class NavFilterBar extends React.Component {
     // console.log(this.state.filter);
     console.log(val.path);
     console.log(this.state.filter);
-    // console.log(e.target.value);
+  };
+
+  handleSubmit = (e) => {
+    e.preventDefault();
     let searchQuery = queryString.parse(this.props.location.search);
     console.log(searchQuery);
     searchQuery.sources = this.state.filter;
-    console.log(searchQuery.sources);
     const stringifiedSearchQuery = queryString.stringify(searchQuery);
-    console.log(stringifiedSearchQuery);
-    this.props.history.push(`search/?${stringifiedSearchQuery}`);
+    this.props.history.push(`?${stringifiedSearchQuery}`);
+
+    this.setState({ filter: "" });
   };
 
-  // handleSubmit = (e) => {
-  //   // e.preventDefault();
-  //   let searchQuery = queryString.parse(this.props.location.search);
-  //   console.log(searchQuery);
-  //   searchQuery.sources = this.state.filter;
-  //   const stringifiedSearchQuery = queryString.stringify(searchQuery);
-  //   this.props.history.push(`search/?${stringifiedSearchQuery}`);
-
-  //   // this.setState({ filter: "" });
-  // };
+  componentDidMount() {
+    if (!this.state.filter) {
+      this.setState({ filter: this.state.filter });
+    }
+    console.log(this.props);
+  }
 
   // componentDidUpdate(prevProps) {
   //   if (prevProps.searchterm !== this.props.searchterm && this.props.source) {
@@ -94,6 +93,7 @@ class NavFilterBar extends React.Component {
                 getOptionLabel={(option) => `${option.name}`}
                 getOptionValue={(option) => `${option.path}`}
                 onChange={this.handleChange}
+                /* inputValue={this.state.filter} */
                 /* onSubmit={this.handleSubmit} */
                 /* isOptionSelected={(option) => {
                   return this.state.filter === option.name ? true : false;
@@ -101,7 +101,7 @@ class NavFilterBar extends React.Component {
                 placeholder={"Select Source"}
               />
             </label>
-            {/* <input type="submit" value="Submit" /> */}
+            <input type="submit" value="Submit" />
           </form>
         </NavFilterBarContainerInner>
       </NavFilterBarContainer>
