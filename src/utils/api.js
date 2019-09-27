@@ -17,9 +17,3 @@ export const getSearchNews = (searchTerm, sources) => {
   }
   return axios.get(link);
 };
-
-// export const getfilteredNews = (source) => {
-//   const link = `${baseUrl}/sources?id=${source}&apiKey=${process.env.REACT_APP_API_KEY}`;
-
-//   return axios.get(link);
-// };

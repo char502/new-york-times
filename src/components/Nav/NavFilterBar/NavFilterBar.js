@@ -2,14 +2,13 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import queryString from "query-string";
 import styled from "styled-components/macro";
-// import queryString from "query-string";
+import Select from "react-select";
 import newsSources from "../../../newsSources";
-import { getSearchNews } from "../../../utils/api";
 
 // ======== Styled Components ========
 const NavFilterBarContainer = styled.div`
   width: 100%;
-  height: 30px;
+  height: 100px;
   background-color: MediumSeaGreen;
 `;
 
@@ -20,70 +19,89 @@ const NavFilterBarContainerInner = styled.div`
   display: flex;
   align-items: center;
 `;
-
 // ===================================
 
 class NavFilterBar extends React.Component {
   state = {
     filter: ""
-    // newsURL: "",
-    // results: [],
-    // filteredResults: []
   };
 
-  handleChange = (e) => {
-    this.setState({ filter: e.target.value });
+  handleChange = (val) => {
+    console.log(val);
+    this.setState({ filter: val.path });
+    // console.log(this.state.filter);
+    console.log(val.path);
     console.log(this.state.filter);
-  };
-
-  handleSubmit = (e) => {
-    e.preventDefault();
-
-    // console.log(this.props.location.search); //"?searchTerm=jam"
-
+    // console.log(e.target.value);
     let searchQuery = queryString.parse(this.props.location.search);
-    // console.log(searchQuery);
-
+    console.log(searchQuery);
     searchQuery.sources = this.state.filter;
-    // console.log(searchQuery.source);
-    // console.log(searchQuery);
-
+    console.log(searchQuery.sources);
     const stringifiedSearchQuery = queryString.stringify(searchQuery);
-    // console.log(stringifiedSearchQuery); //searchTerm=grapes&source=bbc-news
-
+    console.log(stringifiedSearchQuery);
     this.props.history.push(`search/?${stringifiedSearchQuery}`);
-    // console.log(source);
   };
 
-  // https://newsapi.org/v2/everything?q=apples&sources=bbc-news&apiKey=174fa93fc630400bb21846743dcc5f64
+  // handleSubmit = (e) => {
+  //   // e.preventDefault();
+  //   let searchQuery = queryString.parse(this.props.location.search);
+  //   console.log(searchQuery);
+  //   searchQuery.sources = this.state.filter;
+  //   const stringifiedSearchQuery = queryString.stringify(searchQuery);
+  //   this.props.history.push(`search/?${stringifiedSearchQuery}`);
 
-  // https://newsapi.org/v2/everything?q=grapes&sources=mashable&apiKey=174fa93fc630400bb21846743dcc5f64
+  //   // this.setState({ filter: "" });
+  // };
 
-  // https://newsapi.org/v2/everything?q=monkeys&sources=bloomburg&apiKey=174fa93fc630400bb21846743dcc5f64
+  // componentDidUpdate(prevProps) {
+  //   if (prevProps.searchterm !== this.props.searchterm && this.props.source) {
+  //     this.setState({ filter: "" });
+  //   }
+  // }
 
-  displayNewsOptions = () => {
-    return newsSources.map((item) => (
-      <option key={item.name} value={item.path}>
-        {item.name}
-      </option>
-    ));
-  };
+  // displayNewsOptions = () => {
+  //   return newsSources.map((item) => (
+  //     <option key={item.name} value={item.path}>
+  //       {item.name}
+  //     </option>
+  //   ));
+  // };
+
+  // theSelectComponent = () => {
+  //   let currentValue = this.state.filter || "DEFAULT";
+  //   return (
+  //     <select value={currentValue} onChange={this.handleChange}>
+  //       <option value="DEFAULT" disabled>
+  //         Select Source
+  //       </option>
+  //       {this.displayNewsOptions()}
+  //     </select>
+  //   );
+  // };
+
   render() {
     console.log(this.props);
+    console.log(this.state);
     return (
       <NavFilterBarContainer>
         <NavFilterBarContainerInner>
           <form onSubmit={this.handleSubmit}>
+            {/* <label>Filter by news source: {this.theSelectComponent()}</label> */}
             <label>
-              Filter by news source:
-              <select defaultValue={"DEFAULT"} onChange={this.handleChange}>
-                <option value="DEFAULT" disabled>
-                  Select Source
-                </option>
-                {this.displayNewsOptions()}
-              </select>
+              Filter by news source
+              <Select
+                options={newsSources}
+                getOptionLabel={(option) => `${option.name}`}
+                getOptionValue={(option) => `${option.path}`}
+                onChange={this.handleChange}
+                /* onSubmit={this.handleSubmit} */
+                /* isOptionSelected={(option) => {
+                  return this.state.filter === option.name ? true : false;
+                }} */
+                placeholder={"Select Source"}
+              />
             </label>
-            <input type="submit" value="Submit" />
+            {/* <input type="submit" value="Submit" /> */}
           </form>
         </NavFilterBarContainerInner>
       </NavFilterBarContainer>

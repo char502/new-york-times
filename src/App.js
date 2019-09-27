@@ -8,8 +8,6 @@ import MainCarousel from "./components/Carousel/MainCarousel";
 import "./index.css";
 import newsRoutes from "./newsSources";
 import SearchResults from "./components/Nav/NavTopLine/SearchResults";
-import FilterBySource from "./components/Nav/NavFilterBar/FilterBySource";
-import NavFilterBar from "./components/Nav/NavFilterBar/NavFilterBar";
 
 // ======== Styled Components ========
 const MainBodyContainer = styled.div`
@@ -33,9 +31,6 @@ class FetchNews extends React.Component {
   async componentDidMount() {
     this.setState({ loading: true });
     const response = await getNews(this.props.location.pathname.split("/")[1]);
-    // why include the "/" then take it away again with split
-    // Is it because Rreact-Router requires it but the api call
-    // via axios doesn't?
     const news = response.data.articles;
     console.log(this.props);
     this.setState({
@@ -75,8 +70,6 @@ class App extends React.Component {
               />
             ))}
             <Route path="/search" component={SearchResults} />
-            {/* <Route path="/filter" component={NavFilterBar} /> */}
-            {/* <Route path="/search" component={FilterDate} /> */}
           </div>
         </Router>
       </div>
