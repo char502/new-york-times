@@ -1,6 +1,6 @@
 import React from "react";
 import queryString from "query-string";
-import { getSearchNews } from "../../../utils/api";
+import { getSearchNews } from "../utils/api";
 
 class SearchResults extends React.Component {
   state = {
@@ -8,15 +8,10 @@ class SearchResults extends React.Component {
   };
 
   getData = async () => {
-    console.log(this.props.location.search);
-
     let query = queryString.parse(this.props.location.search);
-    console.log(query); // {searchTerm: "apples"} after filter is {searchTerm: "apples", sources: "bbc-news"}
-
     this.setState({ loading: true });
     const news = await getSearchNews(query.searchTerm, query.sources);
     console.log(news);
-
     this.setState({ loading: false, results: news.data.articles });
   };
 
@@ -25,6 +20,7 @@ class SearchResults extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
+    //Used here because want something to happen after the state is updated?
     if (prevProps.location.search !== this.props.location.search) {
       this.getData();
     }

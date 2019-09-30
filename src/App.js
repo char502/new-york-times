@@ -1,56 +1,12 @@
 import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import styled from "styled-components/macro";
-import { getNews } from "./utils/api";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+
 // components
 import Nav from "./components/Nav/Nav";
-import MainCarousel from "./components/Carousel/MainCarousel";
 import "./index.css";
 import newsRoutes from "./newsSources";
-import SearchResults from "./components/Nav/NavTopLine/SearchResults";
-
-// ======== Styled Components ========
-const MainBodyContainer = styled.div`
-  width: 100vw;
-  background-color: LightSkyBlue;
-`;
-
-const MainBodyContainerInner = styled.div`
-  width: 100%;
-  height: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-`;
-// ===================================
-
-class FetchNews extends React.Component {
-  state = {
-    news: []
-  };
-
-  async componentDidMount() {
-    this.setState({ loading: true });
-    const response = await getNews(this.props.location.pathname.split("/")[1]);
-    const news = response.data.articles;
-    console.log(this.props);
-    this.setState({
-      loading: false,
-      news
-    });
-  }
-  render() {
-    return (
-      <MainBodyContainer>
-        {this.props.path}
-        <MainBodyContainerInner>
-          <MainCarousel newsData={this.state.news} />
-        </MainBodyContainerInner>
-      </MainBodyContainer>
-    );
-  }
-}
-
-// const Container = (props) => <div>{props.renderComponent()}</div>;
+import SearchResults from "./pages/SearchResults";
+import FetchNews from "./pages/FetchNews";
 
 class App extends React.Component {
   render() {
@@ -59,12 +15,13 @@ class App extends React.Component {
         <Router>
           <div>
             <Nav />
+            <Route exact path="/">
+              <Redirect to={`/${newsRoutes[0].path}`} component={FetchNews} />
+            </Route>
             {newsRoutes.map((route) => (
               <Route
                 key={route.name}
                 path={`/${route.path}`}
-                // Just check, why is path here twice?
-                // standard Route <Route path="/create" component={ComponentToRender} />
                 exact
                 component={FetchNews}
               />
@@ -78,5 +35,3 @@ class App extends React.Component {
 }
 
 export default App;
-
-// https://newsapi.org/v2/everything?q=france&apiKey=844f83db9ed44325a55725ad85a1592c

@@ -19,6 +19,10 @@ const NavFilterBarContainerInner = styled.div`
   display: flex;
   align-items: center;
 `;
+
+const FormButtons = styled.input`
+  margin: 10px 10px;
+`;
 // ===================================
 
 class NavFilterBar extends React.Component {
@@ -27,65 +31,51 @@ class NavFilterBar extends React.Component {
   };
 
   handleChange = (val) => {
-    console.log(val);
     this.setState({ filter: val.path });
-    // console.log(this.state.filter);
-    console.log(val.path);
-    console.log(this.state.filter);
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
     let searchQuery = queryString.parse(this.props.location.search);
-    console.log(searchQuery);
     searchQuery.sources = this.state.filter;
     const stringifiedSearchQuery = queryString.stringify(searchQuery);
+    console.log(stringifiedSearchQuery);
     this.props.history.push(`?${stringifiedSearchQuery}`);
 
     this.setState({ filter: "" });
   };
 
-  componentDidMount() {
-    if (!this.state.filter) {
-      this.setState({ filter: this.state.filter });
+  handleClearFilter = (e) => {
+    e.preventDefault();
+    let searchQuery = queryString.parse(this.props.location.search);
+    if (searchQuery.sources) {
+      delete searchQuery.sources;
+      this.setState({ filter: "" });
+      const filterKeyRemovedQuery = queryString.stringify(searchQuery);
+      this.props.history.push(`?${filterKeyRemovedQuery}`);
     }
-    console.log(this.props);
+  };
+
+  componentDidMount() {
+    let searchQuery = queryString.parse(this.props.location.search);
+    if (searchQuery.sources) {
+      this.setState({ filter: searchQuery.sources });
+    }
   }
 
-  // componentDidUpdate(prevProps) {
-  //   if (prevProps.searchterm !== this.props.searchterm && this.props.source) {
-  //     this.setState({ filter: "" });
-  //   }
-  // }
-
-  // displayNewsOptions = () => {
-  //   return newsSources.map((item) => (
-  //     <option key={item.name} value={item.path}>
-  //       {item.name}
-  //     </option>
-  //   ));
-  // };
-
-  // theSelectComponent = () => {
-  //   let currentValue = this.state.filter || "DEFAULT";
-  //   return (
-  //     <select value={currentValue} onChange={this.handleChange}>
-  //       <option value="DEFAULT" disabled>
-  //         Select Source
-  //       </option>
-  //       {this.displayNewsOptions()}
-  //     </select>
-  //   );
-  // };
+  componentDidUpdate(prevProps) {
+    //Used here because want something to happen after the state is updated?
+    if (prevProps.location.search !== this.props.location.search) {
+      let searchQuery = queryString.parse(this.props.location.search);
+      this.setState({ filter: searchQuery.sources });
+    }
+  }
 
   render() {
-    console.log(this.props);
-    console.log(this.state);
-    return (
+    return this.props.location.pathname === "/search" ? (
       <NavFilterBarContainer>
         <NavFilterBarContainerInner>
           <form onSubmit={this.handleSubmit}>
-            {/* <label>Filter by news source: {this.theSelectComponent()}</label> */}
             <label>
               Filter by news source
               <Select
@@ -93,19 +83,24 @@ class NavFilterBar extends React.Component {
                 getOptionLabel={(option) => `${option.name}`}
                 getOptionValue={(option) => `${option.path}`}
                 onChange={this.handleChange}
-                /* inputValue={this.state.filter} */
-                /* onSubmit={this.handleSubmit} */
-                /* isOptionSelected={(option) => {
-                  return this.state.filter === option.name ? true : false;
-                }} */
                 placeholder={"Select Source"}
+                value={newsSources.filter(
+                  ({ path }) => path === this.state.filter
+                )}
               />
             </label>
-            <input type="submit" value="Submit" />
+            {this.state.filter && <FormButtons type="submit" value="Submit" />}
+            {this.state.filter && (
+              <FormButtons
+                type="button"
+                value="Clear Filter"
+                onClick={this.handleClearFilter}
+              />
+            )}
           </form>
         </NavFilterBarContainerInner>
       </NavFilterBarContainer>
-    );
+    ) : null;
   }
 }
 
