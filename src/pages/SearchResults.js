@@ -1,6 +1,8 @@
 import React from "react";
 import queryString from "query-string";
 import { getSearchNews } from "../utils/api";
+// import NavFilterBar from "../components/Nav/NavFilterBar/NavFilterBar";
+// import newsSources from "../newsSources";
 // import axios from "axios";
 // import axiosCancel from "axios-cancel";
 
@@ -15,23 +17,11 @@ class SearchResults extends React.Component {
     const news = await getSearchNews(query.searchTerm, query.sources);
     console.log(news);
     this.setState({ loading: false, results: news.data.articles });
-
-    // try {
-    //   let query = queryString.parse(this.props.location.search);
-    //   this.setState({ loading: true });
-    //   const news = await getSearchNews(query.searchTerm, query.sources);
-    //   console.log(news);
-    //   this.setState({ loading: false, results: news.data.articles });
-    // } catch (thrown) {
-    //   if (axiosCancel.isCancel(thrown)) {
-    //     console.log("request cancelled");
-    //   } else {
-    //     console.log("some other reason");
-    //   }
-    // }
   };
 
   componentDidMount() {
+    let query = queryString.parse(this.props.location.search);
+    if (!query.searchTerm) return this.props.history.push(`/not-found`);
     this.getData();
   }
 
@@ -41,10 +31,6 @@ class SearchResults extends React.Component {
       this.getData();
     }
   }
-
-  // componentWillUnmount() {
-  //   axiosCancel(getSearchNews());
-  // }
 
   render() {
     const { results } = this.state;

@@ -7,12 +7,12 @@ import newsSources from "../../../newsSources";
 
 // ======== Styled Components ========
 const NavFilterBarContainer = styled.div`
-  width: 100%;
-  height: 100px;
+  /* width: 100%; */
+  height: 100%;
   background-color: MediumSeaGreen;
 `;
 
-const NavFilterBarContainerInner = styled.div`
+const NavFilterBarContainerInner = styled.form`
   height: 100%;
   width: 100%;
   margin: 0 auto;
@@ -20,9 +20,17 @@ const NavFilterBarContainerInner = styled.div`
   align-items: center;
 `;
 
-const FormButtons = styled.input`
-  margin: 10px 10px;
+const ContainerAndButtons = styled.div`
+  display: flex;
 `;
+
+const Buttoncontainer = styled.button`
+  display: flex;
+`;
+
+// const FormButtons = styled.input`
+//   margin: 10px 10px;
+// `;
 // ===================================
 
 class NavFilterBar extends React.Component {
@@ -71,36 +79,37 @@ class NavFilterBar extends React.Component {
     }
   }
 
+  // this.props.location.pathname === "/search" ?
   render() {
-    return this.props.location.pathname === "/search" ? (
+    return (
       <NavFilterBarContainer>
-        <NavFilterBarContainerInner>
-          <form onSubmit={this.handleSubmit}>
-            <label>
-              Filter by news source
+        <NavFilterBarContainerInner onSubmit={this.handleSubmit}>
+          <ContainerAndButtons>
+            <div style={{ width: "300px" }}>
               <Select
                 options={newsSources}
                 getOptionLabel={(option) => `${option.name}`}
                 getOptionValue={(option) => `${option.path}`}
                 onChange={this.handleChange}
-                placeholder={"Select Source"}
+                placeholder={"select by filter source"}
                 value={newsSources.filter(
                   ({ path }) => path === this.state.filter
                 )}
               />
-            </label>
-            {this.state.filter && <FormButtons type="submit" value="Submit" />}
-            {this.state.filter && (
-              <FormButtons
+            </div>
+
+            <Buttoncontainer>
+              <input type="submit" value="Submit" placeholder="search" />
+              <input
                 type="button"
                 value="Clear Filter"
                 onClick={this.handleClearFilter}
               />
-            )}
-          </form>
+            </Buttoncontainer>
+          </ContainerAndButtons>
         </NavFilterBarContainerInner>
       </NavFilterBarContainer>
-    ) : null;
+    );
   }
 }
 

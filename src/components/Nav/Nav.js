@@ -26,7 +26,7 @@ const Nav = () => (
     <NavBarInner>
       <NavTopLine />
       <NavBottomLine />
-      <NavFilterBar />
+      {/* <NavFilterBar /> */}
     </NavBarInner>
   </NavBarContainer>
 );
