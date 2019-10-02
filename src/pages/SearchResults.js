@@ -1,14 +1,13 @@
 import React from "react";
 import queryString from "query-string";
 import { getSearchNews } from "../utils/api";
-// import NavFilterBar from "../components/Nav/NavFilterBar/NavFilterBar";
-// import newsSources from "../newsSources";
-// import axios from "axios";
-// import axiosCancel from "axios-cancel";
+import moment from "moment";
 
 class SearchResults extends React.Component {
   state = {
-    results: []
+    results: [],
+    resultsToSave: JSON.parse(localStorage.getItem("newArrList"))
+    // isSaveClicked: false
   };
 
   getData = async () => {
@@ -32,6 +31,37 @@ class SearchResults extends React.Component {
     }
   }
 
+  handleSaveItem = (result) => {
+    // e.preventDefault();
+
+    const savedResult = {
+      ...result,
+      savedAt: moment().format("MMMM Do YYYY, h:mm:ss a")
+    };
+
+    let newsArr = [];
+
+    if (localStorage.getItem("savedNews")) {
+      newsArr = JSON.parse(localStorage.getItem("savedNews"));
+    }
+    newsArr.push(savedResult);
+    localStorage.setItem("savedNews", JSON.stringify(newsArr));
+
+    // if (localStorage.getItem("newArrList") === null) {
+    //   let newsArr = [];
+    //   newsArr.push({ resultSet });
+    //   localStorage.setItem("newArrList", JSON.stringify(newsArr));
+    // } else {
+    //   let newsArr = JSON.parse(localStorage.getItem("newArrList"));
+    //   newsArr.push({ resultSet });
+    //   localStorage.setItem("newArrList", JSON.stringify(newsArr));
+    // }
+    // this.setState({
+    //   resultsToSave: JSON.parse(localStorage.getItem("newArrList"))
+    // });
+    // console.log(this.state.resultsToSave);
+  };
+
   render() {
     const { results } = this.state;
     return (
@@ -39,7 +69,15 @@ class SearchResults extends React.Component {
         {results.map((result, index) => (
           <ul key={index}>
             <li>
-              <a href={result.url}>{result.title}</a>
+              <a href={result.url}>{result.title}</a>{" "}
+              <button
+                value={result}
+                /* id={index} */
+                onClick={() => this.handleSaveItem(result)}
+              >
+                {/* {this.state.isSaveClicked ? "Remove" : "Save"} */}
+                Save
+              </button>
             </li>
           </ul>
         ))}

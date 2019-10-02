@@ -19,7 +19,9 @@ class MainCarousel extends React.Component {
         <h2>Single Item</h2>
         <Slider {...settings}>
           {newsData.map((article) => (
-            <div key={article.title}>{article.title}</div>
+            <div key={article.title}>
+              {article.title} <button>Save</button>
+            </div>
           ))}
         </Slider>
       </div>

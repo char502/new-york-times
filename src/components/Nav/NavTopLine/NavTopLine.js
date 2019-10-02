@@ -67,6 +67,7 @@ class NavTopLine extends React.Component {
               <input
                 value={this.state.searchTerm}
                 onChange={this.handleChange}
+                placeholder={"Enter Search"}
               />
             </form>
             <NavFilterBar />

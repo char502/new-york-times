@@ -10,8 +10,10 @@ import {
 import Nav from "./components/Nav/Nav";
 import "./index.css";
 import newsRoutes from "./newsSources";
-import SearchResults from "./pages/SearchResults";
+
 import FetchNews from "./pages/FetchNews";
+import SearchResults from "./pages/SearchResults";
+import SavedNews from "./pages/SavedNews";
 
 const FourOhFour = () => <div>Not found</div>;
 
@@ -26,6 +28,7 @@ class App extends React.Component {
               <Route exact path="/">
                 <Redirect to={`/${newsRoutes[0].path}`} component={FetchNews} />
               </Route>
+
               {newsRoutes.map((route) => (
                 <Route
                   key={route.name}
@@ -35,6 +38,7 @@ class App extends React.Component {
                 />
               ))}
               <Route path="/search" component={SearchResults} />
+              <Route path="/savedNews" component={SavedNews} />
               <Route path="*" component={FourOhFour} />
             </Switch>
           </div>

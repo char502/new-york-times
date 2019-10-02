@@ -85,13 +85,13 @@ class NavFilterBar extends React.Component {
       <NavFilterBarContainer>
         <NavFilterBarContainerInner onSubmit={this.handleSubmit}>
           <ContainerAndButtons>
-            <div style={{ width: "300px" }}>
+            <div style={{ width: "220px" }}>
               <Select
                 options={newsSources}
                 getOptionLabel={(option) => `${option.name}`}
                 getOptionValue={(option) => `${option.path}`}
                 onChange={this.handleChange}
-                placeholder={"select by filter source"}
+                placeholder={"Select by filter source"}
                 value={newsSources.filter(
                   ({ path }) => path === this.state.filter
                 )}
