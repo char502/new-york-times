@@ -32,11 +32,10 @@ class SearchResults extends React.Component {
   }
 
   handleSaveItem = (result) => {
-    // e.preventDefault();
-
     const savedResult = {
       ...result,
-      savedAt: moment().format("MMMM Do YYYY, h:mm:ss a")
+      savedAt: moment().format("YYYY-MM-DD")
+      // savedAt: "2019-08-15"
     };
 
     let newsArr = [];
@@ -46,20 +45,6 @@ class SearchResults extends React.Component {
     }
     newsArr.push(savedResult);
     localStorage.setItem("savedNews", JSON.stringify(newsArr));
-
-    // if (localStorage.getItem("newArrList") === null) {
-    //   let newsArr = [];
-    //   newsArr.push({ resultSet });
-    //   localStorage.setItem("newArrList", JSON.stringify(newsArr));
-    // } else {
-    //   let newsArr = JSON.parse(localStorage.getItem("newArrList"));
-    //   newsArr.push({ resultSet });
-    //   localStorage.setItem("newArrList", JSON.stringify(newsArr));
-    // }
-    // this.setState({
-    //   resultsToSave: JSON.parse(localStorage.getItem("newArrList"))
-    // });
-    // console.log(this.state.resultsToSave);
   };
 
   render() {
@@ -75,7 +60,6 @@ class SearchResults extends React.Component {
                 /* id={index} */
                 onClick={() => this.handleSaveItem(result)}
               >
-                {/* {this.state.isSaveClicked ? "Remove" : "Save"} */}
                 Save
               </button>
             </li>
