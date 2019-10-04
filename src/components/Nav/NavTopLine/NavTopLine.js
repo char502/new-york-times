@@ -1,6 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import styled from "styled-components/macro";
+import { Link } from "react-router-dom";
 
 // Components
 import NavFilterBar from "../NavFilterBar/NavFilterBar";
@@ -9,7 +10,7 @@ import NavFilterBar from "../NavFilterBar/NavFilterBar";
 const NavTopLineContainer = styled.div`
   width: 100%;
   height: 75px;
-  background-color: red;
+  /* background-color: red; */
 `;
 
 const NavTopLineContainerInner = styled.div`
@@ -23,6 +24,32 @@ const NavTopLineContainerInner = styled.div`
 
 const TitleContainer = styled.div`
   flex: 1;
+`;
+
+const StyledButton = styled.button`
+  font-family: "Playfair Display", serif;
+  background-color: Transparent;
+  border: none;
+  cursor: pointer;
+  /* overflow: hidden; */
+  outline: none;
+`;
+
+const SavedItemsStyledButton = styled.button`
+  font-family: "Roboto Condensed", sans-serif;
+  background-color: Transparent;
+  display: flex;
+  border: 0.5px solid black;
+  /* outline: none; */
+  margin: 5px;
+  border-radius: 5px;
+  background-color: lightgray;
+  padding: 5px;
+`;
+
+const StyledLink = styled(Link)`
+  color: black;
+  text-decoration: none;
 `;
 
 const NavSearchInputsContainer = styled.div`
@@ -60,7 +87,11 @@ class NavTopLine extends React.Component {
       <NavTopLineContainer>
         <NavTopLineContainerInner>
           <TitleContainer>
-            <h4>This is Nav Top Line</h4>
+            <StyledButton>
+              <h1>
+                <StyledLink to="/">Favourite News App</StyledLink>
+              </h1>
+            </StyledButton>
           </TitleContainer>
           <NavSearchInputsContainer>
             <form onSubmit={this.handleSubmit}>
@@ -72,6 +103,9 @@ class NavTopLine extends React.Component {
             </form>
             <NavFilterBar />
           </NavSearchInputsContainer>
+          <SavedItemsStyledButton>
+            <StyledLink to="/savedNews">Saved Items</StyledLink>
+          </SavedItemsStyledButton>
         </NavTopLineContainerInner>
       </NavTopLineContainer>
     );

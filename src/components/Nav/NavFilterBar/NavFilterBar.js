@@ -9,7 +9,7 @@ import newsSources from "../../../newsSources";
 const NavFilterBarContainer = styled.div`
   /* width: 100%; */
   height: 100%;
-  background-color: MediumSeaGreen;
+  /* background-color: MediumSeaGreen; */
 `;
 
 const NavFilterBarContainerInner = styled.form`
@@ -24,8 +24,31 @@ const ContainerAndButtons = styled.div`
   display: flex;
 `;
 
-const Buttoncontainer = styled.button`
+const ButtonContainer = styled.button`
+  background-color: Transparent;
   display: flex;
+  border: 0.5px solid black;
+  /* outline: none; */
+  margin: 5px;
+  border-radius: 5px;
+`;
+
+// const select = styled(Select)`
+//   font-family: "Roboto Condensed", sans-serif;
+//   background-color: Transparent;
+//   border: none;
+//   cursor: pointer;
+//   /* overflow: hidden; */
+//   outline: none;
+// `;
+
+const StyledSubmitFilterInput = styled.input`
+  font-family: "Roboto Condensed", sans-serif;
+  background-color: Transparent;
+  border: none;
+  cursor: pointer;
+  /* overflow: hidden; */
+  outline: none;
 `;
 
 // const FormButtons = styled.input`
@@ -98,14 +121,20 @@ class NavFilterBar extends React.Component {
               />
             </div>
 
-            <Buttoncontainer>
-              <input type="submit" value="Submit" placeholder="search" />
-              <input
+            <ButtonContainer>
+              <StyledSubmitFilterInput
+                type="submit"
+                value="Submit"
+                placeholder="search"
+              />
+            </ButtonContainer>
+            <ButtonContainer>
+              <StyledSubmitFilterInput
                 type="button"
                 value="Clear Filter"
                 onClick={this.handleClearFilter}
               />
-            </Buttoncontainer>
+            </ButtonContainer>
           </ContainerAndButtons>
         </NavFilterBarContainerInner>
       </NavFilterBarContainer>

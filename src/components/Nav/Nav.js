@@ -9,7 +9,7 @@ import NavBottomLine from "./NavBottomLine/NavBottomLine";
 // ======== Styled Components ========
 const NavBarContainer = styled.div`
   width: 100vw;
-  background-color: green;
+  /* background-color: green; */
 `;
 
 const NavBarInner = styled.div`

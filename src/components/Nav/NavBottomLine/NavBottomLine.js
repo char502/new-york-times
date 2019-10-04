@@ -6,7 +6,7 @@ import newsSources from "../../../newsSources";
 const NavBottomLineContainer = styled.div`
   width: 100%;
   height: 45px;
-  background-color: yellow;
+  /* background-color: yellow; */
 `;
 
 const NavBottomLineContainerInner = styled.div`
@@ -18,13 +18,15 @@ const NavBottomLineContainerInner = styled.div`
 `;
 
 const NewsLink = styled(Link)`
-  padding: 5px 15px 5px 15px;
+  /* padding: 5px 10px 5px 10px; */
+  margin: 5px 10px;
   display: flex;
   align-items: center;
   font-size: 10px;
+  font-family: "Roboto Condensed", sans-serif;
   display: inline-block;
   text-decoration: none;
-  color: black;
+  color: gray;
 `;
 
 const NavBottomLine = () => (
@@ -32,7 +34,7 @@ const NavBottomLine = () => (
     <NavBottomLineContainerInner>
       {newsSources.map((link) => (
         <NewsLink key={link.name} to={`/${link.path}`}>
-          {link.name}
+          {link.name.toUpperCase()}
         </NewsLink>
       ))}
     </NavBottomLineContainerInner>
