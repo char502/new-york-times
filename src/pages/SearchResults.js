@@ -2,20 +2,37 @@ import React from "react";
 import queryString from "query-string";
 import { getSearchNews } from "../utils/api";
 import moment from "moment";
+import styled from "styled-components/macro";
+import Loading from "react-loading-bar";
+
+// ======== Styled Components ========
+const SearchResultsContainer = styled.div`
+  width: 100vw;
+`;
+
+const SearchResultsContainerInner = styled.div`
+  width: 100%;
+  height: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+`;
+// ===================================
 
 class SearchResults extends React.Component {
   state = {
     results: [],
-    resultsToSave: JSON.parse(localStorage.getItem("newArrList"))
+    show: false
+    // resultsToSave: JSON.parse(localStorage.getItem("newArrList"))
     // isSaveClicked: false
   };
 
   getData = async () => {
     let query = queryString.parse(this.props.location.search);
-    this.setState({ loading: true });
+    this.setState({ show: true });
+
     const news = await getSearchNews(query.searchTerm, query.sources);
     console.log(news);
-    this.setState({ loading: false, results: news.data.articles });
+    this.setState({ show: false, results: news.data.articles });
   };
 
   componentDidMount() {
@@ -49,23 +66,27 @@ class SearchResults extends React.Component {
 
   render() {
     const { results } = this.state;
+
     return (
-      <div>
-        {results.map((result, index) => (
-          <ul key={index}>
-            <li>
-              <a href={result.url}>{result.title}</a>{" "}
-              <button
-                value={result}
-                /* id={index} */
-                onClick={() => this.handleSaveItem(result)}
-              >
-                Save
-              </button>
-            </li>
-          </ul>
-        ))}
-      </div>
+      <SearchResultsContainer>
+        <SearchResultsContainerInner>
+          {results.map((result, index) => (
+            <ul key={index}>
+              <li>
+                <a href={result.url}>{result.title}</a>{" "}
+                <button
+                  value={result}
+                  /* id={index} */
+                  onClick={() => this.handleSaveItem(result)}
+                >
+                  Save
+                </button>
+              </li>
+            </ul>
+          ))}
+          <Loading show={this.state.show} color="red" />
+        </SearchResultsContainerInner>
+      </SearchResultsContainer>
     );
   }
 }

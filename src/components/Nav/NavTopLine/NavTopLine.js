@@ -6,6 +6,10 @@ import { Link } from "react-router-dom";
 // Components
 import NavFilterBar from "../NavFilterBar/NavFilterBar";
 
+//Font Awesome
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+
 // ======== Styled Components ========
 const NavTopLineContainer = styled.div`
   width: 100%;
@@ -40,11 +44,10 @@ const SavedItemsStyledButton = styled.button`
   background-color: Transparent;
   display: flex;
   border: 0.5px solid black;
-  /* outline: none; */
   margin: 5px;
-  border-radius: 5px;
+  border-radius: 4px;
   background-color: lightgray;
-  padding: 5px;
+  padding: 5px 10px;
 `;
 
 const StyledLink = styled(Link)`
@@ -53,13 +56,59 @@ const StyledLink = styled(Link)`
 `;
 
 const NavSearchInputsContainer = styled.div`
-  /* height: 50%;
-  width: 50%; */
   display: flex;
   flex: 1;
   justify-content: flex-end;
+  background-color: forestgreen;
 `;
 
+// const FormContainer = styled.div`
+//   width: 200px;
+//   height: 30px;
+//   p
+// `;
+
+const Form = styled.form`
+  position: relative;
+  width: 200px;
+  height: 40px;
+  background-color: red;
+`;
+
+const Input = styled.input`
+  position: relative;
+  width: 180px;
+  background: yellow;
+  border: none;
+  height: 27px;
+`;
+
+const InputButton = styled.button`
+  background: blue;
+  border-radius: 50px;
+  height: 30px;
+  width: 30px;
+  top: 5px;
+  right: 20px;
+  border: none;
+  position: absolute;
+  right: 0;
+  /* &:active {
+    background: seagreen;
+  } */
+  &:focus {
+    background: seagreen;
+  }
+`;
+
+const StyledIcon = styled(FontAwesomeIcon)`
+  /* position: absolute;
+  right: 7px;
+  bottom: 7px; */
+  /* background: blue; */
+  /* border-radius: 50px; */
+  /* position: absolute; */
+`;
 // const NavFilterBarContainer = styled.div`
 //   /* height: 50%;
 //   width: 50%; */
@@ -70,19 +119,35 @@ const NavSearchInputsContainer = styled.div`
 
 class NavTopLine extends React.Component {
   state = {
-    searchTerm: ""
+    searchTerm: "",
+    show: false,
+    toggleInput: false
   };
 
   handleChange = (e) => this.setState({ searchTerm: e.target.value });
 
   handleSubmit = (e) => {
     e.preventDefault();
+
     this.props.history.push(`/search?searchTerm=${this.state.searchTerm}`);
 
     this.setState({ searchTerm: "" });
   };
 
+  // handleToggleInput = () => {
+  //   const { toggleInput, searchTerm } = this.state;
+
+  //   console.log("handleToggleInput clicked");
+
+  //   if (searchTerm) {
+  //     this.setState({
+  //       toggleInput: !toggleInput
+  //     });
+  //   }
+  // };
+
   render() {
+    const { toggleInput } = this.state;
     return (
       <NavTopLineContainer>
         <NavTopLineContainerInner>
@@ -94,13 +159,22 @@ class NavTopLine extends React.Component {
             </StyledButton>
           </TitleContainer>
           <NavSearchInputsContainer>
-            <form onSubmit={this.handleSubmit}>
-              <input
-                value={this.state.searchTerm}
-                onChange={this.handleChange}
-                placeholder={"Enter Search"}
-              />
-            </form>
+            {/* <FormContainer> */}
+            <Form onSubmit={this.handleSubmit}>
+              <InputButton
+                onClick={() => this.setState({ toggleInput: !toggleInput })}
+              >
+                <StyledIcon icon={faSearch} />
+                {toggleInput ? (
+                  <Input
+                    value={this.state.searchTerm}
+                    onChange={this.handleChange}
+                    placeholder={"Enter Search"}
+                  />
+                ) : null}
+              </InputButton>
+            </Form>
+            {/* </FormContainer> */}
             <NavFilterBar />
           </NavSearchInputsContainer>
           <SavedItemsStyledButton>

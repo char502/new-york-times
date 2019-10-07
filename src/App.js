@@ -33,7 +33,6 @@ class App extends React.Component {
               <Route exact path="/">
                 <Redirect to={`/${newsRoutes[0].path}`} component={FetchNews} />
               </Route>
-
               {newsRoutes.map((route) => (
                 <Route
                   key={route.name}

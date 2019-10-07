@@ -30,7 +30,11 @@ const ButtonContainer = styled.button`
   border: 0.5px solid black;
   /* outline: none; */
   margin: 5px;
-  border-radius: 5px;
+  border-radius: 4px;
+  &:hover {
+    background-color: gray;
+    transition: 1.5s;
+  }
 `;
 
 // const select = styled(Select)`
@@ -49,6 +53,10 @@ const StyledSubmitFilterInput = styled.input`
   cursor: pointer;
   /* overflow: hidden; */
   outline: none;
+  &:hover {
+    background-color: gray;
+    transition: 1s;
+  }
 `;
 
 // const FormButtons = styled.input`
@@ -120,7 +128,6 @@ class NavFilterBar extends React.Component {
                 )}
               />
             </div>
-
             <ButtonContainer>
               <StyledSubmitFilterInput
                 type="submit"
