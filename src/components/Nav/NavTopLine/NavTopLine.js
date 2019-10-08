@@ -59,7 +59,7 @@ const NavSearchInputsContainer = styled.div`
   display: flex;
   flex: 1;
   justify-content: flex-end;
-  background-color: forestgreen;
+  /* background-color: forestgreen; */
 `;
 
 // const FormContainer = styled.div`
@@ -68,47 +68,49 @@ const NavSearchInputsContainer = styled.div`
 //   p
 // `;
 
+// animated magnifying glass icon
+// ==========================================
+
 const Form = styled.form`
   position: relative;
   width: 200px;
   height: 40px;
-  background-color: red;
+  /* background-color: red; */
 `;
+
+const InputWrapper = styled.div`
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  /* background-color: blue; */
+`;
+
+const easing = "cubic-bezier(0.77, 0, 0.175, 1)";
 
 const Input = styled.input`
-  position: relative;
-  width: 180px;
-  background: yellow;
-  border: none;
-  height: 27px;
-`;
-
-const InputButton = styled.button`
-  background: blue;
-  border-radius: 50px;
-  height: 30px;
-  width: 30px;
-  top: 5px;
-  right: 20px;
-  border: none;
+  /* background-color: yellow; */
   position: absolute;
-  right: 0;
-  /* &:active {
-    background: seagreen;
-  } */
-  &:focus {
-    background: seagreen;
-  }
+  width: 85%;
+  left: 10%;
+  top: 15%;
+  border: none;
+  outline: none;
+  height: 27px;
+  transform: ${(props) => (props.show ? "translatex(0)" : "translatex(110%)")};
+  transition: 0.2s ${easing};
+  /* transform property
+  translate function */
 `;
 
 const StyledIcon = styled(FontAwesomeIcon)`
-  /* position: absolute;
-  right: 7px;
-  bottom: 7px; */
-  /* background: blue; */
-  /* border-radius: 50px; */
-  /* position: absolute; */
+  /* background-color: forestgreen; */
+  top: 30%;
+  width: 10%;
+  position: absolute;
+  left: ${(props) => (props.show ? "0" : "90%")};
+  transition: 0.2s ${easing};
 `;
+
 // const NavFilterBarContainer = styled.div`
 //   /* height: 50%;
 //   width: 50%; */
@@ -124,6 +126,10 @@ class NavTopLine extends React.Component {
     toggleInput: false
   };
 
+  // use this to target and manage focus on the search box
+  // after the click animation exposes it
+  inputRef = React.createRef();
+
   handleChange = (e) => this.setState({ searchTerm: e.target.value });
 
   handleSubmit = (e) => {
@@ -134,6 +140,10 @@ class NavTopLine extends React.Component {
     this.setState({ searchTerm: "" });
   };
 
+  handleToggle = () => {
+    this.setState(({ toggleInput }) => ({ toggleInput: !toggleInput }));
+    this.inputRef.current.focus();
+  };
   // handleToggleInput = () => {
   //   const { toggleInput, searchTerm } = this.state;
 
@@ -159,22 +169,25 @@ class NavTopLine extends React.Component {
             </StyledButton>
           </TitleContainer>
           <NavSearchInputsContainer>
-            {/* <FormContainer> */}
+            {/* ///////////////////// */}
             <Form onSubmit={this.handleSubmit}>
-              <InputButton
-                onClick={() => this.setState({ toggleInput: !toggleInput })}
-              >
-                <StyledIcon icon={faSearch} />
-                {toggleInput ? (
-                  <Input
-                    value={this.state.searchTerm}
-                    onChange={this.handleChange}
-                    placeholder={"Enter Search"}
-                  />
-                ) : null}
-              </InputButton>
+              <InputWrapper>
+                <StyledIcon
+                  icon={faSearch}
+                  onClick={this.handleToggle}
+                  show={toggleInput}
+                />
+                <Input
+                  value={this.state.searchTerm}
+                  onChange={this.handleChange}
+                  placeholder={"Enter Search"}
+                  show={toggleInput}
+                  ref={this.inputRef}
+                />
+                {/* <div style={{ color: toggleInput ? "red" : "black" }} /> */}
+              </InputWrapper>
             </Form>
-            {/* </FormContainer> */}
+            {/* ///////////////////// */}
             <NavFilterBar />
           </NavSearchInputsContainer>
           <SavedItemsStyledButton>
