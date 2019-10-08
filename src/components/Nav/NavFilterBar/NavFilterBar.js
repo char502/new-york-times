@@ -37,14 +37,15 @@ const ButtonContainer = styled.button`
   }
 `;
 
-// const select = styled(Select)`
-//   font-family: "Roboto Condensed", sans-serif;
-//   background-color: Transparent;
-//   border: none;
-//   cursor: pointer;
-//   /* overflow: hidden; */
-//   outline: none;
-// `;
+const select = styled.select`
+  /* font-family: "Roboto Condensed", sans-serif;
+  background-color: Transparent;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none; */
+  background-color: blue;
+`;
 
 const StyledSubmitFilterInput = styled.input`
   font-family: "Roboto Condensed", sans-serif;

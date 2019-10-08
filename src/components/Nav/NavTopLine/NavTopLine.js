@@ -85,7 +85,14 @@ const InputWrapper = styled.div`
   /* background-color: blue; */
 `;
 
-const easing = "cubic-bezier(0.77, 0, 0.175, 1)";
+// const easing = "cubic-bezier(0.77, 0, 0.175, 1)";
+
+const easing = "cubic-bezier(0.645, 0.045, 0.355, 1)";
+
+// const easeOut = "cubic-bezier(0.2, 0, 0.2, 1)";
+
+// const easeIn = "cubic-bezier(0.1, 0.12, 0.25, 1)";
+// cubic - bezier(.1, .12, .25, 1)}.hk{ transition: fill 200ms ease }
 
 const Input = styled.input`
   /* background-color: yellow; */
@@ -97,7 +104,9 @@ const Input = styled.input`
   outline: none;
   height: 27px;
   transform: ${(props) => (props.show ? "translatex(0)" : "translatex(110%)")};
-  transition: 0.2s ${easing};
+  transition: 2s ${easing};
+  /* transition: opacity 0.3s; */
+  transition: fill 500ms ease;
   /* transform property
   translate function */
 `;
@@ -108,7 +117,9 @@ const StyledIcon = styled(FontAwesomeIcon)`
   width: 10%;
   position: absolute;
   left: ${(props) => (props.show ? "0" : "90%")};
-  transition: 0.2s ${easing};
+  transition: 2s ${easing};
+  /* transition: opacity 0.3s; */
+  transition: fill 500ms ease;
 `;
 
 // const NavFilterBarContainer = styled.div`
