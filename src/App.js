@@ -19,6 +19,7 @@ import newsRoutes from "./newsSources";
 import FetchNews from "./pages/FetchNews";
 import SearchResults from "./pages/SearchResults";
 import SavedNews from "./pages/SavedNews";
+import LoadingProvider from "./loadingContext";
 
 const FourOhFour = () => <div>Not found</div>;
 
@@ -26,27 +27,32 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Router>
-          <div>
-            <Nav />
-            <Switch>
-              <Route exact path="/">
-                <Redirect to={`/${newsRoutes[0].path}`} component={FetchNews} />
-              </Route>
-              {newsRoutes.map((route) => (
-                <Route
-                  key={route.name}
-                  path={`/${route.path}`}
-                  exact
-                  component={FetchNews}
-                />
-              ))}
-              <Route path="/search" component={SearchResults} />
-              <Route path="/savedNews" component={SavedNews} />
-              <Route path="*" component={FourOhFour} />
-            </Switch>
-          </div>
-        </Router>
+        <LoadingProvider>
+          <Router>
+            <div>
+              <Nav />
+              <Switch>
+                <Route exact path="/">
+                  <Redirect
+                    to={`/${newsRoutes[0].path}`}
+                    component={FetchNews}
+                  />
+                </Route>
+                {newsRoutes.map(route => (
+                  <Route
+                    key={route.name}
+                    path={`/${route.path}`}
+                    exact
+                    component={FetchNews}
+                  />
+                ))}
+                <Route path="/search" component={SearchResults} />
+                <Route path="/savedNews" component={SavedNews} />
+                <Route path="*" component={FourOhFour} />
+              </Switch>
+            </div>
+          </Router>
+        </LoadingProvider>
       </div>
     );
   }
