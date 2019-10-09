@@ -2,20 +2,15 @@ import React from "react";
 import {
   BrowserRouter as Router,
   Route,
-  Redirect,
+  // Redirect,
   Switch
 } from "react-router-dom";
-// import { library } from '@fortawesome/fontawesome-svg-core';
-// import { fab } from '@fortawesome/free-brands-svg-icons';
-// import { faCheckSquare, faCoffee } from '@fortawesome/free-solid-svg-icons';
-
-// library.add(fab, faCheckSquare, faCoffee)
 
 // components
+import LandingPage from "./pages/LandingPage";
 import Nav from "./components/Nav/Nav";
 import "./index.css";
-import newsRoutes from "./newsSources";
-
+import newsSources from "./newsSources";
 import FetchNews from "./pages/FetchNews";
 import SearchResults from "./pages/SearchResults";
 import SavedNews from "./pages/SavedNews";
@@ -30,10 +25,11 @@ class App extends React.Component {
           <div>
             <Nav />
             <Switch>
-              <Route exact path="/">
+              <Route exact path="/" component={LandingPage} />
+              {/* <Route exact path="/">
                 <Redirect to={`/${newsRoutes[0].path}`} component={FetchNews} />
-              </Route>
-              {newsRoutes.map((route) => (
+              </Route>  */}
+              {newsSources.map((route) => (
                 <Route
                   key={route.name}
                   path={`/${route.path}`}
@@ -45,6 +41,7 @@ class App extends React.Component {
               <Route path="/savedNews" component={SavedNews} />
               <Route path="*" component={FourOhFour} />
             </Switch>
+            {/* <Footer /> */}
           </div>
         </Router>
       </div>

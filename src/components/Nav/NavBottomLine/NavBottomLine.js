@@ -14,12 +14,13 @@ const NavBottomLineContainerInner = styled.div`
   width: 100%;
   margin: 0 auto;
   display: flex;
+  justify-content: center;
   align-items: center;
 `;
 
 const NewsLink = styled(Link)`
-  /* padding: 5px 10px 5px 10px; */
-  margin: 5px 10px;
+  padding: 5px 15px 5px 15px;
+  /* margin: 5px 10px; */
   display: flex;
   align-items: center;
   font-size: 10px;

@@ -26,7 +26,6 @@ class FetchNews extends React.Component {
 
   async componentDidMount() {
     this.setState({ show: true });
-
     const response = await getNews(this.props.location.pathname.split("/")[1]);
     const news = response.data.articles;
     this.setState({
