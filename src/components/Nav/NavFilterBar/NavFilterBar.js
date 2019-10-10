@@ -120,10 +120,24 @@ class NavFilterBar extends React.Component {
             <div style={{ width: "220px" }}>
               <Select
                 options={newsSources}
+                /* isClearable */
                 getOptionLabel={(option) => `${option.name}`}
                 getOptionValue={(option) => `${option.path}`}
                 onChange={this.handleChange}
                 placeholder={"Select by filter source"}
+                // Looking at the docs I don't really understand them though?
+                clearValue={() => true}
+                /* getStyles={(string, any) => theme} */
+                /* theme object
+                 {
+                borderRadius: number required
+                colors: object required Object
+                spacing: required {
+                baseUnit: number required
+                controlHeight: number required
+                menuGutter: number required
+                }
+                } */
                 value={newsSources.filter(
                   ({ path }) => path === this.state.filter
                 )}

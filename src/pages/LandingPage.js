@@ -1,10 +1,10 @@
 import React from "react";
 import Loading from "react-loading-bar";
 import styled from "styled-components/macro";
-import { landingPageNews } from "../newsSources";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { landingPageNews } from "../newsSources";
 import { getNews } from "../utils/api";
 
 // import MainCarousel from "../components/Carousel/MainCarousel";

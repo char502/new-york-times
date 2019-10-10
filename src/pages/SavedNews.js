@@ -1,5 +1,6 @@
 import React from "react";
 import moment from "moment";
+import Card from "./reusableComponents/Card";
 
 class SavedNews extends React.Component {
   constructor(props) {
@@ -53,22 +54,26 @@ class SavedNews extends React.Component {
 
   render() {
     const { savedNewsPastWeek } = this.state;
+
+    console.log(savedNewsPastWeek);
     return (
       <div>
         <button onClick={this.handleClearAll}>Clear All Saved News</button>
-        {savedNewsPastWeek.map((newsItem, index) => (
-          <ul key={index}>
-            <li>
-              <a href={newsItem.url}>{newsItem.title}</a>{" "}
-              <button
-                value={index}
-                onClick={() => this.handleRemoveItem(newsItem)}
-              >
-                Remove
-              </button>
-            </li>
-          </ul>
-        ))}
+        <ul>
+          <div>
+            {savedNewsPastWeek.map((newsItem) => (
+              <Card
+                key={newsItem.url}
+                item={newsItem.title}
+                handleAction={this.handleRemoveItem}
+                text="Remove"
+                author={newsItem.author}
+                publishedAt={newsItem.publishedAt}
+                extended
+              />
+            ))}
+          </div>
+        </ul>
       </div>
     );
   }
