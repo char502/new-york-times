@@ -2,7 +2,6 @@ import React from "react";
 import { getNews } from "../utils/api";
 import styled from "styled-components/macro";
 import MainCarousel from "../components/Carousel/MainCarousel";
-import Loading from "react-loading-bar";
 import { LoadingConsumer } from "../loadingContext";
 
 // ======== Styled Components ========

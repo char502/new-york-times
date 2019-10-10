@@ -16,10 +16,13 @@ class MainCarousel extends React.Component {
     };
     return (
       <div>
-        <h2>Single Item</h2>
+        {/* <h2>Single Item</h2> */}
         <Slider {...settings}>
           {newsData.map((article) => (
             <div key={article.title}>
+              <div>
+                <h2>{article.source.id.toUpperCase()}</h2>
+              </div>
               {article.title} <button>Save</button>
             </div>
           ))}

@@ -8,10 +8,6 @@ export default [
     name: "Ars Technica"
   },
   {
-    path: "bbc-news",
-    name: "BBC News"
-  },
-  {
     path: "bloomberg",
     name: "Bloomberg"
   },
@@ -40,10 +36,6 @@ export default [
     name: "National Geographic"
   },
   {
-    path: "new-scientist",
-    name: "New Scientist"
-  },
-  {
     path: "newsweek",
     name: "Newsweek"
   },
@@ -62,9 +54,22 @@ export default [
   {
     path: "the-verge",
     name: "The Verge"
+  }
+];
+
+const landingPageNews = [
+  {
+    path: "bbc-news",
+    name: "BBC News"
   },
   {
     path: "time",
     name: "Time"
+  },
+  {
+    path: "new-scientist",
+    name: "New Scientist"
   }
 ];
+
+export { landingPageNews };
