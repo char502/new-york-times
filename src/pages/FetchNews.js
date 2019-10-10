@@ -2,7 +2,7 @@ import React from "react";
 import { getNews } from "../utils/api";
 import styled from "styled-components/macro";
 import MainCarousel from "../components/Carousel/MainCarousel";
-import Loading from "react-loading-bar";
+import { LoadingConsumer } from "../loadingContext";
 
 // ======== Styled Components ========
 const MainBodyContainer = styled.div`
@@ -24,21 +24,20 @@ class FetchNews extends React.Component {
     show: false
   };
 
-  async componentDidMount() {
-    this.setState({ show: true });
+  fetchApi = async () => {
+    this.props.setLoading(true);
+
     const response = await getNews(this.props.location.pathname.split("/")[1]);
     const news = response.data.articles;
     this.setState({
-      show: false,
       news
     });
-  }
+    this.props.setLoading(false);
+  };
 
-  // add = (value) => {
-  //   this.setState({
-  //     loadingBarProgress: this.state.loadingBarProgress + value
-  //   });
-  // };
+  componentDidMount() {
+    this.fetchApi();
+  }
 
   render() {
     const { news } = this.state;
@@ -47,7 +46,6 @@ class FetchNews extends React.Component {
       <MainBodyContainer>
         {this.props.path}
         <MainBodyContainerInner>
-          <Loading show={this.state.show} color="red" />
           <MainCarousel newsData={news} />
         </MainBodyContainerInner>
       </MainBodyContainer>
@@ -55,4 +53,8 @@ class FetchNews extends React.Component {
   }
 }
 
-export default FetchNews;
+export default props => (
+  <LoadingConsumer>
+    {loading => <FetchNews {...loading} {...props} />}
+  </LoadingConsumer>
+);
