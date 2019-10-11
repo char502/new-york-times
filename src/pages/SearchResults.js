@@ -1,10 +1,9 @@
 import React from "react";
 import queryString from "query-string";
+import { getSearchNews } from "../utils/api";
 import moment from "moment";
 import styled from "styled-components/macro";
 import Loading from "react-loading-bar";
-import { getSearchNews } from "../utils/api";
-// import Card from "./reusableComponents/Card";
 import Card from "./reusableComponents/Card";
 
 // ======== Styled Components ========
@@ -72,22 +71,19 @@ class SearchResults extends React.Component {
     return (
       <SearchResultsContainer>
         <SearchResultsContainerInner>
-          <div>
-            <ul>
-              {results.map((result) => (
-                <Card
-                  key={result.title}
-                  item={result.title}
-                  handleAction={this.handleSaveItem}
-                  text="Save"
-                  author={result.author}
-                  publishedAt={result.publishedAt}
-                  extended
-                />
-              ))}
-            </ul>
-            <Loading show={this.state.show} color="red" />
-          </div>
+          <ul>
+            {results.map((result) => (
+              <Card
+                url={result.url}
+                title={result.title}
+                handleSaveItem={this.handleSaveItem(result)}
+                /* text="save" */
+                /* handleSaveItem={this.handleSaveItem(result)} */
+                /* handleAction={this.handleSaveItem(result)} */
+              />
+            ))}
+          </ul>
+          <Loading show={this.state.show} color="red" />
         </SearchResultsContainerInner>
       </SearchResultsContainer>
     );
