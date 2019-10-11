@@ -76,8 +76,8 @@ class SearchResults extends React.Component {
               <Card
                 data={result}
                 text="Save"
-                /* handleSaveItem={this.handleSaveItem} */
                 handleItem={this.handleSaveItem}
+                extended
               />
             ))}
           </ul>

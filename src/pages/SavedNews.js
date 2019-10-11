@@ -1,5 +1,20 @@
 import React from "react";
 import moment from "moment";
+import styled from "styled-components/macro";
+import Card from "./reusableComponents/Card";
+
+// ======== Styled Components ========
+const SavedNewsContainer = styled.div`
+  width: 100vw;
+`;
+
+const SavedNewsContainerInner = styled.div`
+  width: 100%;
+  height: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+`;
+// ===================================
 
 class SavedNews extends React.Component {
   constructor(props) {
@@ -54,19 +69,21 @@ class SavedNews extends React.Component {
   render() {
     const { savedNewsPastWeek } = this.state;
     return (
-      <div>
-        <button onClick={this.handleClearAll}>Clear All Saved News</button>
-        <ul>
-          {savedNewsPastWeek.map((newsItem) => (
-            <li key={newsItem.url}>
-              <a href={newsItem.url}>{newsItem.title}</a>{" "}
-              <button onClick={() => this.handleRemoveItem(newsItem)}>
-                Remove
-              </button>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <SavedNewsContainer>
+        <SavedNewsContainerInner>
+          <button onClick={this.handleClearAll}>Clear All Saved News</button>
+          <ul>
+            {savedNewsPastWeek.map((newsItem) => (
+              <Card
+                data={newsItem}
+                handleItem={this.handleRemoveItem}
+                text="remove"
+                extended
+              />
+            ))}
+          </ul>
+        </SavedNewsContainerInner>
+      </SavedNewsContainer>
     );
   }
 }
