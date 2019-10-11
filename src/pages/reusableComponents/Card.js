@@ -16,14 +16,17 @@ const CardContainer = styled.div`
 const Card = (props) => (
   <CardContainer>
     <li>
-      <a href={props.url}>{props.title}</a>{" "}
-      <button onClick={() => props.handleSaveItem(props)}>{props.text}</button>
-      {/* {extended && (
+      <a href={props.data.url}>{props.data.title}</a>
+      {/* <button onClick={() => this.props.handleItem(props.result)}>
+        {props.text}
+      </button> */}
+      <button onClick={() => props.handleItem(props.data)}>{props.text}</button>
+      {props.extended && (
         <div>
-          <h4>{author}</h4>
-          <h5>Published At{publishedAt}</h5>
+          <h4>Author: {props.data.author}</h4>
+          <h5>Published At: {props.data.publishedAt}</h5>
         </div>
-      )} */}
+      )}
     </li>
   </CardContainer>
 );

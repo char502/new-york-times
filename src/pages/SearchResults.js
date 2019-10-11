@@ -74,12 +74,10 @@ class SearchResults extends React.Component {
           <ul>
             {results.map((result) => (
               <Card
-                url={result.url}
-                title={result.title}
-                handleSaveItem={this.handleSaveItem(result)}
-                /* text="save" */
-                /* handleSaveItem={this.handleSaveItem(result)} */
-                /* handleAction={this.handleSaveItem(result)} */
+                data={result}
+                text="Save"
+                /* handleSaveItem={this.handleSaveItem} */
+                handleItem={this.handleSaveItem}
               />
             ))}
           </ul>
