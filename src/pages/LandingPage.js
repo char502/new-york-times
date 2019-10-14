@@ -6,6 +6,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { landingPageNews } from "../newsSources";
 import { getNews } from "../utils/api";
+import { Title } from "../components/Typography";
+import Carousel from "../components/Carousel/MainCarousel";
 
 // import MainCarousel from "../components/Carousel/MainCarousel";
 
@@ -19,14 +21,11 @@ const LandingPageBodyContainerInner = styled.div`
   height: 100%;
   max-width: 1200px;
   margin: 0 auto;
+  display: flex;
 `;
 
-const SliderContainer = styled.div`
-  max-width: 1200px;
-  /* margin: 0 auto; */
-  height: 120px;
-  background-color: LightSkyBlue;
-  padding: 30px;
+const Container = styled.div`
+  width: 66.66%;
 `;
 
 const NewsSourceSecondContainer = styled.div`
@@ -93,43 +92,42 @@ class LandingPage extends React.Component {
     return (
       <LandingPageBodyContainer>
         <LandingPageBodyContainerInner>
-          <Loading show={this.state.show} color="red" />
-          <SliderContainer>
-            <h1>BBC News Top Headlines</h1>
-            <Slider {...settings}>
-              {newsSourceMainSlider.map((newsArticle) => (
-                <div key={newsArticle.title}>
-                  <a href={newsArticle.url}>{newsArticle.title}</a>
-                </div>
-              ))}
-            </Slider>
-          </SliderContainer>
-          <hr />
-          <NewsSourceSecondContainer>
-            <h1>Time Magazine Top Headlines</h1>
-            <div>
-              {newsSourceSecond.map((timeNewsArticle, index) => (
-                <ul key={index}>
-                  <li>
-                    <a href={timeNewsArticle.url}>{timeNewsArticle.title}</a>
-                  </li>
-                </ul>
-              ))}
-            </div>
-          </NewsSourceSecondContainer>
-          <hr />
-          <NewsSourceThirdContainer>
-            <h1>New Scientist Top Headlines</h1>
-            <div>
-              {newsSourceThird.map((newScientist, index) => (
-                <ul key={index}>
-                  <li>
-                    <a href={newScientist.url}>{newScientist.title}</a>
-                  </li>
-                </ul>
-              ))}
-            </div>
-          </NewsSourceThirdContainer>
+          <Container>
+            <Loading show={this.state.show} color="red" />
+
+            <Title>BBC News Top Headlines</Title>
+            <Carousel newsData={newsSourceMainSlider} />
+
+            <hr />
+            <NewsSourceSecondContainer>
+              <Title>Time Magazine Top Headlines</Title>
+              <div>
+                {newsSourceSecond.map((timeNewsArticle, index) => (
+                  <ul key={index}>
+                    <li>
+                      <a href={timeNewsArticle.url}>{timeNewsArticle.title}</a>
+                    </li>
+                  </ul>
+                ))}
+              </div>
+            </NewsSourceSecondContainer>
+            <hr />
+            <NewsSourceThirdContainer>
+              <Title>New Scientist Top Headlines</Title>
+              <div>
+                {newsSourceThird.map((newScientist, index) => (
+                  <ul key={index}>
+                    <li>
+                      <a href={newScientist.url}>{newScientist.title}</a>
+                    </li>
+                  </ul>
+                ))}
+              </div>
+            </NewsSourceThirdContainer>
+          </Container>
+          <Container
+            style={{ width: "33.33%", height: "100%", background: "black" }}
+          ></Container>
         </LandingPageBodyContainerInner>
       </LandingPageBodyContainer>
     );

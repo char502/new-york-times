@@ -4,7 +4,7 @@ import { getSearchNews } from "../utils/api";
 import moment from "moment";
 import styled from "styled-components/macro";
 import Loading from "react-loading-bar";
-import Card from "./reusableComponents/Card";
+import Card from "../components/Card";
 
 // ======== Styled Components ========
 const SearchResultsContainer = styled.div`
@@ -58,11 +58,24 @@ class SearchResults extends React.Component {
 
     let newsArr = [];
 
-    if (localStorage.getItem("savedNews")) {
+    if (!localStorage.getItem("savedNews")) {
+      newsArr.push(savedResult);
+      alert("Item added to Local Storage");
+      localStorage.setItem("savedNews", JSON.stringify(newsArr));
+    } else if (localStorage.getItem("savedNews")) {
       newsArr = JSON.parse(localStorage.getItem("savedNews"));
+
+      let alreadyInArr = newsArr.some((newsItem) => {
+        return newsItem.title === savedResult.title;
+      });
+      if (alreadyInArr) {
+        return alert("item already saved");
+      }
+
+      newsArr.push(savedResult);
+      localStorage.setItem("savedNews", JSON.stringify(newsArr));
+      alert("Unique Item added to Local Storage ");
     }
-    newsArr.push(savedResult);
-    localStorage.setItem("savedNews", JSON.stringify(newsArr));
   };
 
   render() {
@@ -74,6 +87,7 @@ class SearchResults extends React.Component {
           <ul>
             {results.map((result) => (
               <Card
+                key={result.title}
                 data={result}
                 text="Save"
                 handleItem={this.handleSaveItem}

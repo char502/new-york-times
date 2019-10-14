@@ -1,7 +1,9 @@
 import React from "react";
 import moment from "moment";
 import styled from "styled-components/macro";
-import Card from "./reusableComponents/Card";
+import Card from "../components/Card";
+import { Button } from "../components/Button";
+import { H1, H4 } from "../components/Typography";
 
 // ======== Styled Components ========
 const SavedNewsContainer = styled.div`
@@ -10,11 +12,20 @@ const SavedNewsContainer = styled.div`
 
 const SavedNewsContainerInner = styled.div`
   width: 100%;
-  height: 100%;
   max-width: 1200px;
   margin: 0 auto;
+  position: relative;
 `;
+
+const StyledHeaderFour = styled.h4`
+  margin-left: 24px;
+`;
+
 // ===================================
+
+const ActionContainer = styled.div`
+  display: flex;
+`;
 
 class SavedNews extends React.Component {
   constructor(props) {
@@ -71,17 +82,26 @@ class SavedNews extends React.Component {
     return (
       <SavedNewsContainer>
         <SavedNewsContainerInner>
-          <button onClick={this.handleClearAll}>Clear All Saved News</button>
-          <ul>
+          <H1>Saved News</H1>
+          <ActionContainer>
+            <Button small onClick={this.handleClearAll}>
+              Clear All Saved News
+            </Button>
+            <H4>Note: Saved Items will be cleared after a week</H4>
+          </ActionContainer>
+
+          <div>
             {savedNewsPastWeek.map((newsItem) => (
               <Card
                 data={newsItem}
-                handleItem={this.handleRemoveItem}
+                handleClick={this.handleRemoveItem}
                 text="remove"
-                extended
-              />
+                key={newsItem.title}
+              >
+                <Button>Retain Item for another week</Button>
+              </Card>
             ))}
-          </ul>
+          </div>
         </SavedNewsContainerInner>
       </SavedNewsContainer>
     );

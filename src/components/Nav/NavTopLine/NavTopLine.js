@@ -2,6 +2,7 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import styled from "styled-components/macro";
 import { Link } from "react-router-dom";
+import { AltButton } from "../../Button";
 
 // Components
 import NavFilterBar from "../NavFilterBar/NavFilterBar";
@@ -201,9 +202,10 @@ class NavTopLine extends React.Component {
             {/* ///////////////////// */}
             <NavFilterBar />
           </NavSearchInputsContainer>
-          <SavedItemsStyledButton>
-            <StyledLink to="/savedNews">Saved Items</StyledLink>
-          </SavedItemsStyledButton>
+
+          <AltButton as={Link} to="/savedNews">
+            Saved Items
+          </AltButton>
         </NavTopLineContainerInner>
       </NavTopLineContainer>
     );

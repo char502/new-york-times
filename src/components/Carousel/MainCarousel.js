@@ -1,9 +1,11 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
 import moment from "moment";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Card from "../../pages/reusableComponents/Card";
+import Card from "../Card";
+import { Title } from "../Typography";
 
 class MainCarousel extends React.Component {
   handleSaveItem = (article) => {
@@ -14,16 +16,27 @@ class MainCarousel extends React.Component {
 
     let articleArr = [];
 
-    if (localStorage.getItem("savedNews")) {
+    if (!localStorage.getItem("savedNews")) {
+      articleArr.push(savedArticle);
+      alert("Item added to Local Storage");
+      localStorage.setItem("savedNews", JSON.stringify(articleArr));
+    } else if (localStorage.getItem("savedNews")) {
       articleArr = JSON.parse(localStorage.getItem("savedNews"));
+
+      let alreadyInArr = articleArr.some((newsItem) => {
+        return newsItem.title === savedArticle.title;
+      });
+      if (alreadyInArr) {
+        return alert("item already saved");
+      }
+      articleArr.push(savedArticle);
+      localStorage.setItem("savedNews", JSON.stringify(articleArr));
+      alert("Unique Item added to Local Storage ");
     }
-    articleArr.push(savedArticle);
-    localStorage.setItem("savedNews", JSON.stringify(articleArr));
   };
 
   render() {
     const { newsData } = this.props;
-
     const settings = {
       dots: true,
       infinite: true,
@@ -31,20 +44,19 @@ class MainCarousel extends React.Component {
       slidesToShow: 1,
       slidesToScroll: 1
     };
+    console.log();
     return (
       <div>
-        {/* <h2>Single Item</h2> */}
+        <Title>{this.props.location.pathname.split("-").join(" ")}</Title>
         <Slider {...settings}>
           {newsData.map((article) => (
-            <>
-              <h2>{article.source.id.toUpperCase()}</h2>
-              <Card
-                data={article}
-                text="Save"
-                handleItem={this.handleSaveItem}
-                extended
-              />
-            </>
+            <Card
+              key={article.url}
+              data={article}
+              text="Save"
+              onClick={this.handleSaveItem}
+              extended
+            />
           ))}
         </Slider>
       </div>
@@ -52,4 +64,6 @@ class MainCarousel extends React.Component {
   }
 }
 
-export default MainCarousel;
+//lodash capitalisefirst
+
+export default withRouter(MainCarousel);

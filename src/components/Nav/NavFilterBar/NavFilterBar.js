@@ -4,15 +4,14 @@ import queryString from "query-string";
 import styled from "styled-components/macro";
 import Select from "react-select";
 import newsSources from "../../../newsSources";
+import { Button } from "../../Button";
 
 // ======== Styled Components ========
-const NavFilterBarContainer = styled.div`
-  /* width: 100%; */
+const Container = styled.div`
   height: 100%;
-  /* background-color: MediumSeaGreen; */
 `;
 
-const NavFilterBarContainerInner = styled.form`
+const Inner = styled.div`
   height: 100%;
   width: 100%;
   margin: 0 auto;
@@ -24,17 +23,11 @@ const ContainerAndButtons = styled.div`
   display: flex;
 `;
 
-const ButtonContainer = styled.button`
-  background-color: Transparent;
+const ActionContainer = styled.div`
+  background-color: transparent;
   display: flex;
-  border: 0.5px solid black;
-  /* outline: none; */
   margin: 5px;
   border-radius: 4px;
-  &:hover {
-    background-color: gray;
-    transition: 1.5s;
-  }
 `;
 
 // const select = styled.select`
@@ -46,19 +39,6 @@ const ButtonContainer = styled.button`
 //   outline: none; */
 //   background-color: blue;
 // `;
-
-const StyledSubmitFilterInput = styled.input`
-  font-family: "Roboto Condensed", sans-serif;
-  background-color: Transparent;
-  border: none;
-  cursor: pointer;
-  /* overflow: hidden; */
-  outline: none;
-  &:hover {
-    background-color: gray;
-    transition: 1s;
-  }
-`;
 
 // const FormButtons = styled.input`
 //   margin: 10px 10px;
@@ -114,9 +94,9 @@ class NavFilterBar extends React.Component {
   // this.props.location.pathname === "/search" ?
   render() {
     return (
-      <NavFilterBarContainer>
-        <NavFilterBarContainerInner onSubmit={this.handleSubmit}>
-          <ContainerAndButtons>
+      <Container>
+        <Inner onSubmit={this.handleSubmit}>
+          <ActionContainer>
             <div style={{ width: "220px" }}>
               <Select
                 options={newsSources}
@@ -143,23 +123,13 @@ class NavFilterBar extends React.Component {
                 )}
               />
             </div>
-            <ButtonContainer>
-              <StyledSubmitFilterInput
-                type="submit"
-                value="Submit"
-                placeholder="search"
-              />
-            </ButtonContainer>
-            <ButtonContainer>
-              <StyledSubmitFilterInput
-                type="button"
-                value="Clear Filter"
-                onClick={this.handleClearFilter}
-              />
-            </ButtonContainer>
-          </ContainerAndButtons>
-        </NavFilterBarContainerInner>
-      </NavFilterBarContainer>
+
+            <Button onClick={this.handleSubmit}>Submit</Button>
+
+            <Button onClick={this.handleClearFilter}>Clear Filter</Button>
+          </ActionContainer>
+        </Inner>
+      </Container>
     );
   }
 }
