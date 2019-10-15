@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components/macro";
 import moment from "moment";
 import { Button } from "./Button";
-import { Title } from "./Typography";
+import { H4 } from "./Typography";
 
 const CardContainer = styled.div`
   padding-bottom: 20px;
@@ -16,23 +16,23 @@ const CardContainer = styled.div`
 const ImgContainer = styled.img`
   display: block;
   margin: 0 auto;
-  /* margin-left: auto;
-  margin-right: auto; */
   width: 100%;
-  /* padding: 20px 0; */
+  /* height: 85%; */
+  align-items: center;
 `;
 
-const ImageAndTitleContainer = styled.div`
-  margin: 0 auto;
+const TitleContainer = styled.div`
+  padding: 30px;
+  text-align: center;
 `;
 
 const StyledAuthor = styled.p`
-  /* color: lightseagreen; */
-  color: #548787;
+  color: lightseagreen;
+  /* color: #548787; */
   font-weight: bold;
   padding-top: 5px;
   margin: 0;
-  font-size: 16px;
+  font-size: 15px;
 `;
 
 const StyledPublished = styled.p`
@@ -54,18 +54,27 @@ const Card = (props) => (
           Published: {moment(props.data.publishedAt).fromNow()}
         </StyledPublished>
       </div>
-      <div style={{ flex: 1, display: "flex", justifyContent: "flex-end" }}>
+      <div
+        style={{
+          flex: 1,
+          display: "flex",
+          justifyContent: "flex-end",
+          alignItems: "center"
+        }}
+      >
         <Button small onClick={() => props.handleClick(props.data)}>
           {props.text}
         </Button>
       </div>
     </div>
-    <ImageAndTitleContainer>
-      <ImgContainer src={props.data.urlToImage} alt="" />
-      <Title style={{ textAlign: "justify" }} as="a" href={props.data.url}>
+
+    <ImgContainer src={props.data.urlToImage} alt="" />
+    <TitleContainer>
+      <H4 as="a" href={props.data.url}>
         {props.data.title}
-      </Title>
-    </ImageAndTitleContainer>
+      </H4>
+    </TitleContainer>
+
     {props.children}
   </CardContainer>
 );

@@ -6,7 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { landingPageNews } from "../newsSources";
 import { getNews } from "../utils/api";
 import { Title } from "../components/Typography";
-import { H1 } from "../components/Typography";
+import { H1, H4 } from "../components/Typography";
 import Carousel from "../components/Carousel/MainCarousel";
 
 // import MainCarousel from "../components/Carousel/MainCarousel";
@@ -26,6 +26,7 @@ const LandingPageBodyContainerInner = styled.div`
 
 const Container = styled.div`
   width: 66.66%;
+  padding-top: 30px;
 `;
 
 const NewsSourceSecondContainer = styled.div`
@@ -47,8 +48,8 @@ const SideBar = styled.div`
   height: 100%;
   padding: 0 20px;
   margin: 10px;
-  border: 0.5px solid rgba(0, 0, 0, 0.2);
-  background-color: #548787;
+  /* border: 0.5px solid rgba(0, 0, 0, 0.2); */
+  /* background-color: lightseagreen; */
 `;
 
 const SavedArticle = styled.div`
@@ -110,7 +111,7 @@ class LandingPage extends React.Component {
             <Loading show={this.state.show} color="red" />
             <H1>BBC News Top Headlines</H1>
             <Carousel newsData={newsSourceMainSlider} />
-            <hr />
+
             <NewsSourceSecondContainer>
               <Title>Time Magazine Top Headlines</Title>
               <div>
@@ -138,7 +139,7 @@ class LandingPage extends React.Component {
             </NewsSourceThirdContainer>
           </Container>
           <SideBar>
-            <H1>Top 10 Saved News Articles</H1>
+            <H4>Top 10 Saved News Articles</H4>
             <SavedArticle>Article 1</SavedArticle>
             <SavedArticle>Article 2</SavedArticle>
             <SavedArticle>Article 3</SavedArticle>

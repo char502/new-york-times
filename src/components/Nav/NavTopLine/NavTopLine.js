@@ -4,7 +4,7 @@ import styled from "styled-components/macro";
 import { Link } from "react-router-dom";
 import { AltButton } from "../../Button";
 // import { H1 } from "../../Typography";
-import newspaper from "../../../Images/newspaper3.jpg";
+import newspaper from "../../../Images/newspaper7.jpg";
 
 // newspaper.png
 
