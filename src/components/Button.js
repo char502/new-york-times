@@ -20,7 +20,7 @@ export const Button = styled.button`
   ${(props) =>
     props.small &&
     css`
-      font-size: 8px;
+      font-size: 10px;
       padding: 0 12px;
       height: 24px;
     `}
@@ -31,10 +31,21 @@ export const Button = styled.button`
 `;
 
 export const AltButton = styled(Button)`
-  color: black;
   background: gray;
-
+  color: white;
   &:hover {
     background: white;
+    color: black;
+  }
+  ${(props) =>
+    props.small &&
+    css`
+      font-size: 10px;
+      padding: 0 12px;
+      height: 24px;
+    `}
+  &:hover {
+    background-color: white;
+    color: black;
   }
 `;

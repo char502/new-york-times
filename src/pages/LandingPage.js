@@ -1,12 +1,12 @@
 import React from "react";
 import Loading from "react-loading-bar";
 import styled from "styled-components/macro";
-import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { landingPageNews } from "../newsSources";
 import { getNews } from "../utils/api";
 import { Title } from "../components/Typography";
+import { H1 } from "../components/Typography";
 import Carousel from "../components/Carousel/MainCarousel";
 
 // import MainCarousel from "../components/Carousel/MainCarousel";
@@ -41,6 +41,20 @@ const NewsSourceThirdContainer = styled.div`
   background-color: lightseagreen;
   padding: 30px;
 `;
+
+const SideBar = styled.div`
+  width: 33.33%;
+  height: 100%;
+  padding: 0 20px;
+  margin: 10px;
+  border: 0.5px solid rgba(0, 0, 0, 0.2);
+  background-color: #548787;
+`;
+
+const SavedArticle = styled.div`
+  padding: 15px 0;
+`;
+
 // ===================================
 
 class LandingPage extends React.Component {
@@ -73,13 +87,13 @@ class LandingPage extends React.Component {
   }
 
   render() {
-    const settings = {
-      dots: true,
-      infinite: true,
-      speed: 500,
-      slidesToShow: 1,
-      slidesToScroll: 1
-    };
+    // const settings = {
+    //   dots: true,
+    //   infinite: true,
+    //   speed: 500,
+    //   slidesToShow: 1,
+    //   slidesToScroll: 1
+    // };
     // console.log(this.state.newsSourceMainSlider);
     // console.log(landingPageNews[0].path);
 
@@ -94,10 +108,8 @@ class LandingPage extends React.Component {
         <LandingPageBodyContainerInner>
           <Container>
             <Loading show={this.state.show} color="red" />
-
-            <Title>BBC News Top Headlines</Title>
+            <H1>BBC News Top Headlines</H1>
             <Carousel newsData={newsSourceMainSlider} />
-
             <hr />
             <NewsSourceSecondContainer>
               <Title>Time Magazine Top Headlines</Title>
@@ -125,9 +137,19 @@ class LandingPage extends React.Component {
               </div>
             </NewsSourceThirdContainer>
           </Container>
-          <Container
-            style={{ width: "33.33%", height: "100%", background: "black" }}
-          ></Container>
+          <SideBar>
+            <H1>Top 10 Saved News Articles</H1>
+            <SavedArticle>Article 1</SavedArticle>
+            <SavedArticle>Article 2</SavedArticle>
+            <SavedArticle>Article 3</SavedArticle>
+            <SavedArticle>Article 4</SavedArticle>
+            <SavedArticle>Article 5</SavedArticle>
+            <SavedArticle>Article 6</SavedArticle>
+            <SavedArticle>Article 7</SavedArticle>
+            <SavedArticle>Article 8</SavedArticle>
+            <SavedArticle>Article 9</SavedArticle>
+            <SavedArticle>Article 10</SavedArticle>
+          </SideBar>
         </LandingPageBodyContainerInner>
       </LandingPageBodyContainer>
     );

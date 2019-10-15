@@ -53,8 +53,8 @@ class FetchNews extends React.Component {
   }
 }
 
-export default props => (
+export default (props) => (
   <LoadingConsumer>
-    {loading => <FetchNews {...loading} {...props} />}
+    {(loading) => <FetchNews {...loading} {...props} />}
   </LoadingConsumer>
 );

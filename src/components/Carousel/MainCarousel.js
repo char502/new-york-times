@@ -47,14 +47,19 @@ class MainCarousel extends React.Component {
     console.log();
     return (
       <div>
-        <Title>{this.props.location.pathname.split("-").join(" ")}</Title>
+        <Title>
+          {this.props.location.pathname
+            .split("/")
+            .join(" ")
+            .toUpperCase()}
+        </Title>
         <Slider {...settings}>
           {newsData.map((article) => (
             <Card
               key={article.url}
               data={article}
               text="Save"
-              onClick={this.handleSaveItem}
+              handleClick={this.handleSaveItem}
               extended
             />
           ))}

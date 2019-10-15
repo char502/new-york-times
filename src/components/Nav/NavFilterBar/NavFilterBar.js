@@ -19,10 +19,6 @@ const Inner = styled.div`
   align-items: center;
 `;
 
-const ContainerAndButtons = styled.div`
-  display: flex;
-`;
-
 const ActionContainer = styled.div`
   background-color: transparent;
   display: flex;

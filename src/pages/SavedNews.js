@@ -2,7 +2,7 @@ import React from "react";
 import moment from "moment";
 import styled from "styled-components/macro";
 import Card from "../components/Card";
-import { Button } from "../components/Button";
+import { Button, AltButton } from "../components/Button";
 import { H1, H4 } from "../components/Typography";
 
 // ======== Styled Components ========
@@ -17,14 +17,17 @@ const SavedNewsContainerInner = styled.div`
   position: relative;
 `;
 
-const StyledHeaderFour = styled.h4`
-  margin-left: 24px;
-`;
-
 // ===================================
 
 const ActionContainer = styled.div`
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
 `;
 
 class SavedNews extends React.Component {
@@ -82,13 +85,14 @@ class SavedNews extends React.Component {
     return (
       <SavedNewsContainer>
         <SavedNewsContainerInner>
-          <H1>Saved News</H1>
           <ActionContainer>
+            <H1>Saved News</H1>
+
             <Button small onClick={this.handleClearAll}>
               Clear All Saved News
             </Button>
-            <H4>Note: Saved Items will be cleared after a week</H4>
           </ActionContainer>
+          <H4>Note: Saved Items will be cleared after a week</H4>
 
           <div>
             {savedNewsPastWeek.map((newsItem) => (
@@ -98,7 +102,9 @@ class SavedNews extends React.Component {
                 text="remove"
                 key={newsItem.title}
               >
-                <Button>Retain Item for another week</Button>
+                <ButtonContainer>
+                  <AltButton small>Retain Item for another week</AltButton>
+                </ButtonContainer>
               </Card>
             ))}
           </div>

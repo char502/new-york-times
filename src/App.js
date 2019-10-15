@@ -28,7 +28,7 @@ class App extends React.Component {
               <Nav />
               <Switch>
                 <Route exact path="/" component={LandingPage} />
-                {newsSources.map(route => (
+                {newsSources.map((route) => (
                   <Route
                     key={route.name}
                     path={`/${route.path}`}
@@ -49,10 +49,3 @@ class App extends React.Component {
 }
 
 export default App;
-
-// ask local storage for saved news array
-// filter the saved news based on the creation date
-// setState with the filtered news array
-// save in local storage the filtered array
-
-// clear all saved news ->  setting local storage to empty array

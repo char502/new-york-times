@@ -90,7 +90,7 @@ class SearchResults extends React.Component {
                 key={result.title}
                 data={result}
                 text="Save"
-                handleItem={this.handleSaveItem}
+                handleClick={this.handleSaveItem}
                 extended
               />
             ))}
