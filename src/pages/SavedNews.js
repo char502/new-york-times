@@ -86,26 +86,30 @@ class SavedNews extends React.Component {
       <SavedNewsContainer>
         <SavedNewsContainerInner>
           <ActionContainer>
-            <H1>Saved News</H1>
-
-            <Button small onClick={this.handleClearAll}>
-              Clear All Saved News
-            </Button>
+            <div>
+              <H1>Saved News</H1>
+              <H4>Note: Saved Items will be cleared after a week</H4>
+            </div>
+            <div>
+              <Button small onClick={this.handleClearAll}>
+                Clear All Saved News
+              </Button>
+            </div>
           </ActionContainer>
-          <H4>Note: Saved Items will be cleared after a week</H4>
 
           <div>
             {savedNewsPastWeek.map((newsItem) => (
-              <Card
-                data={newsItem}
-                handleClick={this.handleRemoveItem}
-                text="remove"
-                key={newsItem.title}
-              >
-                <ButtonContainer>
-                  <AltButton small>Retain Item for another week</AltButton>
-                </ButtonContainer>
-              </Card>
+              <div key={newsItem.title}>
+                <Card
+                  data={newsItem}
+                  handleClick={this.handleRemoveItem}
+                  text="remove"
+                >
+                  <ButtonContainer>
+                    <AltButton small>Retain Item for another week</AltButton>
+                  </ButtonContainer>
+                </Card>
+              </div>
             ))}
           </div>
         </SavedNewsContainerInner>

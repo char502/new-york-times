@@ -38,11 +38,16 @@ class MainCarousel extends React.Component {
   render() {
     const { newsData } = this.props;
     const settings = {
-      dots: true,
+      // dots: true,
       infinite: true,
       speed: 500,
       slidesToShow: 1,
-      slidesToScroll: 1
+      slidesToScroll: 1,
+      centerPadding: 0
+      // autoplay: true,
+      // speed: 2000,
+      // autoplaySpeed: 3000,
+      // cssEase: "linear"
     };
     console.log();
     return (
@@ -55,13 +60,14 @@ class MainCarousel extends React.Component {
         </Title>
         <Slider {...settings}>
           {newsData.map((article) => (
-            <Card
-              key={article.url}
-              data={article}
-              text="Save"
-              handleClick={this.handleSaveItem}
-              extended
-            />
+            <div key={article.url}>
+              <Card
+                data={article}
+                text="Save"
+                handleClick={this.handleSaveItem}
+                extended
+              />
+            </div>
           ))}
         </Slider>
       </div>

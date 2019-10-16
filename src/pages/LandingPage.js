@@ -26,20 +26,25 @@ const LandingPageBodyContainerInner = styled.div`
 
 const Container = styled.div`
   width: 66.66%;
-  padding-top: 30px;
+  padding-top: 10px;
+  /* background: lightseagreen; */
+`;
+
+const StyledTitle = styled.div`
+  padding-left: 30px;
 `;
 
 const NewsSourceSecondContainer = styled.div`
   max-width: 1200px;
   height: auto;
-  background-color: lightpink;
-  padding: 30px;
+  /* background-color: lightpink; */
+  padding: 10px;
 `;
 
 const NewsSourceThirdContainer = styled.div`
   max-width: 1200px;
   height: auto;
-  background-color: lightseagreen;
+  /* background-color: lightseagreen; */
   padding: 30px;
 `;
 
@@ -109,9 +114,10 @@ class LandingPage extends React.Component {
         <LandingPageBodyContainerInner>
           <Container>
             <Loading show={this.state.show} color="red" />
-            <H1>BBC News Top Headlines</H1>
+            <StyledTitle>
+              <H1>BBC News Top Headlines</H1>
+            </StyledTitle>
             <Carousel newsData={newsSourceMainSlider} />
-
             <NewsSourceSecondContainer>
               <Title>Time Magazine Top Headlines</Title>
               <div>

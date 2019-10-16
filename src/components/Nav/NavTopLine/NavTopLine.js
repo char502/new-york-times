@@ -39,11 +39,6 @@ const TitleContainer = styled.div`
   flex: 1;
 `;
 
-// const StyledLink = styled(Link)`
-//   color: black;
-//   text-decoration: none;
-// `;
-
 const NavSearchInputsContainer = styled.div`
   display: flex;
   flex: 1;
@@ -166,7 +161,6 @@ class NavTopLine extends React.Component {
                 {/* <div style={{ color: toggleInput ? "red" : "black" }} /> */}
               </InputWrapper>
             </Form>
-
             <NavFilterBar />
           </NavSearchInputsContainer>
 

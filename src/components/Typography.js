@@ -8,6 +8,11 @@ export const H1 = styled.h1`
   /* color: rgba(0, 0, 0, 0.84); */
 `;
 
+export const H3 = styled.h1`
+  font-size: 24px;
+  color: black;
+`;
+
 export const H4 = styled.h4`
   padding: 0;
   font-size: 16px;

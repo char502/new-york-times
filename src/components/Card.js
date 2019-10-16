@@ -2,15 +2,16 @@ import React from "react";
 import styled from "styled-components/macro";
 import moment from "moment";
 import { Button } from "./Button";
-import { H4 } from "./Typography";
+import { H3 } from "./Typography";
 
 const CardContainer = styled.div`
   padding-bottom: 20px;
   border-bottom: 0.5px solid rgba(0, 0, 0, 0.2);
-  width: 100%;
+  width: 50%;
   max-width: 900px;
   margin: 0 auto;
   margin-bottom: 32px;
+  /* background: lightsteelblue; */
 `;
 
 const ImgContainer = styled.img`
@@ -19,10 +20,12 @@ const ImgContainer = styled.img`
   width: 100%;
   /* height: 85%; */
   align-items: center;
+  /* border: 1px solid gray; */
+  /* box-shadow: 5px 10px lightGray; */
 `;
 
 const TitleContainer = styled.div`
-  padding: 30px;
+  padding: 20px;
   text-align: center;
 `;
 
@@ -70,9 +73,9 @@ const Card = (props) => (
 
     <ImgContainer src={props.data.urlToImage} alt="" />
     <TitleContainer>
-      <H4 as="a" href={props.data.url}>
+      <H3 as="a" href={props.data.url}>
         {props.data.title}
-      </H4>
+      </H3>
     </TitleContainer>
 
     {props.children}

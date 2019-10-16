@@ -86,13 +86,14 @@ class SearchResults extends React.Component {
         <SearchResultsContainerInner>
           <ul>
             {results.map((result) => (
-              <Card
-                key={result.title}
-                data={result}
-                text="Save"
-                handleClick={this.handleSaveItem}
-                extended
-              />
+              <div key={result.title}>
+                <Card
+                  data={result}
+                  text="Save"
+                  handleClick={this.handleSaveItem}
+                  extended
+                />
+              </div>
             ))}
           </ul>
           <Loading show={this.state.show} color="red" />
