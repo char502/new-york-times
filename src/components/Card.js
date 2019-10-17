@@ -10,7 +10,7 @@ const CardContainer = styled.div`
   width: 60%;
   max-width: 900px;
   margin: 0 auto;
-  margin-bottom: 32px;
+  /* margin-bottom: 18px; */
   /* background: lightsteelblue; */
 `;
 
@@ -46,6 +46,13 @@ const StyledPublished = styled.p`
   color: grey;
 `;
 
+const ActionButton = styled.div`
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+`;
+
 // { item, handleAction, text, extended, author, publishedAt }
 
 const Card = (props) => (
@@ -57,18 +64,11 @@ const Card = (props) => (
           Published: {moment(props.data.publishedAt).fromNow()}
         </StyledPublished>
       </div>
-      <div
-        style={{
-          flex: 1,
-          display: "flex",
-          justifyContent: "flex-end",
-          alignItems: "center"
-        }}
-      >
+      <ActionButton>
         <Button small onClick={() => props.handleClick(props.data)}>
           {props.text}
         </Button>
-      </div>
+      </ActionButton>
     </div>
     <ImgContainer src={props.data.urlToImage} alt="" />
     <TitleContainer>
@@ -76,7 +76,11 @@ const Card = (props) => (
         {props.data.title}
       </H3>
     </TitleContainer>
-
+    {/* {props.extended && (
+      <div>
+        This is the extended item information - the metadata(createdAt etc?)
+      </div>
+    )} */}
     {props.children}
   </CardContainer>
 );

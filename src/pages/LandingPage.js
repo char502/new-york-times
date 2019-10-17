@@ -36,18 +36,19 @@ const StyledTitle = styled.div`
 const NewsSourceSecondContainer = styled.div`
   max-width: 1200px;
   height: auto;
-  /* background-color: lightpink; */
+
   padding: 5px 10px 10px 10px;
   border-bottom: 0.5px solid rgba(0, 0, 0, 0.2);
+  /* background-color: lightpink; */
 `;
 
 const NewsSourceThirdContainer = styled.div`
   max-width: 1200px;
   height: auto;
-  /* background-color: lightseagreen; */
   padding: 5px 10px 10px 10px;
   border-bottom: 0.5px solid rgba(0, 0, 0, 0.2);
   margin-bottom: 30px;
+  /* background-color: lightseagreen; */
 `;
 
 const SideBar = styled.div`
@@ -59,9 +60,33 @@ const SideBar = styled.div`
   /* background-color: lightseagreen; */
 `;
 
-const SavedArticle = styled.div`
-  padding: 15px 0;
+const TopNewsContainer = styled.div`
+  /* border: 0.5px solid black; */
 `;
+
+const ArticleNumbering = styled.div`
+  padding: 5px;
+`;
+
+const ImageAndTitle = styled.div`
+  display: flex;
+  padding: 10px;
+`;
+
+const SavedImage = styled.img`
+  height: 40px;
+  width: 40px;
+`;
+
+const TopNewsTitle = styled.div`
+  padding-left: 10px;
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+`;
+// const SavedArticle = styled.div`
+//   padding: 15px;
+// `;
 
 // ===================================
 
@@ -70,7 +95,8 @@ class LandingPage extends React.Component {
     newsSourceMainSlider: [],
     newsSourceSecond: [],
     newsSourceThird: [],
-    show: false
+    show: false,
+    topTenSaved: []
   };
 
   async componentDidMount() {
@@ -86,6 +112,17 @@ class LandingPage extends React.Component {
     let newsSourceSecond = ResponseTwo.data.articles;
     let newsSourceThird = ResponseThree.data.articles;
 
+    // Data for sidebar
+    if (localStorage.getItem("savedNews")) {
+      const topSaved = JSON.parse(localStorage.getItem("savedNews"));
+
+      const topTenSaved = topSaved.filter((item, index) => index <= 9);
+
+      this.setState({
+        topTenSaved
+      });
+    }
+
     this.setState({
       show: false,
       newsSourceMainSlider,
@@ -98,9 +135,11 @@ class LandingPage extends React.Component {
     const {
       newsSourceMainSlider,
       newsSourceSecond,
-      newsSourceThird
+      newsSourceThird,
+      topTenSaved
     } = this.state;
 
+    // console.log(topTenSaved);
     return (
       <LandingPageBodyContainer>
         <LandingPageBodyContainerInner>
@@ -142,16 +181,21 @@ class LandingPage extends React.Component {
 
           <SideBar>
             <H4>Top 10 Saved News Articles</H4>
-            <SavedArticle>Article 1</SavedArticle>
-            <SavedArticle>Article 2</SavedArticle>
-            <SavedArticle>Article 3</SavedArticle>
-            <SavedArticle>Article 4</SavedArticle>
-            <SavedArticle>Article 5</SavedArticle>
-            <SavedArticle>Article 6</SavedArticle>
-            <SavedArticle>Article 7</SavedArticle>
-            <SavedArticle>Article 8</SavedArticle>
-            <SavedArticle>Article 9</SavedArticle>
-            <SavedArticle>Article 10</SavedArticle>
+            {topTenSaved.map((topNewsItem, index) => {
+              return (
+                <TopNewsContainer key={topNewsItem.title}>
+                  <ArticleNumbering>Article {[index + 1]}:</ArticleNumbering>
+                  <ImageAndTitle>
+                    <div>
+                      <SavedImage src={topNewsItem.urlToImage} />
+                    </div>
+                    <TopNewsTitle as="a" href={topNewsItem.url}>
+                      {topNewsItem.title}
+                    </TopNewsTitle>
+                  </ImageAndTitle>
+                </TopNewsContainer>
+              );
+            })}
           </SideBar>
         </LandingPageBodyContainerInner>
       </LandingPageBodyContainer>

@@ -18,6 +18,7 @@ const MainBodyContainerInner = styled.div`
 `;
 
 const Title = styled.div`
+  margin-top: 5px;
   padding: 5px;
 `;
 // ===================================
