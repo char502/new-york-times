@@ -26,6 +26,23 @@ const ActionContainer = styled.div`
   border-radius: 4px;
 `;
 
+const styles = {
+  control: (base) => ({
+    ...base,
+    fontFamily: "Roboto Condensed",
+    backgroundColor: "white",
+    fontSize: "12px",
+    color: "black"
+  }),
+  menu: (base) => ({
+    ...base,
+    fontFamily: "Roboto Condensed",
+    backgroundColor: "white",
+    fontSize: "12px",
+    color: "black"
+  })
+};
+
 // const select = styled.select`
 //   /* font-family: "Roboto Condensed", sans-serif;
 //   background-color: Transparent;
@@ -101,19 +118,8 @@ class NavFilterBar extends React.Component {
                 getOptionValue={(option) => `${option.path}`}
                 onChange={this.handleChange}
                 placeholder={"Select by filter source"}
-                // Looking at the docs I don't really understand them though?
+                styles={styles}
                 clearValue={() => true}
-                /* getStyles={(string, any) => theme} */
-                /* theme object
-                 {
-                borderRadius: number required
-                colors: object required Object
-                spacing: required {
-                baseUnit: number required
-                controlHeight: number required
-                menuGutter: number required
-                }
-                } */
                 value={newsSources.filter(
                   ({ path }) => path === this.state.filter
                 )}

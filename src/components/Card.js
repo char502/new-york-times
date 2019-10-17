@@ -7,7 +7,7 @@ import { H3 } from "./Typography";
 const CardContainer = styled.div`
   padding-bottom: 20px;
   border-bottom: 0.5px solid rgba(0, 0, 0, 0.2);
-  width: 50%;
+  width: 60%;
   max-width: 900px;
   margin: 0 auto;
   margin-bottom: 32px;
@@ -70,7 +70,6 @@ const Card = (props) => (
         </Button>
       </div>
     </div>
-
     <ImgContainer src={props.data.urlToImage} alt="" />
     <TitleContainer>
       <H3 as="a" href={props.data.url}>

@@ -8,8 +8,7 @@ import { getNews } from "../utils/api";
 import { Title } from "../components/Typography";
 import { H1, H4 } from "../components/Typography";
 import Carousel from "../components/Carousel/MainCarousel";
-
-// import MainCarousel from "../components/Carousel/MainCarousel";
+// import SavedNews from "./SavedNews";
 
 // ======== Styled Components ========
 const LandingPageBodyContainer = styled.div`
@@ -26,7 +25,7 @@ const LandingPageBodyContainerInner = styled.div`
 
 const Container = styled.div`
   width: 66.66%;
-  padding-top: 10px;
+  /* padding-top: 10px; */
   /* background: lightseagreen; */
 `;
 
@@ -38,14 +37,17 @@ const NewsSourceSecondContainer = styled.div`
   max-width: 1200px;
   height: auto;
   /* background-color: lightpink; */
-  padding: 10px;
+  padding: 5px 10px 10px 10px;
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.2);
 `;
 
 const NewsSourceThirdContainer = styled.div`
   max-width: 1200px;
   height: auto;
   /* background-color: lightseagreen; */
-  padding: 30px;
+  padding: 5px 10px 10px 10px;
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.2);
+  margin-bottom: 30px;
 `;
 
 const SideBar = styled.div`
@@ -93,16 +95,6 @@ class LandingPage extends React.Component {
   }
 
   render() {
-    // const settings = {
-    //   dots: true,
-    //   infinite: true,
-    //   speed: 500,
-    //   slidesToShow: 1,
-    //   slidesToScroll: 1
-    // };
-    // console.log(this.state.newsSourceMainSlider);
-    // console.log(landingPageNews[0].path);
-
     const {
       newsSourceMainSlider,
       newsSourceSecond,
@@ -124,26 +116,30 @@ class LandingPage extends React.Component {
                 {newsSourceSecond.map((timeNewsArticle, index) => (
                   <ul key={index}>
                     <li>
-                      <a href={timeNewsArticle.url}>{timeNewsArticle.title}</a>
+                      <H4 as="a" href={timeNewsArticle.url}>
+                        {timeNewsArticle.title}
+                      </H4>
                     </li>
                   </ul>
                 ))}
               </div>
             </NewsSourceSecondContainer>
-            <hr />
             <NewsSourceThirdContainer>
               <Title>New Scientist Top Headlines</Title>
               <div>
                 {newsSourceThird.map((newScientist, index) => (
                   <ul key={index}>
                     <li>
-                      <a href={newScientist.url}>{newScientist.title}</a>
+                      <H4 as="a" href={newScientist.url}>
+                        {newScientist.title}
+                      </H4>
                     </li>
                   </ul>
                 ))}
               </div>
             </NewsSourceThirdContainer>
           </Container>
+
           <SideBar>
             <H4>Top 10 Saved News Articles</H4>
             <SavedArticle>Article 1</SavedArticle>

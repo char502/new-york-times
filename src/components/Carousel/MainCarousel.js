@@ -1,13 +1,37 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
+import styled from "styled-components/macro";
 import moment from "moment";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Card from "../Card";
 import { Title } from "../Typography";
+import { Button } from "../Button";
+
+// ======== Styled Components ========
+
+const ScrollButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+// ===================================
 
 class MainCarousel extends React.Component {
+  constructor(props) {
+    super(props);
+    this.next = this.next;
+    this.previous = this.previous;
+  }
+
+  next = () => {
+    this.slider.slickNext();
+  };
+  previous = () => {
+    this.slider.slickPrev();
+  };
   handleSaveItem = (article) => {
     const savedArticle = {
       ...article,
@@ -58,7 +82,7 @@ class MainCarousel extends React.Component {
             .join(" ")
             .toUpperCase()}
         </Title>
-        <Slider {...settings}>
+        <Slider ref={(c) => (this.slider = c)} {...settings}>
           {newsData.map((article) => (
             <div key={article.url}>
               <Card
@@ -66,7 +90,16 @@ class MainCarousel extends React.Component {
                 text="Save"
                 handleClick={this.handleSaveItem}
                 extended
-              />
+              >
+                <ScrollButtonContainer>
+                  <Button small className="button" onClick={this.previous}>
+                    Previous
+                  </Button>
+                  <Button small className="button" onClick={this.next}>
+                    Next
+                  </Button>
+                </ScrollButtonContainer>
+              </Card>
             </div>
           ))}
         </Slider>

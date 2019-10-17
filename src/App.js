@@ -15,6 +15,7 @@ import FetchNews from "./pages/FetchNews";
 import SearchResults from "./pages/SearchResults";
 import SavedNews from "./pages/SavedNews";
 import LoadingProvider from "./loadingContext";
+import Footer from "../src/components/Footer";
 
 const FourOhFour = () => <div>Not found</div>;
 
@@ -40,6 +41,7 @@ class App extends React.Component {
                 <Route path="/savedNews" component={SavedNews} />
                 <Route path="*" component={FourOhFour} />
               </Switch>
+              <Footer />
             </div>
           </Router>
         </LoadingProvider>

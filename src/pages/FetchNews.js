@@ -7,7 +7,7 @@ import { LoadingConsumer } from "../loadingContext";
 // ======== Styled Components ========
 const MainBodyContainer = styled.div`
   width: 100vw;
-  background-color: LightSkyBlue;
+  background-color: lightgrey;
 `;
 
 const MainBodyContainerInner = styled.div`
@@ -15,6 +15,10 @@ const MainBodyContainerInner = styled.div`
   height: 100%;
   max-width: 1200px;
   margin: 0 auto;
+`;
+
+const Title = styled.div`
+  padding: 5px;
 `;
 // ===================================
 
@@ -44,7 +48,7 @@ class FetchNews extends React.Component {
 
     return (
       <MainBodyContainer>
-        {this.props.path}
+        <Title>{this.props.path}</Title>
         <MainBodyContainerInner>
           <MainCarousel newsData={news} />
         </MainBodyContainerInner>

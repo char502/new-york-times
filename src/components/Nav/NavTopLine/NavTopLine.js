@@ -6,12 +6,6 @@ import { AltButton } from "../../Button";
 // import { H1 } from "../../Typography";
 import newspaper from "../../../Images/newspaper7.jpg";
 
-// newspaper.png
-
-// newspaper2.jpg
-// newspaper3.jpg
-// newspaper7.jpg
-
 // Components
 import NavFilterBar from "../NavFilterBar/NavFilterBar";
 
@@ -23,7 +17,7 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 const NavTopLineContainer = styled.div`
   width: 100%;
   height: 75px;
-  /* background-color: red; */
+  margin-top: 10px;
 `;
 
 const NavTopLineContainerInner = styled.div`
@@ -43,7 +37,6 @@ const NavSearchInputsContainer = styled.div`
   display: flex;
   flex: 1;
   justify-content: flex-end;
-  /* background-color: forestgreen; */
 `;
 
 // animated magnifying glass icon
@@ -53,30 +46,27 @@ const Form = styled.form`
   position: relative;
   width: 200px;
   height: 40px;
-  /* background-color: red; */
 `;
 
 const InputWrapper = styled.div`
   position: relative;
   overflow: hidden;
   height: 100%;
-  /* background-color: blue; */
+  margin-right: 30px;
 `;
 
 const easing = "cubic-bezier(0.645, 0.045, 0.355, 1)";
 
 const Input = styled.input`
-  /* background-color: yellow; */
   position: absolute;
   width: 85%;
   left: 15%;
-  top: 15%;
+  top: 30%;
   border: none;
   outline: none;
   height: 27px;
   transform: ${(props) => (props.show ? "translatex(0)" : "translatex(110%)")};
   transition: 2s ${easing};
-  /* transition: opacity 0.3s; */
   transition: fill 500ms ease;
   /* transform property
   translate function */
@@ -84,10 +74,10 @@ const Input = styled.input`
 
 //Magnifying glass icon
 const StyledIcon = styled(FontAwesomeIcon)`
-  top: 35%;
+  top: 45%;
   width: 10%;
   position: absolute;
-  left: ${(props) => (props.show ? "0" : "90%")};
+  left: ${(props) => (props.show ? false : "90%")};
   transition: 2s ${easing};
   transition: fill 500ms ease;
 `;
@@ -99,6 +89,7 @@ const Newspaper = styled.img`
 `;
 
 const HomeButton = styled.img`
+  /* padding-left: 5px; */
   /* display: flex;
   align-items: center;
   position: absolute;
@@ -122,9 +113,7 @@ class NavTopLine extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-
     this.props.history.push(`/search?searchTerm=${this.state.searchTerm}`);
-
     this.setState({ searchTerm: "" });
   };
 
