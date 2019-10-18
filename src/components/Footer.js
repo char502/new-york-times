@@ -4,6 +4,10 @@ import copyright from "../Images/copyright3.png";
 
 // ======== Styled Components ========
 
+const FooterContainer = styled.div`
+  padding: 30px 10px 10px 10px;
+`;
+
 const CopyrightImage = styled.div`
   display: flex;
   justify-content: center;
@@ -21,11 +25,11 @@ const Copyright = styled.img`
 // ===================================
 const Footer = () => {
   return (
-    <div>
+    <FooterContainer>
       <CopyrightImage>
         <Copyright src={copyright} /> <p>Charlotte Ellwood 2019</p>
       </CopyrightImage>
-    </div>
+    </FooterContainer>
   );
 };
 

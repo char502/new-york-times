@@ -30,6 +30,10 @@ const ButtonContainer = styled.div`
   justify-content: flex-end;
 `;
 
+const CardContainer = styled.div`
+  padding: 50px;
+`;
+
 class SavedNews extends React.Component {
   constructor(props) {
     super(props);
@@ -100,15 +104,18 @@ class SavedNews extends React.Component {
           <div>
             {savedNewsPastWeek.map((newsItem) => (
               <div key={newsItem.title}>
-                <Card
-                  data={newsItem}
-                  handleClick={this.handleRemoveItem}
-                  text="remove"
-                >
-                  <ButtonContainer>
-                    <AltButton small>Retain Item for another week</AltButton>
-                  </ButtonContainer>
-                </Card>
+                <CardContainer>
+                  <Card
+                    data={newsItem}
+                    handleClick={this.handleRemoveItem}
+                    text="remove"
+                    extended
+                  >
+                    <ButtonContainer>
+                      <AltButton small>Retain Item for another week</AltButton>
+                    </ButtonContainer>
+                  </Card>
+                </CardContainer>
               </div>
             ))}
           </div>

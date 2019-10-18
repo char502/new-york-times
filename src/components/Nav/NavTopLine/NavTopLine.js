@@ -52,7 +52,7 @@ const InputWrapper = styled.div`
   position: relative;
   overflow: hidden;
   height: 100%;
-  margin-right: 30px;
+  margin-right: 20px;
 `;
 
 const easing = "cubic-bezier(0.645, 0.045, 0.355, 1)";

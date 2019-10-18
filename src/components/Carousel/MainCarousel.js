@@ -11,10 +11,21 @@ import { Button } from "../Button";
 
 // ======== Styled Components ========
 
+const MainCarouselContainer = styled.div`
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.2);
+  max-width: 600px;
+  margin: auto;
+  /* max-width: 900px;
+  max-height: 500px; */
+  /* padding: 5px; */
+`;
+
 const ScrollButtonContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 10px 10px 10px 10px;
+  margin: 10px;
 `;
 
 // ===================================
@@ -67,7 +78,8 @@ class MainCarousel extends React.Component {
       speed: 500,
       slidesToShow: 1,
       slidesToScroll: 1,
-      centerPadding: 0
+      centerPadding: 0,
+      slideWidth: 0.7
       // autoplay: true,
       // speed: 2000,
       // autoplaySpeed: 3000,
@@ -75,7 +87,7 @@ class MainCarousel extends React.Component {
     };
     console.log();
     return (
-      <div>
+      <MainCarouselContainer>
         <Title>
           {this.props.location.pathname
             .split("/")
@@ -89,21 +101,20 @@ class MainCarousel extends React.Component {
                 data={article}
                 text="Save"
                 handleClick={this.handleSaveItem}
-                extended
-              >
-                <ScrollButtonContainer>
-                  <Button small className="button" onClick={this.previous}>
-                    Previous
-                  </Button>
-                  <Button small className="button" onClick={this.next}>
-                    Next
-                  </Button>
-                </ScrollButtonContainer>
-              </Card>
+                /* extended */
+              ></Card>
             </div>
           ))}
         </Slider>
-      </div>
+        <ScrollButtonContainer>
+          <Button small className="button" onClick={this.previous}>
+            Previous
+          </Button>
+          <Button small className="button" onClick={this.next}>
+            Next
+          </Button>
+        </ScrollButtonContainer>
+      </MainCarouselContainer>
     );
   }
 }

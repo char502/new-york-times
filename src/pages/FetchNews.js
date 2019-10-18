@@ -7,7 +7,8 @@ import { LoadingConsumer } from "../loadingContext";
 // ======== Styled Components ========
 const MainBodyContainer = styled.div`
   width: 100vw;
-  background-color: lightgrey;
+  /* max-height: 700px; */
+  background-color: WhiteSmoke;
 `;
 
 const MainBodyContainerInner = styled.div`
@@ -46,7 +47,6 @@ class FetchNews extends React.Component {
 
   render() {
     const { news } = this.state;
-
     return (
       <MainBodyContainer>
         <Title>{this.props.path}</Title>

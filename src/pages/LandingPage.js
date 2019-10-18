@@ -57,7 +57,7 @@ const SideBar = styled.div`
   padding: 0 20px;
   margin: 10px;
   /* border: 0.5px solid rgba(0, 0, 0, 0.2); */
-  /* background-color: lightseagreen; */
+  background-color: WhiteSmoke;
 `;
 
 const TopNewsContainer = styled.div`
@@ -154,11 +154,9 @@ class LandingPage extends React.Component {
               <div>
                 {newsSourceSecond.map((timeNewsArticle, index) => (
                   <ul key={index}>
-                    <li>
-                      <H4 as="a" href={timeNewsArticle.url}>
-                        {timeNewsArticle.title}
-                      </H4>
-                    </li>
+                    <H4 as="a" href={timeNewsArticle.url}>
+                      {timeNewsArticle.title}
+                    </H4>
                   </ul>
                 ))}
               </div>
@@ -178,7 +176,6 @@ class LandingPage extends React.Component {
               </div>
             </NewsSourceThirdContainer>
           </Container>
-
           <SideBar>
             <H4>Top 10 Saved News Articles</H4>
             {topTenSaved.map((topNewsItem, index) => {

@@ -17,6 +17,11 @@ const SearchResultsContainerInner = styled.div`
   max-width: 1200px;
   margin: 0 auto;
 `;
+
+const CardContainer = styled.div`
+  padding: 60px;
+`;
+
 // ===================================
 
 class SearchResults extends React.Component {
@@ -87,12 +92,14 @@ class SearchResults extends React.Component {
           <ul>
             {results.map((result) => (
               <div key={result.title}>
-                <Card
-                  data={result}
-                  text="Save"
-                  handleClick={this.handleSaveItem}
-                  extended
-                />
+                <CardContainer>
+                  <Card
+                    data={result}
+                    text="Save"
+                    handleClick={this.handleSaveItem}
+                    extended
+                  />
+                </CardContainer>
               </div>
             ))}
           </ul>
