@@ -19,7 +19,7 @@ const SearchResultsContainerInner = styled.div`
 `;
 
 const CardContainer = styled.div`
-  padding: 60px;
+  padding: 10px;
 `;
 
 // ===================================

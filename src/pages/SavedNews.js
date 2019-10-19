@@ -23,15 +23,17 @@ const ActionContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-top: 30px;
 `;
 
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: flex-end;
+  padding: 10px;
 `;
 
 const CardContainer = styled.div`
-  padding: 50px;
+  padding: 10px 0 20px 0;
 `;
 
 class SavedNews extends React.Component {
@@ -100,7 +102,6 @@ class SavedNews extends React.Component {
               </Button>
             </div>
           </ActionContainer>
-
           <div>
             {savedNewsPastWeek.map((newsItem) => (
               <div key={newsItem.title}>

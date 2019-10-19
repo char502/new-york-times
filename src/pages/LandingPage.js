@@ -83,6 +83,7 @@ const TopNewsTitle = styled.div`
   color: black;
   text-decoration: none;
   cursor: pointer;
+  /* word-wrap: break-word; */
 `;
 // const SavedArticle = styled.div`
 //   padding: 15px;
