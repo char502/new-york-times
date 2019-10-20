@@ -5,7 +5,8 @@ import {
   // Redirect,
   Switch
 } from "react-router-dom";
-
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 // components
 import LandingPage from "./pages/LandingPage";
 import Nav from "./components/Nav/Nav";
@@ -29,7 +30,7 @@ class App extends React.Component {
               <Nav />
               <Switch>
                 <Route exact path="/" component={LandingPage} />
-                {newsSources.map((route) => (
+                {newsSources.map(route => (
                   <Route
                     key={route.name}
                     path={`/${route.path}`}

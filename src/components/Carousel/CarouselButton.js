@@ -1,53 +1,9 @@
 import React from "react";
 import { CarouselButton } from "../Button";
-// import styled from "styled-components/macro";
 
-// const ArrowContainer = styled.div`
-//   display: block;
-// `;
-
-// import Icon from './Icon'
-
-// export default (props) => {
-//   console.log(props);
-//   return (
-//     <Button
-//       type="button"
-//       onClick={props.onClick}
-//       className={`button button--text button--icon ${props.className}`}
-//       aria-label={props.to}
-//       style={}
-//       /* className="carouselButton" */
-//       /* carouselButton={to} */
-//     ></Button>
-//   );
-// };
-
-export const CustomPrevArrow = (props) => {
-  console.log(props);
-  return (
-    <CarouselButton
-      small
-      type="button"
-      onClick={props.onClick}
-      {...props}
-      /* style={props.style} */
-      /* style={styles} */
-    >
-      next
-    </CarouselButton>
-  );
-};
-
-export const CustomNextArrow = (props) => (
-  <CarouselButton
-    small
-    type="button"
-    onClick={props.onClick}
-    {...props}
-    /* style={props.style} */
-  >
-    prev
+export const CustomArrow = props => (
+  <CarouselButton small type="button" onClick={props.onClick} {...props}>
+    {props.next ? "Next" : "Prev"}
   </CarouselButton>
 );
 

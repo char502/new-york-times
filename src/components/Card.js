@@ -18,7 +18,7 @@ const CardContainer = styled.div`
   /* border: 0.5px solid rgba(0, 0, 0, 0.2); */
   /* background: lightsteelblue; */
   padding: 10px 0 20px 0;
-  ${(props) => {
+  ${props => {
     return (
       props.padded &&
       css`
@@ -80,7 +80,7 @@ const ActionButton = styled.div`
 
 // { item, handleAction, text, extended, author, publishedAt }
 
-const Card = (props) => (
+const Card = props => (
   <CardContainer padded={props.extended}>
     <div style={{ display: "flex" }}>
       <div style={{ flex: 1 }}>
@@ -104,13 +104,7 @@ const Card = (props) => (
             <ImagePlaceHolder src={imagePlaceholder} />
           )
         } */
-        src={
-          !!props.data.urlToImage ? (
-            props.data.urlToImage
-          ) : (
-            <ImagePlaceHolder src={imagePlaceholder} />
-          )
-        }
+        src={props.data.urlToImage ? props.data.urlToImage : imagePlaceholder}
         alt=""
         /* src={!!props.data.urlToImage ? props.data.urlToImage : props.noImage}
         alt=""

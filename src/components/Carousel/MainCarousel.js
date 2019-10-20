@@ -3,12 +3,10 @@ import { withRouter } from "react-router-dom";
 import styled from "styled-components/macro";
 import moment from "moment";
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+
 import Card from "../Card";
 import { Title } from "../Typography";
-// import CarouselButton from "./CarouselButton";
-import { CustomPrevArrow, CustomNextArrow } from "./CarouselButton";
+import { CustomArrow } from "./CarouselButton";
 
 // ======== Styled Components ========
 
@@ -16,35 +14,35 @@ const MainCarouselContainer = styled.div`
   border-bottom: 0.5px solid rgba(0, 0, 0, 0.2);
   max-width: 600px;
   margin: auto;
-  /* padding-top: 64px; */
-  /* max-width: 900px;
-  max-height: 500px; */
-  /* padding: 5px; */
 `;
 
-const SliderWrap = styled.div`
+const SliderSlider = styled(Slider)`
   .slick-slider .slick-initialized {
     height: 60vh;
+  }
+
+  .slick-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0;
+  }
+  .slick-arrow::before {
+    display: none;
+  }
+
+  .slick-prev {
+    left: -45px;
+  }
+  .slick-next {
+    right: -45px;
   }
 `;
 
 // ===================================
 
 class MainCarousel extends React.Component {
-  constructor(props) {
-    super(props);
-    this.next = this.next;
-    this.previous = this.previous;
-  }
-
-  next = () => {
-    this.slider.slickNext();
-  };
-  previous = () => {
-    this.slider.slickPrev();
-  };
-
-  handleSaveItem = (article) => {
+  handleSaveItem = article => {
     const savedArticle = {
       ...article,
       savedAt: moment().format("YYYY-MM-DD")
@@ -59,7 +57,7 @@ class MainCarousel extends React.Component {
     } else if (localStorage.getItem("savedNews")) {
       articleArr = JSON.parse(localStorage.getItem("savedNews"));
 
-      let alreadyInArr = articleArr.some((newsItem) => {
+      let alreadyInArr = articleArr.some(newsItem => {
         return newsItem.title === savedArticle.title;
       });
       if (alreadyInArr) {
@@ -81,8 +79,8 @@ class MainCarousel extends React.Component {
       slidesToScroll: 1,
       centerPadding: 0,
       slideWidth: 0.7,
-      nextArrow: <CustomPrevArrow />,
-      prevArrow: <CustomNextArrow />
+      nextArrow: <CustomArrow next />,
+      prevArrow: <CustomArrow />
       // autoplay: true,
       // speed: 2000,
       // autoplaySpeed: 3000,
@@ -97,20 +95,18 @@ class MainCarousel extends React.Component {
             .join(" ")
             .toUpperCase()}
         </Title>
-        <SliderWrap>
-          <Slider ref={(c) => (this.slider = c)} {...settings}>
-            {newsData.map((article) => (
-              <div key={article.url}>
-                <Card
-                  data={article}
-                  text="Save"
-                  handleClick={this.handleSaveItem}
-                  /* extended */
-                />
-              </div>
-            ))}
-          </Slider>
-        </SliderWrap>
+        <SliderSlider {...settings}>
+          {newsData.map(article => (
+            <div key={article.url}>
+              <Card
+                data={article}
+                text="Save"
+                handleClick={this.handleSaveItem}
+                /* extended */
+              />
+            </div>
+          ))}
+        </SliderSlider>
       </MainCarouselContainer>
     );
   }
