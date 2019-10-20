@@ -17,7 +17,7 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 const NavTopLineContainer = styled.div`
   width: 100%;
   height: 75px;
-  margin-top: 10px;
+  /* margin-top: 10px; */
 `;
 
 const NavTopLineContainerInner = styled.div`

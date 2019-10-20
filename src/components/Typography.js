@@ -4,6 +4,8 @@ export const H1 = styled.h1`
   /* font-family: "Playfair Display", serif; */
   font-size: 32px;
   color: black;
+  margin: 0;
+  margin-bottom: 32px;
 `;
 
 export const H3 = styled.h1`

@@ -13,15 +13,12 @@ const MainBodyContainer = styled.div`
 
 const MainBodyContainerInner = styled.div`
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
+  min-height: calc(100vh - 120px);
   max-width: 1200px;
   margin: 0 auto;
 `;
 
-const Title = styled.div`
-  margin-top: 5px;
-  padding: 5px;
-`;
 // ===================================
 
 class FetchNews extends React.Component {
@@ -49,7 +46,6 @@ class FetchNews extends React.Component {
     const { news } = this.state;
     return (
       <MainBodyContainer>
-        <Title>{this.props.path}</Title>
         <MainBodyContainerInner>
           <MainCarousel newsData={news} />
         </MainBodyContainerInner>

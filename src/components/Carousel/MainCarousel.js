@@ -7,7 +7,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Card from "../Card";
 import { Title } from "../Typography";
-import { Button } from "../Button";
+// import CarouselButton from "./CarouselButton";
+import { CustomPrevArrow, CustomNextArrow } from "./CarouselButton";
 
 // ======== Styled Components ========
 
@@ -15,17 +16,16 @@ const MainCarouselContainer = styled.div`
   border-bottom: 0.5px solid rgba(0, 0, 0, 0.2);
   max-width: 600px;
   margin: auto;
+  /* padding-top: 64px; */
   /* max-width: 900px;
   max-height: 500px; */
   /* padding: 5px; */
 `;
 
-const ScrollButtonContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10px 10px 10px 10px;
-  margin: 10px;
+const SliderWrap = styled.div`
+  .slick-slider .slick-initialized {
+    height: 60vh;
+  }
 `;
 
 // ===================================
@@ -43,6 +43,7 @@ class MainCarousel extends React.Component {
   previous = () => {
     this.slider.slickPrev();
   };
+
   handleSaveItem = (article) => {
     const savedArticle = {
       ...article,
@@ -79,7 +80,9 @@ class MainCarousel extends React.Component {
       slidesToShow: 1,
       slidesToScroll: 1,
       centerPadding: 0,
-      slideWidth: 0.7
+      slideWidth: 0.7,
+      nextArrow: <CustomPrevArrow />,
+      prevArrow: <CustomNextArrow />
       // autoplay: true,
       // speed: 2000,
       // autoplaySpeed: 3000,
@@ -94,31 +97,23 @@ class MainCarousel extends React.Component {
             .join(" ")
             .toUpperCase()}
         </Title>
-        <Slider ref={(c) => (this.slider = c)} {...settings}>
-          {newsData.map((article) => (
-            <div key={article.url}>
-              <Card
-                data={article}
-                text="Save"
-                handleClick={this.handleSaveItem}
-                /* extended */
-              ></Card>
-            </div>
-          ))}
-        </Slider>
-        <ScrollButtonContainer>
-          <Button small className="button" onClick={this.previous}>
-            Previous
-          </Button>
-          <Button small className="button" onClick={this.next}>
-            Next
-          </Button>
-        </ScrollButtonContainer>
+        <SliderWrap>
+          <Slider ref={(c) => (this.slider = c)} {...settings}>
+            {newsData.map((article) => (
+              <div key={article.url}>
+                <Card
+                  data={article}
+                  text="Save"
+                  handleClick={this.handleSaveItem}
+                  /* extended */
+                />
+              </div>
+            ))}
+          </Slider>
+        </SliderWrap>
       </MainCarouselContainer>
     );
   }
 }
-
-//lodash capitalisefirst
 
 export default withRouter(MainCarousel);

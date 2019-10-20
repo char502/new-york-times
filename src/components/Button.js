@@ -49,3 +49,7 @@ export const AltButton = styled(Button)`
     color: black;
   }
 `;
+
+export const CarouselButton = styled(Button)`
+  display: block;
+`;

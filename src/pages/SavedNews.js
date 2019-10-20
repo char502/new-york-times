@@ -32,9 +32,9 @@ const ButtonContainer = styled.div`
   padding: 10px;
 `;
 
-const CardContainer = styled.div`
-  padding: 10px 0 20px 0;
-`;
+// const CardContainer = styled.div`
+//   padding: 10px 0 20px 0;
+// `;
 
 class SavedNews extends React.Component {
   constructor(props) {
@@ -102,24 +102,20 @@ class SavedNews extends React.Component {
               </Button>
             </div>
           </ActionContainer>
-          <div>
-            {savedNewsPastWeek.map((newsItem) => (
-              <div key={newsItem.title}>
-                <CardContainer>
-                  <Card
-                    data={newsItem}
-                    handleClick={this.handleRemoveItem}
-                    text="remove"
-                    extended
-                  >
-                    <ButtonContainer>
-                      <AltButton small>Retain Item for another week</AltButton>
-                    </ButtonContainer>
-                  </Card>
-                </CardContainer>
-              </div>
-            ))}
-          </div>
+
+          {savedNewsPastWeek.map((newsItem) => (
+            <Card
+              key={newsItem.title}
+              data={newsItem}
+              handleClick={this.handleRemoveItem}
+              text="remove"
+              extended
+            >
+              <ButtonContainer>
+                <AltButton small>Retain Item for another week</AltButton>
+              </ButtonContainer>
+            </Card>
+          ))}
         </SavedNewsContainerInner>
       </SavedNewsContainer>
     );

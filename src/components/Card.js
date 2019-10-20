@@ -1,22 +1,32 @@
 import React from "react";
-import styled from "styled-components/macro";
+import styled, { css } from "styled-components/macro";
 import moment from "moment";
 import { Button } from "./Button";
 import { H3 } from "./Typography";
 import imagePlaceholder from "../Images/imagePlaceholder.png";
 
-const CardOuter = styled.div`
-  /* padding: 10px;
-  margin: 30px; */
-`;
+// const CardOuter = styled.div`
+//   /* padding: 10px;
+//   margin: 30px; */
+// `;
 
 const CardContainer = styled.div`
   /* padding: 5px; */
   width: 550px;
-  height: 450px;
+  min-height: 450px;
   margin: auto;
   /* border: 0.5px solid rgba(0, 0, 0, 0.2); */
   /* background: lightsteelblue; */
+  padding: 10px 0 20px 0;
+  ${(props) => {
+    return (
+      props.padded &&
+      css`
+        border-bottom: 0.5px solid rgba(0, 0, 0, 0.2);
+        padding: 15px;
+      `
+    );
+  }}
 `;
 
 const ImageAndTitle = styled.div`
@@ -64,54 +74,52 @@ const ActionButton = styled.div`
   align-items: center;
 `;
 
-const BorderBottom = styled.div`
-  padding: 15px;
-`;
+// const BorderBottom = styled.div`
+//   padding: 15px;
+// `;
 
 // { item, handleAction, text, extended, author, publishedAt }
 
 const Card = (props) => (
-  <CardOuter>
-    <CardContainer>
-      <div style={{ display: "flex" }}>
-        <div style={{ flex: 1 }}>
-          <StyledAuthor>Author: {props.data.author}</StyledAuthor>
-          <StyledPublished>
-            Published: {moment(props.data.publishedAt).fromNow()}
-          </StyledPublished>
-        </div>
-        <ActionButton>
-          <Button small onClick={() => props.handleClick(props.data)}>
-            {props.text}
-          </Button>
-        </ActionButton>
+  <CardContainer padded={props.extended}>
+    <div style={{ display: "flex" }}>
+      <div style={{ flex: 1 }}>
+        <StyledAuthor>Author: {props.data.author}</StyledAuthor>
+        <StyledPublished>
+          Published: {moment(props.data.publishedAt).fromNow()}
+        </StyledPublished>
       </div>
-      <ImageAndTitle>
-        <ImgContainer
-          src={
-            props.data.urlToImage ? (
-              props.data.urlToImage
-            ) : (
-              <ImagePlaceHolder src={imagePlaceholder} />
-            )
-          }
-          alt=""
-        />
-        <TitleContainer>
-          <H3 as="a" href={props.data.url}>
-            {props.data.title}
-          </H3>
-        </TitleContainer>
-      </ImageAndTitle>
+      <ActionButton>
+        <Button small onClick={() => props.handleClick(props.data)}>
+          {props.text}
+        </Button>
+      </ActionButton>
+    </div>
+    <ImageAndTitle>
+      <ImgContainer
+        src={
+          props.data.urlToImage ? (
+            props.data.urlToImage
+          ) : (
+            <ImagePlaceHolder src={imagePlaceholder} />
+          )
+        }
+        alt=""
+      />
+      <TitleContainer>
+        <H3 as="a" href={props.data.url}>
+          {props.data.title}
+        </H3>
+      </TitleContainer>
+    </ImageAndTitle>
 
-      {props.children}
-      {props.extended && (
-        <BorderBottom
-          style={{ borderBottom: "0.5px solid rgba(0, 0, 0, 0.2)" }}
-        />
-      )}
-    </CardContainer>
-  </CardOuter>
+    {props.children}
+    {/* {props.extended && (
+      <BorderBottom
+        style={{ borderBottom: "0.5px solid rgba(0, 0, 0, 0.2)" }}
+      />
+    )} */}
+  </CardContainer>
 );
 
 export default Card;
