@@ -97,14 +97,30 @@ const Card = (props) => (
     </div>
     <ImageAndTitle>
       <ImgContainer
-        src={
+        /* src={
           props.data.urlToImage ? (
+            props.data.urlToImage
+          ) : (
+            <ImagePlaceHolder src={imagePlaceholder} />
+          )
+        } */
+        src={
+          !!props.data.urlToImage ? (
             props.data.urlToImage
           ) : (
             <ImagePlaceHolder src={imagePlaceholder} />
           )
         }
         alt=""
+        /* src={!!props.data.urlToImage ? props.data.urlToImage : props.noImage}
+        alt=""
+
+        /* src={
+          !!props.data.urlToImage
+            ? console.log("image available")
+            : console.log("image not available")
+        }
+        alt="" */
       />
       <TitleContainer>
         <H3 as="a" href={props.data.url}>

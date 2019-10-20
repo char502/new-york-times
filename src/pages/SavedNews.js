@@ -4,6 +4,7 @@ import styled from "styled-components/macro";
 import Card from "../components/Card";
 import { Button, AltButton } from "../components/Button";
 import { H1, H4 } from "../components/Typography";
+import Placeholder from "../components/Placeholder";
 
 // ======== Styled Components ========
 const SavedNewsContainer = styled.div`
@@ -35,6 +36,7 @@ const ButtonContainer = styled.div`
 // const CardContainer = styled.div`
 //   padding: 10px 0 20px 0;
 // `;
+// const ImagePlaceHolder = styled.img``;
 
 class SavedNews extends React.Component {
   constructor(props) {
@@ -88,6 +90,8 @@ class SavedNews extends React.Component {
 
   render() {
     const { savedNewsPastWeek } = this.state;
+
+    console.log(savedNewsPastWeek);
     return (
       <SavedNewsContainer>
         <SavedNewsContainerInner>
@@ -109,6 +113,7 @@ class SavedNews extends React.Component {
               data={newsItem}
               handleClick={this.handleRemoveItem}
               text="remove"
+              noImage={<Placeholder />}
               extended
             >
               <ButtonContainer>

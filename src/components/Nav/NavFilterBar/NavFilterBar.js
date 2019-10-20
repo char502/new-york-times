@@ -43,19 +43,6 @@ const styles = {
   })
 };
 
-// const select = styled.select`
-//   /* font-family: "Roboto Condensed", sans-serif;
-//   background-color: Transparent;
-//   border: none;
-//   cursor: pointer;
-//   overflow: hidden;
-//   outline: none; */
-//   background-color: blue;
-// `;
-
-// const FormButtons = styled.input`
-//   margin: 10px 10px;
-// `;
 // ===================================
 
 class NavFilterBar extends React.Component {

@@ -30,8 +30,9 @@ export const CustomPrevArrow = (props) => {
       small
       type="button"
       onClick={props.onClick}
-      /* {...props} */
+      {...props}
       /* style={props.style} */
+      /* style={styles} */
     >
       next
     </CarouselButton>
@@ -43,7 +44,7 @@ export const CustomNextArrow = (props) => (
     small
     type="button"
     onClick={props.onClick}
-    /* {...props} */
+    {...props}
     /* style={props.style} */
   >
     prev
