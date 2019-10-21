@@ -16,7 +16,7 @@ const FooterContainer = styled.div`
   justify-content: center;
   align-items: center;
   font-size: 10px;
-  background-color: whitesmoke;
+  background-color: lightgray;
 `;
 
 const SocialMedia = styled.div`

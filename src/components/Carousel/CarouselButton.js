@@ -2,7 +2,7 @@ import React from "react";
 import { CarouselButton } from "../Button";
 
 export const CustomArrow = (props) => {
-  console.log(props);
+  // console.log(props);
   return (
     <CarouselButton small type="button" onClick={props.onClick} {...props}>
       {props.next ? "Next" : "Prev"}

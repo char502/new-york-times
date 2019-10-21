@@ -31,6 +31,7 @@ class FetchNews extends React.Component {
     this.props.setLoading(true);
 
     const response = await getNews(this.props.location.pathname.split("/")[1]);
+    console.log(response);
     const news = response.data.articles;
     this.setState({
       news
@@ -44,6 +45,7 @@ class FetchNews extends React.Component {
 
   render() {
     const { news } = this.state;
+    console.log(news);
     return (
       <MainBodyContainer>
         <MainBodyContainerInner>
