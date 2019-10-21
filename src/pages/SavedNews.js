@@ -49,7 +49,7 @@ class SavedNews extends React.Component {
     if (localStorage.getItem("savedNews")) {
       const savedResults = JSON.parse(localStorage.getItem("savedNews"));
 
-      const filteredSavedResults = savedResults.filter((savedResult) => {
+      const filteredSavedResults = savedResults.filter(savedResult => {
         const savedAtTime = savedResult.savedAt;
         const aWeekAgo = moment()
           .subtract(7, "days")
@@ -65,10 +65,10 @@ class SavedNews extends React.Component {
     }
   }
 
-  handleRemoveItem = (newsItem) => {
+  handleRemoveItem = newsItem => {
     const { savedNewsPastWeek } = this.state;
 
-    const resultWhenItemRemoved = savedNewsPastWeek.filter((arrItem) => {
+    const resultWhenItemRemoved = savedNewsPastWeek.filter(arrItem => {
       return arrItem !== newsItem;
     });
 
@@ -106,7 +106,7 @@ class SavedNews extends React.Component {
             </div>
           </ActionContainer>
 
-          {savedNewsPastWeek.map((newsItem) => (
+          {savedNewsPastWeek.map(newsItem => (
             <Card
               key={newsItem.title}
               data={newsItem}

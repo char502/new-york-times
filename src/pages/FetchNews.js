@@ -3,6 +3,7 @@ import { getNews } from "../utils/api";
 import styled from "styled-components/macro";
 import MainCarousel from "../components/Carousel/MainCarousel";
 import { LoadingConsumer } from "../loadingContext";
+import { Title } from "../components/Typography";
 
 // ======== Styled Components ========
 const MainBodyContainer = styled.div`
@@ -45,9 +46,14 @@ class FetchNews extends React.Component {
 
   render() {
     const { news } = this.state;
-    console.log(news);
     return (
       <MainBodyContainer>
+        <Title>
+          {this.props.location.pathname
+            .split("/")
+            .join(" ")
+            .toUpperCase()}
+        </Title>
         <MainBodyContainerInner>
           <MainCarousel newsData={news} />
         </MainBodyContainerInner>
@@ -56,8 +62,8 @@ class FetchNews extends React.Component {
   }
 }
 
-export default (props) => (
+export default props => (
   <LoadingConsumer>
-    {(loading) => <FetchNews {...loading} {...props} />}
+    {loading => <FetchNews {...loading} {...props} />}
   </LoadingConsumer>
 );

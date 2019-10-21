@@ -1,22 +1,16 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
 import styled from "styled-components/macro";
 import moment from "moment";
 import Slider from "react-slick";
-
 import Card from "../Card";
-import { Title } from "../Typography";
 import { CustomArrow } from "./CarouselButton";
 
 // ======== Styled Components ========
 
-const MainCarouselContainer = styled.div`
+const StyledSlider = styled(Slider)`
   border-bottom: 0.5px solid rgba(0, 0, 0, 0.2);
   max-width: 600px;
   margin: auto;
-`;
-
-const SliderSlider = styled(Slider)`
   .slick-slider .slick-initialized {
     height: 60vh;
   }
@@ -86,30 +80,20 @@ class MainCarousel extends React.Component {
       // autoplaySpeed: 3000,
       // cssEase: "linear"
     };
-    console.log();
+
     return (
-      <MainCarouselContainer>
-        <Title>
-          {this.props.location.pathname
-            .split("/")
-            .join(" ")
-            .toUpperCase()}
-        </Title>
-        <SliderSlider {...settings}>
-          {newsData.map(article => (
-            <div key={article.url}>
-              <Card
-                data={article}
-                text="Save"
-                handleClick={this.handleSaveItem}
-                /* extended */
-              />
-            </div>
-          ))}
-        </SliderSlider>
-      </MainCarouselContainer>
+      <StyledSlider {...settings}>
+        {newsData.map(article => (
+          <Card
+            key={article.url}
+            data={article}
+            text="Save"
+            handleClick={this.handleSaveItem}
+          />
+        ))}
+      </StyledSlider>
     );
   }
 }
 
-export default withRouter(MainCarousel);
+export default MainCarousel;

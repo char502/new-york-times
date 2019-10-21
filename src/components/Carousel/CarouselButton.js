@@ -1,14 +1,11 @@
 import React from "react";
 import { CarouselButton } from "../Button";
 
-export const CustomArrow = (props) => {
-  // console.log(props);
-  return (
-    <CarouselButton small type="button" onClick={props.onClick} {...props}>
-      {props.next ? "Next" : "Prev"}
-    </CarouselButton>
-  );
-};
+export const CustomArrow = props => (
+  <CarouselButton small type="button" {...props}>
+    {props.next ? "Next" : "Prev"}
+  </CarouselButton>
+);
 
 // class LeftNavButton extends React.Component {
 //   render() {
