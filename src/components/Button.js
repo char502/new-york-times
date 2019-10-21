@@ -52,5 +52,6 @@ export const AltButton = styled(Button)`
 `;
 
 export const CarouselButton = styled(Button)`
-  display: block;
+  /* display: block; */
+  color: black;
 `;

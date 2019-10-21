@@ -65,7 +65,8 @@ const Input = styled.input`
   border: none;
   outline: none;
   height: 27px;
-  transform: ${(props) => (props.show ? "translatex(0)" : "translatex(110%)")};
+  transform: ${(props) =>
+    props.isshown ? "translatex(0)" : "translatex(110%)"};
   transition: 2s ${easing};
   transition: fill 500ms ease;
   /* transform property
@@ -77,7 +78,7 @@ const StyledIcon = styled(FontAwesomeIcon)`
   top: 45%;
   width: 10%;
   position: absolute;
-  left: ${(props) => (props.show ? false : "90%")};
+  left: ${(props) => (props.isshown ? "unset" : "90%")};
   transition: 2s ${easing};
   transition: fill 500ms ease;
 `;
@@ -138,13 +139,13 @@ class NavTopLine extends React.Component {
                 <StyledIcon
                   icon={faSearch}
                   onClick={this.handleToggle}
-                  show={toggleInput}
+                  isshown={toggleInput}
                 />
                 <Input
                   value={this.state.searchTerm}
                   onChange={this.handleChange}
                   placeholder={"Enter Search"}
-                  show={toggleInput}
+                  isshown={toggleInput}
                   ref={this.inputRef}
                 />
                 {/* <div style={{ color: toggleInput ? "red" : "black" }} /> */}
