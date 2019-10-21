@@ -18,7 +18,7 @@ const CardContainer = styled.div`
   /* border: 0.5px solid rgba(0, 0, 0, 0.2); */
   /* background: lightsteelblue; */
   padding: 10px 0 20px 0;
-  ${props => {
+  ${(props) => {
     return (
       props.padded &&
       css`
@@ -43,7 +43,7 @@ const ImgContainer = styled.img`
   /* box-shadow: 5px 10px lightGray; */
 `;
 
-const ImagePlaceHolder = styled.img``;
+// const ImagePlaceHolder = styled.img``;
 
 const TitleContainer = styled.div`
   padding: 10px 10px 10px 10px;
@@ -80,7 +80,7 @@ const ActionButton = styled.div`
 
 // { item, handleAction, text, extended, author, publishedAt }
 
-const Card = props => (
+const Card = (props) => (
   <CardContainer padded={props.extended}>
     <div style={{ display: "flex" }}>
       <div style={{ flex: 1 }}>
@@ -97,24 +97,8 @@ const Card = props => (
     </div>
     <ImageAndTitle>
       <ImgContainer
-        /* src={
-          props.data.urlToImage ? (
-            props.data.urlToImage
-          ) : (
-            <ImagePlaceHolder src={imagePlaceholder} />
-          )
-        } */
         src={props.data.urlToImage ? props.data.urlToImage : imagePlaceholder}
         alt=""
-        /* src={!!props.data.urlToImage ? props.data.urlToImage : props.noImage}
-        alt=""
-
-        /* src={
-          !!props.data.urlToImage
-            ? console.log("image available")
-            : console.log("image not available")
-        }
-        alt="" */
       />
       <TitleContainer>
         <H3 as="a" href={props.data.url}>

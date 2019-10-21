@@ -18,7 +18,7 @@ export const Button = styled.button`
   text-decoration: none;
   font-size: 12px;
   width: auto;
-  ${props =>
+  ${(props) =>
     props.small &&
     css`
       font-size: 10px;
@@ -38,7 +38,7 @@ export const AltButton = styled(Button)`
     background: white;
     color: black;
   }
-  ${props =>
+  ${(props) =>
     props.small &&
     css`
       font-size: 10px;

@@ -4,7 +4,6 @@ import styled from "styled-components/macro";
 import Card from "../components/Card";
 import { Button, AltButton } from "../components/Button";
 import { H1, H4 } from "../components/Typography";
-import Placeholder from "../components/Placeholder";
 
 // ======== Styled Components ========
 const SavedNewsContainer = styled.div`
@@ -113,7 +112,6 @@ class SavedNews extends React.Component {
               data={newsItem}
               handleClick={this.handleRemoveItem}
               text="remove"
-              noImage={<Placeholder />}
               extended
             >
               <ButtonContainer>
