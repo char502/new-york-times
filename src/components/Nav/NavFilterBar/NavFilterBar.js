@@ -2,9 +2,8 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import queryString from "query-string";
 import styled from "styled-components/macro";
-import Select from "react-select";
-import newsSources from "../../../newsSources";
 import { Button } from "../../Button";
+import Dropdown from "../../Dropdown";
 
 // ======== Styled Components ========
 const Container = styled.div`
@@ -25,24 +24,6 @@ const ActionContainer = styled.div`
   margin: 5px;
   border-radius: 4px;
 `;
-
-const styles = {
-  control: (base) => ({
-    ...base,
-    fontFamily: "Roboto Condensed",
-    backgroundColor: "white",
-    fontSize: "12px",
-    color: "black",
-    background: "green"
-  }),
-  menu: (base) => ({
-    ...base,
-    fontFamily: "Roboto Condensed",
-    backgroundColor: "white",
-    fontSize: "12px",
-    color: "black"
-  })
-};
 
 // const styles = {
 //   clearIndicator: (base) => ({
@@ -93,11 +74,11 @@ class NavFilterBar extends React.Component {
     filter: ""
   };
 
-  handleChange = (val) => {
+  handleChange = val => {
     this.setState({ filter: val.path });
   };
 
-  handleSubmit = (e) => {
+  handleSubmit = e => {
     e.preventDefault();
     let searchQuery = queryString.parse(this.props.location.search);
     searchQuery.sources = this.state.filter;
@@ -108,7 +89,7 @@ class NavFilterBar extends React.Component {
     this.setState({ filter: "" });
   };
 
-  handleClearFilter = (e) => {
+  handleClearFilter = e => {
     e.preventDefault();
     let searchQuery = queryString.parse(this.props.location.search);
     if (searchQuery.sources) {
@@ -141,18 +122,9 @@ class NavFilterBar extends React.Component {
         <Inner onSubmit={this.handleSubmit}>
           <ActionContainer>
             <div style={{ width: "220px" }}>
-              <Select
-                options={newsSources}
-                /* isClearable */
-                getOptionLabel={(option) => `${option.name}`}
-                getOptionValue={(option) => `${option.path}`}
-                onChange={this.handleChange}
-                placeholder={"Select by filter source"}
-                styles={styles}
-                clearValue={() => true}
-                value={newsSources.filter(
-                  ({ path }) => path === this.state.filter
-                )}
+              <Dropdown
+                handleChange={this.handleChange}
+                filter={this.state.filter}
               />
             </div>
 
