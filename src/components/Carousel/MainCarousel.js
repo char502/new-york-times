@@ -8,19 +8,22 @@ import { CustomArrow } from "./CarouselButton";
 // ======== Styled Components ========
 
 const StyledSlider = styled(Slider)`
-  border-bottom: 0.5px solid rgba(0, 0, 0, 0.2);
-  max-width: 600px;
-  margin: auto;
-  .slick-slider .slick-initialized {
-    height: 60vh;
+  & {
+    border-bottom: 0.5px solid rgba(0, 0, 0, 0.2);
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .slick-list {
+    height: 100%;
   }
 
   .slick-arrow {
     position: absolute;
-    top: 50%;
     transform: translateY(-50%);
-    margin: 0;
   }
+
   .slick-arrow::before {
     display: none;
   }
@@ -28,6 +31,7 @@ const StyledSlider = styled(Slider)`
   .slick-prev {
     left: -45px;
   }
+
   .slick-next {
     right: -45px;
   }
@@ -36,7 +40,7 @@ const StyledSlider = styled(Slider)`
 // ===================================
 
 class MainCarousel extends React.Component {
-  handleSaveItem = article => {
+  handleSaveItem = (article) => {
     const savedArticle = {
       ...article,
       savedAt: moment().format("YYYY-MM-DD")
@@ -51,7 +55,7 @@ class MainCarousel extends React.Component {
     } else if (localStorage.getItem("savedNews")) {
       articleArr = JSON.parse(localStorage.getItem("savedNews"));
 
-      let alreadyInArr = articleArr.some(newsItem => {
+      let alreadyInArr = articleArr.some((newsItem) => {
         return newsItem.title === savedArticle.title;
       });
       if (alreadyInArr) {
@@ -75,15 +79,12 @@ class MainCarousel extends React.Component {
       slideWidth: 0.7,
       nextArrow: <CustomArrow next />,
       prevArrow: <CustomArrow />
-      // autoplay: true,
-      // speed: 2000,
-      // autoplaySpeed: 3000,
-      // cssEase: "linear"
+      // variableWidth: true
     };
 
     return (
       <StyledSlider {...settings}>
-        {newsData.map(article => (
+        {newsData.map((article) => (
           <Card
             key={article.url}
             data={article}

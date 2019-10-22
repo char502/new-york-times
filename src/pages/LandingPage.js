@@ -1,6 +1,7 @@
 import React from "react";
 import Loading from "react-loading-bar";
 import styled from "styled-components/macro";
+import moment from "moment";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { landingPageNews } from "../newsSources";
@@ -8,6 +9,7 @@ import { getNews } from "../utils/api";
 import { Title } from "../components/Typography";
 import { H1, H4 } from "../components/Typography";
 import Carousel from "../components/Carousel/MainCarousel";
+import imagePlaceholder from "../Images/imagePlaceholder.png";
 // import SavedNews from "./SavedNews";
 
 // ======== Styled Components ========
@@ -30,13 +32,13 @@ const Container = styled.div`
 `;
 
 const StyledTitle = styled.div`
-  padding-left: 30px;
+  padding: 30px;
+  font-family: "Vidaloka", serif;
 `;
 
 const NewsSourceSecondContainer = styled.div`
   max-width: 1200px;
   height: auto;
-
   padding: 5px 10px 10px 10px;
   border-bottom: 0.5px solid rgba(0, 0, 0, 0.2);
   /* background-color: lightpink; */
@@ -51,6 +53,57 @@ const NewsSourceThirdContainer = styled.div`
   /* background-color: lightseagreen; */
 `;
 
+// === Seondary news items styling
+
+const StyledListItem = styled.div`
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.2);
+  &:last-child {
+    border-width: 0;
+  }
+`;
+
+const LinkContainer = styled.div`
+  flex: 3;
+  align-self: center;
+`;
+
+const LinkContainerInner = styled.div`
+  margin-bottom: 8px;
+`;
+
+const ImageContainer = styled.div`
+  flex: 1;
+  text-align: center;
+`;
+
+const SecondaryHeadlineImage = styled.img`
+  height: 80px;
+  width: 80px;
+`;
+
+const SecondaryHeadlineAuthor = styled.p`
+  color: lightseagreen;
+  /* font-weight: bold; */
+  margin: 0;
+  padding: 0;
+  font-size: 8px;
+`;
+
+const SecondaryHeadlinePublished = styled.p`
+  font-size: 10px;
+  /* font-weight: bold; */
+  margin: 0;
+  padding: 0;
+  /* color: grey; */
+`;
+
+// === end of secondary news items styling ===
+
+// === SideBar styling ===
 const SideBar = styled.div`
   width: 33.33%;
   height: 100%;
@@ -60,17 +113,18 @@ const SideBar = styled.div`
   background-color: WhiteSmoke;
 `;
 
+const StyledHeader = styled.div`
+  font-family: "Vidaloka", serif;
+  margin: 20px 20px 20px 0;
+`;
+
 const TopNewsContainer = styled.div`
   /* border: 0.5px solid black; */
 `;
 
-const ArticleNumbering = styled.div`
-  padding: 5px;
-`;
-
 const ImageAndTitle = styled.div`
   display: flex;
-  padding: 10px;
+  padding: 10px 10px 10px 20px;
 `;
 
 const SavedImage = styled.img`
@@ -85,9 +139,8 @@ const TopNewsTitle = styled.div`
   cursor: pointer;
   /* word-wrap: break-word; */
 `;
-// const SavedArticle = styled.div`
-//   padding: 15px;
-// `;
+
+// === End of SideBar styling ===
 
 // ===================================
 
@@ -152,42 +205,90 @@ class LandingPage extends React.Component {
             <Carousel newsData={newsSourceMainSlider} />
             <NewsSourceSecondContainer>
               <Title>Time Magazine Top Headlines</Title>
-              <div>
-                {newsSourceSecond.map((timeNewsArticle, index) => (
-                  <ul key={index}>
-                    <H4 as="a" href={timeNewsArticle.url}>
-                      {timeNewsArticle.title}
-                    </H4>
-                  </ul>
+              <ul>
+                {newsSourceSecond.map((timeNewsArticle) => (
+                  <StyledListItem key={timeNewsArticle.url}>
+                    <ImageContainer>
+                      <SecondaryHeadlineImage
+                        src={
+                          timeNewsArticle.urlToImage
+                            ? timeNewsArticle.urlToImage
+                            : imagePlaceholder
+                        }
+                      />
+                    </ImageContainer>
+                    <LinkContainer>
+                      <LinkContainerInner>
+                        <H4 as="a" href={timeNewsArticle.url} target="_blank">
+                          {timeNewsArticle.title}
+                        </H4>
+                      </LinkContainerInner>
+                      <SecondaryHeadlineAuthor>
+                        Author: {timeNewsArticle.author}
+                      </SecondaryHeadlineAuthor>
+                      <SecondaryHeadlinePublished>
+                        Published:{" "}
+                        {moment(timeNewsArticle.publishedAt).fromNow()}
+                      </SecondaryHeadlinePublished>
+                    </LinkContainer>
+                  </StyledListItem>
                 ))}
-              </div>
+              </ul>
             </NewsSourceSecondContainer>
             <NewsSourceThirdContainer>
               <Title>New Scientist Top Headlines</Title>
               <div>
-                {newsSourceThird.map((newScientist, index) => (
-                  <ul key={index}>
-                    <li>
-                      <H4 as="a" href={newScientist.url}>
-                        {newScientist.title}
-                      </H4>
-                    </li>
-                  </ul>
-                ))}
+                <ul>
+                  {newsSourceThird.map((newScientist) => (
+                    <StyledListItem key={newScientist.url}>
+                      <LinkContainer>
+                        <LinkContainerInner>
+                          <H4 as="a" href={newScientist.url} target="_blank">
+                            {newScientist.title}
+                          </H4>
+                        </LinkContainerInner>
+                        <SecondaryHeadlineAuthor>
+                          Author: {newScientist.author}
+                        </SecondaryHeadlineAuthor>
+                        <SecondaryHeadlinePublished>
+                          Published:{" "}
+                          {moment(newScientist.publishedAt).fromNow()}
+                        </SecondaryHeadlinePublished>
+                      </LinkContainer>
+
+                      <ImageContainer>
+                        <SecondaryHeadlineImage
+                          src={
+                            newScientist.urlToImage
+                              ? newScientist.urlToImage
+                              : imagePlaceholder
+                          }
+                        />
+                      </ImageContainer>
+                    </StyledListItem>
+                  ))}
+                </ul>
               </div>
             </NewsSourceThirdContainer>
           </Container>
           <SideBar>
-            <H4>Top 10 Saved News Articles</H4>
+            <H4>
+              <StyledHeader>Top 10 Saved News Articles</StyledHeader>
+            </H4>
             {topTenSaved.map((topNewsItem, index) => {
               return (
                 <TopNewsContainer key={topNewsItem.title}>
-                  <ArticleNumbering>Article {[index + 1]}:</ArticleNumbering>
                   <ImageAndTitle>
                     <div>
-                      <SavedImage src={topNewsItem.urlToImage} />
+                      <SavedImage
+                        src={
+                          topNewsItem.urlToImage
+                            ? topNewsItem.urlToImage
+                            : imagePlaceholder
+                        }
+                      />
                     </div>
-                    <TopNewsTitle as="a" href={topNewsItem.url}>
+                    <TopNewsTitle as="a" href={topNewsItem.url} target="_blank">
                       {topNewsItem.title}
                     </TopNewsTitle>
                   </ImageAndTitle>

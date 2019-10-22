@@ -19,6 +19,10 @@ const FooterContainer = styled.div`
   background-color: lightgray;
 `;
 
+const StyledHeader = styled.div`
+  padding-bottom: 15px;
+`;
+
 const SocialMedia = styled.div`
   display: flex;
 `;
@@ -49,20 +53,28 @@ const Footer = () => {
   return (
     <FooterContainer>
       <ContactMe>
-        <H4>Contact Me:</H4>
+        <StyledHeader>
+          <H4>Contact Me:</H4>
+        </StyledHeader>
         <SocialMedia>
           <SocialMediaLink
             as="a"
             href="http://www.linkedin.com/in/charlotte-ellwood-9132313"
+            target="_blank"
           >
             <StyledIcon icon={faLinkedin} />
           </SocialMediaLink>
-          <SocialMediaLink as="a" href="mailto:char502@hotmail.com">
+          <SocialMediaLink
+            as="a"
+            href="mailto:char502@hotmail.com"
+            target="_blank"
+          >
             <StyledIcon icon={faEnvelope} />
           </SocialMediaLink>
           <SocialMediaLink
             as="a"
             href="https://github.com/char502/new-york-times"
+            target="_blank"
           >
             <StyledIcon icon={faGithubSquare} />
           </SocialMediaLink>
@@ -72,8 +84,8 @@ const Footer = () => {
       <MadeBy>
         <H5>
           Made with{" "}
-          <span role="img" aria="heart icon">
-            ❤️
+          <span role="img" aria-labelledby="jsx-a11y/accessible-emoji">
+            {"❤️"}
           </span>{" "}
           by Charlotte Ellwood 2019
         </H5>

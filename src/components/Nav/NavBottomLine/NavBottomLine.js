@@ -19,12 +19,12 @@ const NavBottomLineContainerInner = styled.div`
 `;
 
 const NewsLink = styled(Link)`
-  padding: 5px 15px 5px 15px;
+  padding: 5px 13px;
   /* margin: 5px 10px; */
   display: flex;
   align-items: center;
   font-size: 10px;
-  font-family: "Roboto Condensed", sans-serif;
+  /* font-family: "Roboto Condensed", sans-serif; */
   display: inline-block;
   text-decoration: none;
   color: gray;

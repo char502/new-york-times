@@ -3,7 +3,7 @@ import { getNews } from "../utils/api";
 import styled from "styled-components/macro";
 import MainCarousel from "../components/Carousel/MainCarousel";
 import { LoadingConsumer } from "../loadingContext";
-import { Title } from "../components/Typography";
+// import { Title } from "../components/Typography";
 
 // ======== Styled Components ========
 const MainBodyContainer = styled.div`
@@ -18,6 +18,13 @@ const MainBodyContainerInner = styled.div`
   min-height: calc(100vh - 120px);
   max-width: 1200px;
   margin: 0 auto;
+`;
+
+const StyledTitle = styled.div`
+  font-size: 32px;
+  margin: 28px;
+  padding: 20px 0 0 250px;
+  font-family: "Vidaloka", serif;
 `;
 
 // ===================================
@@ -48,13 +55,13 @@ class FetchNews extends React.Component {
     const { news } = this.state;
     return (
       <MainBodyContainer>
-        <Title>
-          {this.props.location.pathname
-            .split("/")
-            .join(" ")
-            .toUpperCase()}
-        </Title>
         <MainBodyContainerInner>
+          <StyledTitle>
+            {this.props.location.pathname
+              .split("/")
+              .join(" ")
+              .toUpperCase()}
+          </StyledTitle>
           <MainCarousel newsData={news} />
         </MainBodyContainerInner>
       </MainBodyContainer>
@@ -62,8 +69,8 @@ class FetchNews extends React.Component {
   }
 }
 
-export default props => (
+export default (props) => (
   <LoadingConsumer>
-    {loading => <FetchNews {...loading} {...props} />}
+    {(loading) => <FetchNews {...loading} {...props} />}
   </LoadingConsumer>
 );

@@ -46,8 +46,9 @@ const ImgContainer = styled.img`
 // const ImagePlaceHolder = styled.img``;
 
 const TitleContainer = styled.div`
-  padding: 10px 10px 10px 10px;
+  padding: 20px 10px 10px 10px;
   text-align: center;
+  font-weight: bold;
 `;
 
 const StyledAuthor = styled.p`
@@ -101,7 +102,7 @@ const Card = (props) => (
         alt=""
       />
       <TitleContainer>
-        <H3 as="a" href={props.data.url}>
+        <H3 as="a" href={props.data.url} target="_blank">
           {props.data.title}
         </H3>
       </TitleContainer>
