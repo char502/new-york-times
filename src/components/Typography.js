@@ -15,7 +15,7 @@ export const H3 = styled.h1`
 `;
 
 export const H4 = styled.h4`
-  font-size: 16px;
+  font-size: 14px;
   color: black;
   text-decoration: none;
   margin: 0;

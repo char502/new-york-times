@@ -67,9 +67,17 @@ const landingPageNews = [
     name: "Time"
   },
   {
-    path: "new-scientist",
-    name: "New Scientist"
+    path: "the-next-web",
+    name: "The Next Web"
   }
+  // {
+  //   path: "new-scientist",
+  //   name: "New Scientist"
+  // },
+  // {
+  //   path: "the-next-web",
+  //   name: "The Next Web"
+  // }
 ];
 
 export { landingPageNews };

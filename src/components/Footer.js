@@ -87,7 +87,7 @@ const Footer = () => {
           <span role="img" aria-labelledby="jsx-a11y/accessible-emoji">
             {"❤️"}
           </span>{" "}
-          by Charlotte Ellwood 2019
+          by Charlotte Ellwood - 2019
         </H5>
       </MadeBy>
     </FooterContainer>

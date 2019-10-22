@@ -1,6 +1,6 @@
 import React from "react";
 import Loading from "react-loading-bar";
-import styled from "styled-components/macro";
+import styled, { css } from "styled-components/macro";
 import moment from "moment";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -63,6 +63,7 @@ const StyledListItem = styled.div`
   border-bottom: 0.5px solid rgba(0, 0, 0, 0.2);
   &:last-child {
     border-width: 0;
+    padding-bottom: 50px;
   }
 `;
 
@@ -73,6 +74,11 @@ const LinkContainer = styled.div`
 
 const LinkContainerInner = styled.div`
   margin-bottom: 8px;
+  ${(props) =>
+    props.right &&
+    css`
+      text-align: right;
+    `}
 `;
 
 const ImageContainer = styled.div`
@@ -87,10 +93,15 @@ const SecondaryHeadlineImage = styled.img`
 
 const SecondaryHeadlineAuthor = styled.p`
   color: lightseagreen;
-  /* font-weight: bold; */
+  font-weight: bold;
   margin: 0;
   padding: 0;
-  font-size: 8px;
+  font-size: 12px;
+  ${(props) =>
+    props.right &&
+    css`
+      text-align: right;
+    `}
 `;
 
 const SecondaryHeadlinePublished = styled.p`
@@ -99,6 +110,11 @@ const SecondaryHeadlinePublished = styled.p`
   margin: 0;
   padding: 0;
   /* color: grey; */
+  ${(props) =>
+    props.right &&
+    css`
+      text-align: right;
+    `}
 `;
 
 // === end of secondary news items styling ===
@@ -193,7 +209,7 @@ class LandingPage extends React.Component {
       topTenSaved
     } = this.state;
 
-    // console.log(topTenSaved);
+    console.log(newsSourceThird);
     return (
       <LandingPageBodyContainer>
         <LandingPageBodyContainerInner>
@@ -242,15 +258,15 @@ class LandingPage extends React.Component {
                   {newsSourceThird.map((newScientist) => (
                     <StyledListItem key={newScientist.url}>
                       <LinkContainer>
-                        <LinkContainerInner>
+                        <LinkContainerInner right>
                           <H4 as="a" href={newScientist.url} target="_blank">
                             {newScientist.title}
                           </H4>
                         </LinkContainerInner>
-                        <SecondaryHeadlineAuthor>
+                        <SecondaryHeadlineAuthor right>
                           Author: {newScientist.author}
                         </SecondaryHeadlineAuthor>
-                        <SecondaryHeadlinePublished>
+                        <SecondaryHeadlinePublished right>
                           Published:{" "}
                           {moment(newScientist.publishedAt).fromNow()}
                         </SecondaryHeadlinePublished>
