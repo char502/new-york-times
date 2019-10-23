@@ -3,7 +3,6 @@ import { withRouter } from "react-router-dom";
 import styled from "styled-components/macro";
 import { Link } from "react-router-dom";
 import { AltButton } from "../../Button";
-// import { H1 } from "../../Typography";
 import newspaper from "../../../Images/newspaper7.jpg";
 
 // Components
@@ -44,15 +43,20 @@ const NavSearchInputsContainer = styled.div`
 
 const Form = styled.form`
   position: relative;
+  /* Makes InputWrapper relative to it parent 'Form' */
   width: 200px;
   height: 40px;
+  background: blue;
 `;
 
 const InputWrapper = styled.div`
   position: relative;
-  overflow: hidden;
+  /* Makes Input and StyledIcon relative to their parent 'InputWrapper' */
+  /* overflow: hidden; */
+  /* in always exist this just hides it when not needed */
   height: 100%;
   margin-right: 20px;
+  background: red;
 `;
 
 const easing = "cubic-bezier(0.645, 0.045, 0.355, 1)";
@@ -60,15 +64,29 @@ const easing = "cubic-bezier(0.645, 0.045, 0.355, 1)";
 const Input = styled.input`
   position: absolute;
   width: 85%;
+  /* green box 85% of the width of it's parent */
   left: 15%;
+  /* 15% away from the left of it's normal position */
   top: 30%;
+  /* 30% away from the top of it's notmal position */
   border: none;
   outline: none;
   height: 27px;
+  /* ====================================================== */
+  /* Stuff that makes it move */
+
+  /* The transform property applies a 2D or 3D transformation to an element */
+  /* translate - repositions an element in the horizontal (x) and/or vertical (Y) directions */
+  /* css can't talk directly to state so a property (props) is given to this Input as per lines 83 and 84 below) */
+  /* This css property is then linked toggleInput in line 172 */
+  /* when isshown(toggleInput) is set to false, this element is moved )  */
   transform: ${(props) =>
     props.isshown ? "translatex(0)" : "translatex(110%)"};
+
+  /* CSS transitions allows you to change property values smoothly, over a given duration. */
   transition: 2s ${easing};
   transition: fill 500ms ease;
+  background: green;
   /* transform property
   translate function */
 `;
@@ -77,11 +95,18 @@ const Input = styled.input`
 const StyledIcon = styled(FontAwesomeIcon)`
   top: 45%;
   width: 10%;
+  /* for sizing the icon - but as fnt awsome not sure can size it anyway
   position: absolute;
+  /* ====================================================== */
+  /* Stuff that makes it move */
   left: ${(props) => (props.isshown ? "unset" : "90%")};
+
   transition: 2s ${easing};
   transition: fill 500ms ease;
+  background: yellow;
 `;
+
+// ===================================
 
 const Newspaper = styled.img`
   width: 70px;
@@ -97,12 +122,10 @@ const HomeButton = styled.img`
   right: 5px; */
 `;
 
-// ===================================
-
 class NavTopLine extends React.Component {
   state = {
     searchTerm: "",
-    show: false,
+    isshown: false,
     toggleInput: false
   };
 
@@ -134,12 +157,13 @@ class NavTopLine extends React.Component {
             </HomeButton>
           </TitleContainer>
           <NavSearchInputsContainer>
+            {/* ======================================== */}
             <Form onSubmit={this.handleSubmit}>
               <InputWrapper>
                 <StyledIcon
                   icon={faSearch}
                   onClick={this.handleToggle}
-                  isshown={toggleInput}
+                  /* isshown={toggleInput} */
                 />
                 <Input
                   value={this.state.searchTerm}
@@ -148,9 +172,10 @@ class NavTopLine extends React.Component {
                   isshown={toggleInput}
                   ref={this.inputRef}
                 />
-                {/* <div style={{ color: toggleInput ? "red" : "black" }} /> */}
+                <div style={{ color: toggleInput ? "red" : "black" }} />
               </InputWrapper>
             </Form>
+            {/* ==================================================== */}
             <NavFilterBar />
           </NavSearchInputsContainer>
 

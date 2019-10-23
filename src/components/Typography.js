@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const H1 = styled.h1`
   font-family: "Vidaloka", serif;
@@ -19,6 +19,11 @@ export const H4 = styled.h4`
   color: black;
   text-decoration: none;
   margin: 0;
+  ${(props) =>
+    props.red &&
+    css`
+      color: red;
+    `}
 `;
 
 export const H5 = styled.h4`
@@ -32,4 +37,9 @@ export const Title = styled(H1)`
   font-size: 32px;
   margin: 28px;
   /* padding: 20px 0 0 250px; */
+  ${(props) =>
+    props.right &&
+    css`
+      text-align: right;
+    `}
 `;

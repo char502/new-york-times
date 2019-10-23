@@ -74,11 +74,11 @@ class NavFilterBar extends React.Component {
     filter: ""
   };
 
-  handleChange = val => {
+  handleChange = (val) => {
     this.setState({ filter: val.path });
   };
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
     let searchQuery = queryString.parse(this.props.location.search);
     searchQuery.sources = this.state.filter;
@@ -89,7 +89,7 @@ class NavFilterBar extends React.Component {
     this.setState({ filter: "" });
   };
 
-  handleClearFilter = e => {
+  handleClearFilter = (e) => {
     e.preventDefault();
     let searchQuery = queryString.parse(this.props.location.search);
     if (searchQuery.sources) {
@@ -122,10 +122,10 @@ class NavFilterBar extends React.Component {
         <Inner onSubmit={this.handleSubmit}>
           <ActionContainer>
             <div style={{ width: "220px" }}>
-              <Dropdown
+              {/* <Dropdown
                 handleChange={this.handleChange}
                 filter={this.state.filter}
-              />
+              /> */}
             </div>
 
             <Button onClick={this.handleSubmit}>Submit</Button>

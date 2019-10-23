@@ -252,7 +252,7 @@ class LandingPage extends React.Component {
               </ul>
             </NewsSourceSecondContainer>
             <NewsSourceThirdContainer>
-              <Title>New Scientist Top Headlines</Title>
+              <Title right>New Scientist Top Headlines</Title>
               <div>
                 <ul>
                   {newsSourceThird.map((newScientist) => (

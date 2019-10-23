@@ -97,7 +97,7 @@ class SavedNews extends React.Component {
           <ActionContainer>
             <div>
               <H1>Saved News</H1>
-              <H4>Saved Items will be cleared after a week</H4>
+              <H4 red>Saved Items will be cleared after a week</H4>
             </div>
             <div>
               <Button small onClick={this.handleClearAll}>
