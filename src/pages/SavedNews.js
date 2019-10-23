@@ -126,3 +126,5 @@ class SavedNews extends React.Component {
 }
 
 export default SavedNews;
+
+//some comments for this feature
