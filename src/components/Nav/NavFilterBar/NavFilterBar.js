@@ -122,10 +122,10 @@ class NavFilterBar extends React.Component {
         <Inner onSubmit={this.handleSubmit}>
           <ActionContainer>
             <div style={{ width: "220px" }}>
-              {/* <Dropdown
+              <Dropdown
                 handleChange={this.handleChange}
                 filter={this.state.filter}
-              /> */}
+              />
             </div>
 
             <Button onClick={this.handleSubmit}>Submit</Button>
