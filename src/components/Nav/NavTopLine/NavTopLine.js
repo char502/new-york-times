@@ -46,20 +46,22 @@ const Form = styled.form`
   /* Makes InputWrapper relative to it parent 'Form' */
   width: 200px;
   height: 40px;
-  background: blue;
+  /* background: blue; */
 `;
 
 const InputWrapper = styled.div`
   position: relative;
   /* Makes Input and StyledIcon relative to their parent 'InputWrapper' */
-  /* overflow: hidden; */
+  overflow: hidden;
   /* it always exists this just hides it when not needed */
   height: 100%;
-  margin-right: 20px;
-  background: red;
+  /* margin-right: 10px; */
+  /* background: red; */
 `;
 
-const easing = "cubic-bezier(0.645, 0.045, 0.355, 1)";
+const easing = "cubic-bezier(0.77, 0, 0.175, 1)";
+
+// const easing = "cubic-bezier(0.165, 0.84, 0.44, 1)";
 
 const Input = styled.input`
   position: absolute;
@@ -84,12 +86,16 @@ const Input = styled.input`
     props.isshown ? "translatex(0)" : "translatex(110%)"};
 
   /* CSS transitions allows you to change property values smoothly, over a given duration. */
+  /* transition: 2s ${easing}; */
   transition: 2s ${easing};
-  transition: fill 500ms ease;
+  transition: 500ms ease;
   background: green;
   /* transform property
   translate function */
 `;
+
+// const easing = "cubic-bezier(0.77, 0, 0.175, 1)";
+// const easing = "cubic-bezier(0.165, 0.84, 0.44, 1)";
 
 //Magnifying glass icon
 const StyledIcon = styled(FontAwesomeIcon)`
@@ -99,10 +105,11 @@ const StyledIcon = styled(FontAwesomeIcon)`
   position: absolute;
   /* ====================================================== */
   /* Stuff that makes it move */
-  left: ${(props) => (props.isshown ? "unset" : "90%")};
+  left: ${(props) => (props.isshown ? "2%" : "90%")};
 
+  /* transition: 2s ${easing}; */
   transition: 2s ${easing};
-  transition: fill 500ms ease;
+  transition: 500ms ease;
   background: yellow;
 `;
 
