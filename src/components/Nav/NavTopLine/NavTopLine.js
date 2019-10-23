@@ -53,7 +53,7 @@ const InputWrapper = styled.div`
   position: relative;
   /* Makes Input and StyledIcon relative to their parent 'InputWrapper' */
   /* overflow: hidden; */
-  /* in always exist this just hides it when not needed */
+  /* it always exists this just hides it when not needed */
   height: 100%;
   margin-right: 20px;
   background: red;
@@ -79,7 +79,7 @@ const Input = styled.input`
   /* translate - repositions an element in the horizontal (x) and/or vertical (Y) directions */
   /* css can't talk directly to state so a property (props) is given to this Input as per lines 83 and 84 below) */
   /* This css property is then linked toggleInput in line 172 */
-  /* when isshown(toggleInput) is set to false, this element is moved )  */
+  /* when isshown(toggleInput) is set to false, this element is positioned 110% to the right of the input box (a minus number i.e. -110% would start it on the left))  */
   transform: ${(props) =>
     props.isshown ? "translatex(0)" : "translatex(110%)"};
 
@@ -95,7 +95,7 @@ const Input = styled.input`
 const StyledIcon = styled(FontAwesomeIcon)`
   top: 45%;
   width: 10%;
-  /* for sizing the icon - but as fnt awsome not sure can size it anyway
+  /* for sizing the icon - but as font awsome not sure can size it anyway */
   position: absolute;
   /* ====================================================== */
   /* Stuff that makes it move */
@@ -163,7 +163,7 @@ class NavTopLine extends React.Component {
                 <StyledIcon
                   icon={faSearch}
                   onClick={this.handleToggle}
-                  /* isshown={toggleInput} */
+                  isshown={toggleInput}
                 />
                 <Input
                   value={this.state.searchTerm}
@@ -172,7 +172,7 @@ class NavTopLine extends React.Component {
                   isshown={toggleInput}
                   ref={this.inputRef}
                 />
-                <div style={{ color: toggleInput ? "red" : "black" }} />
+                {/* <div style={{ color: toggleInput ? "red" : "black" }} /> */}
               </InputWrapper>
             </Form>
             {/* ==================================================== */}
