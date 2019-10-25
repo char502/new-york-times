@@ -7,7 +7,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { landingPageNews } from "../newsSources";
 import { getNews } from "../utils/api";
 import { Title } from "../components/Typography";
-import { H1, H4 } from "../components/Typography";
+import { H1, H4, H3 } from "../components/Typography";
 import Carousel from "../components/Carousel/MainCarousel";
 import imagePlaceholder from "../Images/imagePlaceholder.png";
 // import SavedNews from "./SavedNews";
@@ -235,9 +235,9 @@ class LandingPage extends React.Component {
                     </ImageContainer>
                     <LinkContainer>
                       <LinkContainerInner>
-                        <H4 as="a" href={timeNewsArticle.url} target="_blank">
+                        <H3 as="a" href={timeNewsArticle.url} target="_blank">
                           {timeNewsArticle.title}
-                        </H4>
+                        </H3>
                       </LinkContainerInner>
                       <SecondaryHeadlineAuthor>
                         Author: {timeNewsArticle.author}
@@ -259,9 +259,9 @@ class LandingPage extends React.Component {
                     <StyledListItem key={newScientist.url}>
                       <LinkContainer>
                         <LinkContainerInner right>
-                          <H4 as="a" href={newScientist.url} target="_blank">
+                          <H3 as="a" href={newScientist.url} target="_blank">
                             {newScientist.title}
-                          </H4>
+                          </H3>
                         </LinkContainerInner>
                         <SecondaryHeadlineAuthor right>
                           Author: {newScientist.author}

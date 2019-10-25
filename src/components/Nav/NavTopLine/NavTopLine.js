@@ -5,12 +5,10 @@ import { Link } from "react-router-dom";
 import { AltButton } from "../../Button";
 import newspaper from "../../../Images/newspaper7.jpg";
 
+import magGlass2 from "../../../Images/magGlass2.png";
+
 // Components
 import NavFilterBar from "../NavFilterBar/NavFilterBar";
-
-//Font Awesome
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 // ======== Styled Components ========
 const NavTopLineContainer = styled.div`
@@ -44,7 +42,7 @@ const NavSearchInputsContainer = styled.div`
 const Form = styled.form`
   position: relative;
   /* Makes InputWrapper relative to it parent 'Form' */
-  width: 200px;
+  width: 250px;
   height: 40px;
   /* background: blue; */
 `;
@@ -61,10 +59,15 @@ const InputWrapper = styled.div`
 
 const easing = "cubic-bezier(0.77, 0, 0.175, 1)";
 
-// const easing = "cubic-bezier(0.165, 0.84, 0.44, 1)";
-
 const Input = styled.input`
+  /* background: green; */
   position: absolute;
+  /* An element with position: absolute; is positioned relative to the nearest positioned ancestor */
+  font-family: "Roboto", sans-serif;
+  /* the input defaults to arial so this is to override that */
+  color: black;
+  /* the colour of the search text */
+  
   width: 85%;
   /* green box 85% of the width of it's parent */
   left: 15%;
@@ -75,42 +78,41 @@ const Input = styled.input`
   outline: none;
   height: 27px;
   /* ====================================================== */
+
   /* Stuff that makes it move */
+  transform: ${(props) =>
+    props.isshown ? "translatex(0)" : "translatex(205px)"};
 
   /* The transform property applies a 2D or 3D transformation to an element */
   /* translate - repositions an element in the horizontal (x) and/or vertical (Y) directions */
   /* css can't talk directly to state so a property (props) is given to this Input as per lines 83 and 84 below) */
-  /* This css property is then linked toggleInput in line 172 */
+  /* This css property is then linked to toggleInput in line 172 */
   /* when isshown(toggleInput) is set to false, this element is positioned 110% to the right of the input box (a minus number i.e. -110% would start it on the left))  */
-  transform: ${(props) =>
-    props.isshown ? "translatex(0)" : "translatex(110%)"};
-
+  
   /* CSS transitions allows you to change property values smoothly, over a given duration. */
   /* transition: 2s ${easing}; */
-  transition: 2s ${easing};
-  transition: 500ms ease;
-  background: green;
+  
   /* transform property
   translate function */
+
+  font-size:  ${(props) => (props.isshown ? "12px" : "transparent")};
+   
 `;
 
 // const easing = "cubic-bezier(0.77, 0, 0.175, 1)";
-// const easing = "cubic-bezier(0.165, 0.84, 0.44, 1)";
 
-//Magnifying glass icon
-const StyledIcon = styled(FontAwesomeIcon)`
+const StyledIcon = styled.div`
   top: 45%;
-  width: 10%;
-  /* for sizing the icon - but as font awsome not sure can size it anyway */
   position: absolute;
-  /* ====================================================== */
-  /* Stuff that makes it move */
-  left: ${(props) => (props.isshown ? "2%" : "90%")};
+  transform: ${(props) =>
+    props.isshown ? "translatex(0)" : "translatex(205px)"};
+  /* left: ${(props) => (props.isshown ? "2%" : "90%")}; */
+  
+`;
 
-  /* transition: 2s ${easing}; */
-  transition: 2s ${easing};
-  transition: 500ms ease;
-  background: yellow;
+const MagGlass = styled.img`
+  width: 20px;
+  height: 20px;
 `;
 
 // ===================================
@@ -122,11 +124,7 @@ const Newspaper = styled.img`
 `;
 
 const HomeButton = styled.img`
-  /* padding-left: 5px; */
-  /* display: flex;
   align-items: center;
-  position: absolute;
-  right: 5px; */
 `;
 
 class NavTopLine extends React.Component {
@@ -151,6 +149,7 @@ class NavTopLine extends React.Component {
   handleToggle = () => {
     this.setState(({ toggleInput }) => ({ toggleInput: !toggleInput }));
     this.inputRef.current.focus();
+    // When the reference is created using React.creatRef() (with React 16 syntax) you can then access it using the 'current' property
   };
 
   render() {
@@ -167,17 +166,22 @@ class NavTopLine extends React.Component {
             {/* ======================================== */}
             <Form onSubmit={this.handleSubmit}>
               <InputWrapper>
-                <StyledIcon
-                  icon={faSearch}
-                  onClick={this.handleToggle}
-                  isshown={toggleInput}
-                />
+                {/* =============== */}
+                <StyledIcon onClick={this.handleToggle} isshown={toggleInput}>
+                  <MagGlass src={magGlass2} />
+                </StyledIcon>
+                {/* =============== */}
                 <Input
                   value={this.state.searchTerm}
                   onChange={this.handleChange}
                   placeholder={"Enter Search"}
                   isshown={toggleInput}
                   ref={this.inputRef}
+                  /* there are a few cases where you need to modify a child outside of the typical dataflow. The child to be modified could be an instance of a React component,for this case, React provides an escape hatch. */
+                  /* There are a few good use cases for refs:
+                          Managing focus, text selection, or media playback. */
+                  /* This prop targets the ref on the 'Input' component */
+                  /*  The' handleToggle' function then uses 'this.inputRef.current.focus();' to put focus on that component */
                 />
                 {/* <div style={{ color: toggleInput ? "red" : "black" }} /> */}
               </InputWrapper>
