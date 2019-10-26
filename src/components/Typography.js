@@ -8,8 +8,14 @@ export const H1 = styled.h1`
   /* margin-bottom: 32px; */
 `;
 
-export const H3 = styled.h1`
+export const H3 = styled.h3`
   font-size: 24px;
+  color: black;
+  text-decoration: none;
+`;
+
+export const ModH3 = styled(H3)`
+  font-size: 20px;
   color: black;
   text-decoration: none;
 `;
@@ -26,7 +32,7 @@ export const H4 = styled.h4`
     `}
 `;
 
-export const H5 = styled.h4`
+export const H5 = styled.h5`
   padding: 0;
   font-size: 12px;
   color: black;

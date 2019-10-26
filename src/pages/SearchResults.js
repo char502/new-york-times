@@ -91,7 +91,7 @@ class SearchResults extends React.Component {
         <SearchResultsContainerInner>
           <ul>
             {results.map((result) => (
-              <div key={result.title}>
+              <div key={result.description}>
                 <CardContainer>
                   <Card
                     data={result}

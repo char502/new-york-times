@@ -54,4 +54,8 @@ export const AltButton = styled(Button)`
 export const CarouselButton = styled(Button)`
   /* display: block; */
   color: black;
+  &:focus {
+    background-color: gray;
+    color: white;
+  }
 `;

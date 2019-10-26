@@ -8,8 +8,12 @@ export default [
     name: "Ars Technica"
   },
   {
-    path: "bloomberg",
-    name: "Bloomberg"
+    path: "cnbc",
+    name: "CNBC"
+  },
+  {
+    path: "cnn",
+    name: "CNN"
   },
   {
     path: "crypto-coins-news",
@@ -24,20 +28,16 @@ export default [
     name: "IGN"
   },
   {
-    path: "mashable",
-    name: "Mashable"
-  },
-  {
-    path: "metro",
-    name: "Metro"
-  },
-  {
-    path: "national-geographic",
-    name: "National Geographic"
+    path: "medical-news-today",
+    name: "Medical News Today"
   },
   {
     path: "newsweek",
     name: "Newsweek"
+  },
+  {
+    path: "new-scientist",
+    name: "New Scientist"
   },
   {
     path: "next-big-future",
@@ -63,13 +63,14 @@ const landingPageNews = [
     name: "BBC News"
   },
   {
-    path: "time",
-    name: "Time"
-  },
-  {
     path: "the-next-web",
     name: "The Next Web"
+  },
+  {
+    path: "national-geographic",
+    name: "National Geographic"
   }
+
   // {
   //   path: "new-scientist",
   //   name: "New Scientist"
