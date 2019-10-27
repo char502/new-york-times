@@ -10,14 +10,19 @@ export const Button = styled.button`
   border: 0.5px solid rgba(0, 0, 0, 0.2);
   margin: 0 5px;
   border-radius: 4px;
-  height: 38px;
+  height: 30px;
+  width: auto;
+
+  /* height: 30px;
+  width: 30px; */
+
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 0 16px;
   text-decoration: none;
   font-size: 12px;
-  width: auto;
+
   ${(props) =>
     props.small &&
     css`
@@ -34,6 +39,8 @@ export const Button = styled.button`
 export const AltButton = styled(Button)`
   background: gray;
   color: white;
+  height: 28px;
+  width: auto;
   &:hover {
     background: white;
     color: black;

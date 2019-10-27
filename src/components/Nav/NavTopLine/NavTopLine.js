@@ -59,7 +59,7 @@ const Input = styled.input`
   color: black;
   width: 85%;
   left: 15%;
-  top: 30%;
+  top: 20%;
   border: none;
   outline: none;
   height: 27px;
@@ -75,7 +75,7 @@ const Input = styled.input`
 // const easing = "cubic-bezier(0.77, 0, 0.175, 1)";
 
 const StyledIcon = styled.div`
-  top: 45%;
+  top: 35%;
   position: absolute;
   transform: ${(props) =>
     props.isshown ? "translatex(0)" : "translatex(205px)"};
