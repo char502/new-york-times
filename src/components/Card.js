@@ -2,7 +2,7 @@ import React from "react";
 import styled, { css } from "styled-components/macro";
 import moment from "moment";
 import { Button } from "./Button";
-import { H3 } from "./Typography";
+import { H3, H4 } from "./Typography";
 import imagePlaceholder from "../Images/imagePlaceholder.png";
 
 // const CardOuter = styled.div`
@@ -49,6 +49,11 @@ const TitleContainer = styled.div`
   padding: 20px 10px 10px 10px;
   text-align: center;
   font-weight: bold;
+`;
+
+const StyledSource = styled.div`
+  color: darkgray;
+  padding: 5px;
 `;
 
 const StyledAuthor = styled.p`
@@ -105,6 +110,9 @@ const Card = (props) => (
         <H3 as="a" href={props.data.url} target="_blank">
           {props.data.title}
         </H3>
+        <H4>
+          <StyledSource>Source: {props.data.source.name}</StyledSource>
+        </H4>
       </TitleContainer>
     </ImageAndTitle>
 

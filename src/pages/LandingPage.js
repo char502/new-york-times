@@ -7,9 +7,10 @@ import "slick-carousel/slick/slick-theme.css";
 import { landingPageNews } from "../newsSources";
 import { getNews } from "../utils/api";
 import { Title } from "../components/Typography";
-import { H1, H4, H3 } from "../components/Typography";
+import { H1, H3, H4, ModH3 } from "../components/Typography";
 import Carousel from "../components/Carousel/MainCarousel";
 import imagePlaceholder from "../Images/imagePlaceholder.png";
+import { Button } from "../components/Button";
 // import SavedNews from "./SavedNews";
 
 // ======== Styled Components ========
@@ -27,8 +28,6 @@ const LandingPageBodyContainerInner = styled.div`
 
 const Container = styled.div`
   width: 66.66%;
-  /* padding-top: 10px; */
-  /* background: lightseagreen; */
 `;
 
 const StyledTitle = styled.div`
@@ -65,6 +64,8 @@ const StyledListItem = styled.div`
     border-width: 0;
     padding-bottom: 50px;
   }
+
+  align-items: center;
 `;
 
 const LinkContainer = styled.div`
@@ -73,7 +74,7 @@ const LinkContainer = styled.div`
 `;
 
 const LinkContainerInner = styled.div`
-  margin-bottom: 8px;
+  margin-bottom: 2px;
   ${(props) =>
     props.right &&
     css`
@@ -135,12 +136,14 @@ const StyledHeader = styled.div`
 `;
 
 const TopNewsContainer = styled.div`
-  /* border: 0.5px solid black; */
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.2);
 `;
 
 const ImageAndTitle = styled.div`
   display: flex;
-  padding: 10px 10px 10px 20px;
+  padding: 15px 10px 15px 20px;
+  justify-content: center;
+  align-items: center;
 `;
 
 const SavedImage = styled.img`
@@ -154,6 +157,16 @@ const TopNewsTitle = styled.div`
   text-decoration: none;
   cursor: pointer;
   /* word-wrap: break-word; */
+`;
+
+const SourceContainer = styled.div`
+  font-size: 12px;
+  color: darkgray;
+`;
+
+const ButtonContainer = styled.div`
+  /* justify-content: center;
+  align-items: center; */
 `;
 
 // === End of SideBar styling ===
@@ -201,6 +214,51 @@ class LandingPage extends React.Component {
     });
   }
 
+  handleRemoveItem = (topNewsItem) => {
+    const { topTenSaved } = this.state;
+
+    const resultWhenItemRemoved = topTenSaved.filter((arrItem) => {
+      return arrItem !== topNewsItem;
+    });
+
+    this.setState({ topTenSaved: resultWhenItemRemoved });
+
+    const savedResults = JSON.parse(localStorage.getItem("savedNews"));
+    if (resultWhenItemRemoved !== savedResults) {
+      localStorage.setItem("savedNews", JSON.stringify(resultWhenItemRemoved));
+    }
+  };
+
+  handleSaveItem = (result) => {
+    const savedResult = {
+      ...result,
+      savedAt: moment().format("YYYY-MM-DD")
+      // savedAt: "2019-08-15"
+    };
+
+    console.log(savedResult);
+    let newsArr = [];
+
+    if (!localStorage.getItem("savedNews")) {
+      newsArr.push(savedResult);
+      alert("Item added to Local Storage");
+      localStorage.setItem("savedNews", JSON.stringify(newsArr));
+    } else if (localStorage.getItem("savedNews")) {
+      newsArr = JSON.parse(localStorage.getItem("savedNews"));
+
+      let alreadyInArr = newsArr.some((newsItem) => {
+        return newsItem.title === savedResult.title;
+      });
+      if (alreadyInArr) {
+        return alert("item already saved");
+      }
+
+      newsArr.push(savedResult);
+      localStorage.setItem("savedNews", JSON.stringify(newsArr));
+      alert("Unique Item added to Local Storage ");
+    }
+  };
+
   render() {
     const {
       newsSourceMainSlider,
@@ -209,7 +267,7 @@ class LandingPage extends React.Component {
       topTenSaved
     } = this.state;
 
-    console.log(newsSourceThird);
+    console.log(topTenSaved);
     return (
       <LandingPageBodyContainer>
         <LandingPageBodyContainerInner>
@@ -220,63 +278,85 @@ class LandingPage extends React.Component {
             </StyledTitle>
             <Carousel newsData={newsSourceMainSlider} />
             <NewsSourceSecondContainer>
-              <Title>Time Magazine Top Headlines</Title>
+              <Title>The Next Web - Top Headlines</Title>
               <ul>
-                {newsSourceSecond.map((timeNewsArticle) => (
-                  <StyledListItem key={timeNewsArticle.url}>
+                {newsSourceSecond.map((theNextWeb) => (
+                  <StyledListItem key={theNextWeb.description}>
                     <ImageContainer>
                       <SecondaryHeadlineImage
                         src={
-                          timeNewsArticle.urlToImage
-                            ? timeNewsArticle.urlToImage
+                          theNextWeb.urlToImage
+                            ? theNextWeb.urlToImage
                             : imagePlaceholder
                         }
                       />
                     </ImageContainer>
                     <LinkContainer>
                       <LinkContainerInner>
-                        <H3 as="a" href={timeNewsArticle.url} target="_blank">
-                          {timeNewsArticle.title}
-                        </H3>
+                        <ModH3 as="a" href={theNextWeb.url} target="_blank">
+                          {theNextWeb.title}
+                        </ModH3>
                       </LinkContainerInner>
                       <SecondaryHeadlineAuthor>
-                        Author: {timeNewsArticle.author}
+                        Author: {theNextWeb.author}
                       </SecondaryHeadlineAuthor>
                       <SecondaryHeadlinePublished>
-                        Published:{" "}
-                        {moment(timeNewsArticle.publishedAt).fromNow()}
+                        Published: {moment(theNextWeb.publishedAt).fromNow()}
                       </SecondaryHeadlinePublished>
+                      {/* <div>{theNextWeb.source.id}</div> */}
                     </LinkContainer>
+                    <ButtonContainer>
+                      <Button
+                        small
+                        onClick={() => this.handleSaveItem(theNextWeb)}
+                      >
+                        Save
+                      </Button>
+                    </ButtonContainer>
                   </StyledListItem>
                 ))}
               </ul>
             </NewsSourceSecondContainer>
             <NewsSourceThirdContainer>
-              <Title right>New Scientist Top Headlines</Title>
+              <Title right>National Geographic - Top Headlines</Title>
               <div>
                 <ul>
-                  {newsSourceThird.map((newScientist) => (
-                    <StyledListItem key={newScientist.url}>
+                  {newsSourceThird.map((nationalGeographic) => (
+                    <StyledListItem key={nationalGeographic.title}>
+                      <ButtonContainer>
+                        <Button
+                          small
+                          onClick={() =>
+                            this.handleSaveItem(nationalGeographic)
+                          }
+                        >
+                          Save
+                        </Button>
+                      </ButtonContainer>
                       <LinkContainer>
                         <LinkContainerInner right>
-                          <H3 as="a" href={newScientist.url} target="_blank">
-                            {newScientist.title}
-                          </H3>
+                          <ModH3
+                            as="a"
+                            href={nationalGeographic.url}
+                            target="_blank"
+                          >
+                            {nationalGeographic.title}
+                          </ModH3>
                         </LinkContainerInner>
                         <SecondaryHeadlineAuthor right>
-                          Author: {newScientist.author}
+                          Author: {nationalGeographic.author}
                         </SecondaryHeadlineAuthor>
                         <SecondaryHeadlinePublished right>
                           Published:{" "}
-                          {moment(newScientist.publishedAt).fromNow()}
+                          {moment(nationalGeographic.publishedAt).fromNow()}
                         </SecondaryHeadlinePublished>
+                        {/* <div>{nationalGeographic.source.id}</div> */}
                       </LinkContainer>
-
                       <ImageContainer>
                         <SecondaryHeadlineImage
                           src={
-                            newScientist.urlToImage
-                              ? newScientist.urlToImage
+                            nationalGeographic.urlToImage
+                              ? nationalGeographic.urlToImage
                               : imagePlaceholder
                           }
                         />
@@ -288,9 +368,9 @@ class LandingPage extends React.Component {
             </NewsSourceThirdContainer>
           </Container>
           <SideBar>
-            <H4>
+            <H3>
               <StyledHeader>Top 10 Saved News Articles</StyledHeader>
-            </H4>
+            </H3>
             {topTenSaved.map((topNewsItem, index) => {
               return (
                 <TopNewsContainer key={topNewsItem.title}>
@@ -305,8 +385,20 @@ class LandingPage extends React.Component {
                       />
                     </div>
                     <TopNewsTitle as="a" href={topNewsItem.url} target="_blank">
-                      {topNewsItem.title}
+                      <H4>{topNewsItem.title}</H4>
+                      <SourceContainer>
+                        Source: {topNewsItem.source.name}
+                      </SourceContainer>
                     </TopNewsTitle>
+                    <ButtonContainer>
+                      <Button
+                        style={{ color: "red", fontWeight: "bold" }}
+                        small
+                        onClick={() => this.handleRemoveItem(topNewsItem)}
+                      >
+                        x
+                      </Button>
+                    </ButtonContainer>
                   </ImageAndTitle>
                 </TopNewsContainer>
               );
