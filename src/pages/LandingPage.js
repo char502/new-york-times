@@ -392,6 +392,7 @@ class LandingPage extends React.Component {
                     </TopNewsTitle>
                     <ButtonContainer>
                       <Button
+                        style={{ color: "red", fontWeight: "bold" }}
                         small
                         onClick={() => this.handleRemoveItem(topNewsItem)}
                       >
