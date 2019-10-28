@@ -92,6 +92,7 @@ const styles = {
     position: "absolute",
     top: "15px",
     color: "black"
+    // fontWeight: "bold"
   })
 };
 

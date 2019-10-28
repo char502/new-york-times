@@ -75,7 +75,7 @@ const Input = styled.input`
 // const easing = "cubic-bezier(0.77, 0, 0.175, 1)";
 
 const StyledIcon = styled.div`
-  top: 35%;
+  top: 30%;
   position: absolute;
   transform: ${(props) =>
     props.isshown ? "translatex(0)" : "translatex(205px)"};
@@ -99,7 +99,7 @@ const Newspaper = styled.img`
 `;
 
 const HomeButton = styled.img`
-  align-items: center;
+  /* align-items: center; */
 `;
 
 class NavTopLine extends React.Component {

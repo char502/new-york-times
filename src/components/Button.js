@@ -12,7 +12,7 @@ export const Button = styled.button`
   border-radius: 4px;
   height: 30px;
   width: auto;
-
+  /* font-weight: bold; */
   /* height: 30px;
   width: 30px; */
 
