@@ -98,6 +98,7 @@ class SearchResults extends React.Component {
                     text="Save"
                     handleClick={this.handleSaveItem}
                     extended
+                    showSource
                   />
                 </CardContainer>
               </div>

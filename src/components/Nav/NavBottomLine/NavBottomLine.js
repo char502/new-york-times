@@ -6,7 +6,6 @@ import newsSources from "../../../newsSources";
 const NavBottomLineContainer = styled.div`
   width: 100%;
   height: 45px;
-  /* background-color: yellow; */
 `;
 
 const NavBottomLineContainerInner = styled.div`
@@ -14,20 +13,24 @@ const NavBottomLineContainerInner = styled.div`
   width: 100%;
   margin: 0 auto;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 `;
 
 const NewsLink = styled(Link)`
   padding: 5px 13px;
-  /* margin: 5px 10px; */
   display: flex;
   align-items: center;
   font-size: 10px;
-  /* font-family: "Roboto Condensed", sans-serif; */
   display: inline-block;
   text-decoration: none;
   color: gray;
+  &:first-child {
+    padding-left: 0;
+  }
+  /* &:last-child {
+    padding-right: 0;
+  } */
 `;
 
 const NavBottomLine = () => (

@@ -113,6 +113,7 @@ class SavedNews extends React.Component {
               handleClick={this.handleRemoveItem}
               text="remove"
               extended
+              showSource
             >
               <ButtonContainer>
                 <AltButton small>Retain Item for another week</AltButton>

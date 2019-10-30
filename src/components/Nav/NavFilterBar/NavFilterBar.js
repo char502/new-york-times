@@ -86,9 +86,16 @@ class NavFilterBar extends React.Component {
               />
             </div>
 
-            <Button onClick={this.handleSubmit}>Submit</Button>
+            <Button style={{ marginLeft: "5px;" }} onClick={this.handleSubmit}>
+              Submit
+            </Button>
 
-            <Button onClick={this.handleClearFilter}>Clear Filter</Button>
+            <Button
+              style={{ margin: "0", marginLeft: "5px;" }}
+              onClick={this.handleClearFilter}
+            >
+              Clear Filter
+            </Button>
           </ActionContainer>
         </Inner>
       </Container>

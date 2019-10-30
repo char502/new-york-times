@@ -110,9 +110,11 @@ const Card = (props) => (
         <H3 as="a" href={props.data.url} target="_blank">
           {props.data.title}
         </H3>
-        <H4>
-          <StyledSource>Source: {props.data.source.name}</StyledSource>
-        </H4>
+        {props.showSource && (
+          <H4>
+            <StyledSource>Source: {props.data.source.name}</StyledSource>
+          </H4>
+        )}
       </TitleContainer>
     </ImageAndTitle>
 
