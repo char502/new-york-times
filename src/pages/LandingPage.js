@@ -11,6 +11,7 @@ import { H1, H3, ModH3 } from "../components/Typography";
 import Carousel from "../components/Carousel/MainCarousel";
 import imagePlaceholder from "../Images/imagePlaceholder.png";
 import { Button } from "../components/Button";
+import LandingPageNewsItem from "../components/LandingPageNewsItem";
 // import SavedNews from "./SavedNews";
 
 // ======== Styled Components ========
@@ -291,7 +292,13 @@ class LandingPage extends React.Component {
             <CarouselContainer>
               <Carousel newsData={newsSourceMainSlider} />
             </CarouselContainer>
-            <NewsSourceSecondContainer>
+            <LandingPageNewsItem
+              data={newsSourceSecond}
+              key={newsSourceSecond.url}
+              title="The Next Web - Top Headlines"
+              handleClick={this.handleSaveItem}
+            />
+            {/* <NewsSourceSecondContainer>
               <Title style={{ marginLeft: 0 }}>
                 The Next Web - Top Headlines
               </Title>
@@ -318,7 +325,6 @@ class LandingPage extends React.Component {
                     <SecondaryHeadlinePublished>
                       Published: {moment(theNextWeb.publishedAt).fromNow()}
                     </SecondaryHeadlinePublished>
-                    {/* <div>{theNextWeb.source.id}</div> */}
                   </LinkContainer>
                   <ButtonContainer>
                     <Button
@@ -330,7 +336,7 @@ class LandingPage extends React.Component {
                   </ButtonContainer>
                 </StyledListItem>
               ))}
-            </NewsSourceSecondContainer>
+            </NewsSourceSecondContainer> */}
             <NewsSourceThirdContainer>
               <Title right>National Geographic - Top Headlines</Title>
               <div>
@@ -403,9 +409,9 @@ class LandingPage extends React.Component {
                         target="_blank"
                       >
                         {topNewsItem.title}
-                        <SourceContainer>
+                        {/* <SourceContainer>
                           Source: {topNewsItem.source.name}
-                        </SourceContainer>
+                        </SourceContainer> */}
                       </TopNewsTitle>
                     </div>
 
