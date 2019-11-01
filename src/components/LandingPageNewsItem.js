@@ -111,7 +111,7 @@ const NewsSourceContainer = (props) => (
           </SecondaryHeadlinePublished>
         </LinkContainer>
         <ButtonContainer>
-          <Button small onClick={() => props.handleClick(props.data)}>
+          <Button small onClick={() => props.handleClick(newsSourceItem)}>
             Save
           </Button>
         </ButtonContainer>
