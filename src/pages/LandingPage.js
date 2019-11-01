@@ -7,10 +7,11 @@ import "slick-carousel/slick/slick-theme.css";
 import { landingPageNews } from "../newsSources";
 import { getNews } from "../utils/api";
 import { Title } from "../components/Typography";
-import { H1, H3, H4, ModH3 } from "../components/Typography";
+import { H1, H3, ModH3 } from "../components/Typography";
 import Carousel from "../components/Carousel/MainCarousel";
 import imagePlaceholder from "../Images/imagePlaceholder.png";
 import { Button } from "../components/Button";
+import LandingPageNewsItem from "../components/LandingPageNewsItem";
 // import SavedNews from "./SavedNews";
 
 // ======== Styled Components ========
@@ -31,22 +32,32 @@ const Container = styled.div`
 `;
 
 const StyledTitle = styled.div`
-  padding: 30px;
+  padding: 30px 0;
   font-family: "Vidaloka", serif;
+`;
+
+// ======================================
+const CarouselContainer = styled.div`
+  width: 714px;
+  height: 495px;
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.2);
+  /* margin-left: 10px; */
 `;
 
 const NewsSourceSecondContainer = styled.div`
   max-width: 1200px;
   height: auto;
-  padding: 5px 10px 10px 10px;
-  border-bottom: 0.5px solid rgba(0, 0, 0, 0.2);
+  /* padding: 5px 0 10px 0; */
+  margin-right: 40px;
+  /* border-bottom: 0.5px solid rgba(0, 0, 0, 0.2); */
   /* background-color: lightpink; */
 `;
 
 const NewsSourceThirdContainer = styled.div`
   max-width: 1200px;
   height: auto;
-  padding: 5px 10px 10px 10px;
+  /* padding: 5px 0 10px 0; */
+  margin-right: 40px;
   border-bottom: 0.5px solid rgba(0, 0, 0, 0.2);
   margin-bottom: 30px;
   /* background-color: lightseagreen; */
@@ -55,17 +66,16 @@ const NewsSourceThirdContainer = styled.div`
 // === Seondary news items styling
 
 const StyledListItem = styled.div`
-  padding: 10px;
+  padding: 20px 0 20px 0;
   display: flex;
   justify-content: center;
   width: 100%;
   border-bottom: 0.5px solid rgba(0, 0, 0, 0.2);
+  align-items: center;
   &:last-child {
     border-width: 0;
     padding-bottom: 50px;
   }
-
-  align-items: center;
 `;
 
 const LinkContainer = styled.div`
@@ -125,7 +135,7 @@ const SideBar = styled.div`
   width: 33.33%;
   height: 100%;
   padding: 0 20px;
-  margin: 10px;
+  margin: 20px 10px 10px 10px;
   /* border: 0.5px solid rgba(0, 0, 0, 0.2); */
   background-color: WhiteSmoke;
 `;
@@ -137,12 +147,15 @@ const StyledHeader = styled.div`
 
 const TopNewsContainer = styled.div`
   border-bottom: 0.5px solid rgba(0, 0, 0, 0.2);
+  &:last-child {
+    border-width: 0;
+  }
 `;
 
 const ImageAndTitle = styled.div`
   display: flex;
   padding: 15px 10px 15px 20px;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 `;
 
@@ -152,7 +165,7 @@ const SavedImage = styled.img`
 `;
 
 const TopNewsTitle = styled.div`
-  padding-left: 10px;
+  margin-left: 10px;
   color: black;
   text-decoration: none;
   cursor: pointer;
@@ -276,47 +289,54 @@ class LandingPage extends React.Component {
             <StyledTitle>
               <H1>BBC News Top Headlines</H1>
             </StyledTitle>
-            <Carousel newsData={newsSourceMainSlider} />
-            <NewsSourceSecondContainer>
-              <Title>The Next Web - Top Headlines</Title>
-              <ul>
-                {newsSourceSecond.map((theNextWeb) => (
-                  <StyledListItem key={theNextWeb.description}>
-                    <ImageContainer>
-                      <SecondaryHeadlineImage
-                        src={
-                          theNextWeb.urlToImage
-                            ? theNextWeb.urlToImage
-                            : imagePlaceholder
-                        }
-                      />
-                    </ImageContainer>
-                    <LinkContainer>
-                      <LinkContainerInner>
-                        <ModH3 as="a" href={theNextWeb.url} target="_blank">
-                          {theNextWeb.title}
-                        </ModH3>
-                      </LinkContainerInner>
-                      <SecondaryHeadlineAuthor>
-                        Author: {theNextWeb.author}
-                      </SecondaryHeadlineAuthor>
-                      <SecondaryHeadlinePublished>
-                        Published: {moment(theNextWeb.publishedAt).fromNow()}
-                      </SecondaryHeadlinePublished>
-                      {/* <div>{theNextWeb.source.id}</div> */}
-                    </LinkContainer>
-                    <ButtonContainer>
-                      <Button
-                        small
-                        onClick={() => this.handleSaveItem(theNextWeb)}
-                      >
-                        Save
-                      </Button>
-                    </ButtonContainer>
-                  </StyledListItem>
-                ))}
-              </ul>
-            </NewsSourceSecondContainer>
+            <CarouselContainer>
+              <Carousel newsData={newsSourceMainSlider} />
+            </CarouselContainer>
+            <LandingPageNewsItem
+              data={newsSourceSecond}
+              key={newsSourceSecond.url}
+              title="The Next Web - Top Headlines"
+              handleClick={this.handleSaveItem}
+            />
+            {/* <NewsSourceSecondContainer>
+              <Title style={{ marginLeft: 0 }}>
+                The Next Web - Top Headlines
+              </Title>
+              {newsSourceSecond.map((theNextWeb) => (
+                <StyledListItem key={theNextWeb.description}>
+                  <ImageContainer>
+                    <SecondaryHeadlineImage
+                      src={
+                        theNextWeb.urlToImage
+                          ? theNextWeb.urlToImage
+                          : imagePlaceholder
+                      }
+                    />
+                  </ImageContainer>
+                  <LinkContainer>
+                    <LinkContainerInner>
+                      <ModH3 as="a" href={theNextWeb.url} target="_blank">
+                        {theNextWeb.title}
+                      </ModH3>
+                    </LinkContainerInner>
+                    <SecondaryHeadlineAuthor>
+                      Author: {theNextWeb.author}
+                    </SecondaryHeadlineAuthor>
+                    <SecondaryHeadlinePublished>
+                      Published: {moment(theNextWeb.publishedAt).fromNow()}
+                    </SecondaryHeadlinePublished>
+                  </LinkContainer>
+                  <ButtonContainer>
+                    <Button
+                      small
+                      onClick={() => this.handleSaveItem(theNextWeb)}
+                    >
+                      Save
+                    </Button>
+                  </ButtonContainer>
+                </StyledListItem>
+              ))}
+            </NewsSourceSecondContainer> */}
             <NewsSourceThirdContainer>
               <Title right>National Geographic - Top Headlines</Title>
               <div>
@@ -375,7 +395,7 @@ class LandingPage extends React.Component {
               return (
                 <TopNewsContainer key={topNewsItem.title}>
                   <ImageAndTitle>
-                    <div>
+                    <div style={{ display: "flex" }}>
                       <SavedImage
                         src={
                           topNewsItem.urlToImage
@@ -383,13 +403,18 @@ class LandingPage extends React.Component {
                             : imagePlaceholder
                         }
                       />
+                      <TopNewsTitle
+                        as="a"
+                        href={topNewsItem.url}
+                        target="_blank"
+                      >
+                        {topNewsItem.title}
+                        {/* <SourceContainer>
+                          Source: {topNewsItem.source.name}
+                        </SourceContainer> */}
+                      </TopNewsTitle>
                     </div>
-                    <TopNewsTitle as="a" href={topNewsItem.url} target="_blank">
-                      <H4>{topNewsItem.title}</H4>
-                      <SourceContainer>
-                        Source: {topNewsItem.source.name}
-                      </SourceContainer>
-                    </TopNewsTitle>
+
                     <ButtonContainer>
                       <Button
                         style={{ color: "red", fontWeight: "bold" }}

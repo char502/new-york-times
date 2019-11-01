@@ -34,6 +34,7 @@ const NavSearchInputsContainer = styled.div`
   display: flex;
   flex: 1;
   justify-content: flex-end;
+  margin-right: 24px;
 `;
 
 // animated magnifying glass icon
@@ -78,7 +79,7 @@ const StyledIcon = styled.div`
   top: 30%;
   position: absolute;
   transform: ${(props) =>
-    props.isshown ? "translatex(0)" : "translatex(205px)"};
+    props.isshown ? "translatex(10px)" : "translatex(205px)"};
     /* transition: 5000ms ${easing}; */
     /* transition: 0.5s ease; */
   /* left: ${(props) => (props.isshown ? "2%" : "90%")}; */
@@ -96,6 +97,7 @@ const Newspaper = styled.img`
   width: 70px;
   height: 70px;
   border-radius: 10%;
+  margin-top: 20px;
 `;
 
 const HomeButton = styled.img`
@@ -142,7 +144,6 @@ class NavTopLine extends React.Component {
                 <StyledIcon onClick={this.handleToggle} isshown={toggleInput}>
                   <MagGlass src={magGlass2} />
                 </StyledIcon>
-
                 <Input
                   value={this.state.searchTerm}
                   onChange={this.handleChange}
@@ -153,13 +154,13 @@ class NavTopLine extends React.Component {
                 {/* <div style={{ color: toggleInput ? "red" : "black" }} /> */}
               </InputWrapper>
             </Form>
-
             <NavFilterBar />
           </NavSearchInputsContainer>
-
-          <AltButton as={Link} to="/savedNews">
-            Saved Items
-          </AltButton>
+          <div style={{ marginRight: "5px" }}>
+            <AltButton as={Link} to="/savedNews">
+              Saved Items
+            </AltButton>
+          </div>
         </NavTopLineContainerInner>
       </NavTopLineContainer>
     );

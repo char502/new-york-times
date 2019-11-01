@@ -39,8 +39,6 @@ const styles = {
     borderRadius: "4px",
     outline: "none",
     border: "0.5px solid rgba(0, 0, 0, 0.2)",
-    margin: "0 5px",
-    bordeRadius: "4px",
     position: "relative"
   }),
   dropdownIndicator: (base) => ({
