@@ -1,6 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import styled from "styled-components/macro";
+import queryString from "query-string";
 import { Link } from "react-router-dom";
 import { AltButton } from "../../Button";
 import newspaper from "../../../Images/newspaper7.jpg";
@@ -111,6 +112,13 @@ class NavTopLine extends React.Component {
     toggleInput: false
   };
 
+  componentDidMount() {
+    let searchQuery = queryString.parse(this.props.location.search);
+    if (searchQuery.searchTerm) {
+      this.setState({ searchTerm: searchQuery.searchTerm, toggleInput: true });
+    }
+  }
+
   // use this to target and manage focus on the search box
   // after the click animation exposes it
   inputRef = React.createRef();
@@ -120,7 +128,7 @@ class NavTopLine extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.history.push(`/search?searchTerm=${this.state.searchTerm}`);
-    this.setState({ searchTerm: "" });
+    // this.setState({ searchTerm: "" });
   };
 
   handleToggle = () => {

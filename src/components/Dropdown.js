@@ -28,11 +28,8 @@ const styles = {
   control: (base) => ({
     // ...base,
     fontFamily: "Roboto Condensed",
-    // backgroundColor: "orange",
-    // backgroundColor: "white",
     fontSize: "12px",
     color: "black",
-    // background: "blue",
     height: "30px",
     width: "180px",
     padding: "0 16px",
@@ -43,9 +40,6 @@ const styles = {
   }),
   dropdownIndicator: (base) => ({
     ...base,
-    // borderLeft: 0.5px solid rgba(0, 0, 0, 0.2),
-    // borderLeft: "grey",
-    // background: "green",
     textAlign: "center",
     width: "30px",
     height: "30px",
@@ -57,11 +51,7 @@ const styles = {
   }),
   indicatorSeparator: (base) => ({
     ...base,
-    // borderLeft: 0.5px solid rgba(0, 0, 0, 0.2),
-    // borderLeft: "grey",
-    // background: "green",
     backgroundColor: "lightgrey",
-    // width: "25px",
     height: "20px",
     padding: 0,
     margin: 0,
@@ -79,18 +69,12 @@ const styles = {
     fontSize: "12px",
     color: "black"
   }),
-  // input: (base) => ({
-  //   ...base,
-  //   background: "orange"
-  // }),
   placeholder: (base) => ({
     ...base,
     fontSize: "12px",
-    // alignItems: "center"
     position: "absolute",
     top: "15px",
     color: "black"
-    // fontWeight: "bold"
   })
 };
 
