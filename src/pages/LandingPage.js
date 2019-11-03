@@ -1,13 +1,12 @@
 import React from "react";
 import Loading from "react-loading-bar";
-import styled, { css } from "styled-components/macro";
+import styled from "styled-components/macro";
 import moment from "moment";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { landingPageNews } from "../newsSources";
 import { getNews } from "../utils/api";
-import { Title } from "../components/Typography";
-import { H1, H3, ModH3 } from "../components/Typography";
+import { H1, H3 } from "../components/Typography";
 import Carousel from "../components/Carousel/MainCarousel";
 import imagePlaceholder from "../Images/imagePlaceholder.png";
 import { Button } from "../components/Button";
@@ -36,99 +35,12 @@ const StyledTitle = styled.div`
   font-family: "Vidaloka", serif;
 `;
 
-// ======================================
 const CarouselContainer = styled.div`
   width: 714px;
   height: 495px;
   border-bottom: 0.5px solid rgba(0, 0, 0, 0.2);
   /* margin-left: 10px; */
 `;
-
-const NewsSourceSecondContainer = styled.div`
-  max-width: 1200px;
-  height: auto;
-  /* padding: 5px 0 10px 0; */
-  margin-right: 40px;
-  /* border-bottom: 0.5px solid rgba(0, 0, 0, 0.2); */
-  /* background-color: lightpink; */
-`;
-
-const NewsSourceThirdContainer = styled.div`
-  max-width: 1200px;
-  height: auto;
-  /* padding: 5px 0 10px 0; */
-  margin-right: 40px;
-  border-bottom: 0.5px solid rgba(0, 0, 0, 0.2);
-  margin-bottom: 30px;
-  /* background-color: lightseagreen; */
-`;
-
-// === Seondary news items styling
-
-const StyledListItem = styled.div`
-  padding: 20px 0 20px 0;
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  border-bottom: 0.5px solid rgba(0, 0, 0, 0.2);
-  align-items: center;
-  &:last-child {
-    border-width: 0;
-    padding-bottom: 50px;
-  }
-`;
-
-const LinkContainer = styled.div`
-  flex: 3;
-  align-self: center;
-`;
-
-const LinkContainerInner = styled.div`
-  margin-bottom: 2px;
-  ${(props) =>
-    props.right &&
-    css`
-      text-align: right;
-    `}
-`;
-
-const ImageContainer = styled.div`
-  flex: 1;
-  text-align: center;
-`;
-
-const SecondaryHeadlineImage = styled.img`
-  height: 80px;
-  width: 80px;
-`;
-
-const SecondaryHeadlineAuthor = styled.p`
-  color: lightseagreen;
-  font-weight: bold;
-  margin: 0;
-  padding: 0;
-  font-size: 12px;
-  ${(props) =>
-    props.right &&
-    css`
-      text-align: right;
-    `}
-`;
-
-const SecondaryHeadlinePublished = styled.p`
-  font-size: 10px;
-  /* font-weight: bold; */
-  margin: 0;
-  padding: 0;
-  /* color: grey; */
-  ${(props) =>
-    props.right &&
-    css`
-      text-align: right;
-    `}
-`;
-
-// === end of secondary news items styling ===
 
 // === SideBar styling ===
 const SideBar = styled.div`
@@ -298,94 +210,12 @@ class LandingPage extends React.Component {
               title="The Next Web - Top Headlines"
               handleClick={this.handleSaveItem}
             />
-            {/* <NewsSourceSecondContainer>
-              <Title style={{ marginLeft: 0 }}>
-                The Next Web - Top Headlines
-              </Title>
-              {newsSourceSecond.map((theNextWeb) => (
-                <StyledListItem key={theNextWeb.description}>
-                  <ImageContainer>
-                    <SecondaryHeadlineImage
-                      src={
-                        theNextWeb.urlToImage
-                          ? theNextWeb.urlToImage
-                          : imagePlaceholder
-                      }
-                    />
-                  </ImageContainer>
-                  <LinkContainer>
-                    <LinkContainerInner>
-                      <ModH3 as="a" href={theNextWeb.url} target="_blank">
-                        {theNextWeb.title}
-                      </ModH3>
-                    </LinkContainerInner>
-                    <SecondaryHeadlineAuthor>
-                      Author: {theNextWeb.author}
-                    </SecondaryHeadlineAuthor>
-                    <SecondaryHeadlinePublished>
-                      Published: {moment(theNextWeb.publishedAt).fromNow()}
-                    </SecondaryHeadlinePublished>
-                  </LinkContainer>
-                  <ButtonContainer>
-                    <Button
-                      small
-                      onClick={() => this.handleSaveItem(theNextWeb)}
-                    >
-                      Save
-                    </Button>
-                  </ButtonContainer>
-                </StyledListItem>
-              ))}
-            </NewsSourceSecondContainer> */}
-            <NewsSourceThirdContainer>
-              <Title right>National Geographic - Top Headlines</Title>
-              <div>
-                <ul>
-                  {newsSourceThird.map((nationalGeographic) => (
-                    <StyledListItem key={nationalGeographic.title}>
-                      <ButtonContainer>
-                        <Button
-                          small
-                          onClick={() =>
-                            this.handleSaveItem(nationalGeographic)
-                          }
-                        >
-                          Save
-                        </Button>
-                      </ButtonContainer>
-                      <LinkContainer>
-                        <LinkContainerInner right>
-                          <ModH3
-                            as="a"
-                            href={nationalGeographic.url}
-                            target="_blank"
-                          >
-                            {nationalGeographic.title}
-                          </ModH3>
-                        </LinkContainerInner>
-                        <SecondaryHeadlineAuthor right>
-                          Author: {nationalGeographic.author}
-                        </SecondaryHeadlineAuthor>
-                        <SecondaryHeadlinePublished right>
-                          Published:{" "}
-                          {moment(nationalGeographic.publishedAt).fromNow()}
-                        </SecondaryHeadlinePublished>
-                        {/* <div>{nationalGeographic.source.id}</div> */}
-                      </LinkContainer>
-                      <ImageContainer>
-                        <SecondaryHeadlineImage
-                          src={
-                            nationalGeographic.urlToImage
-                              ? nationalGeographic.urlToImage
-                              : imagePlaceholder
-                          }
-                        />
-                      </ImageContainer>
-                    </StyledListItem>
-                  ))}
-                </ul>
-              </div>
-            </NewsSourceThirdContainer>
+            <LandingPageNewsItem
+              data={newsSourceThird}
+              key={newsSourceSecond.url}
+              title="National Geographic - Top Headlines"
+              handleClick={this.handleSaveItem}
+            />
           </Container>
           <SideBar>
             <H3>
@@ -409,9 +239,9 @@ class LandingPage extends React.Component {
                         target="_blank"
                       >
                         {topNewsItem.title}
-                        {/* <SourceContainer>
+                        <SourceContainer>
                           Source: {topNewsItem.source.name}
-                        </SourceContainer> */}
+                        </SourceContainer>
                       </TopNewsTitle>
                     </div>
 

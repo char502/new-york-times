@@ -1,7 +1,7 @@
 import React from "react";
-import styled, { css } from "styled-components/macro";
+import styled from "styled-components/macro";
 import { Title } from "../components/Typography";
-import { H1, H3, ModH3 } from "../components/Typography";
+import { ModH3 } from "../components/Typography";
 import moment from "moment";
 import imagePlaceholder from "../Images/imagePlaceholder.png";
 import { Button } from "../components/Button";
@@ -33,7 +33,7 @@ const ImageContainer = styled.div`
   text-align: center;
 `;
 
-const SecondaryHeadlineImage = styled.img`
+const HeadlineImage = styled.img`
   height: 80px;
   width: 80px;
 `;
@@ -45,37 +45,22 @@ const LinkContainer = styled.div`
 
 const LinkContainerInner = styled.div`
   margin-bottom: 2px;
-  ${(props) =>
-    props.right &&
-    css`
-      text-align: right;
-    `}
 `;
 
-const SecondaryHeadlineAuthor = styled.p`
+const HeadlineAuthor = styled.p`
   color: lightseagreen;
   font-weight: bold;
   margin: 0;
   padding: 0;
   font-size: 12px;
-  ${(props) =>
-    props.right &&
-    css`
-      text-align: right;
-    `}
 `;
 
-const SecondaryHeadlinePublished = styled.p`
+const HeadlinePublished = styled.p`
   font-size: 10px;
   /* font-weight: bold; */
   margin: 0;
   padding: 0;
   /* color: grey; */
-  ${(props) =>
-    props.right &&
-    css`
-      text-align: right;
-    `}
 `;
 
 const ButtonContainer = styled.div`
@@ -89,7 +74,7 @@ const NewsSourceContainer = (props) => (
     {props.data.map((newsSourceItem) => (
       <StyledListItem key={props.url}>
         <ImageContainer>
-          <SecondaryHeadlineImage
+          <HeadlineImage
             src={
               newsSourceItem.urlToImage
                 ? newsSourceItem.urlToImage
@@ -103,12 +88,10 @@ const NewsSourceContainer = (props) => (
               {newsSourceItem.title}
             </ModH3>
           </LinkContainerInner>
-          <SecondaryHeadlineAuthor>
-            Author: {newsSourceItem.author}
-          </SecondaryHeadlineAuthor>
-          <SecondaryHeadlinePublished>
+          <HeadlineAuthor>Author: {newsSourceItem.author}</HeadlineAuthor>
+          <HeadlinePublished>
             Published: {moment(newsSourceItem.publishedAt).fromNow()}
-          </SecondaryHeadlinePublished>
+          </HeadlinePublished>
         </LinkContainer>
         <ButtonContainer>
           <Button small onClick={() => props.handleClick(newsSourceItem)}>
