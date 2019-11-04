@@ -1,7 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import styled from "styled-components/macro";
-import queryString from "query-string";
+// import queryString from "query-string";
 import { Link } from "react-router-dom";
 import { AltButton } from "../../Button";
 import newspaper from "../../../Images/newspaper7.jpg";
@@ -9,7 +9,7 @@ import newspaper from "../../../Images/newspaper7.jpg";
 import magGlass2 from "../../../Images/magGlass2.png";
 
 // Components
-import NavFilterBar from "../NavFilterBar/NavFilterBar";
+// import NavFilterBar from "../NavFilterBar/NavFilterBar";
 
 // ======== Styled Components ========
 const NavTopLineContainer = styled.div`
@@ -45,12 +45,14 @@ const Form = styled.form`
   position: relative;
   width: 250px;
   height: 40px;
+  /* background-color: blue; */
 `;
 
 const InputWrapper = styled.div`
   position: relative;
   overflow: hidden;
   height: 100%;
+  /* background-color: blue; */
 `;
 
 const easing = "cubic-bezier(0.77, 0, 0.175, 1)";
@@ -60,18 +62,19 @@ const Input = styled.input`
   font-family: "Roboto", sans-serif;
   color: black;
   width: 85%;
-  left: 15%;
-  top: 20%;
+  left: 20%;
+  top: 15%;
   border: none;
   outline: none;
   height: 27px;
   transform: ${(props) =>
-    props.isshown ? "translatex(0)" : "translatex(205px)"};
+    props.isshown ? "translatex(0)" : "translatex(220px)"};
   /* transform property
   translate function */
   /* transition: 5000ms ${easing}; */
   /* transition: 0.5s ease; */
   font-size: ${(props) => (props.isshown ? "12px" : "transparent")};
+  /* background-color: green; */
 `;
 
 // const easing = "cubic-bezier(0.77, 0, 0.175, 1)";
@@ -80,7 +83,7 @@ const StyledIcon = styled.div`
   top: 30%;
   position: absolute;
   transform: ${(props) =>
-    props.isshown ? "translatex(10px)" : "translatex(205px)"};
+    props.isshown ? "translatex(15px)" : "translatex(220px)"};
     /* transition: 5000ms ${easing}; */
     /* transition: 0.5s ease; */
   /* left: ${(props) => (props.isshown ? "2%" : "90%")}; */
@@ -112,12 +115,12 @@ class NavTopLine extends React.Component {
     toggleInput: false
   };
 
-  componentDidMount() {
-    let searchQuery = queryString.parse(this.props.location.search);
-    if (searchQuery.searchTerm) {
-      this.setState({ searchTerm: searchQuery.searchTerm, toggleInput: true });
-    }
-  }
+  // componentDidMount() {
+  //   let searchQuery = queryString.parse(this.props.location.search);
+  //   if (searchQuery.searchTerm) {
+  //     this.setState({ searchTerm: searchQuery.searchTerm, toggleInput: true });
+  //   }
+  // }
 
   // use this to target and manage focus on the search box
   // after the click animation exposes it
@@ -128,7 +131,7 @@ class NavTopLine extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.history.push(`/search?searchTerm=${this.state.searchTerm}`);
-    // this.setState({ searchTerm: "" });
+    this.setState({ searchTerm: "" });
   };
 
   handleToggle = () => {
@@ -162,7 +165,7 @@ class NavTopLine extends React.Component {
                 {/* <div style={{ color: toggleInput ? "red" : "black" }} /> */}
               </InputWrapper>
             </Form>
-            <NavFilterBar />
+            {/* <NavFilterBar /> */}
           </NavSearchInputsContainer>
           <div style={{ marginRight: "5px" }}>
             <AltButton as={Link} to="/savedNews">

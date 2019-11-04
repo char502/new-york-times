@@ -192,7 +192,6 @@ class LandingPage extends React.Component {
       topTenSaved
     } = this.state;
 
-    console.log(topTenSaved);
     return (
       <LandingPageBodyContainer>
         <LandingPageBodyContainerInner>
@@ -212,7 +211,7 @@ class LandingPage extends React.Component {
             />
             <LandingPageNewsItem
               data={newsSourceThird}
-              key={newsSourceSecond.url}
+              key={newsSourceSecond.title}
               title="National Geographic - Top Headlines"
               handleClick={this.handleSaveItem}
             />

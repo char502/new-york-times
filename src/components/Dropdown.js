@@ -35,6 +35,7 @@ const styles = {
     padding: "0 16px",
     borderRadius: "4px",
     outline: "none",
+    backgroundColor: "white",
     border: "0.5px solid rgba(0, 0, 0, 0.2)",
     position: "relative"
   }),
@@ -67,7 +68,9 @@ const styles = {
     fontFamily: "Roboto Condensed",
     backgroundColor: "white",
     fontSize: "12px",
-    color: "black"
+    color: "black",
+    position: "absolute",
+    top: "15px"
   }),
   placeholder: (base) => ({
     ...base,
@@ -87,7 +90,7 @@ export default ({ handleChange, filter }) => (
     getOptionLabel={(option) => `${option.name}`}
     getOptionValue={(option) => `${option.path}`}
     onChange={handleChange}
-    placeholder={"Select by filter source"}
+    placeholder={"Filter By Source"}
     styles={styles}
     clearValue={() => true}
     value={newsSources.filter(({ path }) => path === filter)}

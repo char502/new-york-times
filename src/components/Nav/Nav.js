@@ -5,6 +5,7 @@ import styled from "styled-components/macro";
 // components
 import NavTopLine from "./NavTopLine/NavTopLine";
 import NavBottomLine from "./NavBottomLine/NavBottomLine";
+import SearchAndFilter from "./NavSearchAndFilter/SearchAndFilter";
 
 // ======== Styled Components ========
 const NavBarContainer = styled.div`
@@ -25,6 +26,7 @@ const Nav = () => (
     <NavBarInner>
       <NavTopLine />
       <NavBottomLine />
+      <SearchAndFilter />
     </NavBarInner>
   </NavBarContainer>
 );
