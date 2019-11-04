@@ -18,7 +18,7 @@ const MainContainer = styled.div`
   /* border-bottom: 0.5px solid rgba(0, 0, 0, 0.2); */
 `;
 
-const Inner = styled.div`
+const Inner = styled.form`
   height: 100%;
   width: 100%;
   margin: 0 auto;
@@ -26,9 +26,12 @@ const Inner = styled.div`
   align-items: center;
 `;
 
-const SearchContainer = styled.form`
+const SearchContainer = styled.div`
   margin: 5px;
   padding-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const StyledInput = styled.input`
@@ -43,12 +46,12 @@ const StyledInput = styled.input`
   margin: 5px;
 `;
 
-const FilterContainer = styled.form`
+const FilterContainer = styled.div`
   /* height: 100%; */
   display: flex;
   flex-direction: row;
   margin: 10px;
-  /* background-color: lightgrey; */
+  background-color: lightgrey;
 `;
 
 // ===================================
@@ -71,21 +74,24 @@ class SearchAndFilter extends React.Component {
     this.setState({ searchTerm: e.target.value });
   };
 
-  handleInputSubmit = (e) => {
-    e.preventDefault();
-    this.props.history.push(`/search?searchTerm=${this.state.searchTerm}`);
-    this.setState({ searchTerm: "" });
-  };
+  // handleInputSubmit = (e) => {
+  //   e.preventDefault();
+  //   this.props.history.push(`/search?searchTerm=${this.state.searchTerm}`);
+  //   this.setState({ searchTerm: "" });
+  // };
 
   handleSubmit = (e) => {
     e.preventDefault();
-    let searchQuery = queryString.parse(this.props.location.search);
+    const searchQuery = queryString.parse(this.props.location.search);
+
     searchQuery.sources = this.state.filter;
+    searchQuery.searchTerm = this.state.searchTerm;
+
     const stringifiedSearchQuery = queryString.stringify(searchQuery);
-    console.log(stringifiedSearchQuery);
+    // console.log(stringifiedSearchQuery);
     this.props.history.push(`?${stringifiedSearchQuery}`);
 
-    this.setState({ filter: "" });
+    this.setState({ searchTerm: "", filter: "" });
   };
 
   handleClearFilter = (e) => {
@@ -131,51 +137,29 @@ class SearchAndFilter extends React.Component {
   render() {
     return this.props.location.pathname === "/search" ? (
       <MainContainer>
-        <SearchContainer onSubmit={this.handleInputSubmit}>
-          <label>
-            <p>You are searching for:</p>
+        {/* =================================== */}
+        <Inner onSubmit={this.handleSubmit}>
+          <SearchContainer>
+            <label>You are searching for:</label>
             <StyledInput
               ref={this.newInputRef}
               value={this.state.searchTerm}
               onChange={this.handleInputchange}
             />
+          </SearchContainer>
+          <FilterContainer>
+            <label>Filter by news source </label>
+            <Dropdown
+              handleChange={this.handleChange}
+              filter={this.state.filter}
+            />
             <Button
               disabled={!this.state.searchTerm}
               style={{ margin: "0 auto" }}
-              onClick={this.handleInputSubmit}
+              onClick={this.handleSubmit}
             >
-              New Search
+              Search
             </Button>
-          </label>
-        </SearchContainer>
-        {/* =================================== */}
-        <Inner onSubmit={this.handleSubmit}>
-          <FilterContainer>
-            <label>
-              <p>Filter by news source</p>
-              <Dropdown
-                handleChange={this.handleChange}
-                filter={this.state.filter}
-              />
-              <div style={{ margin: "5px", display: "flex" }}>
-                {this.state.filter && (
-                  <Button
-                    style={{ marginLeft: "5px" }}
-                    onClick={this.handleSubmit}
-                  >
-                    Submit
-                  </Button>
-                )}
-                {this.state.filter && (
-                  <Button
-                    style={{ margin: "0", marginLeft: "5px", display: "flex" }}
-                    onClick={this.handleClearFilter}
-                  >
-                    Clear Filter
-                  </Button>
-                )}
-              </div>
-            </label>
           </FilterContainer>
         </Inner>
       </MainContainer>

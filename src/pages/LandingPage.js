@@ -74,6 +74,7 @@ const ImageAndTitle = styled.div`
 const SavedImage = styled.img`
   height: 40px;
   width: 40px;
+  min-width: 40px;
 `;
 
 const TopNewsTitle = styled.div`
@@ -81,7 +82,6 @@ const TopNewsTitle = styled.div`
   color: black;
   text-decoration: none;
   cursor: pointer;
-  /* word-wrap: break-word; */
 `;
 
 const SourceContainer = styled.div`
