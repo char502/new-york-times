@@ -26,7 +26,7 @@ const Inner = styled.div`
   align-items: center;
 `;
 
-const SearchContainer = styled.div`
+const SearchContainer = styled.form`
   margin: 5px;
   padding-bottom: 10px;
 `;
@@ -43,7 +43,7 @@ const StyledInput = styled.input`
   margin: 5px;
 `;
 
-const FilterContainer = styled.div`
+const FilterContainer = styled.form`
   /* height: 100%; */
   display: flex;
   flex-direction: row;
