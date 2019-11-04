@@ -27,14 +27,8 @@ const Inner = styled.div`
 `;
 
 const SearchContainer = styled.div`
-  /* height: 100%; */
-  /* background-color: lightgrey; */
-  margin: 20px;
+  margin: 5px;
   padding-bottom: 10px;
-  /* padding-bottom: 40px; when filter buttons active*/
-  /* flex: 1; */
-  /* padding-bottom: ${(props) =>
-    props.filterActive ? "12px" : "transparent"}; */
 `;
 
 const StyledInput = styled.input`
@@ -53,7 +47,6 @@ const FilterContainer = styled.div`
   /* height: 100%; */
   display: flex;
   flex-direction: row;
-  /* flex: 1; */
   margin: 10px;
   /* background-color: lightgrey; */
 `;
@@ -73,10 +66,15 @@ class SearchAndFilter extends React.Component {
   };
 
   handleInputchange = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     // this.props.history.push(`/search?searchTerm=${this.state.searchTerm}`);
     this.setState({ searchTerm: e.target.value });
+  };
+
+  handleInputSubmit = (e) => {
+    e.preventDefault();
     this.props.history.push(`/search?searchTerm=${this.state.searchTerm}`);
+    this.setState({ searchTerm: "" });
   };
 
   handleSubmit = (e) => {
@@ -108,9 +106,8 @@ class SearchAndFilter extends React.Component {
       this.setState({
         searchTerm: searchQuery.searchTerm
       });
+      this.newInputRef.current.focus();
     }
-    console.log(this.inputRef);
-    // this.inputRef.current.focus();
 
     if (searchQuery.sources) {
       this.setState({
@@ -134,18 +131,25 @@ class SearchAndFilter extends React.Component {
   render() {
     return this.props.location.pathname === "/search" ? (
       <MainContainer>
+        <SearchContainer onSubmit={this.handleInputSubmit}>
+          <label>
+            <p>You are searching for:</p>
+            <StyledInput
+              ref={this.newInputRef}
+              value={this.state.searchTerm}
+              onChange={this.handleInputchange}
+            />
+            <Button
+              disabled={!this.state.searchTerm}
+              style={{ margin: "0 auto" }}
+              onClick={this.handleInputSubmit}
+            >
+              New Search
+            </Button>
+          </label>
+        </SearchContainer>
+        {/* =================================== */}
         <Inner onSubmit={this.handleSubmit}>
-          {/* =================================== */}
-          <SearchContainer>
-            <label>
-              <p>You are searching for:</p>
-              <StyledInput
-                ref={this.newInputRef}
-                value={this.state.searchTerm}
-                onChange={this.handleInputchange}
-              ></StyledInput>
-            </label>
-          </SearchContainer>
           <FilterContainer>
             <label>
               <p>Filter by news source</p>
@@ -174,16 +178,6 @@ class SearchAndFilter extends React.Component {
             </label>
           </FilterContainer>
         </Inner>
-
-        {/* <SearchContainer>
-          /* <label>
-            <p>You are searching for:</p>
-            <StyledInput
-              value={this.state.searchTerm}
-              onChange={this.handleInputchange}
-            ></StyledInput>
-          </label>
-        </SearchContainer> */}
       </MainContainer>
     ) : null;
   }
