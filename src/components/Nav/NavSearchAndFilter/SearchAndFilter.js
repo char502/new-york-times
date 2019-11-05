@@ -4,6 +4,7 @@ import queryString from "query-string";
 import styled from "styled-components/macro";
 import Dropdown from "../../Dropdown";
 import { Button } from "../../Button";
+import { H2 } from "../../Typography";
 
 // ======== Styled Components ========
 
@@ -11,47 +12,46 @@ const MainContainer = styled.div`
   width: 100%;
   height: 100%;
   margin: 0 auto;
-  display: flex;
+  padding-bottom: 30px;
+  /* display: flex; */
   /* flex-direction: column; */
   /* align-items: center; */
   background-color: WhiteSmoke;
   /* border-bottom: 0.5px solid rgba(0, 0, 0, 0.2); */
 `;
 
+const StyledTitle = styled.div`
+  margin: 20px 0 0 10px;
+  padding: 10px 0;
+  font-family: "Vidaloka", serif;
+`;
+
 const Inner = styled.form`
   height: 100%;
   width: 100%;
-  margin: 0 auto;
+  /* margin: 0 auto; */
   display: flex;
-  align-items: center;
-`;
-
-const SearchContainer = styled.div`
-  margin: 5px;
-  padding-bottom: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  /* align-items: center; */
+  justify-content: space-around;
+  /* margin-left: 50px; */
 `;
 
 const StyledInput = styled.input`
   height: 28px;
-  width: 210px;
+  width: 350px;
   padding-left: 25px;
   border-radius: 4px;
   font-family: Roboto Condensed;
+  font-weight: bold;
   font-size: 12px;
   border: 0.5px solid rgba(0, 0, 0, 0.2);
   outline: none;
-  margin: 5px;
+  /* margin: 5px; */
 `;
 
-const FilterContainer = styled.div`
-  /* height: 100%; */
+const FilterAndSearchContainer = styled.div`
   display: flex;
-  flex-direction: row;
   margin: 10px;
-  background-color: lightgrey;
 `;
 
 // ===================================
@@ -59,13 +59,13 @@ const FilterContainer = styled.div`
 class SearchAndFilter extends React.Component {
   state = {
     searchTerm: "",
-    filter: ""
+    filter: null
   };
 
   newInputRef = React.createRef();
 
   handleChange = (val) => {
-    this.setState({ filter: val.path });
+    this.setState({ filter: val ? val.path : null });
   };
 
   handleInputchange = (e) => {
@@ -73,12 +73,6 @@ class SearchAndFilter extends React.Component {
     // this.props.history.push(`/search?searchTerm=${this.state.searchTerm}`);
     this.setState({ searchTerm: e.target.value });
   };
-
-  // handleInputSubmit = (e) => {
-  //   e.preventDefault();
-  //   this.props.history.push(`/search?searchTerm=${this.state.searchTerm}`);
-  //   this.setState({ searchTerm: "" });
-  // };
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -88,7 +82,6 @@ class SearchAndFilter extends React.Component {
     searchQuery.searchTerm = this.state.searchTerm;
 
     const stringifiedSearchQuery = queryString.stringify(searchQuery);
-    // console.log(stringifiedSearchQuery);
     this.props.history.push(`?${stringifiedSearchQuery}`);
 
     this.setState({ searchTerm: "", filter: "" });
@@ -131,27 +124,27 @@ class SearchAndFilter extends React.Component {
         filter: searchQuery.sources,
         searchTerm: searchQuery.searchTerm
       });
-      //   this.props.history.push(`/search?searchTerm=${this.state.searchTerm}`);
     }
   }
   render() {
     return this.props.location.pathname === "/search" ? (
       <MainContainer>
         {/* =================================== */}
+        <StyledTitle>
+          <H2>Search and filter Options</H2>
+        </StyledTitle>
+
         <Inner onSubmit={this.handleSubmit}>
-          <SearchContainer>
-            <label>You are searching for:</label>
+          <FilterAndSearchContainer>
+            <Dropdown
+              handleChange={this.handleChange}
+              filter={this.state.filter}
+            />
             <StyledInput
               ref={this.newInputRef}
               value={this.state.searchTerm}
               onChange={this.handleInputchange}
-            />
-          </SearchContainer>
-          <FilterContainer>
-            <label>Filter by news source </label>
-            <Dropdown
-              handleChange={this.handleChange}
-              filter={this.state.filter}
+              /* placeholder="Enter Search....." */
             />
             <Button
               disabled={!this.state.searchTerm}
@@ -160,7 +153,7 @@ class SearchAndFilter extends React.Component {
             >
               Search
             </Button>
-          </FilterContainer>
+          </FilterAndSearchContainer>
         </Inner>
       </MainContainer>
     ) : null;

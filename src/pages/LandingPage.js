@@ -205,7 +205,7 @@ class LandingPage extends React.Component {
             </CarouselContainer>
             <LandingPageNewsItem
               data={newsSourceSecond}
-              key={newsSourceSecond.description}
+              key={newsSourceSecond.url}
               title="The Next Web - Top Headlines"
               handleClick={this.handleSaveItem}
             />

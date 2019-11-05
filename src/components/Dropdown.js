@@ -23,7 +23,13 @@ import newsSources from "../newsSources";
 const styles = {
   clearIndicator: (base) => ({
     ...base,
-    background: "red"
+    background: "grey",
+    position: "absolute",
+    right: "35px",
+    bottom: "3px",
+    width: "35px",
+    height: "30px",
+    backgroundColor: "transparent"
   }),
   control: (base) => ({
     // ...base,
@@ -35,13 +41,15 @@ const styles = {
     padding: "0 16px",
     borderRadius: "4px",
     outline: "none",
-    backgroundColor: "white",
+    backgroundColor: "lightGrey",
     border: "0.5px solid rgba(0, 0, 0, 0.2)",
     position: "relative"
   }),
   dropdownIndicator: (base) => ({
     ...base,
     textAlign: "center",
+    // backgroundColor: "darkGrey",
+    color: "darkGrey",
     width: "30px",
     height: "30px",
     padding: 0,
@@ -52,7 +60,7 @@ const styles = {
   }),
   indicatorSeparator: (base) => ({
     ...base,
-    backgroundColor: "lightgrey",
+    backgroundColor: "darkGrey",
     height: "20px",
     padding: 0,
     margin: 0,
@@ -68,6 +76,7 @@ const styles = {
     fontFamily: "Roboto Condensed",
     backgroundColor: "white",
     fontSize: "12px",
+    fontWeight: "bold",
     color: "black",
     position: "absolute",
     top: "15px"
@@ -75,6 +84,7 @@ const styles = {
   placeholder: (base) => ({
     ...base,
     fontSize: "12px",
+    fontWeight: "bold",
     position: "absolute",
     top: "15px",
     color: "black"
@@ -83,16 +93,17 @@ const styles = {
 
 const Dropdown = styled(Select)``;
 
-export default ({ handleChange, filter }) => (
+export default ({ handleClear, handleChange, filter }) => (
   <Dropdown
     options={newsSources}
-    /* isClearable */
+    isSearchable
+    isClearable
+    clearValue
     getOptionLabel={(option) => `${option.name}`}
     getOptionValue={(option) => `${option.path}`}
     onChange={handleChange}
-    placeholder={"Filter By Source"}
+    placeholder={"Filter By Source (Optional)"}
     styles={styles}
-    clearValue={() => true}
     value={newsSources.filter(({ path }) => path === filter)}
   />
 );

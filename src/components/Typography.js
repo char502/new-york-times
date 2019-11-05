@@ -8,6 +8,14 @@ export const H1 = styled.h1`
   /* margin-bottom: 32px; */
 `;
 
+export const H2 = styled.h2`
+  font-family: "Vidaloka", serif;
+  font-size: 32px;
+  color: black;
+  margin: 0;
+  /* margin-bottom: 32px; */
+`;
+
 export const H3 = styled.h3`
   font-size: 24px;
   color: black;
