@@ -198,7 +198,6 @@ class LandingPage extends React.Component {
       topTenSaved
     } = this.state;
 
-    console.log(topTenSaved);
     return (
       <LandingPageBodyContainer>
         <LandingPageBodyContainerInner>
@@ -227,9 +226,7 @@ class LandingPage extends React.Component {
             <H3>
               <StyledHeader>Top 10 Saved News Articles</StyledHeader>
             </H3>
-            {topTenSaved.length === 0 ? (
-              <NoNewsItems>No News Items Saved</NoNewsItems>
-            ) : (
+            {topTenSaved.length > 0 ? (
               topTenSaved.map((topNewsItem, index) => {
                 return (
                   <TopNewsContainer key={topNewsItem.title}>
@@ -267,6 +264,8 @@ class LandingPage extends React.Component {
                   </TopNewsContainer>
                 );
               })
+            ) : (
+              <NoNewsItems>No News Items Saved</NoNewsItems>
             )}
           </SideBar>
         </LandingPageBodyContainerInner>

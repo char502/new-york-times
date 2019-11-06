@@ -115,13 +115,6 @@ class NavTopLine extends React.Component {
     toggleInput: false
   };
 
-  // componentDidMount() {
-  //   let searchQuery = queryString.parse(this.props.location.search);
-  //   if (searchQuery.searchTerm) {
-  //     this.setState({ searchTerm: searchQuery.searchTerm, toggleInput: true });
-  //   }
-  // }
-
   // use this to target and manage focus on the search box
   // after the click animation exposes it
   inputRef = React.createRef();
@@ -131,7 +124,8 @@ class NavTopLine extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.history.push(`/search?searchTerm=${this.state.searchTerm}`);
-    this.setState({ searchTerm: "" });
+    this.setState({ searchTerm: "", toggleInput: false });
+    this.inputRef.current.blur();
   };
 
   handleToggle = () => {
@@ -141,6 +135,7 @@ class NavTopLine extends React.Component {
 
   render() {
     const { toggleInput } = this.state;
+    console.log(this.props.history.location.search);
     return (
       <NavTopLineContainer>
         <NavTopLineContainerInner>
@@ -150,21 +145,24 @@ class NavTopLine extends React.Component {
             </HomeButton>
           </TitleContainer>
           <NavSearchInputsContainer>
-            <Form onSubmit={this.handleSubmit}>
-              <InputWrapper>
-                <StyledIcon onClick={this.handleToggle} isshown={toggleInput}>
-                  <MagGlass src={magGlass2} />
-                </StyledIcon>
-                <Input
-                  value={this.state.searchTerm}
-                  onChange={this.handleChange}
-                  placeholder={"Enter Search"}
-                  isshown={toggleInput}
-                  ref={this.inputRef}
-                />
-                {/* <div style={{ color: toggleInput ? "red" : "black" }} /> */}
-              </InputWrapper>
-            </Form>
+            {this.props.location.search === "" ? (
+              <Form onSubmit={this.handleSubmit}>
+                <InputWrapper>
+                  <StyledIcon onClick={this.handleToggle} isshown={toggleInput}>
+                    <MagGlass src={magGlass2} />
+                  </StyledIcon>
+                  <Input
+                    value={this.state.searchTerm}
+                    onChange={this.handleChange}
+                    placeholder={"Enter Search"}
+                    isshown={toggleInput}
+                    ref={this.inputRef}
+                  />
+                  {/* <div style={{ color: toggleInput ? "red" : "black" }} /> */}
+                </InputWrapper>
+              </Form>
+            ) : null}
+
             {/* <NavFilterBar /> */}
           </NavSearchInputsContainer>
           <div style={{ marginRight: "5px" }}>

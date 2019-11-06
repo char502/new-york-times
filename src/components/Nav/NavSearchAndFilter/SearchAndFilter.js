@@ -1,11 +1,13 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter /* Redirect */ } from "react-router-dom";
+
 import queryString from "query-string";
 import styled from "styled-components/macro";
 import Dropdown from "../../Dropdown";
 import { SearchAndFilterButton } from "../../Button";
 import { H2 } from "../../Typography";
 import magGlass2 from "../../../Images/magGlass2.png";
+// import FormErrors from "../../../FormErrors";
 
 // ======== Styled Components ========
 
@@ -73,8 +75,9 @@ const StyledInput = styled.input`
 `;
 
 const StyledIcon = styled.div`
-  width: 30px;
   height: 31px;
+  width: 30px;
+
   cursor: pointer;
   margin: 0;
   padding: 0;
@@ -100,9 +103,10 @@ class SearchAndFilter extends React.Component {
   state = {
     searchTerm: "",
     filter: null
+    // formErrors: { searchTerm: "" },
+    // searchTermValid: false,
+    // formValid: false
   };
-
-  newInputRef = React.createRef();
 
   handleChange = (val) => {
     this.setState({ filter: val ? val.path : null });
@@ -112,9 +116,42 @@ class SearchAndFilter extends React.Component {
     this.setState({ searchTerm: e.target.value });
   };
 
+  // validateField = (fieldName, value) => {
+  //   let fieldValidationErrors = this.state.formErrors;
+  //   let searchTermValid = this.state.searchTermValid;
+
+  //   switch (fieldName) {
+  //     case "searchTerm":
+  //       searchTermValid = value.length === "";
+  //       fieldValidationErrors.searchTerm = searchTermValid
+  //         ? ""
+  //         : " please enter search term";
+  //       break;
+  //     default:
+  //       break;
+  //   }
+  //   this.setState(
+  //     {
+  //       formErrors: fieldValidationErrors,
+  //       searchTermValid: searchTermValid
+  //     },
+  //     this.validateForm
+  //   );
+  // };
+
+  // validateForm() {
+  //   this.setState({ formValid: this.state.searchTermValid });
+  // }
+
   handleSubmit = (e) => {
     e.preventDefault();
     const searchQuery = queryString.parse(this.props.location.search);
+
+    // const name = e.target.name;
+    // const value = e.target.value;
+    // this.setState({ [name]: value }, () => {
+    //   this.validateField(name, value);
+    // });
 
     searchQuery.sources = this.state.filter;
     searchQuery.searchTerm = this.state.searchTerm;
@@ -143,7 +180,6 @@ class SearchAndFilter extends React.Component {
       this.setState({
         searchTerm: searchQuery.searchTerm
       });
-      this.newInputRef.current.focus();
     }
 
     if (searchQuery.sources) {
@@ -165,6 +201,7 @@ class SearchAndFilter extends React.Component {
     }
   }
   render() {
+    // console.log(this.props.location);
     return this.props.location.pathname === "/search" ? (
       <MainContainer>
         {/* =================================== */}
@@ -179,14 +216,25 @@ class SearchAndFilter extends React.Component {
               filter={this.state.filter}
             />
             <StyledInput
-              ref={this.newInputRef}
+              type="text"
+              name="searchInput"
               value={this.state.searchTerm}
               onChange={this.handleInputchange}
+              placeholder="Enter Search......"
+              autoFocus
+              required
             />
-            <StyledIcon as={SearchAndFilterButton} onClick={this.handleSubmit}>
+            <StyledIcon
+              as={SearchAndFilterButton}
+              onClick={this.handleSubmit}
+              /* disabled={!this.state.formValid} */
+            >
               <MagGlass src={magGlass2} />
             </StyledIcon>
           </FilterAndSearchContainer>
+          {/* <div className="panel panel-default">
+            <FormErrors formErrors={this.state.formErrors} />
+          </div> */}
         </Inner>
       </MainContainer>
     ) : null;
@@ -194,3 +242,59 @@ class SearchAndFilter extends React.Component {
 }
 
 export default withRouter(SearchAndFilter);
+
+// //we need to extract specific properties in Constraint Validation API using this code snippet
+// reduceFormValues = formElements => {
+//   const arrElements = Array.prototype.slice.call(formElements); //we convert elements/inputs into an array found inside form element
+//   //we need to extract specific properties in Constraint Validation API using this code snippet
+//   const formValues = arrElements
+//     .filter(elem => elem.name.length > 0)
+//     .map(x => {
+//       const { typeMismatch } = x.validity;
+//       const { name, type, value } = x;
+//       return {
+//         name,
+//         type,
+//         typeMismatch, //we use typeMismatch when format is incorrect(e.g. incorrect email)
+//         value,
+//         valid: x.checkValidity()
+//       };
+//     })
+//     .reduce((acc, currVal) => { //then we finally use reduce, ready to put it in our state
+//       const { value, valid, typeMismatch } = currVal;
+//       const {
+//         fieldName,
+//         requiredTxt,
+//         formatErrorTxt
+//       } = this.state[currVal.name]; //get the rest of properties inside the state object
+//       //we'll need to map these properties back to state so we use reducer...
+//       acc[currVal.name] = {
+//         value,
+//         valid,
+//         typeMismatch,
+//         fieldName,
+//         requiredTxt,
+//         formatErrorTxt
+//       };
+//       return acc;
+//     }, {});
+//   return formValues;
+// }
+// checkAllFieldsValid = (formValues) => {
+//   return !Object.keys(formValues)
+//     .map(x => formValues[x])
+//     .some(field => !field.valid);
+// };
+// onSubmit = e => {
+//   e.preventDefault();
+//   const form = e.target;
+//   const formValues = this.reduceFormValues(form.elements);
+//   const allFieldsValid = this.checkAllFieldsValid(formValues);
+
+//   //note: put ajax calls here to persist the form inputs in the database.
+//   //END
+//   this.setState({ ...formValues, allFieldsValid }); //we set the state based on the extracted values from Constraint Validation API
+// };
+// //END
+// this.setState({ ...formValues, allFieldsValid }); //we set the state based on the extracted values from Constraint Validation API
+// };

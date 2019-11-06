@@ -30,7 +30,7 @@ class App extends React.Component {
               <Nav />
               <Switch>
                 <Route exact path="/" component={LandingPage} />
-                {newsSources.map(route => (
+                {newsSources.map((route) => (
                   <Route
                     key={route.name}
                     path={`/${route.path}`}

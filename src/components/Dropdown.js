@@ -40,7 +40,8 @@ const styles = {
     fontSize: "12px",
     color: "black",
     height: "30px",
-    width: "190px",
+    width: "180px",
+    // width: "190px",
     // width: "auto",
     padding: "0 8px 0 4px",
     borderRadius: "4px",
@@ -83,7 +84,8 @@ const styles = {
     color: "black",
     position: "absolute",
     top: "15px",
-    width: "190px"
+    width: "180px"
+    // width: "190px"
     // width: "auto"
   }),
   placeholder: (base) => ({
@@ -114,7 +116,7 @@ export default ({ handleChange, filter }) => (
       getOptionValue={(option) => `${option.path}`}
       onChange={handleChange}
       /* placeholder={"News Source Filter (Optional)"} */
-      placeholder={"All"}
+      placeholder={"All Sources"}
       styles={styles}
       value={newsSources.filter(({ path }) => path === filter)}
       menuPlacement="auto"
