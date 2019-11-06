@@ -94,6 +94,12 @@ const ButtonContainer = styled.div`
   align-items: center; */
 `;
 
+const NoNewsItems = styled.div`
+  padding: 5px;
+  margin: 10px;
+  background-color: lightgray;
+`;
+
 // === End of SideBar styling ===
 
 // ===================================
@@ -222,7 +228,7 @@ class LandingPage extends React.Component {
               <StyledHeader>Top 10 Saved News Articles</StyledHeader>
             </H3>
             {topTenSaved.length === 0 ? (
-              <div>No News Items Saved</div>
+              <NoNewsItems>No News Items Saved</NoNewsItems>
             ) : (
               topTenSaved.map((topNewsItem, index) => {
                 return (
