@@ -12,17 +12,12 @@ export const Button = styled.button`
   border-radius: 4px;
   height: 30px;
   width: auto;
-  /* font-weight: bold; */
-  /* height: 30px;
-  width: 30px; */
-
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 0 16px;
   text-decoration: none;
   font-size: 12px;
-
   ${(props) =>
     props.small &&
     css`
@@ -55,6 +50,13 @@ export const AltButton = styled(Button)`
   &:hover {
     background-color: white;
     color: black;
+  }
+`;
+
+export const SearchAndFilterButton = styled(Button)`
+  &:hover {
+    background-color: white;
+    /* color: white; */
   }
 `;
 

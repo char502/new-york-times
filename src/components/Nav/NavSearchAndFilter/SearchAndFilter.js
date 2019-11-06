@@ -3,8 +3,9 @@ import { withRouter } from "react-router-dom";
 import queryString from "query-string";
 import styled from "styled-components/macro";
 import Dropdown from "../../Dropdown";
-import { Button } from "../../Button";
+import { SearchAndFilterButton } from "../../Button";
 import { H2 } from "../../Typography";
+import magGlass2 from "../../../Images/magGlass2.png";
 
 // ======== Styled Components ========
 
@@ -13,10 +14,10 @@ const MainContainer = styled.div`
   height: 100%;
   margin: 0 auto;
   padding-bottom: 30px;
+  background-color: WhiteSmoke;
   /* display: flex; */
   /* flex-direction: column; */
   /* align-items: center; */
-  background-color: WhiteSmoke;
   /* border-bottom: 0.5px solid rgba(0, 0, 0, 0.2); */
 `;
 
@@ -26,13 +27,34 @@ const StyledTitle = styled.div`
   font-family: "Vidaloka", serif;
 `;
 
+// const FilterAndSearchForm = styled.form`
+//   height: 100%;
+//   width: 100%;
+//   display: flex;
+//   justify-content: center;
+//   margin: 10px;
+//   /* margin: 0 auto; */
+//   /* align-items: center; */
+//   /* margin-left: 50px; */
+// `;
+
+// const FilterAndSearchContainer = styled.div`
+//   display: flex;
+//   margin: 10px;
+// `;
+
+const FilterAndSearchContainer = styled.div`
+  display: flex;
+  margin: 10px;
+`;
+
 const Inner = styled.form`
   height: 100%;
   width: 100%;
-  /* margin: 0 auto; */
   display: flex;
-  /* align-items: center; */
   justify-content: space-around;
+  /* margin: 0 auto; */
+  /* align-items: center; */
   /* margin-left: 50px; */
 `;
 
@@ -40,18 +62,36 @@ const StyledInput = styled.input`
   height: 28px;
   width: 350px;
   padding-left: 25px;
-  border-radius: 4px;
+  border-radius: 4px 0 0 4px;
   font-family: Roboto Condensed;
   font-weight: bold;
   font-size: 12px;
   border: 0.5px solid rgba(0, 0, 0, 0.2);
+  border-right: 0;
   outline: none;
   /* margin: 5px; */
 `;
 
-const FilterAndSearchContainer = styled.div`
-  display: flex;
-  margin: 10px;
+const StyledIcon = styled.div`
+  width: 30px;
+  height: 31px;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+  border: 0.5px solid rgba(0, 0, 0, 0.2);
+  border-left: 0;
+  /* outline: none; */
+  border-radius: 0 4px 4px 0;
+`;
+
+const MagGlass = styled.img`
+  width: 20px;
+  height: 20px;
+  background-color: transparent;
+  /* border: 0.5px solid rgba(0, 0, 0, 0.2); */
+  border-radius: 4px;
+  outline: none;
+  /* z-index: -1; */
 `;
 
 // ===================================
@@ -69,8 +109,6 @@ class SearchAndFilter extends React.Component {
   };
 
   handleInputchange = (e) => {
-    // e.preventDefault();
-    // this.props.history.push(`/search?searchTerm=${this.state.searchTerm}`);
     this.setState({ searchTerm: e.target.value });
   };
 
@@ -131,7 +169,7 @@ class SearchAndFilter extends React.Component {
       <MainContainer>
         {/* =================================== */}
         <StyledTitle>
-          <H2>Search and filter Options</H2>
+          <H2>Search and Filter Options</H2>
         </StyledTitle>
 
         <Inner onSubmit={this.handleSubmit}>
@@ -144,15 +182,10 @@ class SearchAndFilter extends React.Component {
               ref={this.newInputRef}
               value={this.state.searchTerm}
               onChange={this.handleInputchange}
-              /* placeholder="Enter Search....." */
             />
-            <Button
-              disabled={!this.state.searchTerm}
-              style={{ margin: "0 auto" }}
-              onClick={this.handleSubmit}
-            >
-              Search
-            </Button>
+            <StyledIcon as={SearchAndFilterButton} onClick={this.handleSubmit}>
+              <MagGlass src={magGlass2} />
+            </StyledIcon>
           </FilterAndSearchContainer>
         </Inner>
       </MainContainer>

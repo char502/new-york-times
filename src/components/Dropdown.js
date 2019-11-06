@@ -23,7 +23,7 @@ import newsSources from "../newsSources";
 const styles = {
   clearIndicator: (base) => ({
     ...base,
-    background: "grey",
+    color: "darkGrey",
     position: "absolute",
     right: "35px",
     bottom: "3px",
@@ -37,8 +37,8 @@ const styles = {
     fontSize: "12px",
     color: "black",
     height: "30px",
-    width: "180px",
-    padding: "0 16px",
+    width: "190px",
+    padding: "0 8px 0 4px",
     borderRadius: "4px",
     outline: "none",
     backgroundColor: "lightGrey",
@@ -48,7 +48,6 @@ const styles = {
   dropdownIndicator: (base) => ({
     ...base,
     textAlign: "center",
-    // backgroundColor: "darkGrey",
     color: "darkGrey",
     width: "30px",
     height: "30px",
@@ -79,7 +78,9 @@ const styles = {
     fontWeight: "bold",
     color: "black",
     position: "absolute",
-    top: "15px"
+    top: "15px",
+    width: "190px"
+    // width: "auto"
   }),
   placeholder: (base) => ({
     ...base,
@@ -88,12 +89,17 @@ const styles = {
     position: "absolute",
     top: "15px",
     color: "black"
+  }),
+  singleValue: (base) => ({
+    ...base,
+    color: "black",
+    fontWeight: "bold"
   })
 };
 
 const Dropdown = styled(Select)``;
 
-export default ({ handleClear, handleChange, filter }) => (
+export default ({ handleChange, filter }) => (
   <Dropdown
     options={newsSources}
     isSearchable
@@ -102,7 +108,8 @@ export default ({ handleClear, handleChange, filter }) => (
     getOptionLabel={(option) => `${option.name}`}
     getOptionValue={(option) => `${option.path}`}
     onChange={handleChange}
-    placeholder={"Filter By Source (Optional)"}
+    /* placeholder={"News Source Filter (Optional)"} */
+    placeholder={"All"}
     styles={styles}
     value={newsSources.filter(({ path }) => path === filter)}
   />

@@ -87,7 +87,7 @@ const StyledIcon = styled.div`
     /* transition: 5000ms ${easing}; */
     /* transition: 0.5s ease; */
   /* left: ${(props) => (props.isshown ? "2%" : "90%")}; */
-  
+  cursor: pointer;
 `;
 
 const MagGlass = styled.img`
