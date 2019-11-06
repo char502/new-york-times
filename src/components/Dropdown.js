@@ -21,6 +21,9 @@ import newsSources from "../newsSources";
 // };
 
 const styles = {
+  container: (base) => ({
+    flex: 1
+  }),
   clearIndicator: (base) => ({
     ...base,
     color: "darkGrey",
@@ -38,6 +41,7 @@ const styles = {
     color: "black",
     height: "30px",
     width: "190px",
+    // width: "auto",
     padding: "0 8px 0 4px",
     borderRadius: "4px",
     outline: "none",
@@ -100,17 +104,21 @@ const styles = {
 const Dropdown = styled(Select)``;
 
 export default ({ handleChange, filter }) => (
-  <Dropdown
-    options={newsSources}
-    isSearchable
-    isClearable
-    clearValue
-    getOptionLabel={(option) => `${option.name}`}
-    getOptionValue={(option) => `${option.path}`}
-    onChange={handleChange}
-    /* placeholder={"News Source Filter (Optional)"} */
-    placeholder={"All"}
-    styles={styles}
-    value={newsSources.filter(({ path }) => path === filter)}
-  />
+  <div style={{ width: "auto" }}>
+    <Dropdown
+      options={newsSources}
+      isSearchable
+      isClearable
+      clearValue
+      getOptionLabel={(option) => `${option.name}`}
+      getOptionValue={(option) => `${option.path}`}
+      onChange={handleChange}
+      /* placeholder={"News Source Filter (Optional)"} */
+      placeholder={"All"}
+      styles={styles}
+      value={newsSources.filter(({ path }) => path === filter)}
+      menuPlacement="auto"
+      menuPosition="fixed"
+    />
+  </div>
 );
