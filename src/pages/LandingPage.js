@@ -192,6 +192,7 @@ class LandingPage extends React.Component {
       topTenSaved
     } = this.state;
 
+    console.log(topTenSaved);
     return (
       <LandingPageBodyContainer>
         <LandingPageBodyContainerInner>
@@ -220,43 +221,47 @@ class LandingPage extends React.Component {
             <H3>
               <StyledHeader>Top 10 Saved News Articles</StyledHeader>
             </H3>
-            {topTenSaved.map((topNewsItem, index) => {
-              return (
-                <TopNewsContainer key={topNewsItem.title}>
-                  <ImageAndTitle>
-                    <div style={{ display: "flex" }}>
-                      <SavedImage
-                        src={
-                          topNewsItem.urlToImage
-                            ? topNewsItem.urlToImage
-                            : imagePlaceholder
-                        }
-                      />
-                      <TopNewsTitle
-                        as="a"
-                        href={topNewsItem.url}
-                        target="_blank"
-                      >
-                        {topNewsItem.title}
-                        <SourceContainer>
-                          Source: {topNewsItem.source.name}
-                        </SourceContainer>
-                      </TopNewsTitle>
-                    </div>
+            {topTenSaved.length === 0 ? (
+              <div>No News Items Saved</div>
+            ) : (
+              topTenSaved.map((topNewsItem, index) => {
+                return (
+                  <TopNewsContainer key={topNewsItem.title}>
+                    <ImageAndTitle>
+                      <div style={{ display: "flex" }}>
+                        <SavedImage
+                          src={
+                            topNewsItem.urlToImage
+                              ? topNewsItem.urlToImage
+                              : imagePlaceholder
+                          }
+                        />
+                        <TopNewsTitle
+                          as="a"
+                          href={topNewsItem.url}
+                          target="_blank"
+                        >
+                          {topNewsItem.title}
+                          <SourceContainer>
+                            Source: {topNewsItem.source.name}
+                          </SourceContainer>
+                        </TopNewsTitle>
+                      </div>
 
-                    <ButtonContainer>
-                      <Button
-                        style={{ color: "red", fontWeight: "bold" }}
-                        small
-                        onClick={() => this.handleRemoveItem(topNewsItem)}
-                      >
-                        x
-                      </Button>
-                    </ButtonContainer>
-                  </ImageAndTitle>
-                </TopNewsContainer>
-              );
-            })}
+                      <ButtonContainer>
+                        <Button
+                          style={{ color: "red", fontWeight: "bold" }}
+                          small
+                          onClick={() => this.handleRemoveItem(topNewsItem)}
+                        >
+                          x
+                        </Button>
+                      </ButtonContainer>
+                    </ImageAndTitle>
+                  </TopNewsContainer>
+                );
+              })
+            )}
           </SideBar>
         </LandingPageBodyContainerInner>
       </LandingPageBodyContainer>
