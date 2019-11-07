@@ -5,8 +5,8 @@ const FormErrors = ({ formErrors }) => (
     {Object.keys(formErrors).map((fieldName, i) => {
       if (formErrors[fieldName].length > 0) {
         return (
-          <p key={i}>
-            {fieldName} {formErrors[fieldName]}
+          <p key={i} style={{ color: "red" }}>
+            {formErrors[fieldName]}
           </p>
         );
       } else {

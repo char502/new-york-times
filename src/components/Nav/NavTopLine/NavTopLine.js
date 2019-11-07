@@ -75,6 +75,13 @@ const Input = styled.input`
   /* transition: 0.5s ease; */
   font-size: ${(props) => (props.isshown ? "12px" : "transparent")};
   /* background-color: green; */
+   /* &:invalid {
+    background-color: pink;
+  } */
+  &:form:invalid{
+    background-color: pink;
+  }
+  
 `;
 
 // const easing = "cubic-bezier(0.77, 0, 0.175, 1)";
@@ -119,7 +126,9 @@ class NavTopLine extends React.Component {
   // after the click animation exposes it
   inputRef = React.createRef();
 
-  handleChange = (e) => this.setState({ searchTerm: e.target.value });
+  handleChange = (e) => {
+    this.setState({ searchTerm: e.target.value });
+  };
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -148,16 +157,26 @@ class NavTopLine extends React.Component {
             {this.props.location.search === "" ? (
               <Form onSubmit={this.handleSubmit}>
                 <InputWrapper>
-                  <StyledIcon onClick={this.handleToggle} isshown={toggleInput}>
+                  <StyledIcon
+                    onClick={this.handleToggle}
+                    isshown={toggleInput}
+                    disabled={!this.state.formValid}
+                  >
                     <MagGlass src={magGlass2} />
                   </StyledIcon>
                   <Input
+                    name="searchTerm"
                     value={this.state.searchTerm}
                     onChange={this.handleChange}
                     placeholder={"Enter Search"}
                     isshown={toggleInput}
                     ref={this.inputRef}
+                    required
+                    data-error="Name is required"
+                    oninvalid="this.setCustomValidity('Please Enter valid email')"
+                    oninput="setCustomValidity('')"
                   />
+
                   {/* <div style={{ color: toggleInput ? "red" : "black" }} /> */}
                 </InputWrapper>
               </Form>
