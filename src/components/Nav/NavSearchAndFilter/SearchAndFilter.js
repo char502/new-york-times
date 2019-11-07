@@ -199,7 +199,7 @@ class SearchAndFilter extends React.Component {
                 onChange={this.handleInputchange}
                 placeholder="Enter Search......"
                 autoFocus
-                required
+                /* required */
               />
               <StyledIcon
                 as={SearchAndFilterButton}

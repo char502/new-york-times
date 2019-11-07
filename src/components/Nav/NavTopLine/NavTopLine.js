@@ -160,7 +160,7 @@ class NavTopLine extends React.Component {
                   <StyledIcon
                     onClick={this.handleToggle}
                     isshown={toggleInput}
-                    disabled={!this.state.formValid}
+                    /* disabled={!this.state.formValid} */
                   >
                     <MagGlass src={magGlass2} />
                   </StyledIcon>
@@ -171,10 +171,8 @@ class NavTopLine extends React.Component {
                     placeholder={"Enter Search"}
                     isshown={toggleInput}
                     ref={this.inputRef}
+                    /* disabled={this.state.searchTerm} */
                     required
-                    data-error="Name is required"
-                    oninvalid="this.setCustomValidity('Please Enter valid email')"
-                    oninput="setCustomValidity('')"
                   />
 
                   {/* <div style={{ color: toggleInput ? "red" : "black" }} /> */}
