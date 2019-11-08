@@ -132,9 +132,19 @@ class NavTopLine extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.history.push(`/search?searchTerm=${this.state.searchTerm}`);
-    this.setState({ searchTerm: "", toggleInput: false });
-    this.inputRef.current.blur();
+
+    const { searchTerm } = this.state;
+
+    if (!searchTerm) {
+      // if (this.props.location.search === "") {
+      console.log("search has not been entered");
+      this.props.history.push(`/search?searchTerm=${"Enter Search......"}`);
+      // this.setState({ searchTerm: "", toggleInput: false });
+    } else {
+      this.props.history.push(`/search?searchTerm=${this.state.searchTerm}`);
+      this.setState({ searchTerm: "", toggleInput: false });
+      this.inputRef.current.blur();
+    }
   };
 
   handleToggle = () => {
@@ -171,8 +181,7 @@ class NavTopLine extends React.Component {
                     placeholder={"Enter Search"}
                     isshown={toggleInput}
                     ref={this.inputRef}
-                    /* disabled={this.state.searchTerm} */
-                    required
+                    /* required */
                   />
 
                   {/* <div style={{ color: toggleInput ? "red" : "black" }} /> */}
