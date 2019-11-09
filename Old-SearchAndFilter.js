@@ -1,14 +1,13 @@
 import React from "react";
 import { withRouter /* Redirect */ } from "react-router-dom";
+
 import queryString from "query-string";
 import styled from "styled-components/macro";
 import Dropdown from "../../Dropdown";
 import { SearchAndFilterButton } from "../../Button";
 import { H2 } from "../../Typography";
 import magGlass2 from "../../../Images/magGlass2.png";
-// import FormErrors from "../../../FormErrors";
-// import FormValidator from "../../../FormValidator";
-// import Validator from "react-forms-validator";
+import FormErrors from "../../../FormErrors";
 
 // ======== Styled Components ========
 
@@ -75,68 +74,61 @@ const MagGlass = styled.img`
   /* z-index: -1; */
 `;
 
-const ErrorMsg = styled.div`
-  color: red;
-  margin: 5px 0;
-`;
-
 // ===================================
-
-const ValidationMessage = (props) => {
-  console.log(props);
-  if (!props.valid) {
-    return <ErrorMsg>{props.message}</ErrorMsg>;
-  }
-  return null;
-};
 
 class SearchAndFilter extends React.Component {
   state = {
     searchTerm: "",
     filter: null,
+    formErrors: { searchTerm: "" },
     searchTermValid: false,
-    formValid: false,
-    errorMsg: {}
+    formValid: false
+  };
+
+  validateField = (fieldName, value) => {
+    console.log(value);
+    console.log(fieldName);
+    let fieldValidationErrors = this.state.formErrors;
+    let searchTermValid = this.state.searchTermValid;
+
+    switch (fieldName) {
+      case "searchTerm":
+        searchTermValid = value !== "";
+        fieldValidationErrors.searchTerm = searchTermValid
+          ? ""
+          : "please enter search term";
+        break;
+      default:
+        break;
+    }
+    this.setState(
+      {
+        formErrors: fieldValidationErrors,
+        searchTermValid: searchTermValid
+      },
+      this.validateForm
+    );
   };
 
   validateForm = () => {
-    const { searchTermValid } = this.state;
-    this.setState({
-      formValid: searchTermValid
-    });
-  };
-
-  handleInputchange = (e) => {
-    let { name, value } = e.target;
-    this.setState({ [name]: value }, this.validateSearchTerm);
-
-    // this.setState({ searchTerm: e.target.value });
-  };
-
-  validateSearchTerm = () => {
-    const { searchTerm } = this.state;
-    let searchTermValid = true;
-    let errorMsg = { ...this.state.errorMsg };
-
-    if (!searchTerm) {
-      searchTermValid = false;
-      errorMsg.searchTerm = "Please Enter a Search Term";
-    }
-
-    this.setState({ searchTermValid, errorMsg }, this.validateForm);
+    this.setState({ formValid: this.state.searchTermValid });
   };
 
   handleChange = (val) => {
     this.setState({ filter: val ? val.path : null });
   };
 
-  isValidationError = (flag) => {
-    this.setState({ isFormValidationErrors: flag });
+  handleInputchange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    this.setState({ [name]: value }, () => {
+      this.validateField(name, value);
+    });
+    // this.setState({ searchTerm: e.target.value });
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
-
     const searchQuery = queryString.parse(this.props.location.search);
 
     searchQuery.sources = this.state.filter;
@@ -208,6 +200,7 @@ class SearchAndFilter extends React.Component {
                 onChange={this.handleInputchange}
                 placeholder="Enter Search......"
                 autoFocus
+                required
               />
               <StyledIcon
                 as={SearchAndFilterButton}
@@ -218,10 +211,7 @@ class SearchAndFilter extends React.Component {
               </StyledIcon>
             </div>
             <div>
-              <ValidationMessage
-                valid={this.state.searchTermValid}
-                message={this.state.errorMsg.searchTerm}
-              />
+              <FormErrors formErrors={this.state.formErrors} />
             </div>
           </FilterAndSearchContainer>
         </Inner>

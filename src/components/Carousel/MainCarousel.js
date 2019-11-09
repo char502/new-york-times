@@ -9,7 +9,6 @@ import { CustomArrow } from "./CarouselButton";
 
 const StyledSlider = styled(Slider)`
   & {
-    border-bottom: 0.5px solid rgba(0, 0, 0, 0.2);
     max-width: 600px;
     margin: 0 auto;
     position: relative;

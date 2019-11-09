@@ -5,6 +5,7 @@ import moment from "moment";
 import styled from "styled-components/macro";
 import Loading from "react-loading-bar";
 import Card from "../components/Card";
+import NoSearchResults from "../components/noSearchResults";
 
 // ======== Styled Components ========
 const SearchResultsContainer = styled.div`
@@ -28,8 +29,6 @@ class SearchResults extends React.Component {
   state = {
     results: [],
     show: false
-    // resultsToSave: JSON.parse(localStorage.getItem("newArrList"))
-    // isSaveClicked: false
   };
 
   getData = async () => {
@@ -85,8 +84,7 @@ class SearchResults extends React.Component {
 
   render() {
     const { results } = this.state;
-
-    return (
+    return this.state.results.length > 0 ? (
       <SearchResultsContainer>
         <SearchResultsContainerInner>
           <ul>
@@ -107,6 +105,8 @@ class SearchResults extends React.Component {
           <Loading show={this.state.show} color="red" />
         </SearchResultsContainerInner>
       </SearchResultsContainer>
+    ) : (
+      <NoSearchResults />
     );
   }
 }

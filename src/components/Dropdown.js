@@ -21,9 +21,18 @@ import newsSources from "../newsSources";
 // };
 
 const styles = {
+  container: (base) => ({
+    flex: 1
+  }),
   clearIndicator: (base) => ({
     ...base,
-    background: "red"
+    color: "darkGrey",
+    position: "absolute",
+    right: "35px",
+    bottom: "3px",
+    width: "35px",
+    height: "30px",
+    backgroundColor: "transparent"
   }),
   control: (base) => ({
     // ...base,
@@ -32,15 +41,19 @@ const styles = {
     color: "black",
     height: "30px",
     width: "180px",
-    padding: "0 16px",
+    // width: "190px",
+    // width: "auto",
+    padding: "0 8px 0 4px",
     borderRadius: "4px",
     outline: "none",
+    backgroundColor: "lightGrey",
     border: "0.5px solid rgba(0, 0, 0, 0.2)",
     position: "relative"
   }),
   dropdownIndicator: (base) => ({
     ...base,
     textAlign: "center",
+    color: "darkGrey",
     width: "30px",
     height: "30px",
     padding: 0,
@@ -51,7 +64,7 @@ const styles = {
   }),
   indicatorSeparator: (base) => ({
     ...base,
-    backgroundColor: "lightgrey",
+    backgroundColor: "darkGrey",
     height: "20px",
     padding: 0,
     margin: 0,
@@ -67,29 +80,47 @@ const styles = {
     fontFamily: "Roboto Condensed",
     backgroundColor: "white",
     fontSize: "12px",
-    color: "black"
+    fontWeight: "bold",
+    color: "black",
+    position: "absolute",
+    top: "15px",
+    width: "180px"
+    // width: "190px"
+    // width: "auto"
   }),
   placeholder: (base) => ({
     ...base,
     fontSize: "12px",
+    fontWeight: "bold",
     position: "absolute",
     top: "15px",
     color: "black"
+  }),
+  singleValue: (base) => ({
+    ...base,
+    color: "black",
+    fontWeight: "bold"
   })
 };
 
 const Dropdown = styled(Select)``;
 
 export default ({ handleChange, filter }) => (
-  <Dropdown
-    options={newsSources}
-    /* isClearable */
-    getOptionLabel={(option) => `${option.name}`}
-    getOptionValue={(option) => `${option.path}`}
-    onChange={handleChange}
-    placeholder={"Select by filter source"}
-    styles={styles}
-    clearValue={() => true}
-    value={newsSources.filter(({ path }) => path === filter)}
-  />
+  <div style={{ width: "auto" }}>
+    <Dropdown
+      options={newsSources}
+      isSearchable
+      isClearable
+      clearValue
+      getOptionLabel={(option) => `${option.name}`}
+      getOptionValue={(option) => `${option.path}`}
+      onChange={handleChange}
+      /* placeholder={"News Source Filter (Optional)"} */
+      placeholder={"All Sources"}
+      styles={styles}
+      value={newsSources.filter(({ path }) => path === filter)}
+      menuPlacement="auto"
+      menuPosition="fixed"
+    />
+  </div>
 );

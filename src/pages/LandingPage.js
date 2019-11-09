@@ -74,6 +74,7 @@ const ImageAndTitle = styled.div`
 const SavedImage = styled.img`
   height: 40px;
   width: 40px;
+  min-width: 40px;
 `;
 
 const TopNewsTitle = styled.div`
@@ -81,7 +82,6 @@ const TopNewsTitle = styled.div`
   color: black;
   text-decoration: none;
   cursor: pointer;
-  /* word-wrap: break-word; */
 `;
 
 const SourceContainer = styled.div`
@@ -92,6 +92,12 @@ const SourceContainer = styled.div`
 const ButtonContainer = styled.div`
   /* justify-content: center;
   align-items: center; */
+`;
+
+const NoNewsItems = styled.div`
+  padding: 5px;
+  margin: 10px;
+  background-color: lightgray;
 `;
 
 // === End of SideBar styling ===
@@ -192,7 +198,6 @@ class LandingPage extends React.Component {
       topTenSaved
     } = this.state;
 
-    console.log(topTenSaved);
     return (
       <LandingPageBodyContainer>
         <LandingPageBodyContainerInner>
@@ -212,7 +217,7 @@ class LandingPage extends React.Component {
             />
             <LandingPageNewsItem
               data={newsSourceThird}
-              key={newsSourceSecond.url}
+              key={newsSourceSecond.title}
               title="National Geographic - Top Headlines"
               handleClick={this.handleSaveItem}
             />
@@ -221,43 +226,47 @@ class LandingPage extends React.Component {
             <H3>
               <StyledHeader>Top 10 Saved News Articles</StyledHeader>
             </H3>
-            {topTenSaved.map((topNewsItem, index) => {
-              return (
-                <TopNewsContainer key={topNewsItem.title}>
-                  <ImageAndTitle>
-                    <div style={{ display: "flex" }}>
-                      <SavedImage
-                        src={
-                          topNewsItem.urlToImage
-                            ? topNewsItem.urlToImage
-                            : imagePlaceholder
-                        }
-                      />
-                      <TopNewsTitle
-                        as="a"
-                        href={topNewsItem.url}
-                        target="_blank"
-                      >
-                        {topNewsItem.title}
-                        <SourceContainer>
-                          Source: {topNewsItem.source.name}
-                        </SourceContainer>
-                      </TopNewsTitle>
-                    </div>
+            {topTenSaved.length > 0 ? (
+              topTenSaved.map((topNewsItem, index) => {
+                return (
+                  <TopNewsContainer key={topNewsItem.title}>
+                    <ImageAndTitle>
+                      <div style={{ display: "flex" }}>
+                        <SavedImage
+                          src={
+                            topNewsItem.urlToImage
+                              ? topNewsItem.urlToImage
+                              : imagePlaceholder
+                          }
+                        />
+                        <TopNewsTitle
+                          as="a"
+                          href={topNewsItem.url}
+                          target="_blank"
+                        >
+                          {topNewsItem.title}
+                          <SourceContainer>
+                            Source: {topNewsItem.source.name}
+                          </SourceContainer>
+                        </TopNewsTitle>
+                      </div>
 
-                    <ButtonContainer>
-                      <Button
-                        style={{ color: "red", fontWeight: "bold" }}
-                        small
-                        onClick={() => this.handleRemoveItem(topNewsItem)}
-                      >
-                        x
-                      </Button>
-                    </ButtonContainer>
-                  </ImageAndTitle>
-                </TopNewsContainer>
-              );
-            })}
+                      <ButtonContainer>
+                        <Button
+                          style={{ color: "red", fontWeight: "bold" }}
+                          small
+                          onClick={() => this.handleRemoveItem(topNewsItem)}
+                        >
+                          x
+                        </Button>
+                      </ButtonContainer>
+                    </ImageAndTitle>
+                  </TopNewsContainer>
+                );
+              })
+            ) : (
+              <NoNewsItems>No News Items Saved</NoNewsItems>
+            )}
           </SideBar>
         </LandingPageBodyContainerInner>
       </LandingPageBodyContainer>

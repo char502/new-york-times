@@ -1,5 +1,6 @@
 import React from "react";
 import { withRouter /* Redirect */ } from "react-router-dom";
+
 import queryString from "query-string";
 import styled from "styled-components/macro";
 import Dropdown from "../../Dropdown";
@@ -7,8 +8,7 @@ import { SearchAndFilterButton } from "../../Button";
 import { H2 } from "../../Typography";
 import magGlass2 from "../../../Images/magGlass2.png";
 // import FormErrors from "../../../FormErrors";
-// import FormValidator from "../../../FormValidator";
-// import Validator from "react-forms-validator";
+import FormValidator from "../../../FormValidator";
 
 // ======== Styled Components ========
 
@@ -75,77 +75,98 @@ const MagGlass = styled.img`
   /* z-index: -1; */
 `;
 
-const ErrorMsg = styled.div`
-  color: red;
-  margin: 5px 0;
-`;
-
 // ===================================
 
-const ValidationMessage = (props) => {
-  console.log(props);
-  if (!props.valid) {
-    return <ErrorMsg>{props.message}</ErrorMsg>;
-  }
-  return null;
-};
-
 class SearchAndFilter extends React.Component {
-  state = {
-    searchTerm: "",
-    filter: null,
-    searchTermValid: false,
-    formValid: false,
-    errorMsg: {}
-  };
+  constructor() {
+    super();
 
-  validateForm = () => {
-    const { searchTermValid } = this.state;
-    this.setState({
-      formValid: searchTermValid
-    });
-  };
+    this.validator = new FormValidator([
+      {
+        field: "searchTerm",
+        method: "isEmpty",
+        validWhen: false,
+        message: "please enter a search term"
+      }
+    ]);
 
-  handleInputchange = (e) => {
-    let { name, value } = e.target;
-    this.setState({ [name]: value }, this.validateSearchTerm);
+    this.state = {
+      searchTerm: "",
+      filter: null,
+      validation: this.validator.valid()
+      // formErrors: { searchTerm: "" },
+      // searchTermValid: false,
+      // formValid: false
+    };
 
-    // this.setState({ searchTerm: e.target.value });
-  };
+    this.submitted = false;
+  }
 
-  validateSearchTerm = () => {
-    const { searchTerm } = this.state;
-    let searchTermValid = true;
-    let errorMsg = { ...this.state.errorMsg };
+  // validateField = (fieldName, value) => {
+  //   console.log(value);
+  //   console.log(fieldName);
+  //   let fieldValidationErrors = this.state.formErrors;
+  //   let searchTermValid = this.state.searchTermValid;
 
-    if (!searchTerm) {
-      searchTermValid = false;
-      errorMsg.searchTerm = "Please Enter a Search Term";
-    }
+  //   switch (fieldName) {
+  //     case "searchTerm":
+  //       searchTermValid = value !== "";
+  //       fieldValidationErrors.searchTerm = searchTermValid
+  //         ? ""
+  //         : "please enter a search term";
+  //       break;
+  //     default:
+  //       break;
+  //   }
+  //   this.setState(
+  //     {
+  //       formErrors: fieldValidationErrors,
+  //       searchTermValid: searchTermValid
+  //     },
+  //     this.validateForm
+  //   );
+  // };
 
-    this.setState({ searchTermValid, errorMsg }, this.validateForm);
-  };
+  // validateForm = () => {
+  //   this.setState({ formValid: this.state.searchTermValid });
+  // };
 
   handleChange = (val) => {
     this.setState({ filter: val ? val.path : null });
   };
 
-  isValidationError = (flag) => {
-    this.setState({ isFormValidationErrors: flag });
+  handleInputchange = (e) => {
+    // const name = e.target.name;
+    // const value = e.target.value;
+    // this.setState({ [name]: value }, () => {
+    //   this.validateField(name, value);
+    // });
+
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+
+    // this.setState({ searchTerm: e.target.value });
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
 
-    const searchQuery = queryString.parse(this.props.location.search);
+    const validation = this.validator.validate(this.state);
+    this.setState({ validation });
+    this.submitted = true;
 
-    searchQuery.sources = this.state.filter;
-    searchQuery.searchTerm = this.state.searchTerm;
+    if (validation.isValid) {
+      const searchQuery = queryString.parse(this.props.location.search);
 
-    const stringifiedSearchQuery = queryString.stringify(searchQuery);
-    this.props.history.push(`?${stringifiedSearchQuery}`);
+      searchQuery.sources = this.state.filter;
+      searchQuery.searchTerm = this.state.searchTerm;
 
-    this.setState({ searchTerm: "", filter: "" });
+      const stringifiedSearchQuery = queryString.stringify(searchQuery);
+      this.props.history.push(`?${stringifiedSearchQuery}`);
+
+      this.setState({ searchTerm: "", filter: "" });
+    }
   };
 
   handleClearFilter = (e) => {
@@ -188,6 +209,9 @@ class SearchAndFilter extends React.Component {
   }
 
   render() {
+    let validation = this.submitted // if the form has been submitted at least once
+      ? this.validator.validate(this.state) // then check validity every time we render
+      : this.state.validation; // otherwise just use what's in state
     // console.log(this.props.location);
     return this.props.location.pathname === "/search" ? (
       <MainContainer>
@@ -201,28 +225,35 @@ class SearchAndFilter extends React.Component {
                 handleChange={this.handleChange}
                 filter={this.state.filter}
               />
-              <StyledInput
-                type="text"
-                name="searchTerm"
-                value={this.state.searchTerm}
-                onChange={this.handleInputchange}
-                placeholder="Enter Search......"
-                autoFocus
-              />
-              <StyledIcon
-                as={SearchAndFilterButton}
-                onClick={this.handleSubmit}
-                disabled={!this.state.formValid}
+              <div
+                style={{ display: "flex" }}
+                className={validation.searchTerm.isInvalid && "has-error"}
               >
-                <MagGlass src={magGlass2} />
-              </StyledIcon>
+                <StyledInput
+                  type="text"
+                  name="searchTerm"
+                  value={this.state.searchTerm}
+                  onChange={this.handleInputchange}
+                  placeholder="Enter Search......"
+                  autoFocus
+                  /* required */
+                />
+                <StyledIcon
+                  as={SearchAndFilterButton}
+                  onClick={this.handleSubmit}
+                  /* disabled={!this.state.formValid} */
+                >
+                  <MagGlass src={magGlass2} />
+                </StyledIcon>
+              </div>
             </div>
-            <div>
-              <ValidationMessage
-                valid={this.state.searchTermValid}
-                message={this.state.errorMsg.searchTerm}
-              />
-            </div>
+            <span style={{ color: "red" }} /* className="help-block" */>
+              {validation.searchTerm.message}
+            </span>
+
+            {/* <div>
+              <FormErrors formErrors={this.state.formErrors} />
+            </div> */}
           </FilterAndSearchContainer>
         </Inner>
       </MainContainer>
