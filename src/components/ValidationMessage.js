@@ -6,11 +6,7 @@ const ErrorMsg = styled.div`
   margin: 5px 0;
 `;
 
-const ValidationMessage = (props) => {
-  if (!props.valid) {
-    return <ErrorMsg>{props.message}</ErrorMsg>;
-  }
-  return null;
-};
+const ValidationMessage = props =>
+  props.invalid ? <ErrorMsg>{props.message}</ErrorMsg> : null;
 
 export default ValidationMessage;

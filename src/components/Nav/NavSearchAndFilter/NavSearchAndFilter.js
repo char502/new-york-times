@@ -84,14 +84,7 @@ class SearchAndFilter extends React.Component {
 
   searchAndFilterinputRef = React.createRef();
 
-  validateForm = () => {
-    const { searchTermValid } = this.state;
-    this.setState({
-      formValid: searchTermValid
-    });
-  };
-
-  handleInputchange = (e) => {
+  handleInputchange = e => {
     let { name, value } = e.target;
     this.setState({ [name]: value }, this.validateSearchTerm);
     // this.setState({ searchTerm: e.target.value });
@@ -99,27 +92,32 @@ class SearchAndFilter extends React.Component {
 
   validateSearchTerm = () => {
     const { searchTerm } = this.state;
-    let searchTermValid = true;
+    let searchTermError = false;
     let errorMsg = { ...this.state.errorMsg };
 
     if (!searchTerm) {
-      searchTermValid = false;
+      searchTermError = true;
       errorMsg.searchTerm = "Please Enter a Search Term";
     }
 
-    this.setState({ searchTermValid, errorMsg }, this.validateForm);
+    this.setState({
+      searchTermError,
+      errorMsg
+    });
   };
 
-  handleChange = (val) => {
+  handleChange = val => {
     this.setState({ filter: val ? val.path : null });
   };
 
-  isValidationError = (flag) => {
-    this.setState({ isFormValidationErrors: flag });
+  isValidationError = bool => {
+    this.setState({ searchTermError: bool });
   };
 
-  handleSubmit = (e) => {
+  handleSubmit = e => {
     e.preventDefault();
+
+    console.log("i'm here");
 
     console.log(this.props.location.search);
     const searchQuery = queryString.parse(this.props.location.search);
@@ -135,7 +133,7 @@ class SearchAndFilter extends React.Component {
     this.setState({ searchTerm: "", filter: "" });
   };
 
-  handleClearFilter = (e) => {
+  handleClearFilter = e => {
     e.preventDefault();
     let searchQuery = queryString.parse(this.props.location.search);
     if (searchQuery.sources) {
@@ -171,6 +169,12 @@ class SearchAndFilter extends React.Component {
         searchTerm: searchQuery.searchTerm
       });
     }
+
+    if (prevProps.location.pathname !== this.props.location.pathname) {
+      this.setState({
+        searchTermError: false
+      });
+    }
   }
 
   render() {
@@ -198,14 +202,14 @@ class SearchAndFilter extends React.Component {
               <StyledIcon
                 as={SearchAndFilterButton}
                 onClick={this.handleSubmit}
-                disabled={!this.state.formValid}
+                disabled={this.state.searchTermError}
               >
                 <MagGlass src={magGlass2} />
               </StyledIcon>
             </div>
             <div>
               <ValidationMessage
-                valid={this.state.searchTermValid}
+                invalid={this.state.searchTermError}
                 message={this.state.errorMsg.searchTerm}
               />
             </div>
