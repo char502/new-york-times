@@ -6,9 +6,7 @@ import Dropdown from "../../Dropdown";
 import { SearchAndFilterButton } from "../../Button";
 import { H2 } from "../../Typography";
 import magGlass2 from "../../../Images/magGlass2.png";
-// import FormErrors from "../../../FormErrors";
-// import FormValidator from "../../../FormValidator";
-import Validator from "react-forms-validator";
+import ValidationMessage from "../../ValidationMessage";
 
 // ======== Styled Components ========
 
@@ -69,36 +67,51 @@ const MagGlass = styled.img`
   width: 20px;
   height: 20px;
   background-color: transparent;
-  /* border: 0.5px solid rgba(0, 0, 0, 0.2); */
   border-radius: 4px;
   outline: none;
-  /* z-index: -1; */
 `;
 
 // ===================================
 
 class SearchAndFilter extends React.Component {
-  
+  state = {
+    searchTerm: "",
+    filter: null,
+    searchTermValid: false,
+    formValid: false,
+    errorMsg: {}
+  };
 
-    state = {
-      searchTerm: "",
-      filter: null,
-      searchTermValid: false,
-      formValid: false,
-      errorMsg: {}
-    };
+  searchAndFilterinputRef = React.createRef();
 
-    
-
-  handleChange = (val) => {
-    this.setState({ filter: val ? val.path : null });
+  validateForm = () => {
+    const { searchTermValid } = this.state;
+    this.setState({
+      formValid: searchTermValid
+    });
   };
 
   handleInputchange = (e) => {
     let { name, value } = e.target;
-    this.setState({ [name]: value });
-    let { submitted } = this.state;
+    this.setState({ [name]: value }, this.validateSearchTerm);
     // this.setState({ searchTerm: e.target.value });
+  };
+
+  validateSearchTerm = () => {
+    const { searchTerm } = this.state;
+    let searchTermValid = true;
+    let errorMsg = { ...this.state.errorMsg };
+
+    if (!searchTerm) {
+      searchTermValid = false;
+      errorMsg.searchTerm = "Please Enter a Search Term";
+    }
+
+    this.setState({ searchTermValid, errorMsg }, this.validateForm);
+  };
+
+  handleChange = (val) => {
+    this.setState({ filter: val ? val.path : null });
   };
 
   isValidationError = (flag) => {
@@ -108,20 +121,18 @@ class SearchAndFilter extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
 
-    this.setState({ submitted: true });
-    let { searchTerm, isFormValidationErrors } = this.state;
+    console.log(this.props.location.search);
+    const searchQuery = queryString.parse(this.props.location.search);
+    console.log(searchQuery);
 
-    if (!isFormValidationErrors) {
-      const searchQuery = queryString.parse(this.props.location.search);
+    searchQuery.sources = this.state.filter;
+    searchQuery.searchTerm = this.state.searchTerm.trim();
 
-      searchQuery.sources = this.state.filter;
-      searchQuery.searchTerm = this.state.searchTerm;
+    const stringifiedSearchQuery = queryString.stringify(searchQuery);
+    console.log(stringifiedSearchQuery);
+    this.props.history.push(`?${stringifiedSearchQuery}`);
 
-      const stringifiedSearchQuery = queryString.stringify(searchQuery);
-      this.props.history.push(`?${stringifiedSearchQuery}`);
-
-      this.setState({ searchTerm: "", filter: "" });
-    }
+    this.setState({ searchTerm: "", filter: "" });
   };
 
   handleClearFilter = (e) => {
@@ -137,7 +148,6 @@ class SearchAndFilter extends React.Component {
 
   componentDidMount() {
     let searchQuery = queryString.parse(this.props.location.search);
-    console.log(searchQuery.searchTerm);
     if (searchQuery.searchTerm) {
       this.setState({
         searchTerm: searchQuery.searchTerm
@@ -164,8 +174,6 @@ class SearchAndFilter extends React.Component {
   }
 
   render() {
-    let { searchTerm, submitted } = this.state;
-    // console.log(this.props.location);
     return this.props.location.pathname === "/search" ? (
       <MainContainer>
         <StyledTitle>
@@ -178,23 +186,28 @@ class SearchAndFilter extends React.Component {
                 handleChange={this.handleChange}
                 filter={this.state.filter}
               />
-              <div style={{ display: "flex" }}>
-                <StyledInput
-                  type="text"
-                  name="searchTerm"
-                  value={this.state.searchTerm}
-                  onChange={this.handleInputchange}
-                  placeholder="Enter Search......"
-                  autoFocus
-                />
-                <StyledIcon
-                  as={SearchAndFilterButton}
-                  onClick={this.handleSubmit}
-                >
-                  <MagGlass src={magGlass2} />
-                </StyledIcon>
-                < ValidationMessage valid={this.state.searchTermValid} message={this.state.errorMsg.searchTerm} />
-              </div>
+              <StyledInput
+                type="text"
+                name="searchTerm"
+                value={this.state.searchTerm}
+                onChange={this.handleInputchange}
+                placeholder="Enter Search......"
+                ref={this.exampleRef}
+                autoFocus
+              />
+              <StyledIcon
+                as={SearchAndFilterButton}
+                onClick={this.handleSubmit}
+                disabled={!this.state.formValid}
+              >
+                <MagGlass src={magGlass2} />
+              </StyledIcon>
+            </div>
+            <div>
+              <ValidationMessage
+                valid={this.state.searchTermValid}
+                message={this.state.errorMsg.searchTerm}
+              />
             </div>
           </FilterAndSearchContainer>
         </Inner>

@@ -61,6 +61,9 @@ export const SearchAndFilterButton = styled(Button)`
 `;
 
 export const CarouselButton = styled(Button)`
+  /* background-color: lightgoldenrodyellow; */
+  height: 30px;
+  width: 50px;
   /* display: block; */
   color: black;
   &:focus {

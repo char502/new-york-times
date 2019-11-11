@@ -28,11 +28,16 @@ const StyledSlider = styled(Slider)`
   }
 
   .slick-prev {
-    left: -45px;
+    /* left: -45px; */
+    left: 440px;
+    top: 345px;
+    z-index: 1;
   }
 
   .slick-next {
-    right: -45px;
+    right: 45px;
+    top: 345px;
+    z-index: 1;
   }
 `;
 
