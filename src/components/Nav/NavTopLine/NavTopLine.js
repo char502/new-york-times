@@ -138,10 +138,12 @@ class NavTopLine extends React.Component {
     if (!searchTerm) {
       // if (this.props.location.search === "") {
 
-      this.props.history.push(`/search?searchTerm`);
+      this.props.history.push(`/search?searchTerm`.trim());
       // this.setState({ searchTerm: "", toggleInput: false });
     } else {
-      this.props.history.push(`/search?searchTerm=${this.state.searchTerm}`);
+      this.props.history.push(
+        `/search?searchTerm=${this.state.searchTerm}`.trim()
+      );
       this.setState({ searchTerm: "", toggleInput: false });
       this.inputRef.current.blur();
     }

@@ -6,6 +6,7 @@ import Dropdown from "../../Dropdown";
 import { SearchAndFilterButton } from "../../Button";
 import { H2 } from "../../Typography";
 import magGlass2 from "../../../Images/magGlass2.png";
+import ValidationMessage from "../../ValidationMessage";
 
 // ======== Styled Components ========
 
@@ -66,26 +67,11 @@ const MagGlass = styled.img`
   width: 20px;
   height: 20px;
   background-color: transparent;
-  /* border: 0.5px solid rgba(0, 0, 0, 0.2); */
   border-radius: 4px;
   outline: none;
-  /* z-index: -1; */
-`;
-
-const ErrorMsg = styled.div`
-  color: red;
-  margin: 5px 0;
 `;
 
 // ===================================
-
-const ValidationMessage = (props) => {
-  console.log(props);
-  if (!props.valid) {
-    return <ErrorMsg>{props.message}</ErrorMsg>;
-  }
-  return null;
-};
 
 class SearchAndFilter extends React.Component {
   state = {
@@ -108,7 +94,6 @@ class SearchAndFilter extends React.Component {
   handleInputchange = (e) => {
     let { name, value } = e.target;
     this.setState({ [name]: value }, this.validateSearchTerm);
-
     // this.setState({ searchTerm: e.target.value });
   };
 
@@ -136,12 +121,15 @@ class SearchAndFilter extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
 
+    console.log(this.props.location.search);
     const searchQuery = queryString.parse(this.props.location.search);
+    console.log(searchQuery);
 
     searchQuery.sources = this.state.filter;
-    searchQuery.searchTerm = this.state.searchTerm;
+    searchQuery.searchTerm = this.state.searchTerm.trim();
 
     const stringifiedSearchQuery = queryString.stringify(searchQuery);
+    console.log(stringifiedSearchQuery);
     this.props.history.push(`?${stringifiedSearchQuery}`);
 
     this.setState({ searchTerm: "", filter: "" });
@@ -160,7 +148,6 @@ class SearchAndFilter extends React.Component {
 
   componentDidMount() {
     let searchQuery = queryString.parse(this.props.location.search);
-    console.log(searchQuery.searchTerm);
     if (searchQuery.searchTerm) {
       this.setState({
         searchTerm: searchQuery.searchTerm
@@ -187,7 +174,6 @@ class SearchAndFilter extends React.Component {
   }
 
   render() {
-    // console.log(this.props.location);
     return this.props.location.pathname === "/search" ? (
       <MainContainer>
         <StyledTitle>

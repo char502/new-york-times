@@ -6,6 +6,7 @@ import styled from "styled-components/macro";
 import Loading from "react-loading-bar";
 import Card from "../components/Card";
 import NoSearchResults from "../components/noSearchResults";
+import { LoadingConsumer } from "../loadingContext";
 
 // ======== Styled Components ========
 const SearchResultsContainer = styled.div`
@@ -28,19 +29,25 @@ const CardContainer = styled.div`
 class SearchResults extends React.Component {
   state = {
     results: [],
-    show: false,
-    loading: false
+    show: false
+    // loading: false
   };
 
   getData = async () => {
     let query = queryString.parse(this.props.location.search);
-    this.setState({ show: true, loading: true });
+    console.log(this.props);
+    this.props.setLoading(true);
+    this.setState({ show: true /* loading: true */ });
 
     if (!query.searchTerm) return;
 
     const news = await getSearchNews(query.searchTerm, query.sources);
     console.log(news);
-    this.setState({ show: false, results: news.data.articles, loading: false });
+    this.setState({
+      show: false,
+      results: news.data.articles /* loading: true */
+    });
+    this.props.setLoading(false);
   };
 
   componentDidMount() {
@@ -85,6 +92,7 @@ class SearchResults extends React.Component {
 
   render() {
     const { results, loading } = this.state;
+
     let query = queryString.parse(this.props.location.search);
     if (!query.searchTerm) return null;
     if (results.length) {
@@ -103,15 +111,18 @@ class SearchResults extends React.Component {
                 />
               </CardContainer>
             ))}
-            {/* <Loading show={this.state.show} color="red" /> */}
           </SearchResultsContainerInner>
         </SearchResultsContainer>
       );
     }
 
-    if (!results.length && !Loading) return <NoSearchResults />;
-    return null;
+    if (!results.length && !loading) return <NoSearchResults />;
+    return "";
   }
 }
 
-export default SearchResults;
+export default (props) => (
+  <LoadingConsumer>
+    {(loading) => <SearchResults {...loading} {...props} />}
+  </LoadingConsumer>
+);
