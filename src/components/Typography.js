@@ -5,7 +5,6 @@ export const H1 = styled.h1`
   font-size: 42px;
   color: black;
   margin: 0;
-  /* margin-bottom: 32px; */
 `;
 
 export const H2 = styled.h2`
@@ -13,7 +12,6 @@ export const H2 = styled.h2`
   font-size: 32px;
   color: black;
   margin: 0;
-  /* margin-bottom: 32px; */
 `;
 
 export const H3 = styled.h3`
@@ -50,7 +48,6 @@ export const H5 = styled.h5`
 export const Title = styled(H1)`
   font-size: 32px;
   margin: 28px;
-  /* padding: 20px 0 0 250px; */
   ${(props) =>
     props.right &&
     css`
