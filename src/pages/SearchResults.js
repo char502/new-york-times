@@ -28,21 +28,22 @@ const CardContainer = styled.div`
 class SearchResults extends React.Component {
   state = {
     results: [],
-    show: false
+    show: false,
+    loading: false
   };
 
   getData = async () => {
     let query = queryString.parse(this.props.location.search);
-    this.setState({ show: true });
+    this.setState({ show: true, loading: true });
+
+    if (!query.searchTerm) return;
 
     const news = await getSearchNews(query.searchTerm, query.sources);
     console.log(news);
-    this.setState({ show: false, results: news.data.articles });
+    this.setState({ show: false, results: news.data.articles, loading: false });
   };
 
   componentDidMount() {
-    let query = queryString.parse(this.props.location.search);
-    if (!query.searchTerm) return this.props.history.push(`/not-found`);
     this.getData();
   }
 
@@ -83,31 +84,33 @@ class SearchResults extends React.Component {
   };
 
   render() {
-    const { results } = this.state;
-    return this.state.results.length > 0 ? (
-      <SearchResultsContainer>
-        <SearchResultsContainerInner>
-          <ul>
+    const { results, loading } = this.state;
+    let query = queryString.parse(this.props.location.search);
+    if (!query.searchTerm) return null;
+    if (results.length) {
+      return (
+        <SearchResultsContainer>
+          <Loading show={loading} color="red" />
+          <SearchResultsContainerInner>
             {results.map((result) => (
-              <div key={result.description}>
-                <CardContainer>
-                  <Card
-                    data={result}
-                    text="Save"
-                    handleClick={this.handleSaveItem}
-                    extended
-                    showSource
-                  />
-                </CardContainer>
-              </div>
+              <CardContainer key={result.description}>
+                <Card
+                  data={result}
+                  text="Save"
+                  handleClick={this.handleSaveItem}
+                  extended
+                  showSource
+                />
+              </CardContainer>
             ))}
-          </ul>
-          <Loading show={this.state.show} color="red" />
-        </SearchResultsContainerInner>
-      </SearchResultsContainer>
-    ) : (
-      <NoSearchResults />
-    );
+            {/* <Loading show={this.state.show} color="red" /> */}
+          </SearchResultsContainerInner>
+        </SearchResultsContainer>
+      );
+    }
+
+    if (!results.length && !Loading) return <NoSearchResults />;
+    return null;
   }
 }
 

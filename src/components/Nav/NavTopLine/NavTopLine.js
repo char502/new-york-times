@@ -137,8 +137,8 @@ class NavTopLine extends React.Component {
 
     if (!searchTerm) {
       // if (this.props.location.search === "") {
-      console.log("search has not been entered");
-      this.props.history.push(`/search?searchTerm=${"Enter Search......"}`);
+
+      this.props.history.push(`/search?searchTerm`);
       // this.setState({ searchTerm: "", toggleInput: false });
     } else {
       this.props.history.push(`/search?searchTerm=${this.state.searchTerm}`);
@@ -181,7 +181,6 @@ class NavTopLine extends React.Component {
                     placeholder={"Enter Search"}
                     isshown={toggleInput}
                     ref={this.inputRef}
-                    /* required */
                   />
 
                   {/* <div style={{ color: toggleInput ? "red" : "black" }} /> */}

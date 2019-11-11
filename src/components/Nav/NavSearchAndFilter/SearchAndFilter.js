@@ -99,6 +99,8 @@ class SearchAndFilter extends React.Component {
     errorMsg: {}
   };
 
+  searchAndFilterinputRef = React.createRef();
+
   validateForm = () => {
     const { searchTermValid } = this.state;
     this.setState({
@@ -207,6 +209,7 @@ class SearchAndFilter extends React.Component {
                 value={this.state.searchTerm}
                 onChange={this.handleInputchange}
                 placeholder="Enter Search......"
+                ref={this.exampleRef}
                 autoFocus
               />
               <StyledIcon
