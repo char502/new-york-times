@@ -3,6 +3,6 @@ import { CarouselButton } from "../Button";
 
 export const CustomArrow = (props) => (
   <CarouselButton small type="button" {...props}>
-    {props.next ? "Next" : "Prev"}
+    {props.next ? ">" : "<"}
   </CarouselButton>
 );

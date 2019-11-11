@@ -35,9 +35,8 @@ class SearchResults extends React.Component {
 
   getData = async () => {
     let query = queryString.parse(this.props.location.search);
-    console.log(this.props);
     this.props.setLoading(true);
-    this.setState({ show: true /* loading: true */ });
+    this.setState({ show: true });
 
     if (!query.searchTerm) return;
 
@@ -45,7 +44,7 @@ class SearchResults extends React.Component {
     console.log(news);
     this.setState({
       show: false,
-      results: news.data.articles /* loading: true */
+      results: news.data.articles
     });
     this.props.setLoading(false);
   };
@@ -72,7 +71,6 @@ class SearchResults extends React.Component {
 
     if (!localStorage.getItem("savedNews")) {
       newsArr.push(savedResult);
-      alert("Item added to Local Storage");
       localStorage.setItem("savedNews", JSON.stringify(newsArr));
     } else if (localStorage.getItem("savedNews")) {
       newsArr = JSON.parse(localStorage.getItem("savedNews"));
@@ -86,7 +84,6 @@ class SearchResults extends React.Component {
 
       newsArr.push(savedResult);
       localStorage.setItem("savedNews", JSON.stringify(newsArr));
-      alert("Unique Item added to Local Storage ");
     }
   };
 

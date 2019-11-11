@@ -38,6 +38,7 @@ const ImgContainer = styled.img`
   margin: auto;
   width: 100%;
   height: 85%;
+  /* min-height: 350px; */
   align-items: center;
   /* border: 1px solid gray; */
   /* box-shadow: 5px 10px lightGray; */

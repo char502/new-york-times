@@ -172,7 +172,6 @@ class LandingPage extends React.Component {
 
     if (!localStorage.getItem("savedNews")) {
       newsArr.push(savedResult);
-      alert("Item added to Local Storage");
       localStorage.setItem("savedNews", JSON.stringify(newsArr));
     } else if (localStorage.getItem("savedNews")) {
       newsArr = JSON.parse(localStorage.getItem("savedNews"));
@@ -186,7 +185,6 @@ class LandingPage extends React.Component {
 
       newsArr.push(savedResult);
       localStorage.setItem("savedNews", JSON.stringify(newsArr));
-      alert("Unique Item added to Local Storage ");
     }
   };
 
