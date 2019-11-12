@@ -2,7 +2,7 @@ import React from "react";
 import styled, { css } from "styled-components/macro";
 import moment from "moment";
 import { Button } from "./Button";
-import { H3, H4 } from "./Typography";
+import { H4, TitleLink } from "./Typography";
 import imagePlaceholder from "../Images/imagePlaceholder.png";
 
 // const CardOuter = styled.div`
@@ -18,7 +18,7 @@ const CardContainer = styled.div`
   /* border: 0.5px solid rgba(0, 0, 0, 0.2); */
   /* background: lightsteelblue; */
   padding: 10px 0 20px 0;
-  ${(props) => {
+  ${props => {
     return (
       props.padded &&
       css`
@@ -87,7 +87,7 @@ const ActionButton = styled.div`
 
 // { item, handleAction, text, extended, author, publishedAt }
 
-const Card = (props) => (
+const Card = props => (
   <CardContainer padded={props.extended}>
     <div style={{ display: "flex" }}>
       <div style={{ flex: 1 }}>
@@ -108,9 +108,9 @@ const Card = (props) => (
         alt=""
       />
       <TitleContainer>
-        <H3 as="a" href={props.data.url} target="_blank">
+        <TitleLink href={props.data.url} target="_blank">
           {props.data.title}
-        </H3>
+        </TitleLink>
         {props.showSource && (
           <H4>
             <StyledSource>Source: {props.data.source.name}</StyledSource>

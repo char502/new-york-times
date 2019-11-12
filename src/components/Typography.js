@@ -20,6 +20,12 @@ export const H3 = styled.h3`
   text-decoration: none;
 `;
 
+export const TitleLink = styled.a`
+  font-size: 24px;
+  color: black;
+  text-decoration: none;
+`;
+
 export const ModH3 = styled(H3)`
   font-size: 20px;
   color: black;
@@ -31,7 +37,7 @@ export const H4 = styled.h4`
   color: black;
   text-decoration: none;
   margin: 0;
-  ${(props) =>
+  ${props =>
     props.red &&
     css`
       color: red;
@@ -48,7 +54,7 @@ export const H5 = styled.h5`
 export const Title = styled(H1)`
   font-size: 32px;
   margin: 28px;
-  ${(props) =>
+  ${props =>
     props.right &&
     css`
       text-align: right;
