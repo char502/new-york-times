@@ -12,7 +12,7 @@ import imagePlaceholder from "../Images/imagePlaceholder.png";
 
 const CardContainer = styled.div`
   /* padding: 5px; */
-  width: 550px;
+  width: 600px;
   min-height: 450px;
   margin: auto;
   /* border: 0.5px solid rgba(0, 0, 0, 0.2); */
@@ -33,18 +33,15 @@ const ImageAndTitle = styled.div`
   padding: 5px;
 `;
 
-const ImgContainer = styled.img`
+const ImgContainer = styled.div`
+  width: 100%;
+  height: 350px;
+  background: url(${props => props.src}) no-repeat center center;
+  background-size: cover;
   display: block;
   margin: auto;
-  width: 100%;
-  /* height: 85%; */
-  min-height: 350px;
   align-items: center;
-  /* border: 1px solid gray; */
-  /* box-shadow: 5px 10px lightGray; */
 `;
-
-// const ImagePlaceHolder = styled.img``;
 
 const TitleContainer = styled.div`
   padding: 20px 10px 10px 10px;
@@ -87,45 +84,90 @@ const ActionButton = styled.div`
 
 // { item, handleAction, text, extended, author, publishedAt }
 
-const Card = props => (
-  <CardContainer padded={props.extended}>
-    <div style={{ display: "flex" }}>
-      <div style={{ flex: 1 }}>
-        <StyledAuthor>Author: {props.data.author}</StyledAuthor>
-        <StyledPublished>
-          Published: {moment(props.data.publishedAt).fromNow()}
-        </StyledPublished>
+const Card = props => {
+  return (
+    <CardContainer padded={props.extended}>
+      <div style={{ display: "flex" }}>
+        <div style={{ flex: 1 }}>
+          <StyledAuthor>Author: {props.data.author}</StyledAuthor>
+          <StyledPublished>
+            Published: {moment(props.data.publishedAt).fromNow()}
+          </StyledPublished>
+        </div>
+        <ActionButton>
+          <Button small onClick={() => props.handleClick(props.data)}>
+            {props.text}
+          </Button>
+        </ActionButton>
       </div>
-      <ActionButton>
-        <Button small onClick={() => props.handleClick(props.data)}>
-          {props.text}
-        </Button>
-      </ActionButton>
-    </div>
-    <ImageAndTitle>
-      <ImgContainer
-        src={props.data.urlToImage ? props.data.urlToImage : imagePlaceholder}
-        alt=""
-      />
-      <TitleContainer>
-        <TitleLink href={props.data.url} target="_blank">
-          {props.data.title}
-        </TitleLink>
-        {props.showSource && (
+      <ImageAndTitle>
+        <ImgContainer
+          src={props.data.urlToImage ? props.data.urlToImage : imagePlaceholder}
+        />
+        <TitleContainer>
+          <TitleLink href={props.data.url} target="_blank">
+            {props.data.title}
+          </TitleLink>
           <H4>
-            <StyledSource>Source: {props.data.source.name}</StyledSource>
+            <StyledSource> Source: {props.data.source.name}</StyledSource>
           </H4>
-        )}
-      </TitleContainer>
-    </ImageAndTitle>
+          {/* {props.showSource && (
+            <H4>
+              <StyledSource> Source: {props.data.source.name}</StyledSource>
+            </H4>
+          )} */}
+        </TitleContainer>
+      </ImageAndTitle>
 
-    {props.children}
-    {/* {props.extended && (
+      {props.children}
+      {/* {props.extended && (
       <BorderBottom
         style={{ borderBottom: "0.5px solid rgba(0, 0, 0, 0.2)" }}
       />
     )} */}
-  </CardContainer>
-);
+    </CardContainer>
+  );
+};
+
+// const Card = props => (
+//   <CardContainer padded={props.extended}>
+//     <div style={{ display: "flex" }}>
+//       <div style={{ flex: 1 }}>
+//         <StyledAuthor>Author: {props.data.author}</StyledAuthor>
+//         <StyledPublished>
+//           Published: {moment(props.data.publishedAt).fromNow()}
+//         </StyledPublished>
+//       </div>
+//       <ActionButton>
+//         <Button small onClick={() => props.handleClick(props.data)}>
+//           {props.text}
+//         </Button>
+//       </ActionButton>
+//     </div>
+//     <ImageAndTitle>
+//       <ImgContainer
+//         src={props.data.urlToImage ? props.data.urlToImage : imagePlaceholder}
+//       />
+
+//       <TitleContainer>
+//         <TitleLink href={props.data.url} target="_blank">
+//           {props.data.title}
+//         </TitleLink>
+//         {props.showSource && (
+//           <H4>
+//             <StyledSource>Source: {props.data.source.name}</StyledSource>
+//           </H4>
+//         )}
+//       </TitleContainer>
+//     </ImageAndTitle>
+
+//     {props.children}
+//     {/* {props.extended && (
+//       <BorderBottom
+//         style={{ borderBottom: "0.5px solid rgba(0, 0, 0, 0.2)" }}
+//       />
+//     )} */}
+//   </CardContainer>
+// );
 
 export default Card;
