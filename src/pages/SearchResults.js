@@ -3,7 +3,7 @@ import queryString from "query-string";
 import { getSearchNews } from "../utils/api";
 import moment from "moment";
 import styled from "styled-components/macro";
-import Loading from "react-loading-bar";
+// import Loading from "react-loading-bar";
 import Card from "../components/Card";
 import NoSearchResults from "../components/noSearchResults";
 import { LoadingConsumer } from "../loadingContext";
@@ -28,15 +28,15 @@ const CardContainer = styled.div`
 
 class SearchResults extends React.Component {
   state = {
-    results: [],
-    show: false
+    results: []
+    // show: false
     // loading: false
   };
 
   getData = async () => {
     let query = queryString.parse(this.props.location.search);
     this.props.setLoading(true);
-    this.setState({ show: true });
+    // this.setState({ show: true });
 
     if (!query.searchTerm) return;
 
@@ -60,7 +60,7 @@ class SearchResults extends React.Component {
     }
   }
 
-  handleSaveItem = (result) => {
+  handleSaveItem = result => {
     const savedResult = {
       ...result,
       savedAt: moment().format("YYYY-MM-DD")
@@ -75,7 +75,7 @@ class SearchResults extends React.Component {
     } else if (localStorage.getItem("savedNews")) {
       newsArr = JSON.parse(localStorage.getItem("savedNews"));
 
-      let alreadyInArr = newsArr.some((newsItem) => {
+      let alreadyInArr = newsArr.some(newsItem => {
         return newsItem.title === savedResult.title;
       });
       if (alreadyInArr) {
@@ -95,9 +95,9 @@ class SearchResults extends React.Component {
     if (results.length) {
       return (
         <SearchResultsContainer>
-          <Loading show={loading} color="red" />
+          {/* <Loading show={loading} color="red" /> */}
           <SearchResultsContainerInner>
-            {results.map((result) => (
+            {results.map(result => (
               <CardContainer key={result.description}>
                 <Card
                   data={result}
@@ -118,8 +118,11 @@ class SearchResults extends React.Component {
   }
 }
 
-export default (props) => (
+export default props => (
   <LoadingConsumer>
-    {(loading) => <SearchResults {...loading} {...props} />}
+    {loading => {
+      console.log(loading);
+      return <SearchResults {...loading} {...props} />;
+    }}
   </LoadingConsumer>
 );

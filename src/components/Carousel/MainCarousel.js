@@ -30,14 +30,14 @@ const StyledSlider = styled(Slider)`
   .slick-prev {
     /* left: -45px; */
     left: 440px;
-    top: 345px;
+    top: 380px;
     z-index: 1;
   }
 
   .slick-next {
     right: 45px;
-    top: 345px;
-    z-index: 1;
+    top: 380px;
+    /* z-index: 1; */
   }
 `;
 
@@ -54,7 +54,6 @@ class MainCarousel extends React.Component {
 
     if (!localStorage.getItem("savedNews")) {
       articleArr.push(savedArticle);
-      alert("Item added to Local Storage");
       localStorage.setItem("savedNews", JSON.stringify(articleArr));
     } else if (localStorage.getItem("savedNews")) {
       articleArr = JSON.parse(localStorage.getItem("savedNews"));
@@ -67,7 +66,6 @@ class MainCarousel extends React.Component {
       }
       articleArr.push(savedArticle);
       localStorage.setItem("savedNews", JSON.stringify(articleArr));
-      alert("Unique Item added to Local Storage ");
     }
   };
 

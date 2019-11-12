@@ -117,8 +117,6 @@ class SearchAndFilter extends React.Component {
   handleSubmit = e => {
     e.preventDefault();
 
-    console.log("i'm here");
-
     console.log(this.props.location.search);
     const searchQuery = queryString.parse(this.props.location.search);
     console.log(searchQuery);
