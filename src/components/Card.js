@@ -108,14 +108,11 @@ const Card = props => {
           <TitleLink href={props.data.url} target="_blank">
             {props.data.title}
           </TitleLink>
-          <H4>
-            <StyledSource> Source: {props.data.source.name}</StyledSource>
-          </H4>
-          {/* {props.showSource && (
+          {props.showSource && (
             <H4>
               <StyledSource> Source: {props.data.source.name}</StyledSource>
             </H4>
-          )} */}
+          )}
         </TitleContainer>
       </ImageAndTitle>
 

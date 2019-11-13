@@ -96,6 +96,7 @@ class MainCarousel extends React.Component {
             data={article}
             text="Save"
             handleClick={this.handleSaveItem}
+            showSource
           />
         ))}
       </StyledSlider>
