@@ -35,7 +35,7 @@ class SearchResults extends React.Component {
 
   getData = async () => {
     let query = queryString.parse(this.props.location.search);
-    this.props.setLoading(true);
+    this.props.setLoadingValue(true);
     // this.setState({ show: true });
 
     if (!query.searchTerm) return;
@@ -46,7 +46,7 @@ class SearchResults extends React.Component {
       show: false,
       results: news.data.articles
     });
-    this.props.setLoading(false);
+    this.props.setLoadingValue(false);
   };
 
   componentDidMount() {

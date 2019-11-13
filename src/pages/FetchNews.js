@@ -36,7 +36,7 @@ class FetchNews extends React.Component {
   };
 
   fetchApi = async () => {
-    this.props.setLoading(true);
+    this.props.setLoadingValue(true);
 
     const response = await getNews(this.props.location.pathname.split("/")[1]);
     console.log(response);
@@ -44,7 +44,7 @@ class FetchNews extends React.Component {
     this.setState({
       news
     });
-    this.props.setLoading(false);
+    this.props.setLoadingValue(false);
   };
 
   componentDidMount() {
@@ -69,8 +69,8 @@ class FetchNews extends React.Component {
   }
 }
 
-export default (props) => (
+export default props => (
   <LoadingConsumer>
-    {(loading) => <FetchNews {...loading} {...props} />}
+    {loading => <FetchNews {...loading} {...props} />}
   </LoadingConsumer>
 );
