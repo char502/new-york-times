@@ -1,11 +1,12 @@
 import React from "react";
-// import styled from "styled-components";
 import styled from "styled-components/macro";
+import Media from "react-media";
 
 // components
 import NavTopLine from "./NavTopLine/NavTopLine";
 import NavBottomLine from "./NavBottomLine/NavBottomLine";
 import NavSearchAndFilter from "./NavSearchAndFilter/NavSearchAndFilter";
+import NavOnMobile from "./NavOnMobile/NavOnMobile";
 
 // ======== Styled Components ========
 const NavBarContainer = styled.div`
@@ -23,11 +24,29 @@ const NavBarInner = styled.div`
 
 const Nav = () => (
   <NavBarContainer>
-    <NavBarInner>
-      <NavTopLine />
-      <NavBottomLine />
-      <NavSearchAndFilter />
-    </NavBarInner>
+    <Media
+      queries={{
+        small: "(max-width: 768px)",
+        large: "(min-width: 769px)"
+      }}
+    >
+      {(matches) => (
+        <div>
+          {matches.small && (
+            <NavBarInner>
+              <NavOnMobile />
+            </NavBarInner>
+          )}
+          {matches.large && (
+            <NavBarInner>
+              <NavTopLine />
+              <NavBottomLine />
+              <NavSearchAndFilter />
+            </NavBarInner>
+          )}
+        </div>
+      )}
+    </Media>
   </NavBarContainer>
 );
 

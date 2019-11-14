@@ -1,15 +1,10 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import styled from "styled-components/macro";
-// import queryString from "query-string";
-import { Link } from "react-router-dom";
-import { AltButton } from "../../Button";
-import newspaper from "../../../Images/newspaper7.jpg";
+import NavHomeButton from "../../../components/NavHomeButton";
+import SavedItemsButton from "../../SavedItemsButton";
 
 import magGlass2 from "../../../Images/magGlass2.png";
-
-// Components
-// import NavFilterBar from "../NavFilterBar/NavFilterBar";
 
 // ======== Styled Components ========
 const NavTopLineContainer = styled.div`
@@ -25,10 +20,6 @@ const NavTopLineContainerInner = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
-`;
-
-const TitleContainer = styled.div`
-  flex: 1;
 `;
 
 const NavSearchInputsContainer = styled.div`
@@ -104,17 +95,6 @@ const MagGlass = styled.img`
 
 // ===================================
 
-const Newspaper = styled.img`
-  width: 70px;
-  height: 70px;
-  border-radius: 10%;
-  margin-top: 20px;
-`;
-
-const HomeButton = styled.img`
-  /* align-items: center; */
-`;
-
 class NavTopLine extends React.Component {
   state = {
     searchTerm: "",
@@ -160,11 +140,7 @@ class NavTopLine extends React.Component {
     return (
       <NavTopLineContainer>
         <NavTopLineContainerInner>
-          <TitleContainer>
-            <HomeButton as={Link} to="/">
-              <Newspaper src={newspaper} />
-            </HomeButton>
-          </TitleContainer>
+          <NavHomeButton />
           <NavSearchInputsContainer>
             {this.props.location.search === "" ? (
               <Form onSubmit={this.handleSubmit}>
@@ -184,19 +160,12 @@ class NavTopLine extends React.Component {
                     isshown={toggleInput}
                     ref={this.inputRef}
                   />
-
                   {/* <div style={{ color: toggleInput ? "red" : "black" }} /> */}
                 </InputWrapper>
               </Form>
             ) : null}
-
-            {/* <NavFilterBar /> */}
           </NavSearchInputsContainer>
-          <div style={{ marginRight: "5px" }}>
-            <AltButton as={Link} to="/savedNews">
-              Saved Items
-            </AltButton>
-          </div>
+          <SavedItemsButton />
         </NavTopLineContainerInner>
       </NavTopLineContainer>
     );
