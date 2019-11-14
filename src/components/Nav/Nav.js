@@ -24,30 +24,50 @@ const NavBarInner = styled.div`
 
 const Nav = () => (
   <NavBarContainer>
-    <Media
-      queries={{
-        small: "(max-width: 768px)",
-        large: "(min-width: 769px)"
-      }}
-    >
-      {(matches) => (
-        <div>
-          {matches.small && (
-            <NavBarInner>
-              <NavOnMobile />
-            </NavBarInner>
-          )}
-          {matches.large && (
-            <NavBarInner>
-              <NavTopLine />
-              <NavBottomLine />
-              <NavSearchAndFilter />
-            </NavBarInner>
-          )}
-        </div>
-      )}
+    <Media query={{ maxWidth: 599 }}>
+      {(matches) =>
+        matches ? (
+          <NavBarInner>
+            <NavOnMobile />
+          </NavBarInner>
+        ) : (
+          <NavBarInner>
+            <NavTopLine />
+            <NavBottomLine />
+            <NavSearchAndFilter />
+          </NavBarInner>
+        )
+      }
     </Media>
   </NavBarContainer>
 );
+
+// const Nav = () => (
+//   <NavBarContainer>
+//     <Media
+//       queries={{
+//         small: "(max-width: 768px)",
+//         large: "(min-width: 769px)"
+//       }}
+//     >
+//       {(matches) => (
+//         <div>
+//           {matches.small && (
+//             <NavBarInner>
+//               <NavOnMobile />
+//             </NavBarInner>
+//           )}
+//           {matches.large && (
+//             <NavBarInner>
+//               <NavTopLine />
+//               <NavBottomLine />
+//               <NavSearchAndFilter />
+//             </NavBarInner>
+//           )}
+//         </div>
+//       )}
+//     </Media>
+//   </NavBarContainer>
+// );
 
 export default Nav;

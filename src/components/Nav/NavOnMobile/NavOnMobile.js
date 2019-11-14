@@ -5,6 +5,8 @@ import NavHomeButton from "../../NavHomeButton";
 import SavedItems from "../../SavedItemsButton";
 import SearchInput from "../../SearchInput";
 
+import MobSourceLinks from "../../MobSourceLinks";
+
 // ======== Styled Components ========
 
 const NavOnMobileContainer = styled.div`
@@ -17,7 +19,7 @@ const NavOnMobileContainerInner = styled.div`
   width: 100%;
   margin: 0 auto;
   display: flex;
-  justify-content: space-around;
+  /* justify-content: space-around; */
   align-items: center;
 `;
 
@@ -27,8 +29,9 @@ const NavSearchInputsContainer = styled.div`
   align-items: center;
   /* margin-right: 24px; */
   margin-right: 20px;
+  /* background-color: red; */
   position: relative;
-  background-color: white;
+  /* background-color: white; */
   justify-content: flex-end;
 `;
 
@@ -42,7 +45,8 @@ const MenuItemsContainer = styled.div`
   position: absolute;
   width: 40vw;
   padding: 0 20px 20px 20px;
-  top: 0;
+  top: -10%;
+  /* top: 0; */
   right: 0;
   background-color: white;
   border: 0.5px solid rgba(0, 0, 0, 0.2);
@@ -94,13 +98,15 @@ class NavOnMobile extends React.Component {
             </BurgerIcon>
             <MenuItemsContainer showMenu={isMenuOpen}>
               <MenuItems>
-                <p>Search Icon</p>
+                <p>
+                  <SearchInput />
+                </p>
                 <ButtonContainer>
                   <SavedItems />
                 </ButtonContainer>
                 <NewsSourceLinks>
                   <p>
-                    <SearchInput />
+                    <MobSourceLinks />
                   </p>
                 </NewsSourceLinks>
               </MenuItems>
