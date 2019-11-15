@@ -3,6 +3,7 @@ import styled from "styled-components/macro";
 import { Link } from "react-router-dom";
 import newsSources from "../../../newsSources";
 
+// ======== Styled Components ========
 const NavBottomLineContainer = styled.div`
   width: 100%;
   height: 45px;
@@ -32,6 +33,7 @@ const NewsLink = styled(Link)`
     padding-right: 0;
   } */
 `;
+// ==========================================
 
 const NavBottomLine = () => (
   <NavBottomLineContainer>

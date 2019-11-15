@@ -42,32 +42,4 @@ const Nav = () => (
   </NavBarContainer>
 );
 
-// const Nav = () => (
-//   <NavBarContainer>
-//     <Media
-//       queries={{
-//         small: "(max-width: 768px)",
-//         large: "(min-width: 769px)"
-//       }}
-//     >
-//       {(matches) => (
-//         <div>
-//           {matches.small && (
-//             <NavBarInner>
-//               <NavOnMobile />
-//             </NavBarInner>
-//           )}
-//           {matches.large && (
-//             <NavBarInner>
-//               <NavTopLine />
-//               <NavBottomLine />
-//               <NavSearchAndFilter />
-//             </NavBarInner>
-//           )}
-//         </div>
-//       )}
-//     </Media>
-//   </NavBarContainer>
-// );
-
 export default Nav;

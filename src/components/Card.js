@@ -18,7 +18,7 @@ const CardContainer = styled.div`
   /* border: 0.5px solid rgba(0, 0, 0, 0.2); */
   /* background: lightsteelblue; */
   padding: 10px 0 20px 0;
-  ${props => {
+  ${(props) => {
     return (
       props.padded &&
       css`
@@ -36,7 +36,7 @@ const ImageAndTitle = styled.div`
 const ImgContainer = styled.div`
   width: 100%;
   height: 350px;
-  background: url(${props => props.src}) no-repeat center center;
+  background: url(${(props) => props.src}) no-repeat center center;
   background-size: cover;
   display: block;
   margin: auto;
@@ -84,7 +84,7 @@ const ActionButton = styled.div`
 
 // { item, handleAction, text, extended, author, publishedAt }
 
-const Card = props => {
+const Card = (props) => {
   return (
     <CardContainer padded={props.extended}>
       <div style={{ display: "flex" }}>
@@ -125,46 +125,5 @@ const Card = props => {
     </CardContainer>
   );
 };
-
-// const Card = props => (
-//   <CardContainer padded={props.extended}>
-//     <div style={{ display: "flex" }}>
-//       <div style={{ flex: 1 }}>
-//         <StyledAuthor>Author: {props.data.author}</StyledAuthor>
-//         <StyledPublished>
-//           Published: {moment(props.data.publishedAt).fromNow()}
-//         </StyledPublished>
-//       </div>
-//       <ActionButton>
-//         <Button small onClick={() => props.handleClick(props.data)}>
-//           {props.text}
-//         </Button>
-//       </ActionButton>
-//     </div>
-//     <ImageAndTitle>
-//       <ImgContainer
-//         src={props.data.urlToImage ? props.data.urlToImage : imagePlaceholder}
-//       />
-
-//       <TitleContainer>
-//         <TitleLink href={props.data.url} target="_blank">
-//           {props.data.title}
-//         </TitleLink>
-//         {props.showSource && (
-//           <H4>
-//             <StyledSource>Source: {props.data.source.name}</StyledSource>
-//           </H4>
-//         )}
-//       </TitleContainer>
-//     </ImageAndTitle>
-
-//     {props.children}
-//     {/* {props.extended && (
-//       <BorderBottom
-//         style={{ borderBottom: "0.5px solid rgba(0, 0, 0, 0.2)" }}
-//       />
-//     )} */}
-//   </CardContainer>
-// );
 
 export default Card;

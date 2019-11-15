@@ -43,11 +43,14 @@ const BurgerIcon = styled.div`
 
 const MenuItemsContainer = styled.div`
   position: absolute;
-  width: 40vw;
+  width: 50vw;
   padding: 0 20px 20px 20px;
-  top: -10%;
+  /* top: -10%; */
   /* top: 0; */
   right: 0;
+  top: 100%;
+  /* right: 10%; */
+
   background-color: white;
   border: 0.5px solid rgba(0, 0, 0, 0.2);
   z-index: 99;
@@ -55,8 +58,17 @@ const MenuItemsContainer = styled.div`
 `;
 
 const MenuItems = styled.div`
+  position: relative;
   text-align: center;
   padding-top: 50px;
+`;
+
+const MobSearchInputContainer = styled.div`
+  background-color: lightgreen;
+  position: "absolute";
+  left: "100";
+  top: "2%";
+  border: 0.5px solid rgba(0, 0, 0, 0.2);
 `;
 
 const ButtonContainer = styled.div`
@@ -98,16 +110,14 @@ class NavOnMobile extends React.Component {
             </BurgerIcon>
             <MenuItemsContainer showMenu={isMenuOpen}>
               <MenuItems>
-                <p>
+                <MobSearchInputContainer>
                   <SearchInput />
-                </p>
+                </MobSearchInputContainer>
                 <ButtonContainer>
                   <SavedItems />
                 </ButtonContainer>
                 <NewsSourceLinks>
-                  <p>
-                    <MobSourceLinks />
-                  </p>
+                  <MobSourceLinks />
                 </NewsSourceLinks>
               </MenuItems>
             </MenuItemsContainer>
