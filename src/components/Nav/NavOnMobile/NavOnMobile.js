@@ -64,7 +64,7 @@ const MenuItems = styled.div`
 `;
 
 const MobSearchInputContainer = styled.div`
-  background-color: lightgreen;
+  /* background-color: lightgreen; */
   position: "absolute";
   left: "100";
   top: "2%";

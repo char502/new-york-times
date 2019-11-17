@@ -13,7 +13,7 @@ const Form = styled.form`
 
 const InputWrapper = styled.div`
   position: relative;
-  /* overflow: hidden; */
+  overflow: hidden;
   height: 100%;
   /* background-color: blue; */
 `;
@@ -31,13 +31,13 @@ const Input = styled.input`
   outline: none;
   height: 27px;
   transform: ${(props) =>
-    props.isshown ? "translatex(0)" : "translatex(220px)"};
+    props.isshown ? "translatex(-20px)" : "translatex(220px)"};
   /* transform property
   translate function */
   /* transition: 5000ms ${easing}; */
   /* transition: 0.5s ease; */
   font-size: ${(props) => (props.isshown ? "12px" : "transparent")};
-  background-color: green;
+  /* background-color: green; */
 `;
 
 // const easing = "cubic-bezier(0.77, 0, 0.175, 1)";
@@ -46,7 +46,7 @@ const StyledIcon = styled.div`
   top: 30%;
   position: absolute;
   transform: ${(props) =>
-    props.isshown ? "translatex(15px)" : "translatex(220px)"};
+    props.isshown ? "translatex(5px)" : "translatex(220px)"};
     /* transition: 5000ms ${easing}; */
     /* transition: 0.5s ease; */
   /* left: ${(props) => (props.isshown ? "2%" : "90%")}; */
