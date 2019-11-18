@@ -32,6 +32,17 @@ const NewsLink = styled(Link)`
   /* &:last-child {
     padding-right: 0;
   } */
+  @media (max-width: 1231px) {
+    font-size: 10px;
+    margin: 0 auto;
+    text-align: center;
+    &:first-child {
+      padding-left: 5px;
+    }
+    &:last-child {
+      padding-right: 5px;
+    }
+  }
 `;
 // ==========================================
 

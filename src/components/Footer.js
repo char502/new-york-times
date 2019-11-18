@@ -10,6 +10,7 @@ import { faLinkedin, faGithubSquare } from "@fortawesome/free-brands-svg-icons";
 // ======== Styled Components ========
 
 const FooterContainer = styled.div`
+  width: 100vw;
   padding: 10px 10px 0 10px;
   display: flex;
   flex-direction: column;
@@ -17,6 +18,7 @@ const FooterContainer = styled.div`
   align-items: center;
   font-size: 10px;
   background-color: lightgray;
+  position: relative;
 `;
 
 const StyledHeader = styled.div`

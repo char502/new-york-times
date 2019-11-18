@@ -36,19 +36,20 @@ const NavSearchInputsContainer = styled.div`
 `;
 
 const BurgerIcon = styled.div`
-  position: relative;
+  /* position: relative; */
   z-index: 999;
   cursor: pointer;
 `;
 
 const MenuItemsContainer = styled.div`
   position: absolute;
-  width: 50vw;
+  width: 275px;
   padding: 0 20px 20px 20px;
   /* top: -10%; */
   /* top: 0; */
   right: 0;
-  top: 100%;
+  top: 0;
+  /* top: 100%; */
   /* right: 10%; */
 
   background-color: white;
@@ -64,7 +65,6 @@ const MenuItems = styled.div`
 `;
 
 const MobSearchInputContainer = styled.div`
-  /* background-color: lightgreen; */
   position: "absolute";
   left: "100";
   top: "2%";

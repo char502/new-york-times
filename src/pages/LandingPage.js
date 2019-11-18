@@ -28,6 +28,12 @@ const LandingPageBodyContainerInner = styled.div`
 
 const Container = styled.div`
   width: 66.66%;
+  @media (max-width: 978px) {
+    width: 100%;
+  }
+  @media (max-width: 375px) {
+    width: 100%;
+  }
 `;
 
 const StyledTitle = styled.div`
@@ -41,6 +47,16 @@ const CarouselContainer = styled.div`
   border-bottom: 0.5px solid rgba(0, 0, 0, 0.2);
   /* margin-left: 10px; */
   padding-bottom: 30px;
+  @media (max-width: 978px) {
+    width: 100%;
+    margin: 0 auto;
+    /* margin-left: 5px;
+    margin-right: 5px; */
+  }
+  /* @media (max-width: 450px) {
+    width: 100%;
+    margin: 0 auto;
+  } */
 `;
 
 // === SideBar styling ===
@@ -51,6 +67,9 @@ const SideBar = styled.div`
   margin: 20px 10px 10px 10px;
   /* border: 0.5px solid rgba(0, 0, 0, 0.2); */
   background-color: WhiteSmoke;
+  @media (max-width: 985px) {
+    display: none;
+  }
 `;
 
 const StyledHeader = styled.div`
@@ -146,10 +165,10 @@ class LandingPage extends React.Component {
     });
   }
 
-  handleRemoveItem = topNewsItem => {
+  handleRemoveItem = (topNewsItem) => {
     const { topTenSaved } = this.state;
 
-    const resultWhenItemRemoved = topTenSaved.filter(arrItem => {
+    const resultWhenItemRemoved = topTenSaved.filter((arrItem) => {
       return arrItem !== topNewsItem;
     });
 
@@ -161,7 +180,7 @@ class LandingPage extends React.Component {
     }
   };
 
-  handleSaveItem = result => {
+  handleSaveItem = (result) => {
     const savedResult = {
       ...result,
       savedAt: moment().format("YYYY-MM-DD")
@@ -177,7 +196,7 @@ class LandingPage extends React.Component {
     } else if (localStorage.getItem("savedNews")) {
       newsArr = JSON.parse(localStorage.getItem("savedNews"));
 
-      let alreadyInArr = newsArr.some(newsItem => {
+      let alreadyInArr = newsArr.some((newsItem) => {
         return newsItem.title === savedResult.title;
       });
       if (alreadyInArr) {

@@ -14,7 +14,9 @@ const CardContainer = styled.div`
   /* padding: 5px; */
   width: 600px;
   min-height: 450px;
-  margin: auto;
+
+  /* height: calc(100vh - navheight - footer height); */
+  margin: 0 auto;
   /* border: 0.5px solid rgba(0, 0, 0, 0.2); */
   /* background: lightsteelblue; */
   padding: 10px 0 20px 0;
@@ -35,11 +37,13 @@ const ImageAndTitle = styled.div`
 
 const ImgContainer = styled.div`
   width: 100%;
-  height: 350px;
-  background: url(${(props) => props.src}) no-repeat center center;
+  /* height: 350px; */
+  background: url(${(props) => props.src}) no-repeat center;
   background-size: cover;
+
+  padding-top: 59.32%;
   display: block;
-  margin: auto;
+  margin: 0 auto;
   align-items: center;
 `;
 
@@ -47,6 +51,12 @@ const TitleContainer = styled.div`
   padding: 20px 10px 10px 10px;
   text-align: center;
   font-weight: bold;
+
+  /* @media (max-width: 600px) {
+    width: 100%;
+    margin: 0 auto;
+    align-items: center;
+  } */
 `;
 
 const StyledSource = styled.div`

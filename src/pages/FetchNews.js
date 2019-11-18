@@ -10,6 +10,7 @@ const MainBodyContainer = styled.div`
   width: 100vw;
   /* max-height: 700px; */
   background-color: WhiteSmoke;
+  /* margin: 0 auto; */
 `;
 
 const MainBodyContainerInner = styled.div`
@@ -25,6 +26,11 @@ const StyledTitle = styled.div`
   margin: 28px;
   padding: 20px 0 0 250px;
   font-family: "Vidaloka", serif;
+  @media (max-width: 769px) {
+    margin: 0;
+    padding: 0;
+    padding: 20px;
+  }
 `;
 
 // ===================================
@@ -69,8 +75,8 @@ class FetchNews extends React.Component {
   }
 }
 
-export default props => (
+export default (props) => (
   <LoadingConsumer>
-    {loading => <FetchNews {...loading} {...props} />}
+    {(loading) => <FetchNews {...loading} {...props} />}
   </LoadingConsumer>
 );

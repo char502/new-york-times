@@ -28,18 +28,37 @@ const StyledSlider = styled(Slider)`
   }
 
   .slick-prev {
-    /* left: -45px; */
     left: 470px;
     top: 390px;
     z-index: 1;
     font-weight: bold;
     font-size: 30px;
+    @media (max-width: 700px) {
+      left: 200px;
+    }
+    @media (max-width: 600px) {
+      left: 200px;
+    }
+    @media (max-width: 450px) {
+      left: 320px;
+    }
+    @media (max-width: 414px) {
+      left: 290px;
+    }
+    @media (max-width: 375px) {
+      left: 250px;
+    }
+    @media (max-width: 360px) {
+      left: 230px;
+    }
+    @media (max-width: 320px) {
+      left: 190px;
+    }
   }
 
   .slick-next {
     right: 10px;
     top: 390px;
-    /* z-index: 1; */
     font-weight: bold;
     font-size: 30px;
   }
@@ -48,7 +67,7 @@ const StyledSlider = styled(Slider)`
 // ===================================
 
 class MainCarousel extends React.Component {
-  handleSaveItem = article => {
+  handleSaveItem = (article) => {
     const savedArticle = {
       ...article,
       savedAt: moment().format("YYYY-MM-DD")
@@ -62,7 +81,7 @@ class MainCarousel extends React.Component {
     } else if (localStorage.getItem("savedNews")) {
       articleArr = JSON.parse(localStorage.getItem("savedNews"));
 
-      let alreadyInArr = articleArr.some(newsItem => {
+      let alreadyInArr = articleArr.some((newsItem) => {
         return newsItem.title === savedArticle.title;
       });
       if (alreadyInArr) {
@@ -90,7 +109,7 @@ class MainCarousel extends React.Component {
 
     return (
       <StyledSlider {...settings}>
-        {newsData.map(article => (
+        {newsData.map((article) => (
           <Card
             key={article.url}
             data={article}

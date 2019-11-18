@@ -24,7 +24,8 @@ const NavBarInner = styled.div`
 
 const Nav = () => (
   <NavBarContainer>
-    <Media query={{ maxWidth: 599 }}>
+    {/* 599 */}
+    <Media query={{ maxWidth: 769 }}>
       {(matches) =>
         matches ? (
           <NavBarInner>

@@ -60,7 +60,7 @@ class SearchResults extends React.Component {
     }
   }
 
-  handleSaveItem = result => {
+  handleSaveItem = (result) => {
     const savedResult = {
       ...result,
       savedAt: moment().format("YYYY-MM-DD")
@@ -75,7 +75,7 @@ class SearchResults extends React.Component {
     } else if (localStorage.getItem("savedNews")) {
       newsArr = JSON.parse(localStorage.getItem("savedNews"));
 
-      let alreadyInArr = newsArr.some(newsItem => {
+      let alreadyInArr = newsArr.some((newsItem) => {
         return newsItem.title === savedResult.title;
       });
       if (alreadyInArr) {
@@ -97,7 +97,7 @@ class SearchResults extends React.Component {
         <SearchResultsContainer>
           {/* <Loading show={loading} color="red" /> */}
           <SearchResultsContainerInner>
-            {results.map(result => (
+            {results.map((result) => (
               <CardContainer key={result.description}>
                 <Card
                   data={result}
@@ -118,9 +118,9 @@ class SearchResults extends React.Component {
   }
 }
 
-export default props => (
+export default (props) => (
   <LoadingConsumer>
-    {loading => {
+    {(loading) => {
       console.log(loading);
       return <SearchResults {...loading} {...props} />;
     }}

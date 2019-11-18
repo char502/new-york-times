@@ -24,6 +24,14 @@ export const TitleLink = styled.a`
   font-size: 24px;
   color: black;
   text-decoration: none;
+  @media (max-width: 978px) {
+    font-size: 24px;
+    margin: 0 auto;
+    /* text-align: center; */
+    display: flex;
+    justify-content: center;
+    flex: wrap;
+  }
 `;
 
 export const ModH3 = styled(H3)`
@@ -37,11 +45,19 @@ export const H4 = styled.h4`
   color: black;
   text-decoration: none;
   margin: 0;
-  ${props =>
+  ${(props) =>
     props.red &&
     css`
       color: red;
     `}
+  @media (max-width: 978px) {
+    font-size: 12px;
+    margin: 0 auto;
+    /* text-align: center; */
+    display: flex;
+    justify-content: center;
+    flex: wrap;
+  }
 `;
 
 export const H5 = styled.h5`
@@ -54,7 +70,7 @@ export const H5 = styled.h5`
 export const Title = styled(H1)`
   font-size: 32px;
   margin: 28px;
-  ${props =>
+  ${(props) =>
     props.right &&
     css`
       text-align: right;

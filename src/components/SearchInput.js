@@ -4,18 +4,30 @@ import styled from "styled-components/macro";
 import magGlass2 from "../Images/magGlass2.png";
 
 // ==========================================
+
+const FormContainer = styled.div`
+  max-width: "270px";
+  justify-content: "center";
+`;
+
 const Form = styled.form`
-  position: relative;
+  /* position: relative; */
   width: 250px;
   height: 40px;
   /* background-color: blue; */
+  display: flex;
+  flex-direction: column;
 `;
 
 const InputWrapper = styled.div`
   position: relative;
   overflow: hidden;
   height: 100%;
+  width: 110%;
   /* background-color: blue; */
+  /* @media (max-width: 769px) {
+    justify-content: center;
+  } */
 `;
 
 const easing = "cubic-bezier(0.77, 0, 0.175, 1)";
@@ -38,6 +50,12 @@ const Input = styled.input`
   /* transition: 0.5s ease; */
   font-size: ${(props) => (props.isshown ? "12px" : "transparent")};
   /* background-color: green; */
+  @media (max-width: 978px) {
+    margin: 0 auto;
+    /* max-width: 85% */
+    /* transform: ${(props) =>
+      props.isshown ? "translatex(5px)" : "translatex(240px)"}; */
+  }
 `;
 
 // const easing = "cubic-bezier(0.77, 0, 0.175, 1)";
@@ -51,9 +69,14 @@ const StyledIcon = styled.div`
     /* transition: 0.5s ease; */
   /* left: ${(props) => (props.isshown ? "2%" : "90%")}; */
   cursor: pointer;
+   @media (max-width: 978px) {
+    transform: ${(props) =>
+      props.isshown ? "translatex(5px)" : "translatex(240px)"};
+  }
 `;
 
 const MagGlass = styled.img`
+  position: absolute;
   width: 20px;
   height: 20px;
 `;
@@ -99,8 +122,7 @@ class SearchInput extends React.Component {
   render() {
     const { toggleInput } = this.state;
     return (
-      <div>
-        {/* <div>This is the Search Input Component</div> */}
+      <FormContainer>
         <Form onSubmit={this.handleSubmit}>
           <InputWrapper>
             <StyledIcon onClick={this.handleToggle} isshown={toggleInput}>
@@ -116,9 +138,7 @@ class SearchInput extends React.Component {
             />
           </InputWrapper>
         </Form>
-
-        {/* <div style={{ color: toggleInput ? "red" : "black" }} /> */}
-      </div>
+      </FormContainer>
     );
   }
 }

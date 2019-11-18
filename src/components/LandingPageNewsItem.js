@@ -6,13 +6,22 @@ import moment from "moment";
 import imagePlaceholder from "../Images/imagePlaceholder.png";
 import { Button } from "../components/Button";
 
-const NewsSourceSecondContainer = styled.div`
+const NewsSourceSecondaryContainer = styled.div`
   max-width: 1200px;
   height: auto;
-  /* padding: 5px 0 10px 0; */
   margin-right: 40px;
-  /* border-bottom: 0.5px solid rgba(0, 0, 0, 0.2); */
-  /* background-color: lightpink; */
+  @media (max-width: 978px) {
+    width: 100%;
+    margin: 0 auto;
+    margin-right: 0;
+  }
+  @media (max-width: 450px) {
+    width: 100%;
+    margin: 0 auto;
+    margin-right: 0;
+    /* margin-left: 5px;
+    margin-right: 5px; */
+  }
 `;
 
 const StyledListItem = styled.div`
@@ -36,6 +45,9 @@ const ImageContainer = styled.div`
 const HeadlineImage = styled.img`
   height: 80px;
   width: 80px;
+  @media (max-width: 450px) {
+    margin: 5px;
+  }
 `;
 
 const LinkContainer = styled.div`
@@ -69,7 +81,7 @@ const ButtonContainer = styled.div`
 `;
 
 const NewsSourceContainer = (props) => (
-  <NewsSourceSecondContainer>
+  <NewsSourceSecondaryContainer>
     <Title>{props.title}</Title>
     {props.data.map((newsSourceItem) => (
       <StyledListItem key={props.url}>
@@ -100,7 +112,7 @@ const NewsSourceContainer = (props) => (
         </ButtonContainer>
       </StyledListItem>
     ))}
-  </NewsSourceSecondContainer>
+  </NewsSourceSecondaryContainer>
 );
 
 export default NewsSourceContainer;
