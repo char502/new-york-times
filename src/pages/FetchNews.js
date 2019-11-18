@@ -10,7 +10,7 @@ const MainBodyContainer = styled.div`
   width: 100vw;
   /* max-height: 700px; */
   background-color: WhiteSmoke;
-  /* margin: 0 auto; */
+  margin: 0 auto;
 `;
 
 const MainBodyContainerInner = styled.div`

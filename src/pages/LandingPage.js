@@ -50,8 +50,6 @@ const CarouselContainer = styled.div`
   @media (max-width: 978px) {
     width: 100%;
     margin: 0 auto;
-    /* margin-left: 5px;
-    margin-right: 5px; */
   }
   /* @media (max-width: 450px) {
     width: 100%;
@@ -235,7 +233,7 @@ class LandingPage extends React.Component {
             />
             <LandingPageNewsItem
               data={newsSourceThird}
-              key={newsSourceSecond.title}
+              key={newsSourceSecond.url}
               title="National Geographic - Top Headlines"
               handleClick={this.handleSaveItem}
             />

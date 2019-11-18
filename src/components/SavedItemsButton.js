@@ -1,14 +1,18 @@
 import React from "react";
-// import styled from "styled-components/macro";
+import styled from "styled-components/macro";
 import { Link } from "react-router-dom";
 import { AltButton } from "../components/Button";
 
+const ButtonContainer = styled.div`
+  margin-right: 5px;
+`;
+
 const SavedItemsButton = () => (
-  <div style={{ marginRight: "5px" }}>
+  <ButtonContainer>
     <AltButton as={Link} to="/savedNews">
       Saved Items
     </AltButton>
-  </div>
+  </ButtonContainer>
 );
 
 export default SavedItemsButton;
