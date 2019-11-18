@@ -36,7 +36,8 @@ const NavSearchInputsContainer = styled.div`
 `;
 
 const BurgerIcon = styled.button`
-  /* position: relative; */
+  position: relative;
+
   z-index: 999;
   cursor: pointer;
   background: transparent;
@@ -54,7 +55,7 @@ const MenuItemsContainer = styled.div`
   background-color: green;
   border: 0.5px solid rgba(0, 0, 0, 0.2);
   z-index: 99;
-  visibility: ${(props) => (props.showMenu ? "visible" : "hidden")};
+  display: ${props => (props.showMenu ? "block" : "none")};
 `;
 
 const MenuItems = styled.div`
@@ -110,32 +111,26 @@ class NavOnMobile extends React.Component {
     });
   };
 
-  handleClickOutside = (e) => {
+  handleClickOutside = e => {
     if (!this.myRef.current.contains(e.target)) {
-      this.setState({ clickedOutside: true, isMenuOpen: false });
+      console.log("handleClickOutside if statement");
+      this.setState({ isMenuOpen: false });
     }
   };
 
-  handleClickInside = () =>
-    this.setState({ clickedOutside: false, isMenuOpen: true });
-
   render() {
     const { isMenuOpen } = this.state;
-    console.log(this.myRef);
     return (
       <NavOnMobileContainer>
         <NavOnMobileContainerInner>
           <NavHomeButton />
-          <NavSearchInputsContainer>
+
+          <NavSearchInputsContainer ref={this.myRef}>
             <BurgerIcon onClick={this.handleBurgerIconClick}>
               <i className="fas fa-bars fa-2x"></i>
             </BurgerIcon>
 
-            <MenuItemsContainer
-              showMenu={isMenuOpen}
-              ref={this.myRef}
-              onClick={this.handleClickInside}
-            >
+            <MenuItemsContainer showMenu={isMenuOpen}>
               <MenuItems>
                 <MobSearchInputContainer>
                   <SearchInput />
