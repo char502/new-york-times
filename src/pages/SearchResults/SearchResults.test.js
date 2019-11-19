@@ -3,9 +3,7 @@ import { render, fireEvent, waitForElement } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import axios from "axios";
 import { SearchResults } from "./index";
-
 jest.mock("axios");
-
 describe("SearchResults Component", () => {
   const search = "?searchTerm=breaks&sources=cnbc";
   const url = `/search${search}`;
@@ -19,5 +17,7 @@ describe("SearchResults Component", () => {
     data: { results: [] }
   });
   const { debug, getByText } = render(<SearchResults {...props} />);
-  expect(getByText("No Search Results Found")).toBeInTheDocument();
+  it("shows no results", () => {
+    expect(getByText("No Search Results Found")).toBeInTheDocument();
+  });
 });
