@@ -1,12 +1,12 @@
 import React from "react";
 import queryString from "query-string";
-import { getSearchNews } from "../utils/api";
+import { getSearchNews } from "../../utils/api";
 import moment from "moment";
 import styled from "styled-components/macro";
 // import Loading from "react-loading-bar";
-import Card from "../components/Card";
-import NoSearchResults from "../components/NoSearchResults";
-import { LoadingConsumer } from "../loadingContext";
+import Card from "../../components/Card";
+import NoSearchResults from "../../components/NoSearchResults";
+import { LoadingConsumer } from "../../loadingContext";
 
 // ======== Styled Components ========
 const SearchResultsContainer = styled.div`
@@ -26,27 +26,35 @@ const CardContainer = styled.div`
 
 // ===================================
 
-class SearchResults extends React.Component {
+export class SearchResults extends React.Component {
   state = {
     results: []
     // show: false
     // loading: false
   };
 
+  // try { } catch (err) { }
+
   getData = async () => {
-    let query = queryString.parse(this.props.location.search);
-    this.props.setLoadingValue(true);
-    // this.setState({ show: true });
+    try {
+      let query = queryString.parse(this.props.location.search);
+      this.props.setLoadingValue(true);
+      // this.setState({ show: true });
 
-    if (!query.searchTerm) return;
+      if (!query.searchTerm) return;
 
-    const news = await getSearchNews(query.searchTerm, query.sources);
-    console.log(news);
-    this.setState({
-      show: false,
-      results: news.data.articles
-    });
-    this.props.setLoadingValue(false);
+      const news = await getSearchNews(query.searchTerm, query.sources);
+      console.log(news);
+      this.setState({
+        // show: false,
+        results: news.data.articles
+      });
+      this.props.setLoadingValue(false);
+    } catch (err) {
+      console.log(err.message);
+      this.setState({ error: true });
+      this.props.setLoadingValue(false);
+    }
   };
 
   componentDidMount() {
@@ -118,11 +126,26 @@ class SearchResults extends React.Component {
   }
 }
 
-export default (props) => (
+// export default (props) => (
+//   <LoadingConsumer>
+//     {(values) => {
+//       {
+//         /* console.log(values); */
+//       }
+//       return <SearchResults {...values} {...props} />;
+//     }}
+//   </LoadingConsumer>
+// );
+
+const WithConsumer = (props) => (
   <LoadingConsumer>
     {(values) => {
-      console.log(values);
+      {
+        /* console.log(values); */
+      }
       return <SearchResults {...values} {...props} />;
     }}
   </LoadingConsumer>
 );
+
+export default WithConsumer;

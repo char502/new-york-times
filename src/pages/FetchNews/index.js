@@ -1,8 +1,8 @@
 import React from "react";
-import { getNews } from "../utils/api";
+import { getNews } from "../../utils/api";
 import styled from "styled-components/macro";
-import MainCarousel from "../components/Carousel/MainCarousel";
-import { LoadingConsumer } from "../loadingContext";
+import MainCarousel from "../../components/Carousel/MainCarousel";
+import { LoadingConsumer } from "../../loadingContext";
 // import { Title } from "../components/Typography";
 
 // ======== Styled Components ========
