@@ -4,7 +4,6 @@ import styled from "styled-components/macro";
 import NavHomeButton from "../../../components/NavHomeButton";
 import SavedItemsButton from "../../SavedItemsButton";
 import SearchInput from "../../SearchInput";
-
 // import magGlass2 from "../../../Images/magGlass2.png";
 
 // ======== Styled Components ========

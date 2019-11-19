@@ -1,7 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import styled from "styled-components/macro";
-import magGlass2 from "../Images/magGlass2.png";
+import magGlass2 from "../../Images/magGlass2.png";
 
 // ==========================================
 

@@ -5,7 +5,7 @@ import moment from "moment";
 import styled from "styled-components/macro";
 // import Loading from "react-loading-bar";
 import Card from "../components/Card";
-import NoSearchResults from "../components/noSearchResults";
+import NoSearchResults from "../components/NoSearchResults";
 import { LoadingConsumer } from "../loadingContext";
 
 // ======== Styled Components ========
@@ -120,9 +120,9 @@ class SearchResults extends React.Component {
 
 export default (props) => (
   <LoadingConsumer>
-    {(loading) => {
-      console.log(loading);
-      return <SearchResults {...loading} {...props} />;
+    {(values) => {
+      console.log(values);
+      return <SearchResults {...values} {...props} />;
     }}
   </LoadingConsumer>
 );

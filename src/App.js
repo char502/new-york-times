@@ -1,6 +1,6 @@
 import React from "react";
-import { createGlobalStyle } from "styled-components";
-import reset from "styled-reset";
+// import { createGlobalStyle } from "styled-components";
+// import reset from "styled-reset";
 import {
   BrowserRouter as Router,
   Route,
@@ -44,7 +44,7 @@ class App extends React.Component {
               <Nav />
               <Switch>
                 <Route exact path="/" component={LandingPage} />
-                {newsSources.map(route => (
+                {newsSources.map((route) => (
                   <Route
                     key={route.name}
                     path={`/${route.path}`}

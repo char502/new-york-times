@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Loading from "react-loading-bar";
+import "react-loading-bar/dist/index.css";
 // Set Up The Initial Context
 const LoadingContext = React.createContext();
 // Create an exportable consumer that can be injected into components
@@ -10,7 +11,7 @@ class LoadingProvider extends Component {
     loading: false
   };
 
-  setLoading = loading => {
+  setLoading = (loading) => {
     this.setState({ loading });
   };
 
