@@ -24,18 +24,23 @@ export const TitleLink = styled.a`
   font-size: 24px;
   color: black;
   text-decoration: none;
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 12px;
+    background: rgba(118, 231, 205, 0.2);
+    bottom: 0px;
+    z-index: -1;
+  }
   @media (max-width: 978px) {
     font-size: 24px;
-    margin: 0 auto;
-    /* text-align: center; */
-    display: flex;
-    justify-content: center;
-    flex: wrap;
   }
 `;
 
 export const ModH3 = styled(H3)`
-  font-size: 20px;
+  /* font-size: 20px; */
   color: black;
   text-decoration: none;
 `;
@@ -45,7 +50,7 @@ export const H4 = styled.h4`
   color: black;
   text-decoration: none;
   margin: 0;
-  ${(props) =>
+  ${props =>
     props.red &&
     css`
       color: red;
@@ -69,8 +74,9 @@ export const H5 = styled.h5`
 
 export const Title = styled(H1)`
   font-size: 32px;
-  margin: 28px;
-  ${(props) =>
+  margin-top: 24px;
+  margin-bottom: 32px;
+  ${props =>
     props.right &&
     css`
       text-align: right;

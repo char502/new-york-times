@@ -16,11 +16,20 @@ const StyledSlider = styled(Slider)`
 
   .slick-list {
     height: 100%;
+    margin-bottom: 64px;
   }
 
   .slick-arrow {
     position: absolute;
-    transform: translateY(-50%);
+    /* transform: translateY(-50%); */
+    width: 48px;
+    height: 48px;
+    margin: 0;
+    top: unset;
+    bottom: -88px;
+    padding: 0 !important;
+    box-sizing: border-box;
+    border-radius: 0;
   }
 
   .slick-arrow::before {
@@ -28,8 +37,8 @@ const StyledSlider = styled(Slider)`
   }
 
   .slick-prev {
-    left: 470px;
-    top: 390px;
+    /* left: 470px; */
+    /* top: 390px; */
     z-index: 1;
     font-weight: bold;
     font-size: 30px;
@@ -57,17 +66,24 @@ const StyledSlider = styled(Slider)`
   }
 
   .slick-next {
-    right: 10px;
-    top: 390px;
+    /* right: 10px; */
+    /* top: 390px; */
     font-weight: bold;
     font-size: 30px;
+  }
+
+  .slick-prev {
+    left: 0 !important;
+  }
+  .slick-next {
+    left: 48px !important;
   }
 `;
 
 // ===================================
 
 class MainCarousel extends React.Component {
-  handleSaveItem = (article) => {
+  handleSaveItem = article => {
     const savedArticle = {
       ...article,
       savedAt: moment().format("YYYY-MM-DD")
@@ -81,7 +97,7 @@ class MainCarousel extends React.Component {
     } else if (localStorage.getItem("savedNews")) {
       articleArr = JSON.parse(localStorage.getItem("savedNews"));
 
-      let alreadyInArr = articleArr.some((newsItem) => {
+      let alreadyInArr = articleArr.some(newsItem => {
         return newsItem.title === savedArticle.title;
       });
       if (alreadyInArr) {
@@ -109,7 +125,7 @@ class MainCarousel extends React.Component {
 
     return (
       <StyledSlider {...settings}>
-        {newsData.map((article) => (
+        {newsData.map(article => (
           <Card
             key={article.url}
             data={article}

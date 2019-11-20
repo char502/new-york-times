@@ -12,15 +12,15 @@ import imagePlaceholder from "../Images/imagePlaceholder.png";
 
 const CardContainer = styled.div`
   /* padding: 5px; */
-  width: 600px;
+  max-width: 600px;
   min-height: 450px;
 
   /* height: calc(100vh - navheight - footer height); */
   margin: 0 auto;
   /* border: 0.5px solid rgba(0, 0, 0, 0.2); */
   /* background: lightsteelblue; */
-  padding: 10px 0 20px 0;
-  ${(props) => {
+  /* padding: 10px 0 20px 0; */
+  ${props => {
     return (
       props.padded &&
       css`
@@ -31,14 +31,10 @@ const CardContainer = styled.div`
   }}
 `;
 
-const ImageAndTitle = styled.div`
-  padding: 5px;
-`;
-
 const ImgContainer = styled.div`
   width: 100%;
   /* height: 350px; */
-  background: url(${(props) => props.src}) no-repeat center;
+  background: url(${props => props.src}) no-repeat center;
   background-size: cover;
 
   padding-top: 59.32%;
@@ -48,8 +44,7 @@ const ImgContainer = styled.div`
 `;
 
 const TitleContainer = styled.div`
-  padding: 20px 10px 10px 10px;
-  text-align: center;
+  padding-top: 20px;
   font-weight: bold;
 
   /* @media (max-width: 600px) {
@@ -61,7 +56,8 @@ const TitleContainer = styled.div`
 
 const StyledSource = styled.div`
   color: darkgray;
-  padding: 5px;
+  margin-top: 12px;
+  font-size: 11px;
 `;
 
 const StyledAuthor = styled.p`
@@ -94,7 +90,7 @@ const ActionButton = styled.div`
 
 // { item, handleAction, text, extended, author, publishedAt }
 
-const Card = (props) => {
+const Card = props => {
   return (
     <CardContainer padded={props.extended}>
       <div style={{ display: "flex" }}>
@@ -110,7 +106,7 @@ const Card = (props) => {
           </Button>
         </ActionButton>
       </div>
-      <ImageAndTitle>
+      <div>
         <ImgContainer
           src={props.data.urlToImage ? props.data.urlToImage : imagePlaceholder}
         />
@@ -119,12 +115,10 @@ const Card = (props) => {
             {props.data.title}
           </TitleLink>
           {props.showSource && (
-            <H4>
-              <StyledSource> Source: {props.data.source.name}</StyledSource>
-            </H4>
+            <StyledSource> Source: {props.data.source.name}</StyledSource>
           )}
         </TitleContainer>
-      </ImageAndTitle>
+      </div>
 
       {props.children}
       {/* {props.extended && (

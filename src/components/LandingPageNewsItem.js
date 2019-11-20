@@ -35,18 +35,19 @@ const StyledListItem = styled.div`
     border-width: 0;
     padding-bottom: 50px;
   }
-`;
 
-const ImageContainer = styled.div`
-  flex: 1;
-  text-align: center;
+  @media only screen and (max-width: 768px) {
+    display: block;
+  }
 `;
 
 const HeadlineImage = styled.img`
-  height: 80px;
-  width: 80px;
-  @media (max-width: 450px) {
-    margin: 5px;
+  width: 200px;
+  margin-right: 24px;
+  @media only screen and (max-width: 768px) {
+    margin-right: 0px;
+    margin-bottom: 24px;
+    width: 100%;
   }
 `;
 
@@ -80,20 +81,19 @@ const ButtonContainer = styled.div`
   align-items: center; */
 `;
 
-const NewsSourceContainer = (props) => (
+const NewsSourceContainer = props => (
   <NewsSourceSecondaryContainer>
     <Title>{props.title}</Title>
-    {props.data.map((newsSourceItem) => (
+    {props.data.map(newsSourceItem => (
       <StyledListItem key={props.url}>
-        <ImageContainer>
-          <HeadlineImage
-            src={
-              newsSourceItem.urlToImage
-                ? newsSourceItem.urlToImage
-                : imagePlaceholder
-            }
-          />
-        </ImageContainer>
+        <HeadlineImage
+          src={
+            newsSourceItem.urlToImage
+              ? newsSourceItem.urlToImage
+              : imagePlaceholder
+          }
+        />
+
         <LinkContainer>
           <LinkContainerInner>
             <ModH3 as="a" href={newsSourceItem.url} target="_blank">
