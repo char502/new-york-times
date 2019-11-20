@@ -3,6 +3,7 @@ import { render, fireEvent, waitForElement } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import axios from "axios";
 import { SearchResults } from "./index";
+
 jest.mock("axios");
 describe("SearchResults Component", () => {
   const search = "?searchTerm=breaks&sources=cnbc";
@@ -13,6 +14,7 @@ describe("SearchResults Component", () => {
       search
     }
   };
+
   axios.get.mockResolvedValueOnce({
     data: { results: [] }
   });
