@@ -10,7 +10,6 @@ const NoSearches = styled.div`
   text-align: center;
   padding: 20px;
   border: 0.5px solid red;
-  border-radius: 5px;
 `;
 
 const NoSearchResults = () => {

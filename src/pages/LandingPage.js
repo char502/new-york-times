@@ -11,7 +11,6 @@ import Carousel from "../components/Carousel/MainCarousel";
 import imagePlaceholder from "../Images/imagePlaceholder.png";
 import { Button } from "../components/Button";
 import LandingPageNewsItem from "../components/LandingPageNewsItem";
-// import SavedNews from "./SavedNews";
 
 // ======== Styled Components ========
 const LandingPageBodyContainer = styled.div`
@@ -49,6 +48,7 @@ const StyledTitle = styled.div`
 const CarouselContainer = styled.div`
   width: 714px;
   /* height: 495px; */
+  padding-bottom: 10px;
   border-bottom: 0.5px solid rgba(0, 0, 0, 0.2);
   @media (max-width: 1200px) {
     width: 100%;

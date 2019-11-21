@@ -140,9 +140,7 @@ export class SearchResults extends React.Component {
 const WithConsumer = (props) => (
   <LoadingConsumer>
     {(values) => {
-      {
-        /* console.log(values); */
-      }
+      console.log(values);
       return <SearchResults {...values} {...props} />;
     }}
   </LoadingConsumer>

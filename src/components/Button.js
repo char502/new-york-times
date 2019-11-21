@@ -8,8 +8,7 @@ export const Button = styled.button`
   transition: 1s;
   outline: none;
   border: 0.5px solid rgba(0, 0, 0, 0.2);
-  margin: 0 5px;
-  border-radius: 4px;
+  /* margin: 0 5px; */
   height: 30px;
   width: auto;
   display: flex;
@@ -56,15 +55,12 @@ export const AltButton = styled(Button)`
 export const SearchAndFilterButton = styled(Button)`
   &:hover {
     background-color: white;
-    /* color: white; */
   }
 `;
 
 export const CarouselButton = styled(Button)`
-  /* background-color: lightgoldenrodyellow; */
   height: 30px;
   width: 50px;
-  /* display: block; */
   color: black;
   &:focus {
     background-color: gray;

@@ -10,7 +10,6 @@ import SearchInput from "../../SearchInput";
 const NavTopLineContainer = styled.div`
   width: 100%;
   height: 75px;
-  /* margin-top: 10px; */
 `;
 
 const NavTopLineContainerInner = styled.div`
@@ -73,11 +72,7 @@ class NavTopLine extends React.Component {
         <NavTopLineContainerInner>
           <NavHomeButton />
           <NavSearchInputsContainer>
-            {this.props.location.search === "" ? (
-              //==========================
-              <SearchInput />
-            ) : //===========
-            null}
+            {this.props.location.search === "" ? <SearchInput /> : null}
           </NavSearchInputsContainer>
           <SavedItemsButton />
         </NavTopLineContainerInner>

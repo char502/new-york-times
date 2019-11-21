@@ -2,7 +2,7 @@ import React from "react";
 import styled, { css } from "styled-components/macro";
 import moment from "moment";
 import { Button } from "./Button";
-import { H4, TitleLink } from "./Typography";
+import { TitleLink } from "./Typography";
 import imagePlaceholder from "../Images/imagePlaceholder.png";
 
 const CardContainer = styled.div`

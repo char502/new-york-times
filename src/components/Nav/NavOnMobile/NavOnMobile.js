@@ -2,8 +2,9 @@ import React from "react";
 // import { withRouter } from "react-router-dom";
 import styled from "styled-components/macro";
 import NavHomeButton from "../../NavHomeButton";
-import SavedItems from "../../SavedItemsButton";
 import SearchInput from "../../SearchInput";
+import Dropdown from "../../Dropdown";
+import SavedItems from "../../SavedItemsButton";
 
 import MobSourceLinks from "../../MobSourceLinks";
 
@@ -20,7 +21,6 @@ const NavOnMobileContainerInner = styled.div`
   margin: 0 auto;
   display: flex;
   align-items: center;
-  /* justify-content: space-around; */
 `;
 
 const NavSearchInputsContainer = styled.div`
@@ -30,9 +30,6 @@ const NavSearchInputsContainer = styled.div`
   margin-right: 20px;
   position: relative;
   justify-content: flex-end;
-  /* margin-right: 24px; */
-  /* background-color: red; */
-  /* background-color: white; */
 `;
 
 const BurgerIcon = styled.button`
@@ -50,11 +47,10 @@ const MenuItemsContainer = styled.div`
   padding: 0 20px 20px 20px;
   right: 0;
   top: 0;
-  /* background-color: white; */
-  /* background-color: green; */
   border: 0.5px solid rgba(0, 0, 0, 0.2);
   z-index: 99;
   display: ${(props) => (props.showMenu ? "block" : "none")};
+  background: white;
 `;
 
 const MenuItems = styled.div`
@@ -70,13 +66,22 @@ const MobSearchInputContainer = styled.div`
   border: 0.5px solid rgba(0, 0, 0, 0.2);
 `;
 
+const MobSearchFilterContainer = styled.div`
+  width: 100%;
+  position: "absolute";
+  left: "100";
+  top: "2%";
+  margin-top: 10px;
+  /* border: 0.5px solid rgba(0, 0, 0, 0.2); */
+`;
+
 const ButtonContainer = styled.div`
   max-width: 120px;
   margin: auto;
+  margin-top: 20px;
   padding: 20px 0;
   border-top: 0.5px solid rgba(0, 0, 0, 0.2);
   border-bottom: 0.5px solid rgba(0, 0, 0, 0.2);
-  /* background-color: blue; */
 `;
 
 const NewsSourceLinks = styled.div``;
@@ -87,8 +92,9 @@ class NavOnMobile extends React.Component {
   constructor() {
     super();
     this.state = {
-      isMenuOpen: false
+      isMenuOpen: false,
       // clickedOutside: false
+      filter: null
     };
   }
 
@@ -103,6 +109,10 @@ class NavOnMobile extends React.Component {
 
   myRef = React.createRef();
   //=====================================================
+
+  handleChange = (val) => {
+    this.setState({ filter: val ? val.path : null });
+  };
 
   handleBurgerIconClick = () => {
     this.setState({
@@ -123,17 +133,21 @@ class NavOnMobile extends React.Component {
       <NavOnMobileContainer>
         <NavOnMobileContainerInner>
           <NavHomeButton />
-
           <NavSearchInputsContainer ref={this.myRef}>
             <BurgerIcon onClick={this.handleBurgerIconClick}>
               <i className="fas fa-bars fa-2x"></i>
             </BurgerIcon>
-
             <MenuItemsContainer showMenu={isMenuOpen}>
               <MenuItems>
                 <MobSearchInputContainer>
                   <SearchInput />
                 </MobSearchInputContainer>
+                <MobSearchFilterContainer>
+                  <Dropdown
+                    handleChange={this.handleChange}
+                    filter={this.state.filter}
+                  />
+                </MobSearchFilterContainer>
                 <ButtonContainer>
                   <SavedItems />
                 </ButtonContainer>

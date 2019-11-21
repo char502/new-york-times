@@ -3,23 +3,6 @@ import Select from "react-select";
 import styled from "styled-components";
 import newsSources from "../newsSources";
 
-// const styles = {
-//   control: (base) => ({
-//     ...base,
-//     fontFamily: "Roboto Condensed",
-//     backgroundColor: "white",
-//     fontSize: "12px",
-//     color: "black"
-//   }),
-//   menu: (base) => ({
-//     ...base,
-//     fontFamily: "Roboto Condensed",
-//     backgroundColor: "white",
-//     fontSize: "12px",
-//     color: "black"
-//   })
-// };
-
 const styles = {
   container: (base) => ({
     flex: 1
@@ -40,14 +23,11 @@ const styles = {
     fontSize: "12px",
     color: "black",
     height: "30px",
-    width: "180px",
-    // width: "190px",
-    // width: "auto",
+    width: "261px",
     padding: "0 8px 0 4px",
-    borderRadius: "4px",
     outline: "none",
     backgroundColor: "lightGrey",
-    border: "0.5px solid rgba(0, 0, 0, 0.2)",
+    border: "1px solid rgba(0, 0, 0, 0.2)",
     position: "relative"
   }),
   dropdownIndicator: (base) => ({
@@ -83,10 +63,19 @@ const styles = {
     fontWeight: "bold",
     color: "black",
     position: "absolute",
-    top: "15px",
+    top: "0",
     width: "180px"
-    // width: "190px"
-    // width: "auto"
+  }),
+  menuList: (base) => ({
+    ...base,
+    fontFamily: "Roboto Condensed",
+    backgroundColor: "white",
+    fontSize: "12px",
+    fontWeight: "bold",
+    color: "black",
+    position: "absolute",
+    top: "0",
+    width: "180px"
   }),
   placeholder: (base) => ({
     ...base,
@@ -101,6 +90,10 @@ const styles = {
     color: "black",
     fontWeight: "bold"
   })
+  // SelectContainer: (base) => ({
+  //   backgroundColor: "blue",
+  //   width: "auto"
+  // })
 };
 
 const Dropdown = styled(Select)``;
@@ -115,7 +108,6 @@ export default ({ handleChange, filter }) => (
       getOptionLabel={(option) => `${option.name}`}
       getOptionValue={(option) => `${option.path}`}
       onChange={handleChange}
-      /* placeholder={"News Source Filter (Optional)"} */
       placeholder={"All Sources"}
       styles={styles}
       value={newsSources.filter(({ path }) => path === filter)}

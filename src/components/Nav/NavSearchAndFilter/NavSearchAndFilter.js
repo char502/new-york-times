@@ -1,5 +1,5 @@
 import React from "react";
-import { withRouter /* Redirect */ } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import queryString from "query-string";
 import styled from "styled-components/macro";
 import Dropdown from "../../Dropdown";
@@ -40,27 +40,24 @@ const StyledInput = styled.input`
   height: 28px;
   width: 350px;
   padding-left: 25px;
-  border-radius: 4px 0 0 4px;
   font-family: Roboto Condensed;
   font-weight: bold;
   font-size: 12px;
-  border: 0.5px solid rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.2);
   border-right: 0;
+  border-left: 0;
   outline: none;
-  /* margin: 5px; */
 `;
 
 const StyledIcon = styled.div`
-  height: 31px;
+  height: 32px;
   width: 30px;
-
   cursor: pointer;
   margin: 0;
   padding: 0;
-  border: 0.5px solid rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.2);
   border-left: 0;
-  /* outline: none; */
-  border-radius: 0 4px 4px 0;
+  border-radius: 0;
 `;
 
 const MagGlass = styled.img`
@@ -84,7 +81,7 @@ class SearchAndFilter extends React.Component {
 
   searchAndFilterinputRef = React.createRef();
 
-  handleInputchange = e => {
+  handleInputchange = (e) => {
     let { name, value } = e.target;
     this.setState({ [name]: value }, this.validateSearchTerm);
     // this.setState({ searchTerm: e.target.value });
@@ -106,32 +103,25 @@ class SearchAndFilter extends React.Component {
     });
   };
 
-  handleChange = val => {
+  handleChange = (val) => {
     this.setState({ filter: val ? val.path : null });
   };
 
-  isValidationError = bool => {
+  isValidationError = (bool) => {
     this.setState({ searchTermError: bool });
   };
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
-
-    console.log(this.props.location.search);
     const searchQuery = queryString.parse(this.props.location.search);
-    console.log(searchQuery);
-
     searchQuery.sources = this.state.filter;
     searchQuery.searchTerm = this.state.searchTerm.trim();
-
     const stringifiedSearchQuery = queryString.stringify(searchQuery);
-    console.log(stringifiedSearchQuery);
     this.props.history.push(`?${stringifiedSearchQuery}`);
-
     this.setState({ searchTerm: "", filter: "" });
   };
 
-  handleClearFilter = e => {
+  handleClearFilter = (e) => {
     e.preventDefault();
     let searchQuery = queryString.parse(this.props.location.search);
     if (searchQuery.sources) {

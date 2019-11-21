@@ -13,7 +13,7 @@ const MobSourceLinksContainer = styled.div`
 `;
 
 const NewsLink = styled(Link)`
-  padding: 5px;
+  margin: 8px;
   font-size: 10px;
   display: inline-block;
   text-decoration: none;
@@ -21,6 +21,7 @@ const NewsLink = styled(Link)`
   &:first-child {
     padding-left: 0;
   }
+  cursor: pointer;
 `;
 // ==========================================
 

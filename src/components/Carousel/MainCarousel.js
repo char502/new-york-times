@@ -22,11 +22,11 @@ const StyledSlider = styled(Slider)`
   .slick-arrow {
     position: absolute;
     width: 48px;
-    height: 48px;
-    margin: 0;
+    height: 44px;
+    margin: 10px 0;
     top: unset;
     bottom: -88px;
-    padding: 0 /* !important */;
+    padding: 0;
     box-sizing: border-box;
     border-radius: 0;
   }
@@ -39,27 +39,6 @@ const StyledSlider = styled(Slider)`
     z-index: 1;
     font-weight: bold;
     font-size: 30px;
-    /* @media (max-width: 700px) {
-      left: 200px;
-    }
-    @media (max-width: 600px) {
-      left: 200px;
-    }
-    @media (max-width: 450px) {
-      left: 320px;
-    }
-    @media (max-width: 414px) {
-      left: 290px;
-    }
-    @media (max-width: 375px) {
-      left: 250px;
-    }
-    @media (max-width: 360px) {
-      left: 230px;
-    }
-    @media (max-width: 320px) {
-      left: 190px;
-    } */
   }
 
   .slick-next {
@@ -68,10 +47,10 @@ const StyledSlider = styled(Slider)`
   }
 
   .slick-prev {
-    left: 0 /* !important */;
+    left: 0;
   }
   .slick-next {
-    left: 48px /* !important */;
+    left: 48px;
   }
 `;
 
