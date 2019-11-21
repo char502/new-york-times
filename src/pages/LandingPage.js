@@ -16,6 +16,8 @@ import LandingPageNewsItem from "../components/LandingPageNewsItem";
 // ======== Styled Components ========
 const LandingPageBodyContainer = styled.div`
   width: 100vw;
+  padding: 0 32px;
+  box-sizing: border-box;
 `;
 
 const LandingPageBodyContainerInner = styled.div`
@@ -43,10 +45,10 @@ const StyledTitle = styled.div`
 
 const CarouselContainer = styled.div`
   width: 714px;
-  height: 495px;
+  /* height: 495px; */
   border-bottom: 0.5px solid rgba(0, 0, 0, 0.2);
   /* margin-left: 10px; */
-  padding-bottom: 30px;
+  /* padding-bottom: 30px; */
   @media (max-width: 978px) {
     width: 100%;
     margin: 0 auto;
@@ -163,10 +165,10 @@ class LandingPage extends React.Component {
     });
   }
 
-  handleRemoveItem = (topNewsItem) => {
+  handleRemoveItem = topNewsItem => {
     const { topTenSaved } = this.state;
 
-    const resultWhenItemRemoved = topTenSaved.filter((arrItem) => {
+    const resultWhenItemRemoved = topTenSaved.filter(arrItem => {
       return arrItem !== topNewsItem;
     });
 
@@ -178,7 +180,7 @@ class LandingPage extends React.Component {
     }
   };
 
-  handleSaveItem = (result) => {
+  handleSaveItem = result => {
     const savedResult = {
       ...result,
       savedAt: moment().format("YYYY-MM-DD")
@@ -194,7 +196,7 @@ class LandingPage extends React.Component {
     } else if (localStorage.getItem("savedNews")) {
       newsArr = JSON.parse(localStorage.getItem("savedNews"));
 
-      let alreadyInArr = newsArr.some((newsItem) => {
+      let alreadyInArr = newsArr.some(newsItem => {
         return newsItem.title === savedResult.title;
       });
       if (alreadyInArr) {
