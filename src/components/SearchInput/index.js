@@ -3,8 +3,6 @@ import { withRouter } from "react-router-dom";
 import styled from "styled-components/macro";
 import magGlass2 from "../../Images/magGlass2.png";
 
-// ==========================================
-
 const FormContainer = styled.div`
   max-width: 270px;
   justify-content: center;
@@ -59,7 +57,6 @@ const MagGlass = styled.img`
   width: 20px;
   height: 20px;
 `;
-// ===================================
 
 class SearchInput extends React.Component {
   state = {

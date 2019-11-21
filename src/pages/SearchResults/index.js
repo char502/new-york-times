@@ -3,12 +3,10 @@ import queryString from "query-string";
 import { getSearchNews } from "../../utils/api";
 import moment from "moment";
 import styled from "styled-components/macro";
-// import Loading from "react-loading-bar";
 import Card from "../../components/Card";
 import NoSearchResults from "../../components/NoSearchResults";
 import { LoadingConsumer } from "../../loadingContext";
 
-// ======== Styled Components ========
 const SearchResultsContainer = styled.div`
   width: 100vw;
 `;
@@ -24,29 +22,19 @@ const CardContainer = styled.div`
   padding: 10px;
 `;
 
-// ===================================
-
 export class SearchResults extends React.Component {
   state = {
     results: []
-    // show: false
-    // loading: false
   };
-
-  // try { } catch (err) { }
 
   getData = async () => {
     try {
       let query = queryString.parse(this.props.location.search);
       this.props.setLoadingValue(true);
-      // this.setState({ show: true });
-
       if (!query.searchTerm) return;
-
       const news = await getSearchNews(query.searchTerm, query.sources);
       console.log(news);
       this.setState({
-        // show: false,
         results: news.data.articles
       });
       this.props.setLoadingValue(false);
@@ -103,7 +91,6 @@ export class SearchResults extends React.Component {
     if (results.length) {
       return (
         <SearchResultsContainer>
-          {/* <Loading show={loading} color="red" /> */}
           <SearchResultsContainerInner>
             {results.map((result) => (
               <CardContainer key={result.description}>
@@ -126,6 +113,7 @@ export class SearchResults extends React.Component {
   }
 }
 
+// Changed for testing may revert back
 // export default (props) => (
 //   <LoadingConsumer>
 //     {(values) => {

@@ -1,13 +1,10 @@
 import React from "react";
 import styled from "styled-components/macro";
-// import copyright from "../Images/copyright3.png";
 import { H4, H5 } from "../components/Typography";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
 import { faLinkedin, faGithubSquare } from "@fortawesome/free-brands-svg-icons";
-
-// ======== Styled Components ========
 
 const FooterContainer = styled.div`
   width: 100vw;

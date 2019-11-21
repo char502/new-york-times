@@ -5,8 +5,6 @@ import Slider from "react-slick";
 import Card from "../Card";
 import { CustomArrow } from "./CarouselButton";
 
-// ======== Styled Components ========
-
 const StyledSlider = styled(Slider)`
   & {
     max-width: 600px;
@@ -24,6 +22,7 @@ const StyledSlider = styled(Slider)`
     width: 48px;
     height: 44px;
     margin: 10px 0;
+    padding: 10px 0;
     top: unset;
     bottom: -88px;
     padding: 0;
@@ -44,6 +43,7 @@ const StyledSlider = styled(Slider)`
   .slick-next {
     font-weight: bold;
     font-size: 30px;
+    z-index: 1;
   }
 
   .slick-prev {
@@ -53,8 +53,6 @@ const StyledSlider = styled(Slider)`
     left: 48px;
   }
 `;
-
-// ===================================
 
 class MainCarousel extends React.Component {
   handleSaveItem = (article) => {

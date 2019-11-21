@@ -8,8 +8,6 @@ import { H2 } from "../../Typography";
 import magGlass2 from "../../../Images/magGlass2.png";
 import ValidationMessage from "../../ValidationMessage";
 
-// ======== Styled Components ========
-
 const MainContainer = styled.div`
   width: 100%;
   height: 100%;
@@ -67,8 +65,6 @@ const MagGlass = styled.img`
   border-radius: 4px;
   outline: none;
 `;
-
-// ===================================
 
 class SearchAndFilter extends React.Component {
   state = {

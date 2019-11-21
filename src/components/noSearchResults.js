@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components/macro";
-// import SearchAndFilter from "../components/Nav/NavSearchAndFilter/SearchAndFilter";
 
 const NoSearches = styled.div`
   color: red;

@@ -5,7 +5,6 @@ import Card from "../components/Card";
 import { Button, AltButton } from "../components/Button";
 import { H1, H4 } from "../components/Typography";
 
-// ======== Styled Components ========
 const SavedNewsContainer = styled.div`
   width: 100vw;
 `;
@@ -16,8 +15,6 @@ const SavedNewsContainerInner = styled.div`
   margin: 0 auto;
   position: relative;
 `;
-
-// ===================================
 
 const ActionContainer = styled.div`
   display: flex;
@@ -31,11 +28,6 @@ const ButtonContainer = styled.div`
   justify-content: flex-end;
   padding: 10px;
 `;
-
-// const CardContainer = styled.div`
-//   padding: 10px 0 20px 0;
-// `;
-// const ImagePlaceHolder = styled.img``;
 
 class SavedNews extends React.Component {
   constructor(props) {
@@ -127,5 +119,3 @@ class SavedNews extends React.Component {
 }
 
 export default SavedNews;
-
-//some comments for this feature

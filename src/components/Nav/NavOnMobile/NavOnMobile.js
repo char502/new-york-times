@@ -1,14 +1,10 @@
 import React from "react";
-// import { withRouter } from "react-router-dom";
 import styled from "styled-components/macro";
 import NavHomeButton from "../../NavHomeButton";
 import SearchInput from "../../SearchInput";
 import Dropdown from "../../Dropdown";
 import SavedItems from "../../SavedItemsButton";
-
 import MobSourceLinks from "../../MobSourceLinks";
-
-// ======== Styled Components ========
 
 const NavOnMobileContainer = styled.div`
   width: 100%;
@@ -72,7 +68,6 @@ const MobSearchFilterContainer = styled.div`
   left: "100";
   top: "2%";
   margin-top: 10px;
-  /* border: 0.5px solid rgba(0, 0, 0, 0.2); */
 `;
 
 const ButtonContainer = styled.div`
@@ -84,21 +79,15 @@ const ButtonContainer = styled.div`
   border-bottom: 0.5px solid rgba(0, 0, 0, 0.2);
 `;
 
-const NewsSourceLinks = styled.div``;
-
-// =====================================
-
 class NavOnMobile extends React.Component {
   constructor() {
     super();
     this.state = {
       isMenuOpen: false,
-      // clickedOutside: false
       filter: null
     };
   }
 
-  //=====================================================
   componentDidMount() {
     document.addEventListener("mousedown", this.handleClickOutside);
   }
@@ -108,7 +97,6 @@ class NavOnMobile extends React.Component {
   }
 
   myRef = React.createRef();
-  //=====================================================
 
   handleChange = (val) => {
     this.setState({ filter: val ? val.path : null });
@@ -151,9 +139,7 @@ class NavOnMobile extends React.Component {
                 <ButtonContainer>
                   <SavedItems />
                 </ButtonContainer>
-                <NewsSourceLinks>
-                  <MobSourceLinks />
-                </NewsSourceLinks>
+                <MobSourceLinks />
               </MenuItems>
             </MenuItemsContainer>
           </NavSearchInputsContainer>

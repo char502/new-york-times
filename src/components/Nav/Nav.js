@@ -1,14 +1,11 @@
 import React from "react";
 import styled from "styled-components/macro";
 import Media from "react-media";
-
-// components
 import NavTopLine from "./NavTopLine/NavTopLine";
 import NavBottomLine from "./NavBottomLine/NavBottomLine";
 import NavSearchAndFilter from "./NavSearchAndFilter/NavSearchAndFilter";
 import NavOnMobile from "./NavOnMobile/NavOnMobile";
 
-// ======== Styled Components ========
 const NavBarContainer = styled.div`
   width: 100vw;
   /* background-color: green; */
@@ -20,11 +17,9 @@ const NavBarInner = styled.div`
   max-width: 1200px;
   margin: 0 auto;
 `;
-// ===================================
 
 const Nav = () => (
   <NavBarContainer>
-    {/* 599 */}
     <Media query={{ maxWidth: 769 }}>
       {(matches) =>
         matches ? (

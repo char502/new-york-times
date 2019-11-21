@@ -4,9 +4,7 @@ import styled from "styled-components/macro";
 import NavHomeButton from "../../../components/NavHomeButton";
 import SavedItemsButton from "../../SavedItemsButton";
 import SearchInput from "../../SearchInput";
-// import magGlass2 from "../../../Images/magGlass2.png";
 
-// ======== Styled Components ========
 const NavTopLineContainer = styled.div`
   width: 100%;
   height: 75px;
@@ -27,8 +25,6 @@ const NavSearchInputsContainer = styled.div`
   justify-content: flex-end;
   margin-right: 24px;
 `;
-
-// ===================================
 
 class NavTopLine extends React.Component {
   state = {

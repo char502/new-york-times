@@ -1,12 +1,5 @@
 import React from "react";
-// import { createGlobalStyle } from "styled-components";
-// import reset from "styled-reset";
-import {
-  BrowserRouter as Router,
-  Route,
-  // Redirect,
-  Switch
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 // components

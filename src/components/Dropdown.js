@@ -4,7 +4,7 @@ import styled from "styled-components";
 import newsSources from "../newsSources";
 
 const styles = {
-  container: (base) => ({
+  container: () => ({
     flex: 1
   }),
   clearIndicator: (base) => ({
@@ -17,8 +17,7 @@ const styles = {
     height: "30px",
     backgroundColor: "transparent"
   }),
-  control: (base) => ({
-    // ...base,
+  control: () => ({
     fontFamily: "Roboto Condensed",
     fontSize: "12px",
     color: "black",
@@ -90,10 +89,6 @@ const styles = {
     color: "black",
     fontWeight: "bold"
   })
-  // SelectContainer: (base) => ({
-  //   backgroundColor: "blue",
-  //   width: "auto"
-  // })
 };
 
 const Dropdown = styled(Select)``;

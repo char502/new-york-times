@@ -16,6 +16,7 @@ export const Button = styled.button`
   padding: 0 16px;
   text-decoration: none;
   font-size: 12px;
+  font-weight: bold;
   ${(props) =>
     props.small &&
     css`
@@ -24,14 +25,16 @@ export const Button = styled.button`
       height: 24px;
     `}
   &:hover {
-    background-color: gray;
-    color: white;
+    background-color: lightGrey;
+    color: black;
+    font-weight: bold;
   }
 `;
 
 export const AltButton = styled(Button)`
-  background: gray;
-  color: white;
+  background: lightGrey;
+  color: black;
+  font-weight: bold;
   height: 28px;
   width: auto;
   &:hover {
@@ -61,39 +64,10 @@ export const CarouselButton = styled(Button)`
   height: 30px;
   width: 50px;
   color: black;
-  &:focus {
-    background-color: gray;
-    color: white;
-  }
-  &:not(:focus) {
+  font-weight: bold;
+  transition: 0.2s;
+  &:not(:active) {
     background-color: white;
     color: black;
   }
 `;
-
-// export const CarouselButton = styled(Button)`
-//   font-family: "Roboto Condensed", sans-serif;
-//   background-color: white;
-//   border: none;
-//   cursor: pointer;
-//   transition: 0.5s;
-//   color: black;
-//   outline: none;
-//   border: 0.5px solid rgba(0, 0, 0, 0.2);
-//   height: 30px;
-//   width: auto;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   padding: 0 16px;
-//   text-decoration: none;
-//   font-size: 12px;
-//   &:hover {
-//     background-color: gray;
-//     color: black;
-//   }
-//   &:not(:focus) {
-//     background-color: white;
-//     color: black;
-//   }
-// `;

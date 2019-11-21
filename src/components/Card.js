@@ -9,7 +9,6 @@ const CardContainer = styled.div`
   max-width: 600px;
   min-height: 450px;
   margin: 0 auto;
-
   ${(props) => {
     return (
       props.padded &&
@@ -96,11 +95,6 @@ const Card = (props) => {
       </div>
 
       {props.children}
-      {/* {props.extended && (
-      <BorderBottom
-        style={{ borderBottom: "0.5px solid rgba(0, 0, 0, 0.2)" }}
-      />
-    )} */}
     </CardContainer>
   );
 };

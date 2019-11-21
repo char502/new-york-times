@@ -3,13 +3,9 @@ import styled from "styled-components/macro";
 import { Link } from "react-router-dom";
 import newspaper from "../Images/newspaper7.jpg";
 
-// ======== Styled Components ========
-
 const Newspaper = styled.img`
   width: 70px;
   height: 70px;
-  /* border-radius: 10%; */
-  /* margin-top: 20px; */
 `;
 
 const TitleContainer = styled.div`
@@ -20,10 +16,7 @@ const TitleContainer = styled.div`
 const HomeButton = styled.img`
   margin: 20px 20px 20px 0;
   align-items: center;
-  /* align-items: center; */
 `;
-
-// =====================================
 
 const NavHomeButton = () => (
   <TitleContainer>

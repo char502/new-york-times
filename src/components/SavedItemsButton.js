@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { AltButton } from "../components/Button";
 
 const ButtonContainer = styled.div`
-  margin-right: 5px;
+  margin-right: 12px;
 `;
 
 const SavedItemsButton = () => (

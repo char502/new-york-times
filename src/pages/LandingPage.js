@@ -12,7 +12,6 @@ import imagePlaceholder from "../Images/imagePlaceholder.png";
 import { Button } from "../components/Button";
 import LandingPageNewsItem from "../components/LandingPageNewsItem";
 
-// ======== Styled Components ========
 const LandingPageBodyContainer = styled.div`
   width: 100vw;
   padding: 0 32px;
@@ -47,17 +46,12 @@ const StyledTitle = styled.div`
 
 const CarouselContainer = styled.div`
   width: 714px;
-  /* height: 495px; */
   padding-bottom: 10px;
   border-bottom: 0.5px solid rgba(0, 0, 0, 0.2);
   @media (max-width: 1200px) {
     width: 100%;
     margin: 0 auto;
   }
-  /* @media (max-width: 978px) {
-    width: 100%;
-    margin: 0 auto;
-  } */
 `;
 
 // === SideBar styling ===
@@ -116,10 +110,7 @@ const NoNewsItems = styled.div`
   margin: 10px;
   background-color: lightgray;
 `;
-
 // === End of SideBar styling ===
-
-// ===================================
 
 class LandingPage extends React.Component {
   state = {

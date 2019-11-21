@@ -3,8 +3,6 @@ import styled from "styled-components/macro";
 import { Link } from "react-router-dom";
 import newsSources from "../newsSources";
 
-// ======== Styled Components ========
-
 const MobSourceLinksContainer = styled.div`
   padding-top: 20px;
   display: flex;
@@ -23,7 +21,6 @@ const NewsLink = styled(Link)`
   }
   cursor: pointer;
 `;
-// ==========================================
 
 const MobSourceLinks = () => (
   <MobSourceLinksContainer>

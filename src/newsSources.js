@@ -70,15 +70,6 @@ const landingPageNews = [
     path: "national-geographic",
     name: "National Geographic"
   }
-
-  // {
-  //   path: "new-scientist",
-  //   name: "New Scientist"
-  // },
-  // {
-  //   path: "the-next-web",
-  //   name: "The Next Web"
-  // }
 ];
 
 export { landingPageNews };

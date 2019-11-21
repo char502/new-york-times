@@ -90,7 +90,6 @@ const NewsSourceContainer = (props) => (
               : imagePlaceholder
           }
         />
-
         <LinkContainer>
           <LinkContainerInner>
             <ModH3 as="a" href={newsSourceItem.url} target="_blank">

@@ -30,7 +30,7 @@ export const TitleLink = styled.a`
     position: absolute;
     width: 100%;
     height: 12px;
-    background: rgba(118, 231, 205, 0.2);
+    background: rgba(75, 223, 189, 0.4);
     bottom: 0px;
     z-index: -1;
   }
@@ -50,7 +50,7 @@ export const H4 = styled.h4`
   color: black;
   text-decoration: none;
   margin: 0;
-  ${props =>
+  ${(props) =>
     props.red &&
     css`
       color: red;
@@ -58,7 +58,6 @@ export const H4 = styled.h4`
   @media (max-width: 978px) {
     font-size: 12px;
     margin: 0 auto;
-    /* text-align: center; */
     display: flex;
     justify-content: center;
     flex: wrap;
@@ -76,7 +75,7 @@ export const Title = styled(H1)`
   font-size: 32px;
   margin-top: 24px;
   margin-bottom: 32px;
-  ${props =>
+  ${(props) =>
     props.right &&
     css`
       text-align: right;

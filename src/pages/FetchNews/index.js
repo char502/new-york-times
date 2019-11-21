@@ -4,15 +4,16 @@ import styled from "styled-components/macro";
 import MainCarousel from "../../components/Carousel/MainCarousel";
 import { LoadingConsumer } from "../../loadingContext";
 
-// ======== Styled Components ========
 const MainBodyContainer = styled.div`
   width: 100vw;
   background-color: WhiteSmoke;
+  padding: 0 32px;
   margin: 0 auto;
 `;
 
 const MainBodyContainerInner = styled.div`
   width: 100%;
+  /* min-height: calc(100vh - 80px); */
   min-height: calc(100vh - 120px);
   max-width: 1200px;
   margin: 0 auto;
@@ -29,8 +30,6 @@ const StyledTitle = styled.div`
     padding: 20px;
   }
 `;
-
-// ===================================
 
 class FetchNews extends React.Component {
   state = {
