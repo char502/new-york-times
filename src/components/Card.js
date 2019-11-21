@@ -33,6 +33,7 @@ const ImgContainer = styled.div`
 
 const TitleContainer = styled.div`
   padding-top: 20px;
+  padding-bottom: 10px;
   font-weight: bold;
 `;
 

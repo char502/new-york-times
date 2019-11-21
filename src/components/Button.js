@@ -8,7 +8,6 @@ export const Button = styled.button`
   transition: 1s;
   outline: none;
   border: 0.5px solid rgba(0, 0, 0, 0.2);
-  /* margin: 0 5px; */
   height: 30px;
   width: auto;
   display: flex;
@@ -66,4 +65,35 @@ export const CarouselButton = styled(Button)`
     background-color: gray;
     color: white;
   }
+  &:not(:focus) {
+    background-color: white;
+    color: black;
+  }
 `;
+
+// export const CarouselButton = styled(Button)`
+//   font-family: "Roboto Condensed", sans-serif;
+//   background-color: white;
+//   border: none;
+//   cursor: pointer;
+//   transition: 0.5s;
+//   color: black;
+//   outline: none;
+//   border: 0.5px solid rgba(0, 0, 0, 0.2);
+//   height: 30px;
+//   width: auto;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   padding: 0 16px;
+//   text-decoration: none;
+//   font-size: 12px;
+//   &:hover {
+//     background-color: gray;
+//     color: black;
+//   }
+//   &:not(:focus) {
+//     background-color: white;
+//     color: black;
+//   }
+// `;
