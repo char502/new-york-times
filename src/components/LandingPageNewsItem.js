@@ -10,6 +10,11 @@ const NewsSourceSecondaryContainer = styled.div`
   max-width: 1200px;
   height: auto;
   margin-right: 40px;
+  @media (max-width: 1200px) {
+    width: 100%;
+    margin: 0 auto;
+    margin-right: 0;
+  }
   @media (max-width: 978px) {
     width: 100%;
     margin: 0 auto;
@@ -19,8 +24,6 @@ const NewsSourceSecondaryContainer = styled.div`
     width: 100%;
     margin: 0 auto;
     margin-right: 0;
-    /* margin-left: 5px;
-    margin-right: 5px; */
   }
 `;
 
@@ -35,7 +38,6 @@ const StyledListItem = styled.div`
     border-width: 0;
     padding-bottom: 50px;
   }
-
   @media only screen and (max-width: 768px) {
     display: block;
   }
@@ -70,21 +72,16 @@ const HeadlineAuthor = styled.p`
 
 const HeadlinePublished = styled.p`
   font-size: 10px;
-  /* font-weight: bold; */
   margin: 0;
   padding: 0;
-  /* color: grey; */
 `;
 
-const ButtonContainer = styled.div`
-  /* justify-content: center;
-  align-items: center; */
-`;
+const ButtonContainer = styled.div``;
 
-const NewsSourceContainer = props => (
+const NewsSourceContainer = (props) => (
   <NewsSourceSecondaryContainer>
     <Title>{props.title}</Title>
-    {props.data.map(newsSourceItem => (
+    {props.data.map((newsSourceItem) => (
       <StyledListItem key={props.url}>
         <HeadlineImage
           src={

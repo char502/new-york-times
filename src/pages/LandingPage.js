@@ -30,6 +30,9 @@ const LandingPageBodyContainerInner = styled.div`
 
 const Container = styled.div`
   width: 66.66%;
+  @media (max-width: 1200px) {
+    width: 100%;
+  }
   @media (max-width: 978px) {
     width: 100%;
   }
@@ -47,13 +50,11 @@ const CarouselContainer = styled.div`
   width: 714px;
   /* height: 495px; */
   border-bottom: 0.5px solid rgba(0, 0, 0, 0.2);
-  /* margin-left: 10px; */
-  /* padding-bottom: 30px; */
-  @media (max-width: 978px) {
+  @media (max-width: 1200px) {
     width: 100%;
     margin: 0 auto;
   }
-  /* @media (max-width: 450px) {
+  /* @media (max-width: 978px) {
     width: 100%;
     margin: 0 auto;
   } */
@@ -65,9 +66,8 @@ const SideBar = styled.div`
   height: 100%;
   padding: 0 20px;
   margin: 20px 10px 10px 10px;
-  /* border: 0.5px solid rgba(0, 0, 0, 0.2); */
   background-color: WhiteSmoke;
-  @media (max-width: 985px) {
+  @media (max-width: 1200px) {
     display: none;
   }
 `;
@@ -109,10 +109,7 @@ const SourceContainer = styled.div`
   color: darkgray;
 `;
 
-const ButtonContainer = styled.div`
-  /* justify-content: center;
-  align-items: center; */
-`;
+const ButtonContainer = styled.div``;
 
 const NoNewsItems = styled.div`
   padding: 5px;
@@ -165,10 +162,10 @@ class LandingPage extends React.Component {
     });
   }
 
-  handleRemoveItem = topNewsItem => {
+  handleRemoveItem = (topNewsItem) => {
     const { topTenSaved } = this.state;
 
-    const resultWhenItemRemoved = topTenSaved.filter(arrItem => {
+    const resultWhenItemRemoved = topTenSaved.filter((arrItem) => {
       return arrItem !== topNewsItem;
     });
 
@@ -180,7 +177,7 @@ class LandingPage extends React.Component {
     }
   };
 
-  handleSaveItem = result => {
+  handleSaveItem = (result) => {
     const savedResult = {
       ...result,
       savedAt: moment().format("YYYY-MM-DD")
@@ -196,7 +193,7 @@ class LandingPage extends React.Component {
     } else if (localStorage.getItem("savedNews")) {
       newsArr = JSON.parse(localStorage.getItem("savedNews"));
 
-      let alreadyInArr = newsArr.some(newsItem => {
+      let alreadyInArr = newsArr.some((newsItem) => {
         return newsItem.title === savedResult.title;
       });
       if (alreadyInArr) {

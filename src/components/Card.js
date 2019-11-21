@@ -5,22 +5,12 @@ import { Button } from "./Button";
 import { H4, TitleLink } from "./Typography";
 import imagePlaceholder from "../Images/imagePlaceholder.png";
 
-// const CardOuter = styled.div`
-//   /* padding: 10px;
-//   margin: 30px; */
-// `;
-
 const CardContainer = styled.div`
-  /* padding: 5px; */
   max-width: 600px;
   min-height: 450px;
-
-  /* height: calc(100vh - navheight - footer height); */
   margin: 0 auto;
-  /* border: 0.5px solid rgba(0, 0, 0, 0.2); */
-  /* background: lightsteelblue; */
-  /* padding: 10px 0 20px 0; */
-  ${props => {
+
+  ${(props) => {
     return (
       props.padded &&
       css`
@@ -33,10 +23,8 @@ const CardContainer = styled.div`
 
 const ImgContainer = styled.div`
   width: 100%;
-  /* height: 350px; */
-  background: url(${props => props.src}) no-repeat center;
+  background: url(${(props) => props.src}) no-repeat center;
   background-size: cover;
-
   padding-top: 59.32%;
   display: block;
   margin: 0 auto;
@@ -46,12 +34,6 @@ const ImgContainer = styled.div`
 const TitleContainer = styled.div`
   padding-top: 20px;
   font-weight: bold;
-
-  /* @media (max-width: 600px) {
-    width: 100%;
-    margin: 0 auto;
-    align-items: center;
-  } */
 `;
 
 const StyledSource = styled.div`
@@ -61,8 +43,7 @@ const StyledSource = styled.div`
 `;
 
 const StyledAuthor = styled.p`
-  color: lightseagreen; /* try poss forest green */
-  /* color: #548787; */
+  color: lightseagreen;
   font-weight: bold;
   padding-top: 10px;
   margin: 0;
@@ -70,7 +51,6 @@ const StyledAuthor = styled.p`
 `;
 
 const StyledPublished = styled.p`
-  /* padding: 12px; */
   padding: 5px 0;
   margin: 0;
   font-size: 10px;
@@ -84,13 +64,7 @@ const ActionButton = styled.div`
   align-items: center;
 `;
 
-// const BorderBottom = styled.div`
-//   padding: 15px;
-// `;
-
-// { item, handleAction, text, extended, author, publishedAt }
-
-const Card = props => {
+const Card = (props) => {
   return (
     <CardContainer padded={props.extended}>
       <div style={{ display: "flex" }}>

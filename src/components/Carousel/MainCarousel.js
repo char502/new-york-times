@@ -21,13 +21,12 @@ const StyledSlider = styled(Slider)`
 
   .slick-arrow {
     position: absolute;
-    /* transform: translateY(-50%); */
     width: 48px;
     height: 48px;
     margin: 0;
     top: unset;
     bottom: -88px;
-    padding: 0 !important;
+    padding: 0 /* !important */;
     box-sizing: border-box;
     border-radius: 0;
   }
@@ -37,12 +36,10 @@ const StyledSlider = styled(Slider)`
   }
 
   .slick-prev {
-    /* left: 470px; */
-    /* top: 390px; */
     z-index: 1;
     font-weight: bold;
     font-size: 30px;
-    @media (max-width: 700px) {
+    /* @media (max-width: 700px) {
       left: 200px;
     }
     @media (max-width: 600px) {
@@ -62,28 +59,26 @@ const StyledSlider = styled(Slider)`
     }
     @media (max-width: 320px) {
       left: 190px;
-    }
+    } */
   }
 
   .slick-next {
-    /* right: 10px; */
-    /* top: 390px; */
     font-weight: bold;
     font-size: 30px;
   }
 
   .slick-prev {
-    left: 0 !important;
+    left: 0 /* !important */;
   }
   .slick-next {
-    left: 48px !important;
+    left: 48px /* !important */;
   }
 `;
 
 // ===================================
 
 class MainCarousel extends React.Component {
-  handleSaveItem = article => {
+  handleSaveItem = (article) => {
     const savedArticle = {
       ...article,
       savedAt: moment().format("YYYY-MM-DD")
@@ -97,7 +92,7 @@ class MainCarousel extends React.Component {
     } else if (localStorage.getItem("savedNews")) {
       articleArr = JSON.parse(localStorage.getItem("savedNews"));
 
-      let alreadyInArr = articleArr.some(newsItem => {
+      let alreadyInArr = articleArr.some((newsItem) => {
         return newsItem.title === savedArticle.title;
       });
       if (alreadyInArr) {
@@ -111,7 +106,6 @@ class MainCarousel extends React.Component {
   render() {
     const { newsData } = this.props;
     const settings = {
-      // dots: true,
       infinite: true,
       speed: 500,
       slidesToShow: 1,
@@ -120,12 +114,11 @@ class MainCarousel extends React.Component {
       slideWidth: 0.7,
       nextArrow: <CustomArrow next />,
       prevArrow: <CustomArrow />
-      // variableWidth: true
     };
 
     return (
       <StyledSlider {...settings}>
-        {newsData.map(article => (
+        {newsData.map((article) => (
           <Card
             key={article.url}
             data={article}
