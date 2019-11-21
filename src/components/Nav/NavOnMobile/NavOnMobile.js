@@ -37,7 +37,6 @@ const NavSearchInputsContainer = styled.div`
 
 const BurgerIcon = styled.button`
   position: relative;
-
   z-index: 999;
   cursor: pointer;
   background: transparent;
@@ -52,7 +51,7 @@ const MenuItemsContainer = styled.div`
   right: 0;
   top: 0;
   /* background-color: white; */
-  background-color: green;
+  /* background-color: green; */
   border: 0.5px solid rgba(0, 0, 0, 0.2);
   z-index: 99;
   display: ${(props) => (props.showMenu ? "block" : "none")};
