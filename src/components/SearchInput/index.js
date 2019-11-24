@@ -102,6 +102,7 @@ class SearchInput extends React.Component {
               <MagGlass src={magGlass2} />
             </StyledIcon>
             <Input
+              type="text"
               name="searchTerm"
               value={this.state.searchTerm}
               onChange={this.handleChange}

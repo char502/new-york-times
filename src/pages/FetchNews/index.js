@@ -8,6 +8,7 @@ const MainBodyContainer = styled.div`
   width: 100vw;
   background-color: WhiteSmoke;
   padding: 0 32px;
+  box-sizing: border-box;
   margin: 0 auto;
 `;
 

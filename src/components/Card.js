@@ -7,6 +7,7 @@ import imagePlaceholder from "../Images/imagePlaceholder.png";
 
 const CardContainer = styled.div`
   max-width: 600px;
+  /* height: 490px; */
   min-height: 450px;
   margin: 0 auto;
   ${(props) => {

@@ -66,7 +66,7 @@ const MagGlass = styled.img`
   outline: none;
 `;
 
-class SearchAndFilter extends React.Component {
+class NavSearchAndFilter extends React.Component {
   state = {
     searchTerm: "",
     filter: null,
@@ -110,9 +110,13 @@ class SearchAndFilter extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const searchQuery = queryString.parse(this.props.location.search);
+    console.log(searchQuery);
     searchQuery.sources = this.state.filter;
+    console.log(searchQuery.sources);
     searchQuery.searchTerm = this.state.searchTerm.trim();
+    console.log(searchQuery.searchTerm);
     const stringifiedSearchQuery = queryString.stringify(searchQuery);
+    console.log(stringifiedSearchQuery);
     this.props.history.push(`?${stringifiedSearchQuery}`);
     this.setState({ searchTerm: "", filter: "" });
   };
@@ -180,7 +184,6 @@ class SearchAndFilter extends React.Component {
                 value={this.state.searchTerm}
                 onChange={this.handleInputchange}
                 placeholder="Enter Search......"
-                ref={this.exampleRef}
                 autoFocus
               />
               <StyledIcon
@@ -204,4 +207,4 @@ class SearchAndFilter extends React.Component {
   }
 }
 
-export default withRouter(SearchAndFilter);
+export default withRouter(NavSearchAndFilter);

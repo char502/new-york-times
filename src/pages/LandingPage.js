@@ -61,7 +61,7 @@ const SideBar = styled.div`
   padding: 0 20px;
   margin: 20px 10px 10px 10px;
   background-color: WhiteSmoke;
-  @media (max-width: 1200px) {
+  @media (max-width: 1000px/*1200px */) {
     display: none;
   }
 `;
