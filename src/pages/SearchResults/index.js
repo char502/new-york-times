@@ -93,7 +93,7 @@ export class SearchResults extends React.Component {
         <SearchResultsContainer>
           <SearchResultsContainerInner>
             {results.map((result) => (
-              <CardContainer key={result.description}>
+              <CardContainer key={result.url}>
                 <Card
                   data={result}
                   text="Save"
@@ -128,7 +128,6 @@ export class SearchResults extends React.Component {
 const WithConsumer = (props) => (
   <LoadingConsumer>
     {(values) => {
-      console.log(values);
       return <SearchResults {...values} {...props} />;
     }}
   </LoadingConsumer>
