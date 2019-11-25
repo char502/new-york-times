@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components/macro";
+import { withRouter } from "react-router-dom";
 import Media from "react-media";
 import queryString from "query-string";
 import NavTopLine from "./NavTopLine/NavTopLine";
@@ -146,4 +147,4 @@ class Nav extends React.Component {
   }
 }
 
-export default Nav;
+export default withRouter(Nav);
