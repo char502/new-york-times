@@ -171,33 +171,33 @@ class NavSearchAndFilter extends React.Component {
         <StyledTitle>
           <H2>Search and Filter Options</H2>
         </StyledTitle>
-        <Inner onSubmit={this.handleSubmit}>
+        <Inner onSubmit={this.props.handleSubmit}>
           <FilterAndSearchContainer>
             <div style={{ display: "flex" }}>
               <Dropdown
-                handleChange={this.handleChange}
-                filter={this.state.filter}
+                handleChange={this.props.handleChange}
+                filter={this.props.filter}
               />
               <StyledInput
                 type="text"
                 name="searchTerm"
-                value={this.state.searchTerm}
-                onChange={this.handleInputchange}
+                value={this.props.searchTerm}
+                onChange={this.props.handleInputchange}
                 placeholder="Enter Search......"
                 autoFocus
               />
               <StyledIcon
                 as={SearchAndFilterButton}
-                onClick={this.handleSubmit}
-                disabled={this.state.searchTermError}
+                onClick={this.props.handleSubmit}
+                disabled={this.props.searchTermError}
               >
                 <MagGlass src={magGlass2} />
               </StyledIcon>
             </div>
             <div>
               <ValidationMessage
-                invalid={this.state.searchTermError}
-                message={this.state.errorMsg.searchTerm}
+                invalid={this.props.searchTermError}
+                message={this.props.errorMsg.searchTerm}
               />
             </div>
           </FilterAndSearchContainer>
