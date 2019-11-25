@@ -31,7 +31,10 @@ export class SearchResults extends React.Component {
     try {
       let query = queryString.parse(this.props.location.search);
       this.props.setLoadingValue(true);
-      if (!query.searchTerm) return;
+      if (!query.searchTerm) {
+        this.props.setLoadingValue(false);
+      }
+      // if (!query.searchTerm) return;
       const news = await getSearchNews(query.searchTerm, query.sources);
       console.log(news);
       this.setState({

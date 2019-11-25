@@ -207,6 +207,7 @@ class NavOnMobile extends React.Component {
     this.props.history.push(`?${stringifiedSearchQuery}`);
     console.log(this.props.history);
     console.log(this.props.location);
+    console.log(this.props);
     this.setState({ searchTerm: "", filter: "" });
     // }
 
@@ -302,14 +303,13 @@ class NavOnMobile extends React.Component {
         searchTermError: false
       });
     }
+    console.log(prevProps.location.search);
+    console.log(this.props.location.search);
+    console.log(this.props);
   }
 
   componentWillUnmount() {
     document.removeEventListener("mousedown", this.handleClickOutside);
-    // this.setState({
-    //   searchTerm: "",
-    //   filter: null
-    // });
   }
 
   render() {

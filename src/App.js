@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components/macro";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -25,6 +26,12 @@ import newsSources from "./newsSources";
 // }
 // `;
 
+const AppContainer = styled.div`
+  display: flex;
+  min-height: calc(100vh - 175px);
+  flex-direction: column;
+`;
+
 const FourOhFour = () => <div>Not found</div>;
 
 class App extends React.Component {
@@ -33,7 +40,7 @@ class App extends React.Component {
       <div>
         <LoadingProvider>
           <Router>
-            <div>
+            <AppContainer>
               <Nav />
               <Switch>
                 <Route exact path="/" component={LandingPage} />
@@ -49,8 +56,8 @@ class App extends React.Component {
                 <Route path="/savedNews" component={SavedNews} />
                 <Route path="*" component={FourOhFour} />
               </Switch>
-              <Footer />
-            </div>
+            </AppContainer>
+            <Footer />
           </Router>
         </LoadingProvider>
       </div>

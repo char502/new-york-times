@@ -4,6 +4,7 @@ import styled from "styled-components/macro";
 import moment from "moment";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+// import { LoadingConsumer } from "../../loadingContext";
 import { landingPageNews } from "../newsSources";
 import { getNews } from "../utils/api";
 import { H1, H3 } from "../components/Typography";
@@ -117,7 +118,7 @@ class LandingPage extends React.Component {
     newsSourceMainSlider: [],
     newsSourceSecond: [],
     newsSourceThird: [],
-    show: false,
+    // show: false,
     topTenSaved: []
   };
 
@@ -208,7 +209,11 @@ class LandingPage extends React.Component {
       <LandingPageBodyContainer>
         <LandingPageBodyContainerInner>
           <Container>
-            <Loading show={this.state.show} color="red" />
+            <Loading
+              show={this.state.show}
+              color="lightseagreen"
+              showSpinner={false}
+            />
             <StyledTitle>
               <H1>BBC News Top Headlines</H1>
             </StyledTitle>
@@ -279,5 +284,13 @@ class LandingPage extends React.Component {
     );
   }
 }
+
+// const ConsumerOnLandingPage = (props) => (
+//   <LoadingConsumer>
+//     {(values) => {
+//       return <LandingPage {...values} {...props} />;
+//     }}
+//   </LoadingConsumer>
+// );
 
 export default LandingPage;

@@ -15,7 +15,7 @@ const MainBodyContainer = styled.div`
 const MainBodyContainerInner = styled.div`
   width: 100%;
   /* min-height: calc(100vh - 80px); */
-  min-height: calc(100vh - 120px);
+  min-height: calc(100vh - 60px);
   max-width: 1200px;
   margin: 0 auto;
 `;

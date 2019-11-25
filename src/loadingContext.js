@@ -18,7 +18,11 @@ class LoadingProvider extends Component {
   render() {
     return (
       <div>
-        <Loading show={this.state.loading} color="red" />
+        <Loading
+          show={this.state.loading}
+          color="lightseagreen"
+          showSpinner={false}
+        />
         <LoadingContext.Provider value={{ setLoadingValue: this.setLoading }}>
           {this.props.children}
         </LoadingContext.Provider>

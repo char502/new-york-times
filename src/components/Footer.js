@@ -8,14 +8,14 @@ import { faLinkedin, faGithubSquare } from "@fortawesome/free-brands-svg-icons";
 
 const FooterContainer = styled.div`
   width: 100vw;
-  padding: 10px 10px 0 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   font-size: 10px;
   background-color: lightgray;
-  position: relative;
+  height: 175px;
+  /* margin-top: auto; */
 `;
 
 const StyledHeader = styled.div`
