@@ -4,7 +4,7 @@ import { getSearchNews } from "../../utils/api";
 import moment from "moment";
 import styled from "styled-components/macro";
 import Card from "../../components/Card";
-import NoSearchResults from "../../components/NoSearchResults";
+// import NoSearchResults from "../../components/NoSearchResults";
 import { LoadingConsumer } from "../../loadingContext";
 
 const SearchResultsContainer = styled.div`
@@ -59,7 +59,7 @@ export class SearchResults extends React.Component {
     }
   }
 
-  handleSaveItem = (result) => {
+  handleSaveItem = result => {
     const savedResult = {
       ...result,
       savedAt: moment().format("YYYY-MM-DD")
@@ -74,7 +74,7 @@ export class SearchResults extends React.Component {
     } else if (localStorage.getItem("savedNews")) {
       newsArr = JSON.parse(localStorage.getItem("savedNews"));
 
-      let alreadyInArr = newsArr.some((newsItem) => {
+      let alreadyInArr = newsArr.some(newsItem => {
         return newsItem.title === savedResult.title;
       });
       if (alreadyInArr) {
@@ -95,7 +95,7 @@ export class SearchResults extends React.Component {
       return (
         <SearchResultsContainer>
           <SearchResultsContainerInner>
-            {results.map((result) => (
+            {results.map(result => (
               <CardContainer key={result.url}>
                 <Card
                   data={result}
@@ -111,7 +111,7 @@ export class SearchResults extends React.Component {
       );
     }
 
-    if (!results.length && !loading) return <NoSearchResults />;
+    // if (!results.length && !loading) return <NoSearchResults />;
     return "";
   }
 }
@@ -128,9 +128,9 @@ export class SearchResults extends React.Component {
 //   </LoadingConsumer>
 // );
 
-const WithConsumer = (props) => (
+const WithConsumer = props => (
   <LoadingConsumer>
-    {(values) => {
+    {values => {
       return <SearchResults {...values} {...props} />;
     }}
   </LoadingConsumer>
