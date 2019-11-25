@@ -10,7 +10,6 @@ import NavOnMobile from "./NavOnMobile/NavOnMobile";
 
 const NavBarContainer = styled.div`
   width: 100vw;
-  /* background-color: green; */
 `;
 
 const NavBarInner = styled.div`
@@ -31,7 +30,7 @@ class Nav extends React.Component {
 
   searchAndFilterinputRef = React.createRef();
 
-  handleInputchange = e => {
+  handleInputchange = (e) => {
     let { name, value } = e.target;
     this.setState({ [name]: value }, this.validateSearchTerm);
     // this.setState({ searchTerm: e.target.value });
@@ -53,15 +52,15 @@ class Nav extends React.Component {
     });
   };
 
-  handleFilterChange = val => {
+  handleFilterChange = (val) => {
     this.setState({ filter: val ? val.path : null });
   };
 
-  isValidationError = bool => {
+  isValidationError = (bool) => {
     this.setState({ searchTermError: bool });
   };
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
     const searchQuery = queryString.parse(this.props.location.search);
 
@@ -112,7 +111,7 @@ class Nav extends React.Component {
     return (
       <NavBarContainer>
         <Media query={{ maxWidth: 769 }}>
-          {matches =>
+          {(matches) =>
             matches ? (
               <NavBarInner>
                 <NavOnMobile

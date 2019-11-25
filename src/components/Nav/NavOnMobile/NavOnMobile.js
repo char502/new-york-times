@@ -1,13 +1,10 @@
 import React from "react";
 import styled from "styled-components/macro";
 import { withRouter } from "react-router-dom";
-import queryString from "query-string";
 import NavHomeButton from "../../NavHomeButton";
-// import SearchInput from "../../SearchInput";
 import { SearchAndFilterButton } from "../../Button";
 import Dropdown from "../../Dropdown";
 import magGlass2 from "../../../Images/magGlass2.png";
-
 import SavedItems from "../../SavedItemsButton";
 import MobSourceLinks from "../../MobSourceLinks";
 
@@ -50,7 +47,7 @@ const MenuItemsContainer = styled.div`
   top: 0;
   border: 0.5px solid rgba(0, 0, 0, 0.2);
   z-index: 99;
-  display: ${props => (props.showMenu ? "block" : "none")};
+  display: ${(props) => (props.showMenu ? "block" : "none")};
   background: white;
 `;
 
@@ -59,26 +56,6 @@ const MenuItems = styled.div`
   text-align: center;
   padding-top: 50px;
 `;
-
-// const MobSearchInputContainer = styled.div`
-//   position: "absolute";
-//   left: "100";
-//   top: "2%";
-//   border: 0.5px solid rgba(0, 0, 0, 0.2);
-// `;
-
-// const MobSearchFilterContainer = styled.div`
-//   width: 100%;
-//   position: "absolute";
-//   left: "100";
-//   top: "2%";
-//   margin-top: 10px;
-// `;
-
-// const SAndF = styled.div`
-//   display: flex;
-//   flex-direction: column;
-// `;
 
 const ButtonContainer = styled.div`
   max-width: 120px;
@@ -89,27 +66,7 @@ const ButtonContainer = styled.div`
   border-bottom: 0.5px solid rgba(0, 0, 0, 0.2);
 `;
 
-// const StyledIcon = styled.div`
-//   height: 32px;
-//   width: 30px;
-//   cursor: pointer;
-//   margin: 0;
-//   padding: 0;
-//   border: 1px solid rgba(0, 0, 0, 0.2);
-//   border-left: 0;
-//   border-radius: 0;
-// `;
-
-// const MagGlass = styled.img`
-//   width: 20px;
-//   height: 20px;
-//   background-color: transparent;
-//   border-radius: 4px;
-//   outline: none;
-// `;
-
 const MobFilterAndSearchForm = styled.div`
-  /* align-items: center; */
   text-align: center;
 `;
 
@@ -162,9 +119,8 @@ class NavOnMobile extends React.Component {
     });
   };
 
-  handleClickOutside = e => {
+  handleClickOutside = (e) => {
     if (!this.myRef.current.contains(e.target)) {
-      // console.log("handleClickOutside if statement");
       this.setState({ isMenuOpen: false });
     }
   };
@@ -177,7 +133,7 @@ class NavOnMobile extends React.Component {
     document.removeEventListener("mousedown", this.handleClickOutside);
   }
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     this.props.handleSubmit(e);
     this.setState({ isMenuOpen: false });
   };
@@ -194,7 +150,6 @@ class NavOnMobile extends React.Component {
             </BurgerIcon>
             <MenuItemsContainer showMenu={isMenuOpen}>
               <MenuItems>
-                {/* ======================================= */}
                 <MobFilterAndSearchForm>
                   <form onSubmit={this.handleSubmit}>
                     <Dropdown
@@ -217,8 +172,6 @@ class NavOnMobile extends React.Component {
                     </StyledIcon>
                   </form>
                 </MobFilterAndSearchForm>
-
-                {/* ======================================= */}
                 <ButtonContainer>
                   <SavedItems />
                 </ButtonContainer>

@@ -1,6 +1,5 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import queryString from "query-string";
 import styled from "styled-components/macro";
 import Dropdown from "../../Dropdown";
 import { SearchAndFilterButton } from "../../Button";
