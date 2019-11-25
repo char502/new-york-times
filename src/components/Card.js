@@ -6,11 +6,9 @@ import { TitleLink } from "./Typography";
 import imagePlaceholder from "../Images/imagePlaceholder.png";
 
 const CardContainer = styled.div`
-  max-width: 600px;
-  /* height: 490px; */
-  min-height: 470px;
+  /* min-height: 470px; */
   margin: 0 auto;
-  ${(props) => {
+  ${props => {
     return (
       props.padded &&
       css`
@@ -23,7 +21,7 @@ const CardContainer = styled.div`
 
 const ImgContainer = styled.div`
   width: 100%;
-  background: url(${(props) => props.src}) no-repeat center;
+  background: url(${props => props.src}) no-repeat center;
   background-size: cover;
   padding-top: 59.32%;
   display: block;
@@ -65,7 +63,7 @@ const ActionButton = styled.div`
   align-items: center;
 `;
 
-const Card = (props) => {
+const Card = props => {
   return (
     <CardContainer padded={props.extended}>
       <div style={{ display: "flex" }}>

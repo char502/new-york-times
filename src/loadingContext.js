@@ -11,7 +11,7 @@ class LoadingProvider extends Component {
     loading: false
   };
 
-  setLoading = (loading) => {
+  setLoading = loading => {
     this.setState({ loading });
   };
 
@@ -23,7 +23,12 @@ class LoadingProvider extends Component {
           color="lightseagreen"
           showSpinner={false}
         />
-        <LoadingContext.Provider value={{ setLoadingValue: this.setLoading }}>
+        <LoadingContext.Provider
+          value={{
+            setLoadingValue: this.setLoading,
+            loading: this.state.loading
+          }}
+        >
           {this.props.children}
         </LoadingContext.Provider>
       </div>

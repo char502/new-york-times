@@ -87,7 +87,7 @@ export class SearchResults extends React.Component {
   };
 
   render() {
-    const { results, loading } = this.state;
+    const { results } = this.state;
 
     let query = queryString.parse(this.props.location.search);
     if (!query.searchTerm) return null;
@@ -128,12 +128,18 @@ export class SearchResults extends React.Component {
 //   </LoadingConsumer>
 // );
 
-const WithConsumer = props => (
-  <LoadingConsumer>
-    {values => {
-      return <SearchResults {...values} {...props} />;
-    }}
-  </LoadingConsumer>
-);
+function withConsumer(Component) {
+  return class extends React.Component {
+    render() {
+      return (
+        <LoadingConsumer>
+          {values => {
+            return <Component {...values} {...this.props} />;
+          }}
+        </LoadingConsumer>
+      );
+    }
+  };
+}
 
-export default WithConsumer;
+export default withConsumer(SearchResults);

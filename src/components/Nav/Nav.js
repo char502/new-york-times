@@ -31,7 +31,7 @@ class Nav extends React.Component {
 
   searchAndFilterinputRef = React.createRef();
 
-  handleInputchange = (e) => {
+  handleInputchange = e => {
     let { name, value } = e.target;
     this.setState({ [name]: value }, this.validateSearchTerm);
     // this.setState({ searchTerm: e.target.value });
@@ -53,37 +53,26 @@ class Nav extends React.Component {
     });
   };
 
-  handleChange = (val) => {
+  handleFilterChange = val => {
     this.setState({ filter: val ? val.path : null });
   };
 
-  isValidationError = (bool) => {
+  isValidationError = bool => {
     this.setState({ searchTermError: bool });
   };
 
-  handleSubmit = (e) => {
+  handleSubmit = e => {
     e.preventDefault();
     const searchQuery = queryString.parse(this.props.location.search);
-    console.log(searchQuery);
-    searchQuery.sources = this.state.filter;
-    console.log(searchQuery.sources);
-    searchQuery.searchTerm = this.state.searchTerm.trim();
-    console.log(searchQuery.searchTerm);
-    const stringifiedSearchQuery = queryString.stringify(searchQuery);
-    console.log(stringifiedSearchQuery);
-    this.props.history.push(`?${stringifiedSearchQuery}`);
-    this.setState({ searchTerm: "", filter: "" });
-  };
 
-  handleClearFilter = (e) => {
-    e.preventDefault();
-    let searchQuery = queryString.parse(this.props.location.search);
-    if (searchQuery.sources) {
-      delete searchQuery.sources;
-      this.setState({ filter: "" });
-      const filterKeyRemovedQuery = queryString.stringify(searchQuery);
-      this.props.history.push(`?${filterKeyRemovedQuery}`);
-    }
+    searchQuery.sources = this.state.filter;
+
+    searchQuery.searchTerm = this.state.searchTerm.trim();
+
+    const stringifiedSearchQuery = queryString.stringify(searchQuery);
+
+    this.props.history.push(`/search?${stringifiedSearchQuery}`);
+    this.setState({ searchTerm: "", filter: "" });
   };
 
   componentDidMount() {
@@ -123,10 +112,15 @@ class Nav extends React.Component {
     return (
       <NavBarContainer>
         <Media query={{ maxWidth: 769 }}>
-          {(matches) =>
+          {matches =>
             matches ? (
               <NavBarInner>
-                <NavOnMobile />
+                <NavOnMobile
+                  handleInputchange={this.handleInputchange}
+                  handleFilterChange={this.handleFilterChange}
+                  handleSubmit={this.handleSubmit}
+                  {...this.state}
+                />
               </NavBarInner>
             ) : (
               <NavBarInner>
@@ -135,7 +129,7 @@ class Nav extends React.Component {
                 <NavSearchAndFilter
                   {...this.state}
                   handleSubmit={this.handleSubmit}
-                  handleChange={this.handleChange}
+                  handleFilterChange={this.handleFilterChange}
                   handleInputchange={this.handleInputchange}
                 />
               </NavBarInner>

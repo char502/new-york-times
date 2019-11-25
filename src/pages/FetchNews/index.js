@@ -14,16 +14,17 @@ const MainBodyContainer = styled.div`
 
 const MainBodyContainerInner = styled.div`
   width: 100%;
-  /* min-height: calc(100vh - 80px); */
-  min-height: calc(100vh - 60px);
+  min-height: ${props => props.loading && "calc(100vh - 80px)"};
   max-width: 1200px;
   margin: 0 auto;
 `;
 
 const StyledTitle = styled.div`
   font-size: 32px;
-  margin: 28px;
-  padding: 20px 0 0 250px;
+  width: 100%;
+  max-width: 800px;
+  padding: 0;
+  margin: 32px auto;
   font-family: "Vidaloka", serif;
   @media (max-width: 769px) {
     margin: 0;
@@ -56,24 +57,25 @@ class FetchNews extends React.Component {
 
   render() {
     const { news } = this.state;
+    const { loading } = this.props;
     return (
       <MainBodyContainer>
-        <MainBodyContainerInner>
+        <MainBodyContainerInner loading={loading}>
           <StyledTitle>
             {this.props.location.pathname
               .split("/")
               .join(" ")
               .toUpperCase()}
           </StyledTitle>
-          <MainCarousel newsData={news} />
+          <MainCarousel limit={"800px"} newsData={news} />
         </MainBodyContainerInner>
       </MainBodyContainer>
     );
   }
 }
 
-export default (props) => (
+export default props => (
   <LoadingConsumer>
-    {(values) => <FetchNews {...values} {...props} />}
+    {values => <FetchNews {...values} {...props} />}
   </LoadingConsumer>
 );

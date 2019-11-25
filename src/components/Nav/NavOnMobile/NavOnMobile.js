@@ -50,7 +50,7 @@ const MenuItemsContainer = styled.div`
   top: 0;
   border: 0.5px solid rgba(0, 0, 0, 0.2);
   z-index: 99;
-  display: ${(props) => (props.showMenu ? "block" : "none")};
+  display: ${props => (props.showMenu ? "block" : "none")};
   background: white;
 `;
 
@@ -150,16 +150,9 @@ const MagGlass = styled.img`
 `;
 
 class NavOnMobile extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      searchTerm: "",
-      filter: null
-      // searchTermValid: false,
-      // formValid: false,
-      // errorMsg: {}
-    };
-  }
+  state = {
+    isMenuOpen: false
+  };
 
   myRef = React.createRef();
 
@@ -169,148 +162,25 @@ class NavOnMobile extends React.Component {
     });
   };
 
-  handleClickOutside = (e) => {
+  handleClickOutside = e => {
     if (!this.myRef.current.contains(e.target)) {
       // console.log("handleClickOutside if statement");
       this.setState({ isMenuOpen: false });
     }
   };
 
-  handleInputchange = (e) => {
-    let { name, value } = e.target;
-    this.setState({ [name]: value }, this.validateSearchTerm);
-    // this.setState({ searchTerm: e.target.value });
-  };
-
-  handleFilterChange = (val) => {
-    this.setState({ filter: val ? val.path : null });
-  };
-
-  handleSubmit = (e) => {
-    e.preventDefault();
-
-    const { searchTerm } = this.state;
-    console.log(searchTerm);
-
-    // if (!searchTerm) {
-    //   this.props.history.push(`/search?searchTerm`.trim());
-    // } else {
-    const searchQuery = queryString.parse(this.props.location.search);
-    console.log(searchQuery);
-    searchQuery.sources = this.state.filter;
-    console.log(searchQuery.sources);
-    searchQuery.searchTerm = this.state.searchTerm.trim();
-    console.log(searchQuery.searchTerm);
-
-    const stringifiedSearchQuery = queryString.stringify(searchQuery);
-    console.log(stringifiedSearchQuery);
-    this.props.history.push(`?${stringifiedSearchQuery}`);
-    console.log(this.props.history);
-    console.log(this.props.location);
-    console.log(this.props);
-    this.setState({ searchTerm: "", filter: "" });
-    // }
-
-    // if (!searchTerm) {
-    //   this.props.history.push(`/search?searchTerm`.trim());
-    // } else {
-    //   const searchQuery = queryString.parse(this.props.location.search);
-    //   console.log(searchQuery);
-    //   searchQuery.sources = this.state.filter;
-    //   console.log(searchQuery.sources);
-    //   searchQuery.searchTerm = this.state.searchTerm.trim();
-    //   console.log(searchQuery.searchTerm);
-    //   const stringifiedSearchQuery = queryString.stringify(searchQuery);
-    //   console.log(stringifiedSearchQuery);
-    //   this.props.history.push(`?${stringifiedSearchQuery}`);
-    //   this.setState({ searchTerm: "", filter: "" });
-    // }
-
-    // if (!searchTerm) {
-    //   this.props.history.push(`/search?searchTerm`.trim());
-    // } else {
-    //   this.props.history.push(
-    //     `/search?searchTerm=${this.state.searchTerm}`.trim()
-    //   );
-    //   this.setState({ searchTerm: "" });
-    // }
-
-    // const searchQuery = queryString.parse(this.props.location.search);
-    // console.log(searchQuery);
-    // searchQuery.sources = this.state.filter;
-    // console.log(searchQuery.sources);
-    // searchQuery.searchTerm = this.state.searchTerm.trim();
-    // console.log(searchQuery.searchTerm);
-    // const stringifiedSearchQuery = queryString.stringify(searchQuery);
-    // console.log(stringifiedSearchQuery);
-    // this.props.history.push(`?${stringifiedSearchQuery}`);
-    // this.setState({ searchTerm: "", filter: "" });
-    // e.preventDefault();
-
-    // const { searchTerm } = this.state;
-
-    // if (!searchTerm) {
-    //   this.props.history.push(`/search?searchTerm`.trim());
-    // } else {
-    //   this.props.history.push(
-    //     `/search?searchTerm=${this.state.searchTerm}`.trim()
-    //   );
-    //   this.setState({ searchTerm: "" });
-    // }
-  };
-
-  handleClearFilter = (e) => {
-    e.preventDefault();
-    let searchQuery = queryString.parse(this.props.location.search);
-    if (searchQuery.sources) {
-      delete searchQuery.sources;
-      this.setState({ filter: "" });
-      const filterKeyRemovedQuery = queryString.stringify(searchQuery);
-      this.props.history.push(`?${filterKeyRemovedQuery}`);
-    }
-  };
-
   componentDidMount() {
-    // let searchQuery = queryString.parse(this.props.location.search);
-    // if (searchQuery.searchTerm) {
-    //   this.setState({
-    //     searchTerm: searchQuery.searchTerm
-    //   });
-    // }
-
-    // if (searchQuery.sources) {
-    //   this.setState({
-    //     filter: searchQuery.sources,
-    //     searchTerm: searchQuery.searchTerm
-    //   });
-    // }
-
     document.addEventListener("mousedown", this.handleClickOutside);
-  }
-
-  componentDidUpdate(prevProps) {
-    //Used here because want something to happen after the state is updated?
-    if (prevProps.location.search !== this.props.location.search) {
-      let searchQuery = queryString.parse(this.props.location.search);
-      this.setState({
-        filter: searchQuery.sources,
-        searchTerm: searchQuery.searchTerm
-      });
-    }
-
-    if (prevProps.location.pathname !== this.props.location.pathname) {
-      this.setState({
-        searchTermError: false
-      });
-    }
-    console.log(prevProps.location.search);
-    console.log(this.props.location.search);
-    console.log(this.props);
   }
 
   componentWillUnmount() {
     document.removeEventListener("mousedown", this.handleClickOutside);
   }
+
+  handleSubmit = e => {
+    this.props.handleSubmit(e);
+    this.setState({ isMenuOpen: false });
+  };
 
   render() {
     const { isMenuOpen } = this.state;
@@ -328,20 +198,20 @@ class NavOnMobile extends React.Component {
                 <MobFilterAndSearchForm>
                   <form onSubmit={this.handleSubmit}>
                     <Dropdown
-                      handleChange={this.handleFilterChange}
-                      filter={this.state.filter}
+                      handleChange={this.props.handleFilterChange}
+                      filter={this.props.filter}
                     />
                     <StyledInput
                       type="text"
                       name="searchTerm"
-                      value={this.state.searchTerm}
-                      onChange={this.handleInputchange}
+                      value={this.props.searchTerm}
+                      onChange={this.props.handleInputchange}
                       placeholder="Enter Search......"
                     />
                     <StyledIcon
                       as={SearchAndFilterButton}
-                      onClick={this.handleSubmit}
-                      disabled={this.state.searchTermError}
+                      onSubmit={this.handleSubmit}
+                      disabled={this.props.searchTermError}
                     >
                       <MagGlass src={magGlass2} />
                     </StyledIcon>

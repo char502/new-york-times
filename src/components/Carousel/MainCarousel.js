@@ -7,9 +7,9 @@ import { CustomArrow } from "./CarouselButton";
 
 const StyledSlider = styled(Slider)`
   & {
-    max-width: 600px;
     margin: 0 auto;
     position: relative;
+    max-width: ${props => props.limit};
   }
 
   .slick-list {
@@ -55,7 +55,7 @@ const StyledSlider = styled(Slider)`
 `;
 
 class MainCarousel extends React.Component {
-  handleSaveItem = (article) => {
+  handleSaveItem = article => {
     const savedArticle = {
       ...article,
       savedAt: moment().format("YYYY-MM-DD")
@@ -69,7 +69,7 @@ class MainCarousel extends React.Component {
     } else if (localStorage.getItem("savedNews")) {
       articleArr = JSON.parse(localStorage.getItem("savedNews"));
 
-      let alreadyInArr = articleArr.some((newsItem) => {
+      let alreadyInArr = articleArr.some(newsItem => {
         return newsItem.title === savedArticle.title;
       });
       if (alreadyInArr) {
@@ -94,8 +94,8 @@ class MainCarousel extends React.Component {
     };
 
     return (
-      <StyledSlider {...settings}>
-        {newsData.map((article) => (
+      <StyledSlider limit={this.props.limit} {...settings}>
+        {newsData.map(article => (
           <Card
             key={article.url}
             data={article}

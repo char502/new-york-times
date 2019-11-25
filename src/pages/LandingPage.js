@@ -1,10 +1,9 @@
 import React from "react";
-import Loading from "react-loading-bar";
 import styled from "styled-components/macro";
 import moment from "moment";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-// import { LoadingConsumer } from "../../loadingContext";
+import { LoadingConsumer } from "../loadingContext";
 import { landingPageNews } from "../newsSources";
 import { getNews } from "../utils/api";
 import { H1, H3 } from "../components/Typography";
@@ -123,13 +122,14 @@ class LandingPage extends React.Component {
   };
 
   async componentDidMount() {
-    this.setState({ show: true });
+    this.props.setLoadingValue(true);
 
     const [ResponseOne, ResponseTwo, ResponseThree] = await Promise.all([
       getNews(landingPageNews[0].path),
       getNews(landingPageNews[1].path),
       getNews(landingPageNews[2].path)
     ]);
+    this.props.setLoadingValue(false);
 
     let newsSourceMainSlider = ResponseOne.data.articles;
     let newsSourceSecond = ResponseTwo.data.articles;
@@ -154,10 +154,10 @@ class LandingPage extends React.Component {
     });
   }
 
-  handleRemoveItem = (topNewsItem) => {
+  handleRemoveItem = topNewsItem => {
     const { topTenSaved } = this.state;
 
-    const resultWhenItemRemoved = topTenSaved.filter((arrItem) => {
+    const resultWhenItemRemoved = topTenSaved.filter(arrItem => {
       return arrItem !== topNewsItem;
     });
 
@@ -169,7 +169,7 @@ class LandingPage extends React.Component {
     }
   };
 
-  handleSaveItem = (result) => {
+  handleSaveItem = result => {
     const savedResult = {
       ...result,
       savedAt: moment().format("YYYY-MM-DD")
@@ -185,7 +185,7 @@ class LandingPage extends React.Component {
     } else if (localStorage.getItem("savedNews")) {
       newsArr = JSON.parse(localStorage.getItem("savedNews"));
 
-      let alreadyInArr = newsArr.some((newsItem) => {
+      let alreadyInArr = newsArr.some(newsItem => {
         return newsItem.title === savedResult.title;
       });
       if (alreadyInArr) {
@@ -209,11 +209,6 @@ class LandingPage extends React.Component {
       <LandingPageBodyContainer>
         <LandingPageBodyContainerInner>
           <Container>
-            <Loading
-              show={this.state.show}
-              color="lightseagreen"
-              showSpinner={false}
-            />
             <StyledTitle>
               <H1>BBC News Top Headlines</H1>
             </StyledTitle>
@@ -285,12 +280,12 @@ class LandingPage extends React.Component {
   }
 }
 
-// const ConsumerOnLandingPage = (props) => (
-//   <LoadingConsumer>
-//     {(values) => {
-//       return <LandingPage {...values} {...props} />;
-//     }}
-//   </LoadingConsumer>
-// );
+const ConsumerOnLandingPage = props => (
+  <LoadingConsumer>
+    {values => {
+      return <LandingPage {...values} {...props} />;
+    }}
+  </LoadingConsumer>
+);
 
-export default LandingPage;
+export default ConsumerOnLandingPage;
