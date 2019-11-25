@@ -82,11 +82,11 @@ const NewsSourceContainer = (props) => (
   <NewsSourceSecondaryContainer>
     <Title>{props.title}</Title>
     {props.data.map((newsSourceItem) => (
-      <StyledListItem key={props.url}>
+      <StyledListItem key={props.description}>
         <HeadlineImage
           src={
-            newsSourceItem.urlToImage
-              ? newsSourceItem.urlToImage
+            newsSourceItem.description
+              ? newsSourceItem.description
               : imagePlaceholder
           }
         />

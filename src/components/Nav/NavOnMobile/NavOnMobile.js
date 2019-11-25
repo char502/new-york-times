@@ -192,14 +192,23 @@ class NavOnMobile extends React.Component {
     const { searchTerm } = this.state;
     console.log(searchTerm);
 
-    if (!searchTerm) {
-      this.props.history.push(`/search?searchTerm`.trim());
-    } else {
-      this.props.history.push(
-        `/search?searchTerm=${this.state.searchTerm}`.trim()
-      );
-      this.setState({ searchTerm: "" });
-    }
+    // if (!searchTerm) {
+    //   this.props.history.push(`/search?searchTerm`.trim());
+    // } else {
+    const searchQuery = queryString.parse(this.props.location.search);
+    console.log(searchQuery);
+    searchQuery.sources = this.state.filter;
+    console.log(searchQuery.sources);
+    searchQuery.searchTerm = this.state.searchTerm.trim();
+    console.log(searchQuery.searchTerm);
+
+    const stringifiedSearchQuery = queryString.stringify(searchQuery);
+    console.log(stringifiedSearchQuery);
+    this.props.history.push(`?${stringifiedSearchQuery}`);
+    console.log(this.props.history);
+    console.log(this.props.location);
+    this.setState({ searchTerm: "", filter: "" });
+    // }
 
     // if (!searchTerm) {
     //   this.props.history.push(`/search?searchTerm`.trim());

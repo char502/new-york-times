@@ -77,7 +77,7 @@ class SearchInput extends React.Component {
     const { searchTerm } = this.state;
 
     if (!searchTerm) {
-      this.props.history.push(`/search?searchTerm`.trim());
+      this.props.history.push(`/search?searchTerm`);
       console.log(this.props.history);
     } else {
       this.props.history.push(
