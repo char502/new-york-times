@@ -1,5 +1,5 @@
-1. **to install this app - 'npm install'**
-2. **then to run the app - 'npm start'**
+1. **To install this app - 'npm install'**
+2. **Then to run the app - 'npm start'**
 
 ## New York Times Clone
 
