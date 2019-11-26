@@ -1,7 +1,6 @@
 1. **to install this app - 'npm install'**
 2. **then to run the app - 'npm start'**
 
-
 ## New York Times Clone
 
 * New York  Times Clone allows you to read the latest news articles from websites such as BBC News, Hacker News, and The Verge and you    also have the ability to save the news articles for a later date (up to a week).
