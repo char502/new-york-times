@@ -11,3 +11,6 @@
 * It features styling with styled-components (CSS in JS solution), for preventing CSS bleeding and allowing the styles to be more modular and portable.
 
 * It’s been developed using git along with Kanban methodology, to keep track of the features that need to be built and preventing development errors.
+
+##Notion Workflow:
+https://www.notion.so/fe7c209e4ea84c29849075830f17d6de?v=2dd2d82dbb7b4864a56498424811f689
