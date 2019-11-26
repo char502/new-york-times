@@ -12,6 +12,9 @@
 
 * It’s been developed using git along with Kanban methodology, to keep track of the features that need to be built and preventing development errors.
 
+to install this app: npm install
+then to run the app: npm start
+
 
 Notion Workflow:
 https://www.notion.so/fe7c209e4ea84c29849075830f17d6de?v=2dd2d82dbb7b4864a56498424811f689
