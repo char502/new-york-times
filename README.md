@@ -12,8 +12,8 @@
 
 * It’s been developed using git along with Kanban methodology, to keep track of the features that need to be built and preventing development errors.
 
-* **to install this app: 'npm install'**
-* **then to run the app: 'npm start'**
+* **to install this app - 'npm install'**
+* **then to run the app - 'npm start'**
 
 
 Notion Workflow:
