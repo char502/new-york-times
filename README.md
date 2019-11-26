@@ -1,3 +1,7 @@
+1. **to install this app - 'npm install'**
+2. **then to run the app - 'npm start'**
+
+
 ## New York Times Clone
 
 * New York  Times Clone allows you to read the latest news articles from websites such as BBC News, Hacker News, and The Verge and you    also have the ability to save the news articles for a later date (up to a week).
@@ -11,9 +15,6 @@
 * It features styling with styled-components (CSS in JS solution), for preventing CSS bleeding and allowing the styles to be more modular and portable.
 
 * It’s been developed using git along with Kanban methodology, to keep track of the features that need to be built and preventing development errors.
-
-1. **to install this app - 'npm install'**
-2. **then to run the app - 'npm start'**
 
 
 Notion Workflow:
