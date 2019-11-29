@@ -41,7 +41,7 @@ class SavedNews extends React.Component {
     if (localStorage.getItem("savedNews")) {
       const savedResults = JSON.parse(localStorage.getItem("savedNews"));
 
-      const filteredSavedResults = savedResults.filter((savedResult) => {
+      const filteredSavedResults = savedResults.filter(savedResult => {
         const savedAtTime = savedResult.savedAt;
         const aWeekAgo = moment()
           .subtract(7, "days")
@@ -57,10 +57,10 @@ class SavedNews extends React.Component {
     }
   }
 
-  handleRemoveItem = (newsItem) => {
+  handleRemoveItem = newsItem => {
     const { savedNewsPastWeek } = this.state;
 
-    const resultWhenItemRemoved = savedNewsPastWeek.filter((arrItem) => {
+    const resultWhenItemRemoved = savedNewsPastWeek.filter(arrItem => {
       return arrItem !== newsItem;
     });
 
@@ -81,15 +81,13 @@ class SavedNews extends React.Component {
 
   render() {
     const { savedNewsPastWeek } = this.state;
-
-    console.log(savedNewsPastWeek);
     return (
       <SavedNewsContainer>
         <SavedNewsContainerInner>
           <ActionContainer>
             <div>
               <H1>Saved News</H1>
-              <H4 red>Saved Items will be cleared after a week</H4>
+              <H4 color="red">Saved Items will be cleared after a week</H4>
             </div>
             <div>
               <Button small onClick={this.handleClearAll}>
@@ -98,7 +96,7 @@ class SavedNews extends React.Component {
             </div>
           </ActionContainer>
 
-          {savedNewsPastWeek.map((newsItem) => (
+          {savedNewsPastWeek.map(newsItem => (
             <Card
               key={newsItem.title}
               data={newsItem}

@@ -6,7 +6,6 @@ import { TitleLink } from "./Typography";
 import imagePlaceholder from "../Images/imagePlaceholder.png";
 
 const CardContainer = styled.div`
-  /* min-height: 470px; */
   margin: 0 auto;
   ${props => {
     return (

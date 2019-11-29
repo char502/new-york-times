@@ -76,12 +76,12 @@ const HeadlinePublished = styled.p`
   padding: 0;
 `;
 
-const ButtonContainer = styled.div``;
-// checking
-const NewsSourceContainer = (props) => (
+const ButtonContainer = styled.div``; // ???? Why do you use this??????
+
+const NewsSourceContainer = props => (
   <NewsSourceSecondaryContainer>
     <Title>{props.title}</Title>
-    {props.data.map((newsSourceItem) => (
+    {props.data.map(newsSourceItem => (
       <StyledListItem key={newsSourceItem.url}>
         <HeadlineImage
           src={

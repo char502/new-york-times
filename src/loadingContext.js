@@ -36,3 +36,17 @@ class LoadingProvider extends Component {
   }
 }
 export default LoadingProvider;
+
+export function withConsumer(Component) {
+  return class extends React.Component {
+    render() {
+      return (
+        <LoadingConsumer>
+          {values => {
+            return <Component {...values} {...this.props} />;
+          }}
+        </LoadingConsumer>
+      );
+    }
+  };
+}

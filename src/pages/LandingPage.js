@@ -1,9 +1,7 @@
 import React from "react";
 import styled from "styled-components/macro";
 import moment from "moment";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import { LoadingConsumer } from "../loadingContext";
+import { withConsumer } from "../loadingContext";
 import { landingPageNews } from "../newsSources";
 import { getNews } from "../utils/api";
 import { H1, H3 } from "../components/Typography";
@@ -117,18 +115,15 @@ class LandingPage extends React.Component {
     newsSourceMainSlider: [],
     newsSourceSecond: [],
     newsSourceThird: [],
-    // show: false,
     topTenSaved: []
   };
 
   async componentDidMount() {
     this.props.setLoadingValue(true);
 
-    const [ResponseOne, ResponseTwo, ResponseThree] = await Promise.all([
-      getNews(landingPageNews[0].path),
-      getNews(landingPageNews[1].path),
-      getNews(landingPageNews[2].path)
-    ]);
+    const [ResponseOne, ResponseTwo, ResponseThree] = await Promise.all(
+      landingPageNews.slice(0, 3).map(async ({ path }) => await getNews(path))
+    );
     this.props.setLoadingValue(false);
 
     let newsSourceMainSlider = ResponseOne.data.articles;
@@ -154,10 +149,10 @@ class LandingPage extends React.Component {
     });
   }
 
-  handleRemoveItem = (topNewsItem) => {
+  handleRemoveItem = topNewsItem => {
     const { topTenSaved } = this.state;
 
-    const resultWhenItemRemoved = topTenSaved.filter((arrItem) => {
+    const resultWhenItemRemoved = topTenSaved.filter(arrItem => {
       return arrItem !== topNewsItem;
     });
 
@@ -169,14 +164,12 @@ class LandingPage extends React.Component {
     }
   };
 
-  handleSaveItem = (result) => {
+  handleSaveItem = result => {
     const savedResult = {
       ...result,
-      savedAt: moment().format("YYYY-MM-DD")
-      // savedAt: "2019-08-15"
+      savedAt: moment().format("YYYY-MM-DD") // format: "2019-08-15"
     };
 
-    console.log(savedResult);
     let newsArr = [];
 
     if (!localStorage.getItem("savedNews")) {
@@ -185,7 +178,7 @@ class LandingPage extends React.Component {
     } else if (localStorage.getItem("savedNews")) {
       newsArr = JSON.parse(localStorage.getItem("savedNews"));
 
-      let alreadyInArr = newsArr.some((newsItem) => {
+      let alreadyInArr = newsArr.some(newsItem => {
         return newsItem.title === savedResult.title;
       });
       if (alreadyInArr) {
@@ -280,12 +273,4 @@ class LandingPage extends React.Component {
   }
 }
 
-const ConsumerOnLandingPage = (props) => (
-  <LoadingConsumer>
-    {(values) => {
-      return <LandingPage {...values} {...props} />;
-    }}
-  </LoadingConsumer>
-);
-
-export default ConsumerOnLandingPage;
+export default withConsumer(LandingPage);

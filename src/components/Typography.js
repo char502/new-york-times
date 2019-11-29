@@ -40,21 +40,16 @@ export const TitleLink = styled.a`
 `;
 
 export const ModH3 = styled(H3)`
-  /* font-size: 20px; */
   color: black;
   text-decoration: none;
 `;
 
 export const H4 = styled.h4`
   font-size: 14px;
-  color: black;
   text-decoration: none;
   margin: 0;
-  ${(props) =>
-    props.red &&
-    css`
-      color: red;
-    `}
+  color: ${props => (props.color ? props.color : "black")};
+
   @media (max-width: 978px) {
     font-size: 12px;
     margin: 0 auto;
@@ -75,7 +70,7 @@ export const Title = styled(H1)`
   font-size: 32px;
   margin-top: 24px;
   margin-bottom: 32px;
-  ${(props) =>
+  ${props =>
     props.right &&
     css`
       text-align: right;
