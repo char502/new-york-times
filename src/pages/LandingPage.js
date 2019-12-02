@@ -110,6 +110,12 @@ const NoNewsItems = styled.div`
   margin: 10px;
   background-color: lightgray;
 `;
+
+const DeleteButton = styled.btn`
+  color: red;
+  font-weight: bold;
+`;
+
 // === End of SideBar styling ===
 
 class LandingPage extends React.Component {
@@ -172,11 +178,9 @@ class LandingPage extends React.Component {
   handleSaveItem = (result) => {
     const savedResult = {
       ...result,
-      savedAt: moment().format("YYYY-MM-DD")
-      // savedAt: "2019-08-15"
+      savedAt: moment().format("YYYY-MM-DD") //format: "2019-08-15"
     };
 
-    console.log(savedResult);
     let newsArr = [];
 
     if (!localStorage.getItem("savedNews")) {
@@ -237,34 +241,30 @@ class LandingPage extends React.Component {
                 return (
                   <TopNewsContainer key={topNewsItem.title}>
                     <ImageAndTitle>
-                      <div style={{ display: "flex" }}>
-                        <SavedImage
-                          src={
-                            topNewsItem.urlToImage
-                              ? topNewsItem.urlToImage
-                              : imagePlaceholder
-                          }
-                        />
-                        <TopNewsTitle
-                          as="a"
-                          href={topNewsItem.url}
-                          target="_blank"
-                        >
-                          {topNewsItem.title}
-                          <SourceContainer>
-                            Source: {topNewsItem.source.name}
-                          </SourceContainer>
-                        </TopNewsTitle>
-                      </div>
-
+                      <SavedImage
+                        src={
+                          topNewsItem.urlToImage
+                            ? topNewsItem.urlToImage
+                            : imagePlaceholder
+                        }
+                      />
+                      <TopNewsTitle
+                        as="a"
+                        href={topNewsItem.url}
+                        target="_blank"
+                      >
+                        {topNewsItem.title}
+                        <SourceContainer>
+                          Source: {topNewsItem.source.name}
+                        </SourceContainer>
+                      </TopNewsTitle>
                       <ButtonContainer>
-                        <Button
-                          style={{ color: "red", fontWeight: "bold" }}
+                        <DeleteButton
                           small
                           onClick={() => this.handleRemoveItem(topNewsItem)}
                         >
                           x
-                        </Button>
+                        </DeleteButton>
                       </ButtonContainer>
                     </ImageAndTitle>
                   </TopNewsContainer>

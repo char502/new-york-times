@@ -82,14 +82,13 @@ class SavedNews extends React.Component {
   render() {
     const { savedNewsPastWeek } = this.state;
 
-    console.log(savedNewsPastWeek);
     return (
       <SavedNewsContainer>
         <SavedNewsContainerInner>
           <ActionContainer>
             <div>
               <H1>Saved News</H1>
-              <H4 red>Saved Items will be cleared after a week</H4>
+              <H4 color="red">Saved Items will be cleared after a week</H4>
             </div>
             <div>
               <Button small onClick={this.handleClearAll}>
