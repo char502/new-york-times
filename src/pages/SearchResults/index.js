@@ -1,10 +1,10 @@
 import React from "react";
 import queryString from "query-string";
-import { getSearchNews } from "../../utils/api";
-import moment from "moment";
 import styled from "styled-components/macro";
+import moment from "moment";
+import { getSearchNews } from "../../utils/api";
 import Card from "../../components/Card";
-import { LoadingConsumer } from "../../loadingContext";
+import { withConsumer } from "../../loadingContext";
 
 const SearchResultsContainer = styled.div`
   width: 100vw;
@@ -31,17 +31,14 @@ export class SearchResults extends React.Component {
       let query = queryString.parse(this.props.location.search);
       this.props.setLoadingValue(true);
       if (!query.searchTerm) {
-        this.props.setLoadingValue(false);
+        return this.props.setLoadingValue(false);
       }
-      // if (!query.searchTerm) return;
       const news = await getSearchNews(query.searchTerm, query.sources);
-      console.log(news);
       this.setState({
         results: news.data.articles
       });
       this.props.setLoadingValue(false);
     } catch (err) {
-      console.log(err.message);
       this.setState({ error: true });
       this.props.setLoadingValue(false);
     }
@@ -61,8 +58,7 @@ export class SearchResults extends React.Component {
   handleSaveItem = (result) => {
     const savedResult = {
       ...result,
-      savedAt: moment().format("YYYY-MM-DD")
-      // savedAt: "2019-08-15"
+      savedAt: moment().format("YYYY-MM-DD") // format: "2019-08-15"
     };
 
     let newsArr = [];
@@ -109,37 +105,8 @@ export class SearchResults extends React.Component {
         </SearchResultsContainer>
       );
     }
-
-    // if (!results.length && !loading) return <NoSearchResults />;
-    return "";
+    return null;
   }
-}
-
-// Changed for testing may revert back
-// export default (props) => (
-//   <LoadingConsumer>
-//     {(values) => {
-//       {
-//         /* console.log(values); */
-//       }
-//       return <SearchResults {...values} {...props} />;
-//     }}
-//   </LoadingConsumer>
-// );
-
-// move to loadingContext
-function withConsumer(Component) {
-  return class extends React.Component {
-    render() {
-      return (
-        <LoadingConsumer>
-          {(values) => {
-            return <Component {...values} {...this.props} />;
-          }}
-        </LoadingConsumer>
-      );
-    }
-  };
 }
 
 export default withConsumer(SearchResults);

@@ -1,8 +1,8 @@
 import React from "react";
-import { getNews } from "../../utils/api";
 import styled from "styled-components/macro";
+import { getNews } from "../../utils/api";
 import MainCarousel from "../../components/Carousel/MainCarousel";
-import { LoadingConsumer } from "../../loadingContext";
+import { withConsumer } from "../../loadingContext";
 
 const MainBodyContainer = styled.div`
   width: 100vw;
@@ -14,7 +14,7 @@ const MainBodyContainer = styled.div`
 
 const MainBodyContainerInner = styled.div`
   width: 100%;
-  min-height: ${props => props.loading && "calc(100vh - 80px)"};
+  min-height: ${(props) => props.loading && "calc(100vh - 80px)"};
   max-width: 1200px;
   margin: 0 auto;
 `;
@@ -43,7 +43,6 @@ class FetchNews extends React.Component {
     this.props.setLoadingValue(true);
 
     const response = await getNews(this.props.location.pathname.split("/")[1]);
-    console.log(response);
     const news = response.data.articles;
     this.setState({
       news
@@ -74,8 +73,4 @@ class FetchNews extends React.Component {
   }
 }
 
-export default props => (
-  <LoadingConsumer>
-    {values => <FetchNews {...values} {...props} />}
-  </LoadingConsumer>
-);
+export default withConsumer(FetchNews);

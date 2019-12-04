@@ -76,8 +76,6 @@ const HeadlinePublished = styled.p`
   padding: 0;
 `;
 
-const ButtonContainer = styled.div``;
-// checking
 const NewsSourceContainer = (props) => (
   <NewsSourceSecondaryContainer>
     <Title>{props.title}</Title>
@@ -101,11 +99,9 @@ const NewsSourceContainer = (props) => (
             Published: {moment(newsSourceItem.publishedAt).fromNow()}
           </HeadlinePublished>
         </LinkContainer>
-        <ButtonContainer>
-          <Button small onClick={() => props.handleClick(newsSourceItem)}>
-            Save
-          </Button>
-        </ButtonContainer>
+        <Button small onClick={() => props.handleClick(newsSourceItem)}>
+          Save
+        </Button>
       </StyledListItem>
     ))}
   </NewsSourceSecondaryContainer>

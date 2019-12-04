@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 export const H1 = styled.h1`
   font-family: "Vidaloka", serif;
@@ -40,7 +40,6 @@ export const TitleLink = styled.a`
 `;
 
 export const ModH3 = styled(H3)`
-  /* font-size: 20px; */
   color: black;
   text-decoration: none;
 `;
@@ -70,9 +69,5 @@ export const Title = styled(H1)`
   font-size: 32px;
   margin-top: 24px;
   margin-bottom: 32px;
-  ${(props) =>
-    props.right &&
-    css`
-      text-align: right;
-    `}
+  text-align: ${(props) => (props.textAlign ? props.textAlign : "left")};
 `;

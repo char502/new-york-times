@@ -24,6 +24,12 @@ export const Button = styled.button`
       padding: 0 12px;
       height: 24px;
     `}
+  ${(props) =>
+    props.delete &&
+    css`
+      color: red;
+      font-weight: bold;
+    `}
   &:hover {
     background-color: lightGrey;
     color: black;

@@ -33,7 +33,6 @@ class Nav extends React.Component {
   handleInputchange = (e) => {
     let { name, value } = e.target;
     this.setState({ [name]: value }, this.validateSearchTerm);
-    // this.setState({ searchTerm: e.target.value });
   };
 
   validateSearchTerm = () => {

@@ -1,9 +1,6 @@
 import React from "react";
 import styled from "styled-components/macro";
 import moment from "moment";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import { LoadingConsumer } from "../loadingContext";
 import { landingPageNews } from "../newsSources";
 import { getNews } from "../utils/api";
 import { H1, H3 } from "../components/Typography";
@@ -11,6 +8,7 @@ import Carousel from "../components/Carousel/MainCarousel";
 import imagePlaceholder from "../Images/imagePlaceholder.png";
 import { Button } from "../components/Button";
 import LandingPageNewsItem from "../components/LandingPageNewsItem";
+import { withConsumer } from "../loadingContext";
 
 const LandingPageBodyContainer = styled.div`
   width: 100vw;
@@ -110,12 +108,6 @@ const NoNewsItems = styled.div`
   margin: 10px;
   background-color: lightgray;
 `;
-
-const DeleteButton = styled.btn`
-  color: red;
-  font-weight: bold;
-`;
-
 // === End of SideBar styling ===
 
 class LandingPage extends React.Component {
@@ -123,18 +115,16 @@ class LandingPage extends React.Component {
     newsSourceMainSlider: [],
     newsSourceSecond: [],
     newsSourceThird: [],
-    // show: false,
     topTenSaved: []
   };
 
   async componentDidMount() {
     this.props.setLoadingValue(true);
 
-    const [ResponseOne, ResponseTwo, ResponseThree] = await Promise.all([
-      getNews(landingPageNews[0].path),
-      getNews(landingPageNews[1].path),
-      getNews(landingPageNews[2].path)
-    ]);
+    const [ResponseOne, ResponseTwo, ResponseThree] = await Promise.all(
+      landingPageNews.map(({ path }) => getNews(path))
+    );
+
     this.props.setLoadingValue(false);
 
     let newsSourceMainSlider = ResponseOne.data.articles;
@@ -259,12 +249,13 @@ class LandingPage extends React.Component {
                         </SourceContainer>
                       </TopNewsTitle>
                       <ButtonContainer>
-                        <DeleteButton
+                        <Button
+                          delete
                           small
                           onClick={() => this.handleRemoveItem(topNewsItem)}
                         >
                           x
-                        </DeleteButton>
+                        </Button>
                       </ButtonContainer>
                     </ImageAndTitle>
                   </TopNewsContainer>
@@ -280,12 +271,4 @@ class LandingPage extends React.Component {
   }
 }
 
-const ConsumerOnLandingPage = (props) => (
-  <LoadingConsumer>
-    {(values) => {
-      return <LandingPage {...values} {...props} />;
-    }}
-  </LoadingConsumer>
-);
-
-export default ConsumerOnLandingPage;
+export default withConsumer(LandingPage);
