@@ -84,28 +84,23 @@ export class SearchResults extends React.Component {
   render() {
     const { results } = this.state;
 
-    let query = queryString.parse(this.props.location.search);
-    if (!query.searchTerm) return null;
-    if (results.length) {
-      return (
-        <SearchResultsContainer>
-          <SearchResultsContainerInner>
-            {results.map((result) => (
-              <CardContainer key={result.url}>
-                <Card
-                  data={result}
-                  text="Save"
-                  handleClick={this.handleSaveItem}
-                  extended
-                  showSource
-                />
-              </CardContainer>
-            ))}
-          </SearchResultsContainerInner>
-        </SearchResultsContainer>
-      );
-    }
-    return null;
+    return (
+      <SearchResultsContainer>
+        <SearchResultsContainerInner>
+          {results.map((result) => (
+            <CardContainer key={result.url}>
+              <Card
+                data={result}
+                text="Save"
+                handleClick={this.handleSaveItem}
+                extended
+                showSource
+              />
+            </CardContainer>
+          ))}
+        </SearchResultsContainerInner>
+      </SearchResultsContainer>
+    );
   }
 }
 
