@@ -40,6 +40,7 @@ class SavedNews extends React.Component {
   componentDidMount() {
     if (localStorage.getItem("savedNews")) {
       const savedResults = JSON.parse(localStorage.getItem("savedNews"));
+      console.log(savedResults);
 
       const filteredSavedResults = savedResults.filter((savedResult) => {
         const savedAtTime = savedResult.savedAt;
@@ -59,6 +60,7 @@ class SavedNews extends React.Component {
 
   handleRemoveItem = (newsItem) => {
     const { savedNewsPastWeek } = this.state;
+    console.log(newsItem);
 
     const resultWhenItemRemoved = savedNewsPastWeek.filter((arrItem) => {
       return arrItem !== newsItem;
@@ -70,6 +72,12 @@ class SavedNews extends React.Component {
     if (resultWhenItemRemoved !== savedResults) {
       localStorage.setItem("savedNews", JSON.stringify(resultWhenItemRemoved));
     }
+  };
+
+  handleRetainItems = (newsItem) => {
+    const { savedNewsPastWeek } = this.state;
+    console.log(savedNewsPastWeek);
+    console.log(newsItem);
   };
 
   handleClearAll = () => {
@@ -107,7 +115,9 @@ class SavedNews extends React.Component {
               showSource
             >
               <ButtonContainer>
-                <AltButton small>Retain Item for another week</AltButton>
+                <AltButton small onClick={this.handleRetainItems}>
+                  Retain Item for another week
+                </AltButton>
               </ButtonContainer>
             </Card>
           ))}
