@@ -78,7 +78,38 @@ class SavedNews extends React.Component {
     const { savedNewsPastWeek } = this.state;
     console.log(savedNewsPastWeek);
     console.log(newsItem);
+
+    const itemTimeExtended = savedNewsPastWeek.map((itemToExtend) => {
+      if (itemToExtend === newsItem) {
+        const addTime = moment()
+          .add(7, "days")
+          .format("YYYY-MM-DD");
+
+        itemToExtend.savedAt = addTime;
+        console.log(itemToExtend);
+        return itemToExtend;
+      } else {
+        return itemToExtend;
+      }
+    });
+
+    // console.log(itemTimeExtended);
+    // return itemTimeExtended;
+
+    this.setState = { savedNewsPastWeek: itemTimeExtended };
+
+    const savedResults = JSON.parse(localStorage.getItem("savedNews"));
+    if (itemTimeExtended !== savedResults) {
+      localStorage.setItem("savedNews", JSON.stringify(itemTimeExtended));
+    }
   };
+
+  // const savedAtTime = savedResult.savedAt;
+  // const aWeekAgo = moment()
+  //   .subtract(7, "days")
+  //   .format("YYYY-MM-DD");
+
+  //       return savedAtTime > aWeekAgo;
 
   handleClearAll = () => {
     localStorage.clear("savedNews");
@@ -89,7 +120,7 @@ class SavedNews extends React.Component {
 
   render() {
     const { savedNewsPastWeek } = this.state;
-
+    console.log(savedNewsPastWeek);
     return (
       <SavedNewsContainer>
         <SavedNewsContainerInner>
@@ -115,7 +146,10 @@ class SavedNews extends React.Component {
               showSource
             >
               <ButtonContainer>
-                <AltButton small onClick={this.handleRetainItems}>
+                <AltButton
+                  small
+                  onClick={() => this.handleRetainItems(newsItem)}
+                >
                   Retain Item for another week
                 </AltButton>
               </ButtonContainer>
