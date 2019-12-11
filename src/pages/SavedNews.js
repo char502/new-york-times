@@ -104,13 +104,6 @@ class SavedNews extends React.Component {
     }
   };
 
-  // const savedAtTime = savedResult.savedAt;
-  // const aWeekAgo = moment()
-  //   .subtract(7, "days")
-  //   .format("YYYY-MM-DD");
-
-  //       return savedAtTime > aWeekAgo;
-
   handleClearAll = () => {
     localStorage.clear("savedNews");
     this.setState({
