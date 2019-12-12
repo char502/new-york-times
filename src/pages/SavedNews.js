@@ -93,9 +93,6 @@ class SavedNews extends React.Component {
       }
     });
 
-    // console.log(itemTimeExtended);
-    // return itemTimeExtended;
-
     this.setState = { savedNewsPastWeek: itemTimeExtended };
 
     const savedResults = JSON.parse(localStorage.getItem("savedNews"));
@@ -103,13 +100,6 @@ class SavedNews extends React.Component {
       localStorage.setItem("savedNews", JSON.stringify(itemTimeExtended));
     }
   };
-
-  // const savedAtTime = savedResult.savedAt;
-  // const aWeekAgo = moment()
-  //   .subtract(7, "days")
-  //   .format("YYYY-MM-DD");
-
-  //       return savedAtTime > aWeekAgo;
 
   handleClearAll = () => {
     localStorage.clear("savedNews");
