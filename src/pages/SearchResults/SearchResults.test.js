@@ -18,36 +18,7 @@ const newsArticle = {
 }
 
 
-// describe("<SearchResults />", () => {
-//   const search = "?searchTerm=breaks&sources=cnbc";
 
-//   const props = {
-//     setLoadingValue: jest.fn(),
-//     location: {
-//       search
-//     }
-//   };
-//   axios.get.mockResolvedValueOnce({
-//     data: { articles: [newsArticle] }
-//   });
-
-
-//   // beforeEach(() => {
-   
-//   // })
-
-  
-
-//   it('renders cards if there are results from the api', () => {
-    
-//   });
-  
-//   it.only('calls the api when location.search changes', () => {
-   
-
-//   })
-  
-// });
 
 beforeEach(() => {
   axios.get.mockResolvedValueOnce({
