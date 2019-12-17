@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import styled, { css } from "styled-components/macro";
 import moment from "moment";
 import { Button } from "./Button";
@@ -63,37 +63,59 @@ const ActionButton = styled.div`
 `;
 
 const Card = (props) => {
-  return (
-    <CardContainer padded={props.extended}>
-      <div style={{ display: "flex" }}>
-        <div style={{ flex: 1 }}>
-          <StyledAuthor>Author: {props.data.author}</StyledAuthor>
-          <StyledPublished>
-            Published: {moment(props.data.publishedAt).fromNow()}
-          </StyledPublished>
-        </div>
-        <ActionButton>
-          <Button small onClick={() => props.handleClick(props.data)}>
-            {props.text}
-          </Button>
-        </ActionButton>
-      </div>
-      <div>
-        <ImgContainer
-          src={props.data.urlToImage ? props.data.urlToImage : imagePlaceholder}
-        />
-        <TitleContainer>
-          <TitleLink href={props.data.url} target="_blank">
-            {props.data.title}
-          </TitleLink>
-          {props.showSource && (
-            <StyledSource> Source: {props.data.source.name}</StyledSource>
-          )}
-        </TitleContainer>
-      </div>
+  const [showNotification, setShowNotification] = useState(false);
 
-      {props.children}
-    </CardContainer>
+
+  const handleItemAction = () => {
+    setShowNotification(true);
+    props.handleClick(props.data);
+    setTimeout(() => {
+      setShowNotification(false);
+    }, 2000)
+  }
+
+
+
+
+  return (
+    <React.Fragment>
+      {showNotification &&
+        <div style={{width: 300, height: 75, position: "fixed", top: 0, left: 0, background: 'red', zIndex: 999}} >
+
+        </div>
+      }
+      <CardContainer padded={props.extended}>
+        <div style={{ display: "flex" }}>
+          <div style={{ flex: 1 }}>
+            <StyledAuthor>Author: {props.data.author}</StyledAuthor>
+            <StyledPublished>
+              Published: {moment(props.data.publishedAt).fromNow()}
+            </StyledPublished>
+          </div>
+          <ActionButton>
+            <Button small onClick={handleItemAction}>
+              {props.text}
+            </Button>
+          </ActionButton>
+        </div>
+        <div>
+          <ImgContainer
+            src={props.data.urlToImage ? props.data.urlToImage : imagePlaceholder}
+          />
+          <TitleContainer>
+            <TitleLink href={props.data.url} target="_blank">
+              {props.data.title}
+            </TitleLink>
+            {props.showSource && (
+              <StyledSource> Source: {props.data.source.name}</StyledSource>
+            )}
+          </TitleContainer>
+        </div>
+
+        {props.children}
+      </CardContainer>
+    </React.Fragment>
+    
   );
 };
 

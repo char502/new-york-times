@@ -26,9 +26,6 @@ const newsArticle = {
   urlToImage: "https://cdn.vox-cdn.com/thumbor/WWKzxxbgjZWrGDgzkslv6JoF7eM=/0x3"
 };
 
-// describe("<SearchResults />", () => {
-//   const search = "?searchTerm=breaks&sources=cnbc";
-
 //   const props = {
 //     setLoadingValue: jest.fn(),
 //     location: {
