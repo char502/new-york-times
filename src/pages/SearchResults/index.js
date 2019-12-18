@@ -73,7 +73,8 @@ export class SearchResults extends React.Component {
         return newsItem.title === savedResult.title;
       });
       if (alreadyInArr) {
-        return alert("item already saved");
+        // return alert("item already saved");
+        console.log("already in arr");
       }
 
       newsArr.push(savedResult);

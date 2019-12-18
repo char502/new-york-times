@@ -26,6 +26,8 @@ const newsArticle = {
   urlToImage: "https://cdn.vox-cdn.com/thumbor/WWKzxxbgjZWrGDgzkslv6JoF7eM=/0x3"
 };
 
+// describe("<SearchResults />", () => {
+//   const search = "?searchTerm=breaks&sources=cnbc";
 //   const props = {
 //     setLoadingValue: jest.fn(),
 //     location: {
@@ -35,19 +37,12 @@ const newsArticle = {
 //   axios.get.mockResolvedValueOnce({
 //     data: { articles: [newsArticle] }
 //   });
-
 //   // beforeEach(() => {
-
 //   // })
-
 //   it('renders cards if there are results from the api', () => {
-
 //   });
-
 //   it.only('calls the api when location.search changes', () => {
-
 //   })
-
 // });
 
 beforeEach(() => {

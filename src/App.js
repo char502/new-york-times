@@ -10,6 +10,7 @@ import FetchNews from "./pages/FetchNews";
 import SearchResults from "./pages/SearchResults";
 import SavedNews from "./pages/SavedNews";
 import LoadingProvider from "./loadingContext";
+import NotificationProvider from "./notificationContext";
 import Footer from "../src/components/Footer";
 import "./index.css";
 
@@ -38,28 +39,30 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <LoadingProvider>
-          <Router>
-            <AppContainer>
-              <Nav />
-              <Switch>
-                <Route exact path="/" component={LandingPage} />
-                {newsSources.map((route) => (
-                  <Route
-                    key={route.name}
-                    path={`/${route.path}`}
-                    exact
-                    component={FetchNews}
-                  />
-                ))}
-                <Route path="/search" component={SearchResults} />
-                <Route path="/savedNews" component={SavedNews} />
-                <Route path="*" component={FourOhFour} />
-              </Switch>
-            </AppContainer>
-            <Footer />
-          </Router>
-        </LoadingProvider>
+        <NotificationProvider>
+          <LoadingProvider>
+            <Router>
+              <AppContainer>
+                <Nav />
+                <Switch>
+                  <Route exact path="/" component={LandingPage} />
+                  {newsSources.map((route) => (
+                    <Route
+                      key={route.name}
+                      path={`/${route.path}`}
+                      exact
+                      component={FetchNews}
+                    />
+                  ))}
+                  <Route path="/search" component={SearchResults} />
+                  <Route path="/savedNews" component={SavedNews} />
+                  <Route path="*" component={FourOhFour} />
+                </Switch>
+              </AppContainer>
+              <Footer />
+            </Router>
+          </LoadingProvider>
+        </NotificationProvider>
       </div>
     );
   }

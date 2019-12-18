@@ -1,9 +1,10 @@
-import React, {useState, useEffect} from "react";
+import React /* useState  useEffect */ from "react";
 import styled, { css } from "styled-components/macro";
 import moment from "moment";
 import { Button } from "./Button";
 import { TitleLink } from "./Typography";
 import imagePlaceholder from "../Images/imagePlaceholder.png";
+import { withNotificationConsumer } from "../notificationContext";
 
 const CardContainer = styled.div`
   margin: 0 auto;
@@ -63,27 +64,13 @@ const ActionButton = styled.div`
 `;
 
 const Card = (props) => {
-  const [showNotification, setShowNotification] = useState(false);
-
-
-  const handleItemAction = () => {
-    setShowNotification(true);
+  const cardClickHandler = () => {
     props.handleClick(props.data);
-    setTimeout(() => {
-      setShowNotification(false);
-    }, 2000)
-  }
-
-
-
+    props.setNotificationValue(true);
+  };
 
   return (
     <React.Fragment>
-      {showNotification &&
-        <div style={{width: 300, height: 75, position: "fixed", top: 0, left: 0, background: 'red', zIndex: 999}} >
-
-        </div>
-      }
       <CardContainer padded={props.extended}>
         <div style={{ display: "flex" }}>
           <div style={{ flex: 1 }}>
@@ -93,14 +80,23 @@ const Card = (props) => {
             </StyledPublished>
           </div>
           <ActionButton>
-            <Button small onClick={handleItemAction}>
+            <Button small onClick={cardClickHandler}>
               {props.text}
             </Button>
+            {/* <Button small onClick={handleItemAction}>
+              {props.text}
+            </Button> */}
+
+            {/* <Button small onClick={() => props.handleClick(props.data)}>
+              {props.text}
+            </Button> */}
           </ActionButton>
         </div>
         <div>
           <ImgContainer
-            src={props.data.urlToImage ? props.data.urlToImage : imagePlaceholder}
+            src={
+              props.data.urlToImage ? props.data.urlToImage : imagePlaceholder
+            }
           />
           <TitleContainer>
             <TitleLink href={props.data.url} target="_blank">
@@ -115,8 +111,7 @@ const Card = (props) => {
         {props.children}
       </CardContainer>
     </React.Fragment>
-    
   );
 };
 
-export default Card;
+export default withNotificationConsumer(Card);

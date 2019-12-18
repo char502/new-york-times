@@ -42,8 +42,9 @@ export function withConsumer(Component) {
     render() {
       return (
         <LoadingConsumer>
-          {(values) => {
-            return <Component {...values} {...this.props} />;
+          {(value) => {
+            console.log(value);
+            return <Component {...value} {...this.props} />;
           }}
         </LoadingConsumer>
       );
