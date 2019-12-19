@@ -60,24 +60,22 @@ class MainCarousel extends React.Component {
       ...article,
       savedAt: moment().format("YYYY-MM-DD")
     };
-
     let articleArr = [];
-
     if (!localStorage.getItem("savedNews")) {
       articleArr.push(savedArticle);
       localStorage.setItem("savedNews", JSON.stringify(articleArr));
     } else if (localStorage.getItem("savedNews")) {
       articleArr = JSON.parse(localStorage.getItem("savedNews"));
-
       let alreadyInArr = articleArr.some((newsItem) => {
         return newsItem.title === savedArticle.title;
       });
-      if (alreadyInArr) {
+      if (!alreadyInArr) {
+        articleArr.push(savedArticle);
+        localStorage.setItem("savedNews", JSON.stringify(articleArr));
+      } else {
         // return alert("item already saved");
-        console.log("item already saved");
+        console.log("already in arr");
       }
-      articleArr.push(savedArticle);
-      localStorage.setItem("savedNews", JSON.stringify(articleArr));
     }
   };
 

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import moment from "moment";
 import styled from "styled-components/macro";
 import Card from "../components/Card";
@@ -29,21 +29,21 @@ const ButtonContainer = styled.div`
   padding: 10px;
 `;
 
-
 export default () => {
   const [savedNews, setSavedNews] = useState([]);
-
 
   useEffect(() => {
     if (localStorage.getItem("savedNews")) {
       const savedResults = JSON.parse(localStorage.getItem("savedNews"));
       const filteredSavedResults = savedResults.filter((savedResult) => {
-        const thresholdDate = moment().subtract(7, "days")
+        const thresholdDate = moment()
+          .subtract(7, "days")
+          .format("YYYY-MM-DD");
 
         return moment(savedResult.savedAt).isAfter(thresholdDate);
       });
 
-      setSavedNews(filteredSavedResults)
+      setSavedNews(filteredSavedResults);
 
       if (filteredSavedResults !== savedResults) {
         localStorage.setItem("savedNews", JSON.stringify(filteredSavedResults));
@@ -53,7 +53,7 @@ export default () => {
 
   const handleClearAll = () => {
     localStorage.clear("savedNews");
-    setSavedNews([])
+    setSavedNews([]);
   };
 
   const handleRetainItem = (itemToExtend) => {
@@ -64,7 +64,7 @@ export default () => {
           .format("YYYY-MM-DD");
 
         newsItem.savedAt = addTime;
-      } 
+      }
 
       return newsItem;
     });
@@ -108,10 +108,7 @@ export default () => {
             showSource
           >
             <ButtonContainer>
-              <AltButton
-                small
-                onClick={() => handleRetainItem(newsItem)}
-              >
+              <AltButton small onClick={() => handleRetainItem(newsItem)}>
                 Retain Item for another week
               </AltButton>
             </ButtonContainer>
@@ -120,5 +117,4 @@ export default () => {
       </SavedNewsContainerInner>
     </SavedNewsContainer>
   );
-}
-
+};

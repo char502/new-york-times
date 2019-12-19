@@ -10,11 +10,11 @@ class NotificationProvider extends Component {
     showNotification: false
   };
 
-  handleItemAction = (showNotification) => {
-    this.setState({ showNotification });
-    setTimeout(() => {
-      this.setState({ showNotification: false });
-    }, 2000);
+  handleItemAction = () => {
+    this.setState({ showNotification: true });
+    // setTimeout(() => {
+    //   this.setState({ showNotification: false });
+    // }, 2000);
   };
 
   render() {
@@ -55,7 +55,8 @@ export function withNotificationConsumer(Component) {
       return (
         <NotificationConsumer>
           {(values) => {
-            console.log(values);
+            /* console.log(values); */
+
             return <Component {...values} {...this.props} />;
           }}
         </NotificationConsumer>

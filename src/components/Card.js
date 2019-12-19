@@ -66,7 +66,7 @@ const ActionButton = styled.div`
 const Card = (props) => {
   const cardClickHandler = () => {
     props.handleClick(props.data);
-    props.setNotificationValue(true);
+    props.setNotificationValue();
   };
 
   return (
@@ -83,13 +83,6 @@ const Card = (props) => {
             <Button small onClick={cardClickHandler}>
               {props.text}
             </Button>
-            {/* <Button small onClick={handleItemAction}>
-              {props.text}
-            </Button> */}
-
-            {/* <Button small onClick={() => props.handleClick(props.data)}>
-              {props.text}
-            </Button> */}
           </ActionButton>
         </div>
         <div>
