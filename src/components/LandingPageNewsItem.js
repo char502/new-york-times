@@ -5,6 +5,7 @@ import { ModH3 } from "../components/Typography";
 import moment from "moment";
 import imagePlaceholder from "../Images/imagePlaceholder.png";
 import { Button } from "../components/Button";
+import { withNotificationConsumer } from "../notificationContext";
 
 const NewsSourceSecondaryContainer = styled.div`
   max-width: 1200px;
@@ -76,35 +77,53 @@ const HeadlinePublished = styled.p`
   padding: 0;
 `;
 
-const NewsSourceContainer = (props) => (
-  <NewsSourceSecondaryContainer>
-    <Title>{props.title}</Title>
-    {props.data.map((newsSourceItem) => (
-      <StyledListItem key={newsSourceItem.url}>
-        <HeadlineImage
-          src={
-            newsSourceItem.urlToImage
-              ? newsSourceItem.urlToImage
-              : imagePlaceholder
-          }
-        />
-        <LinkContainer>
-          <LinkContainerInner>
-            <ModH3 as="a" href={newsSourceItem.url} target="_blank">
-              {newsSourceItem.title}
-            </ModH3>
-          </LinkContainerInner>
-          <HeadlineAuthor>Author: {newsSourceItem.author}</HeadlineAuthor>
-          <HeadlinePublished>
-            Published: {moment(newsSourceItem.publishedAt).fromNow()}
-          </HeadlinePublished>
-        </LinkContainer>
-        <Button small onClick={() => props.handleClick(newsSourceItem)}>
-          Save
-        </Button>
-      </StyledListItem>
-    ))}
-  </NewsSourceSecondaryContainer>
-);
+const NewsSourceContainer = (props) => {
+  const additionalItemClickHandler = (newsSourceItem) => {
+    console.log(newsSourceItem);
+    props.handleClick(newsSourceItem);
+    props
+      .setNotificationValue
+      //   {
+      //   color: "green",
+      //   message: "test message",
+      //   data: props.data
+      // }
+      ();
+  };
 
-export default NewsSourceContainer;
+  return (
+    <NewsSourceSecondaryContainer>
+      <Title>{props.title}</Title>
+      {props.data.map((newsSourceItem) => (
+        <StyledListItem key={newsSourceItem.url}>
+          <HeadlineImage
+            src={
+              newsSourceItem.urlToImage
+                ? newsSourceItem.urlToImage
+                : imagePlaceholder
+            }
+          />
+          <LinkContainer>
+            <LinkContainerInner>
+              <ModH3 as="a" href={newsSourceItem.url} target="_blank">
+                {newsSourceItem.title}
+              </ModH3>
+            </LinkContainerInner>
+            <HeadlineAuthor>Author: {newsSourceItem.author}</HeadlineAuthor>
+            <HeadlinePublished>
+              Published: {moment(newsSourceItem.publishedAt).fromNow()}
+            </HeadlinePublished>
+          </LinkContainer>
+          <Button
+            small
+            onClick={() => additionalItemClickHandler(newsSourceItem)}
+          >
+            Save
+          </Button>
+        </StyledListItem>
+      ))}
+    </NewsSourceSecondaryContainer>
+  );
+};
+
+export default withNotificationConsumer(NewsSourceContainer);

@@ -1,39 +1,50 @@
 import React, { Component } from "react";
+import styled from "styled-components/macro";
 import "react-loading-bar/dist/index.css";
 // Set Up The Initial Context
 const NotificationContext = React.createContext();
 // Create an exportable consumer that can be injected into components
 export const NotificationConsumer = NotificationContext.Consumer;
 // Create the provider using a traditional React.Component class
+
+const AlertContainer = styled.div`
+  width: 300px;
+  height: 75px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: ${(props) => (props.color ? props.color : "red")};
+  /* background: red; */
+  z-index: 999;
+`;
+
 class NotificationProvider extends Component {
   state = {
-    showNotification: false
+    showNotification: false,
+    color: "",
+    data: "",
+    message: ""
   };
 
-  handleItemAction = () => {
-    this.setState({ showNotification: true });
-    // setTimeout(() => {
-    //   this.setState({ showNotification: false });
-    // }, 2000);
+  handleItemAction = (config) => {
+    this.setState({
+      showNotification: true,
+      color: config.color,
+      message: config.message,
+      data: config.data
+    });
+    setTimeout(() => {
+      this.setState({ showNotification: false });
+    }, 2000);
   };
 
   render() {
     return (
       <div>
-        {this.showNotification && (
-          <div
-            style={{
-              width: 300,
-              height: 75,
-              position: "fixed",
-              top: 0,
-              left: 0,
-              background: "red",
-              zIndex: 999
-            }}
-          >
-            Notification Message
-          </div>
+        {this.state.showNotification && (
+          <AlertContainer color={this.state.color}>
+            {this.state.message}
+          </AlertContainer>
         )}
         <NotificationContext.Provider
           value={{
@@ -55,8 +66,6 @@ export function withNotificationConsumer(Component) {
       return (
         <NotificationConsumer>
           {(values) => {
-            /* console.log(values); */
-
             return <Component {...values} {...this.props} />;
           }}
         </NotificationConsumer>
