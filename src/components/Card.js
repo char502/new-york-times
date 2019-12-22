@@ -1,10 +1,9 @@
-import React /* useState  useEffect */ from "react";
+import React from "react";
 import styled, { css } from "styled-components/macro";
 import moment from "moment";
 import { Button } from "./Button";
 import { TitleLink } from "./Typography";
 import imagePlaceholder from "../Images/imagePlaceholder.png";
-import { withNotificationConsumer } from "../notificationContext";
 
 const CardContainer = styled.div`
   margin: 0 auto;
@@ -64,53 +63,48 @@ const ActionButton = styled.div`
 `;
 
 const Card = (props) => {
-  const cardClickHandler = () => {
-    // console.log(props.data);
-    props.handleClick(props.data);
-    props.setNotificationValue({
-      // color: "green",
-      color: props.color,
-      message: props.message,
-      data: props.data
-    });
-  };
-
+  // const cardClickHandler = () => {
+  //   // console.log(props.data);
+  //   props.handleClick(props.data);
+  //   props.setNotificationValue({
+  //     // color: "green",
+  //     color: props.color,
+  //     message: props.message,
+  //     data: props.data
+  //   });
+  // };
   return (
-    <React.Fragment>
-      <CardContainer padded={props.extended}>
-        <div style={{ display: "flex" }}>
-          <div style={{ flex: 1 }}>
-            <StyledAuthor>Author: {props.data.author}</StyledAuthor>
-            <StyledPublished>
-              Published: {moment(props.data.publishedAt).fromNow()}
-            </StyledPublished>
-          </div>
-          <ActionButton>
-            <Button small onClick={cardClickHandler}>
-              {props.text}
-            </Button>
-          </ActionButton>
+    <CardContainer padded={props.extended}>
+      <div style={{ display: "flex" }}>
+        <div style={{ flex: 1 }}>
+          <StyledAuthor>Author: {props.data.author}</StyledAuthor>
+          <StyledPublished>
+            Published: {moment(props.data.publishedAt).fromNow()}
+          </StyledPublished>
         </div>
-        <div>
-          <ImgContainer
-            src={
-              props.data.urlToImage ? props.data.urlToImage : imagePlaceholder
-            }
-          />
-          <TitleContainer>
-            <TitleLink href={props.data.url} target="_blank">
-              {props.data.title}
-            </TitleLink>
-            {props.showSource && (
-              <StyledSource> Source: {props.data.source.name}</StyledSource>
-            )}
-          </TitleContainer>
-        </div>
+        <ActionButton>
+          <Button small onClick={() => props.handleClick(props.data)}>
+            {props.text}
+          </Button>
+        </ActionButton>
+      </div>
+      <div>
+        <ImgContainer
+          src={props.data.urlToImage ? props.data.urlToImage : imagePlaceholder}
+        />
+        <TitleContainer>
+          <TitleLink href={props.data.url} target="_blank">
+            {props.data.title}
+          </TitleLink>
+          {props.showSource && (
+            <StyledSource> Source: {props.data.source.name}</StyledSource>
+          )}
+        </TitleContainer>
+      </div>
 
-        {props.children}
-      </CardContainer>
-    </React.Fragment>
+      {props.children}
+    </CardContainer>
   );
 };
 
-export default withNotificationConsumer(Card);
+export default Card;

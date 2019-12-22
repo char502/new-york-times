@@ -78,18 +78,18 @@ const HeadlinePublished = styled.p`
 `;
 
 const NewsSourceContainer = (props) => {
-  const additionalItemClickHandler = (newsSourceItem) => {
-    console.log(newsSourceItem);
-    props.handleClick(newsSourceItem);
-    props
-      .setNotificationValue
-      //   {
-      //   color: "green",
-      //   message: "test message",
-      //   data: props.data
-      // }
-      ();
-  };
+  // const additionalItemClickHandler = (newsSourceItem) => {
+  //   console.log(newsSourceItem);
+  //   props.handleClick(newsSourceItem);
+  //   props
+  //     .setNotificationValue
+  //     //   {
+  //     //   color: "green",
+  //     //   message: "test message",
+  //     //   data: props.data
+  //     // }
+  //     ();
+  // };
 
   return (
     <NewsSourceSecondaryContainer>
@@ -114,12 +114,15 @@ const NewsSourceContainer = (props) => {
               Published: {moment(newsSourceItem.publishedAt).fromNow()}
             </HeadlinePublished>
           </LinkContainer>
-          <Button
+          <Button small onClick={() => props.handleClick(newsSourceItem)}>
+            Save
+          </Button>
+          {/* <Button
             small
             onClick={() => additionalItemClickHandler(newsSourceItem)}
           >
             Save
-          </Button>
+          </Button> */}
         </StyledListItem>
       ))}
     </NewsSourceSecondaryContainer>

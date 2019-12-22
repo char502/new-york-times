@@ -4,6 +4,7 @@ import moment from "moment";
 import Slider from "react-slick";
 import Card from "../Card";
 import { CustomArrow } from "./CarouselButton";
+import { withNotificationConsumer } from "../../notificationContext";
 
 const StyledSlider = styled(Slider)`
   & {
@@ -55,13 +56,32 @@ const StyledSlider = styled(Slider)`
 `;
 
 class MainCarousel extends React.Component {
-  notificationMessage = (props) => {
-    console.log("this is from notification message");
-    console.log(props);
+  state = {
+    alert: false
+  };
+  // const cardClickHandler = () => {
+  //   // console.log(props.data);
+  //   props.handleClick(props.data);
+  //   props.setNotificationValue({
+  //     // color: "green",
+  //     color: props.color,
+  //     message: props.message,
+  //     data: props.data
+  //   });
+  // };
+
+  notificationMessage = (article) => {
+    console.log(article);
+    this.props.setNotificationValue({
+      color: this.state.alert ? "red" : "green",
+      message: this.state.alert ? "message already saved" : "message saved",
+      data: this.props.data
+    });
   };
 
   handleSaveItem = (article) => {
     // console.log(this.props);
+    // console.log(article);
     const savedArticle = {
       ...article,
       savedAt: moment().format("YYYY-MM-DD")
@@ -78,16 +98,24 @@ class MainCarousel extends React.Component {
       if (!alreadyInArr) {
         articleArr.push(savedArticle);
         localStorage.setItem("savedNews", JSON.stringify(articleArr));
+        this.setState({
+          alert: false
+        });
+        this.notificationMessage();
       } else {
         // return alert("item already saved");
         console.log("already in arr");
+        this.setState({
+          alert: true
+        });
+        this.notificationMessage();
       }
     }
   };
 
   render() {
     const { newsData } = this.props;
-
+    // console.log(this.props);
     const settings = {
       infinite: true,
       speed: 500,
@@ -107,9 +135,6 @@ class MainCarousel extends React.Component {
             data={article}
             text="Save"
             handleClick={this.handleSaveItem}
-            setNotificationValue={this.notificationMessage}
-            message={"one two three"}
-            color={"green"}
             showSource
           />
         ))}
@@ -118,4 +143,4 @@ class MainCarousel extends React.Component {
   }
 }
 
-export default MainCarousel;
+export default withNotificationConsumer(MainCarousel);
