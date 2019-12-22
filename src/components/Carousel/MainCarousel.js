@@ -55,7 +55,13 @@ const StyledSlider = styled(Slider)`
 `;
 
 class MainCarousel extends React.Component {
+  notificationMessage = (props) => {
+    console.log("this is from notification message");
+    console.log(props);
+  };
+
   handleSaveItem = (article) => {
+    // console.log(this.props);
     const savedArticle = {
       ...article,
       savedAt: moment().format("YYYY-MM-DD")
@@ -81,6 +87,7 @@ class MainCarousel extends React.Component {
 
   render() {
     const { newsData } = this.props;
+
     const settings = {
       infinite: true,
       speed: 500,
@@ -100,6 +107,9 @@ class MainCarousel extends React.Component {
             data={article}
             text="Save"
             handleClick={this.handleSaveItem}
+            setNotificationValue={this.notificationMessage}
+            message={"one two three"}
+            color={"green"}
             showSource
           />
         ))}

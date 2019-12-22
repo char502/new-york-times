@@ -29,7 +29,7 @@ const ButtonContainer = styled.div`
   padding: 10px;
 `;
 
-export default () => {
+export default (props) => {
   const [savedNews, setSavedNews] = useState([]);
 
   useEffect(() => {
@@ -74,6 +74,7 @@ export default () => {
   };
 
   const handleRemoveItem = (itemToRemove) => {
+    console.log(props);
     const newSavedNews = savedNews.filter((newsItem) => {
       return newsItem !== itemToRemove;
     });
