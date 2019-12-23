@@ -72,9 +72,37 @@ class MainCarousel extends React.Component {
 
   notificationMessage = (article) => {
     console.log(article);
+
+    const alertTrue = (
+      <div>
+        News Item:
+        <p>
+          <strong>
+            <u>
+              <i>{article.title}</i>
+            </u>
+          </strong>
+        </p>
+        already saved
+      </div>
+    );
+    const alertFalse = (
+      <div>
+        News Item:
+        <p>
+          <strong>
+            <u>
+              <i>{article.title}</i>
+            </u>
+          </strong>
+        </p>
+        saved
+      </div>
+    );
+
     this.props.setNotificationValue({
       color: this.state.alert ? "red" : "green",
-      message: this.state.alert ? "message already saved" : "message saved",
+      message: this.state.alert ? alertTrue : alertFalse,
       data: this.props.data
     });
   };
@@ -101,14 +129,14 @@ class MainCarousel extends React.Component {
         this.setState({
           alert: false
         });
-        this.notificationMessage();
+        this.notificationMessage(article);
       } else {
         // return alert("item already saved");
         console.log("already in arr");
         this.setState({
           alert: true
         });
-        this.notificationMessage();
+        this.notificationMessage(article);
       }
     }
   };

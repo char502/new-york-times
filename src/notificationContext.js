@@ -9,10 +9,11 @@ export const NotificationConsumer = NotificationContext.Consumer;
 
 const AlertContainer = styled.div`
   width: 300px;
-  height: 75px;
+  /* height: 120px; */
+  height: auto;
   position: fixed;
   top: 0;
-  left: 0;
+  right: 0;
   background: ${(props) => (props.color ? props.color : "red")};
   /* background: red; */
   z-index: 999;
@@ -35,7 +36,7 @@ class NotificationProvider extends Component {
     });
     setTimeout(() => {
       this.setState({ showNotification: false });
-    }, 2000);
+    }, 4000);
   };
 
   render() {
