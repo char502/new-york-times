@@ -3,6 +3,7 @@ import styled from "styled-components/macro";
 import moment from "moment";
 import Slider from "react-slick";
 import Card from "../Card";
+// import { withRouter } from "react-router-dom";
 import { CustomArrow } from "./CarouselButton";
 import { withNotificationConsumer } from "../../notificationContext";
 
@@ -63,15 +64,14 @@ class MainCarousel extends React.Component {
   //   // console.log(props.data);
   //   props.handleClick(props.data);
   //   props.setNotificationValue({
-  //     // color: "green",
   //     color: props.color,
   //     message: props.message,
   //     data: props.data
   //   });
   // };
 
-  notificationMessage = (article) => {
-    console.log(article);
+  notificationMessage = (article, alert) => {
+    // console.log(article);
 
     const alertTrue = (
       <div>
@@ -101,15 +101,15 @@ class MainCarousel extends React.Component {
     );
 
     this.props.setNotificationValue({
-      color: this.state.alert ? "red" : "green",
-      message: this.state.alert ? alertTrue : alertFalse,
+      color: alert ? "rgba(255, 0, 0, 0.8)" : "rgba(0, 128, 0, 0.8)",
+      message: alert ? alertTrue : alertFalse,
       data: this.props.data
     });
   };
 
   handleSaveItem = (article) => {
     // console.log(this.props);
-    // console.log(article);
+    console.log(article);
     const savedArticle = {
       ...article,
       savedAt: moment().format("YYYY-MM-DD")
@@ -126,17 +126,10 @@ class MainCarousel extends React.Component {
       if (!alreadyInArr) {
         articleArr.push(savedArticle);
         localStorage.setItem("savedNews", JSON.stringify(articleArr));
-        this.setState({
-          alert: false
-        });
-        this.notificationMessage(article);
+        this.notificationMessage(article, false);
       } else {
-        // return alert("item already saved");
         console.log("already in arr");
-        this.setState({
-          alert: true
-        });
-        this.notificationMessage(article);
+        this.notificationMessage(article, true);
       }
     }
   };
@@ -172,3 +165,5 @@ class MainCarousel extends React.Component {
 }
 
 export default withNotificationConsumer(MainCarousel);
+
+// export default withNotificationConsumer(withRouter(MainCarousel));

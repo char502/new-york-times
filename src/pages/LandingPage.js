@@ -255,7 +255,7 @@ class LandingPage extends React.Component {
                           small
                           onClick={() => this.handleRemoveItem(topNewsItem)}
                         >
-                          x
+                          X
                         </Button>
                       </ButtonContainer>
                     </ImageAndTitle>

@@ -8,6 +8,7 @@ export const NotificationConsumer = NotificationContext.Consumer;
 // Create the provider using a traditional React.Component class
 
 const AlertContainer = styled.div`
+  padding: 10px;
   width: 300px;
   /* height: 120px; */
   height: auto;
@@ -17,6 +18,7 @@ const AlertContainer = styled.div`
   background: ${(props) => (props.color ? props.color : "red")};
   /* background: red; */
   z-index: 999;
+  color: white;
 `;
 
 class NotificationProvider extends Component {
@@ -36,7 +38,7 @@ class NotificationProvider extends Component {
     });
     setTimeout(() => {
       this.setState({ showNotification: false });
-    }, 4000);
+    }, 3000);
   };
 
   render() {
