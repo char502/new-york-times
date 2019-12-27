@@ -102,14 +102,12 @@ class MainCarousel extends React.Component {
 
     this.props.setNotificationValue({
       color: alert ? "rgba(255, 0, 0, 0.8)" : "rgba(0, 128, 0, 0.8)",
-      message: alert ? alertTrue : alertFalse,
-      data: this.props.data
+      message: alert ? alertTrue : alertFalse
+      // data: this.props.data
     });
   };
 
   handleSaveItem = (article) => {
-    // console.log(this.props);
-    console.log(article);
     const savedArticle = {
       ...article,
       savedAt: moment().format("YYYY-MM-DD")

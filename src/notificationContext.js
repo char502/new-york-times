@@ -25,7 +25,7 @@ class NotificationProvider extends Component {
   state = {
     showNotification: false,
     color: "",
-    data: "",
+    // data: "",
     message: ""
   };
 
@@ -33,8 +33,8 @@ class NotificationProvider extends Component {
     this.setState({
       showNotification: true,
       color: config.color,
-      message: config.message,
-      data: config.data
+      message: config.message
+      // data: config.data
     });
     setTimeout(() => {
       this.setState({ showNotification: false });
