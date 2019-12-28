@@ -10,13 +10,11 @@ export const NotificationConsumer = NotificationContext.Consumer;
 const AlertContainer = styled.div`
   padding: 10px;
   width: 300px;
-  /* height: 120px; */
   height: auto;
   position: fixed;
   top: 0;
   right: 0;
   background: ${(props) => (props.color ? props.color : "red")};
-  /* background: red; */
   z-index: 999;
   color: white;
 `;
@@ -30,11 +28,37 @@ class NotificationProvider extends Component {
   };
 
   handleItemAction = (config) => {
+    const alertTrue = (
+      <div>
+        News Item:
+        <p>
+          <strong>
+            <u>
+              <i>{config.data.title}</i>
+            </u>
+          </strong>
+        </p>
+        already saved
+      </div>
+    );
+    const alertFalse = (
+      <div>
+        News Item:
+        <p>
+          <strong>
+            <u>
+              <i>{config.data.title}</i>
+            </u>
+          </strong>
+        </p>
+        saved
+      </div>
+    );
+
     this.setState({
       showNotification: true,
-      color: config.color,
-      message: config.message
-      // data: config.data
+      color: config.color ? "rgba(255, 0, 0, 0.8)" : "rgba(0, 128, 0, 0.8)",
+      message: config.message ? alertTrue : alertFalse
     });
     setTimeout(() => {
       this.setState({ showNotification: false });

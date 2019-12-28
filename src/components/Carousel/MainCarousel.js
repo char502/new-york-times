@@ -13,12 +13,10 @@ const StyledSlider = styled(Slider)`
     position: relative;
     max-width: ${(props) => props.limit};
   }
-
   .slick-list {
     height: 100%;
     margin-bottom: 64px;
   }
-
   .slick-arrow {
     position: absolute;
     width: 48px;
@@ -31,23 +29,19 @@ const StyledSlider = styled(Slider)`
     box-sizing: border-box;
     border-radius: 0;
   }
-
   .slick-arrow::before {
     display: none;
   }
-
   .slick-prev {
     z-index: 1;
     font-weight: bold;
     font-size: 30px;
   }
-
   .slick-next {
     font-weight: bold;
     font-size: 30px;
     z-index: 1;
   }
-
   .slick-prev {
     left: 0;
   }
@@ -57,53 +51,11 @@ const StyledSlider = styled(Slider)`
 `;
 
 class MainCarousel extends React.Component {
-  state = {
-    alert: false
-  };
-  // const cardClickHandler = () => {
-  //   // console.log(props.data);
-  //   props.handleClick(props.data);
-  //   props.setNotificationValue({
-  //     color: props.color,
-  //     message: props.message,
-  //     data: props.data
-  //   });
-  // };
-
   notificationMessage = (article, alert) => {
-    // console.log(article);
-
-    const alertTrue = (
-      <div>
-        News Item:
-        <p>
-          <strong>
-            <u>
-              <i>{article.title}</i>
-            </u>
-          </strong>
-        </p>
-        already saved
-      </div>
-    );
-    const alertFalse = (
-      <div>
-        News Item:
-        <p>
-          <strong>
-            <u>
-              <i>{article.title}</i>
-            </u>
-          </strong>
-        </p>
-        saved
-      </div>
-    );
-
     this.props.setNotificationValue({
-      color: alert ? "rgba(255, 0, 0, 0.8)" : "rgba(0, 128, 0, 0.8)",
-      message: alert ? alertTrue : alertFalse
-      // data: this.props.data
+      color: alert,
+      message: alert,
+      data: article
     });
   };
 
@@ -126,7 +78,6 @@ class MainCarousel extends React.Component {
         localStorage.setItem("savedNews", JSON.stringify(articleArr));
         this.notificationMessage(article, false);
       } else {
-        console.log("already in arr");
         this.notificationMessage(article, true);
       }
     }
@@ -134,7 +85,6 @@ class MainCarousel extends React.Component {
 
   render() {
     const { newsData } = this.props;
-    // console.log(this.props);
     const settings = {
       infinite: true,
       speed: 500,
@@ -163,5 +113,3 @@ class MainCarousel extends React.Component {
 }
 
 export default withNotificationConsumer(MainCarousel);
-
-// export default withNotificationConsumer(withRouter(MainCarousel));
