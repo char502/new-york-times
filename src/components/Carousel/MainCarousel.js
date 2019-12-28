@@ -51,13 +51,12 @@ const StyledSlider = styled(Slider)`
 `;
 
 class MainCarousel extends React.Component {
-  notificationMessage = (article, alert) => {
+  notificationMessage = (article, alert) =>
     this.props.setNotificationValue({
       color: alert,
       message: alert,
       data: article
     });
-  };
 
   handleSaveItem = (article) => {
     const savedArticle = {
