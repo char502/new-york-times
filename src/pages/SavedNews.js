@@ -4,6 +4,7 @@ import styled from "styled-components/macro";
 import Card from "../components/Card";
 import { Button, AltButton } from "../components/Button";
 import { H1, H4 } from "../components/Typography";
+import { withNotificationConsumer } from "../notificationContext";
 
 const SavedNewsContainer = styled.div`
   width: 100vw;
@@ -30,14 +31,6 @@ const ButtonContainer = styled.div`
 `;
 
 const SavedNews = (props) => {
-  // notificationMessage = (article, alert) =>
-  //   this.props.setNotificationValue({
-  //     color: alert,
-  //     message: alert,
-  //     data: article,
-  //     messagesForDeleting: alert
-  //   });
-
   const [savedNews, setSavedNews] = useState([]);
 
   useEffect(() => {
@@ -59,6 +52,32 @@ const SavedNews = (props) => {
     }
   }, []);
 
+  const notificationMessage = (itemToRemove, isAlert) => {
+    let dateSavedToReversed = "";
+    const fromLocStorage = JSON.parse(localStorage.getItem("savedNews"));
+    const result = fromLocStorage.filter((item) => {
+      return item.title === itemToRemove.title;
+    });
+
+    if (result.length === 0) {
+      dateSavedToReversed = "no date";
+    } else {
+      let dateSavedTo = result[0].savedAt;
+      dateSavedToReversed = dateSavedTo
+        .split("-")
+        .reverse()
+        .join("-");
+    }
+
+    props.setNotificationValue({
+      color: isAlert,
+      alertMessage: isAlert,
+      data: itemToRemove,
+      textWhenTrue: "removed",
+      textWhenFalse: `saved until: ${dateSavedToReversed}`
+    });
+  };
+
   const handleRemoveItem = (itemToRemove) => {
     console.log(props);
     const newSavedNews = savedNews.filter((newsItem) => {
@@ -67,7 +86,8 @@ const SavedNews = (props) => {
 
     setSavedNews(newSavedNews);
     localStorage.setItem("savedNews", JSON.stringify(newSavedNews));
-    console.log(`News Item: '${itemToRemove.title}' removed`);
+    notificationMessage(itemToRemove, true);
+    // console.log(`News Item: '${itemToRemove.title}' removed`);
   };
 
   const handleRetainItem = (itemToExtend) => {
@@ -85,6 +105,7 @@ const SavedNews = (props) => {
 
     localStorage.setItem("savedNews", JSON.stringify(newSavedNews));
     setSavedNews(newSavedNews);
+    notificationMessage(itemToExtend, false);
   };
 
   const handleClearAll = () => {
@@ -128,4 +149,4 @@ const SavedNews = (props) => {
   );
 };
 
-export default SavedNews;
+export default withNotificationConsumer(SavedNews);

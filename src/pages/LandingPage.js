@@ -221,7 +221,7 @@ class LandingPage extends React.Component {
       topTenSaved
     } = this.state;
 
-    console.log(topTenSaved);
+    // console.log(topTenSaved);
     return (
       <LandingPageBodyContainer>
         <LandingPageBodyContainerInner>
