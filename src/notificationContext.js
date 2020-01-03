@@ -29,18 +29,6 @@ class NotificationProvider extends Component {
   };
 
   handleItemAction = (config) => {
-    // Will meed this when use notificationContect on the savedNews page to display date, item seaved until
-    // const newsArticles = JSON.parse(localStorage.getItem("savedNews"));
-    // const result = newsArticles.filter((item) => {
-    //   return item.title === config.data.title;
-    // });
-    // let dateSavedTo = result[0].savedAt;
-    // let dateSavedToReversed = dateSavedTo
-    //   .split("-")
-    //   .reverse()
-    //   .join("-");
-    // console.log(dateSavedToReversed);
-
     this.setState({
       showNotification: true,
       color: config.color ? "rgba(255, 0, 0, 0.8)" : "rgba(0, 128, 0, 0.8)",
