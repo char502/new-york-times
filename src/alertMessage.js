@@ -8,11 +8,11 @@ const AlertMessage = (props) => (
     <p>
       <strong>
         <u>
-          <i>{props.details.data.title} </i>
+          <i>{props.details.data.title}</i>
         </u>
       </strong>
     </p>
-    {props.alertTrue}
+    {props.messageText}
   </div>
 );
 

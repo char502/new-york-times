@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components/macro";
 import "react-loading-bar/dist/index.css";
-import AlertMessage from "./alertMessage";
+import AlertMessage from "./AlertMessage";
 // Set Up The Initial Context
 const NotificationContext = React.createContext();
 // Create an exportable consumer that can be injected into components
@@ -29,6 +29,7 @@ class NotificationProvider extends Component {
   };
 
   handleItemAction = (config) => {
+    // Will meed this when use notificationContect on the savedNews page to display date, item seaved until
     // const newsArticles = JSON.parse(localStorage.getItem("savedNews"));
     // const result = newsArticles.filter((item) => {
     //   return item.title === config.data.title;
@@ -43,10 +44,10 @@ class NotificationProvider extends Component {
     this.setState({
       showNotification: true,
       color: config.color ? "rgba(255, 0, 0, 0.8)" : "rgba(0, 128, 0, 0.8)",
-      message: config.message ? (
-        <AlertMessage details={config} alertTrue={"already saved"} />
+      message: config.alertMessage ? (
+        <AlertMessage details={config} messageText={config.textWhenTrue} />
       ) : (
-        <AlertMessage details={config} alertTrue={"saved"} />
+        <AlertMessage details={config} messageText={config.textWhenFalse} />
       )
     });
     setTimeout(() => {

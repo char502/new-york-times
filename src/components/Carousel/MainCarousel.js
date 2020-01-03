@@ -54,9 +54,11 @@ class MainCarousel extends React.Component {
   notificationMessage = (article, isAlert) =>
     this.props.setNotificationValue({
       color: isAlert,
-      message: isAlert,
+      alertMessage: isAlert,
       data: article,
-      messagesForSaving: isAlert
+      textWhenTrue: "already saved",
+      textWhenFalse: "saved"
+      // messagesForSaving: isAlert
     });
 
   handleSaveItem = (article) => {
