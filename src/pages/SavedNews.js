@@ -78,6 +78,7 @@ const SavedNews = (props) => {
     });
   };
 
+  //this is a test message
   const handleRemoveItem = (itemToRemove) => {
     console.log(props);
     const newSavedNews = savedNews.filter((newsItem) => {
