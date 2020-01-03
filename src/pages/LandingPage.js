@@ -190,7 +190,28 @@ class LandingPage extends React.Component {
         console.log("already in arr");
       }
     }
+
+    // Updates top ten saved straight after clicking saved button
+    // This works for the additional news items not MainCarousel in landing page
+    const newsArticles = JSON.parse(localStorage.getItem("savedNews"));
+    console.log(newsArticles);
+    this.setState({
+      topTenSaved: newsArticles
+    });
   };
+
+  // componentDidUpdate(prevState, prevProps) {
+  //   console.log(prevProps.topTenSaved);
+  //   console.log(this.state.topTenSaved);
+  //   if (prevProps.topTenSaved !== this.state.topTenSaved) {
+  //     console.log("Hellooooooo");
+  //     const newsArticles = JSON.parse(localStorage.getItem("savedNews"));
+  //     console.log(newsArticles);
+  //     this.setState({
+  //       topTenSaved: newsArticles
+  //     });
+  //   }
+  // }
 
   render() {
     const {
@@ -200,6 +221,7 @@ class LandingPage extends React.Component {
       topTenSaved
     } = this.state;
 
+    console.log(topTenSaved);
     return (
       <LandingPageBodyContainer>
         <LandingPageBodyContainerInner>

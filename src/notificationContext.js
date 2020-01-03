@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components/macro";
 import "react-loading-bar/dist/index.css";
+import AlertMessage from "./alertMessage";
 // Set Up The Initial Context
 const NotificationContext = React.createContext();
 // Create an exportable consumer that can be injected into components
@@ -23,42 +24,30 @@ class NotificationProvider extends Component {
   state = {
     showNotification: false,
     color: "",
-    // data: "",
     message: ""
+    // data: "",
   };
 
   handleItemAction = (config) => {
-    const alertTrue = (
-      <div>
-        News Item:
-        <p>
-          <strong>
-            <u>
-              <i>{config.data.title}</i>
-            </u>
-          </strong>
-        </p>
-        already saved
-      </div>
-    );
-    const alertFalse = (
-      <div>
-        News Item:
-        <p>
-          <strong>
-            <u>
-              <i>{config.data.title}</i>
-            </u>
-          </strong>
-        </p>
-        saved
-      </div>
-    );
+    // const newsArticles = JSON.parse(localStorage.getItem("savedNews"));
+    // const result = newsArticles.filter((item) => {
+    //   return item.title === config.data.title;
+    // });
+    // let dateSavedTo = result[0].savedAt;
+    // let dateSavedToReversed = dateSavedTo
+    //   .split("-")
+    //   .reverse()
+    //   .join("-");
+    // console.log(dateSavedToReversed);
 
     this.setState({
       showNotification: true,
       color: config.color ? "rgba(255, 0, 0, 0.8)" : "rgba(0, 128, 0, 0.8)",
-      message: config.message ? alertTrue : alertFalse
+      message: config.message ? (
+        <AlertMessage details={config} alertTrue={"already saved"} />
+      ) : (
+        <AlertMessage details={config} alertTrue={"saved"} />
+      )
     });
     setTimeout(() => {
       this.setState({ showNotification: false });

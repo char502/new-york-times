@@ -29,7 +29,15 @@ const ButtonContainer = styled.div`
   padding: 10px;
 `;
 
-export default (props) => {
+const SavedNews = (props) => {
+  // notificationMessage = (article, alert) =>
+  //   this.props.setNotificationValue({
+  //     color: alert,
+  //     message: alert,
+  //     data: article,
+  //     messagesForDeleting: alert
+  //   });
+
   const [savedNews, setSavedNews] = useState([]);
 
   useEffect(() => {
@@ -51,9 +59,15 @@ export default (props) => {
     }
   }, []);
 
-  const handleClearAll = () => {
-    localStorage.clear("savedNews");
-    setSavedNews([]);
+  const handleRemoveItem = (itemToRemove) => {
+    console.log(props);
+    const newSavedNews = savedNews.filter((newsItem) => {
+      return newsItem !== itemToRemove;
+    });
+
+    setSavedNews(newSavedNews);
+    localStorage.setItem("savedNews", JSON.stringify(newSavedNews));
+    console.log(`News Item: '${itemToRemove.title}' removed`);
   };
 
   const handleRetainItem = (itemToExtend) => {
@@ -73,15 +87,9 @@ export default (props) => {
     setSavedNews(newSavedNews);
   };
 
-  const handleRemoveItem = (itemToRemove) => {
-    console.log(props);
-    const newSavedNews = savedNews.filter((newsItem) => {
-      return newsItem !== itemToRemove;
-    });
-
-    setSavedNews(newSavedNews);
-
-    localStorage.setItem("savedNews", JSON.stringify(newSavedNews));
+  const handleClearAll = () => {
+    localStorage.clear("savedNews");
+    setSavedNews([]);
   };
 
   return (
@@ -119,3 +127,5 @@ export default (props) => {
     </SavedNewsContainer>
   );
 };
+
+export default SavedNews;
