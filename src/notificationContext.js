@@ -25,7 +25,6 @@ class NotificationProvider extends Component {
     showNotification: false,
     color: "",
     message: ""
-    // data: "",
   };
 
   handleItemAction = (config) => {

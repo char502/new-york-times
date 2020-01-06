@@ -5,6 +5,7 @@ import moment from "moment";
 import { getSearchNews } from "../../utils/api";
 import Card from "../../components/Card";
 import { withConsumer } from "../../loadingContext";
+import { withNotificationConsumer } from "../../notificationContext";
 
 const SearchResultsContainer = styled.div`
   width: 100vw;
@@ -55,6 +56,15 @@ export class SearchResults extends React.Component {
     }
   }
 
+  notificationMessage = (article, isAlert) =>
+    this.props.setNotificationValue({
+      color: isAlert,
+      alertMessage: isAlert,
+      data: article,
+      textWhenTrue: "already saved",
+      textWhenFalse: "saved"
+    });
+
   handleSaveItem = (result) => {
     const savedResult = {
       ...result,
@@ -75,9 +85,9 @@ export class SearchResults extends React.Component {
       if (!alreadyInArr) {
         newsArr.push(savedResult);
         localStorage.setItem("savedNews", JSON.stringify(newsArr));
+        this.notificationMessage(savedResult, false);
       } else {
-        // return alert("item already saved");
-        console.log("already in arr");
+        this.notificationMessage(savedResult, true);
       }
     }
   };
@@ -105,4 +115,4 @@ export class SearchResults extends React.Component {
   }
 }
 
-export default withConsumer(SearchResults);
+export default withNotificationConsumer(withConsumer(SearchResults));

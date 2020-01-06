@@ -78,9 +78,7 @@ const SavedNews = (props) => {
     });
   };
 
-  //this is a test message
   const handleRemoveItem = (itemToRemove) => {
-    console.log(props);
     const newSavedNews = savedNews.filter((newsItem) => {
       return newsItem !== itemToRemove;
     });
@@ -88,7 +86,6 @@ const SavedNews = (props) => {
     setSavedNews(newSavedNews);
     localStorage.setItem("savedNews", JSON.stringify(newSavedNews));
     notificationMessage(itemToRemove, true);
-    // console.log(`News Item: '${itemToRemove.title}' removed`);
   };
 
   const handleRetainItem = (itemToExtend) => {

@@ -9,6 +9,7 @@ import imagePlaceholder from "../Images/imagePlaceholder.png";
 import { Button } from "../components/Button";
 import LandingPageNewsItem from "../components/LandingPageNewsItem";
 import { withConsumer } from "../loadingContext";
+import { withNotificationConsumer } from "../notificationContext";
 
 const LandingPageBodyContainer = styled.div`
   width: 100vw;
@@ -150,6 +151,15 @@ class LandingPage extends React.Component {
     });
   }
 
+  notificationMessage = (article, isAlert) =>
+    this.props.setNotificationValue({
+      color: isAlert,
+      alertMessage: isAlert,
+      data: article,
+      textWhenTrue: "already saved",
+      textWhenFalse: "saved"
+    });
+
   handleRemoveItem = (topNewsItem) => {
     const { topTenSaved } = this.state;
 
@@ -185,9 +195,9 @@ class LandingPage extends React.Component {
       if (!alreadyInArr) {
         newsArr.push(savedResult);
         localStorage.setItem("savedNews", JSON.stringify(newsArr));
+        this.notificationMessage(savedResult, false);
       } else {
-        // return alert("item already saved");
-        console.log("already in arr");
+        this.notificationMessage(savedResult, true);
       }
     }
 
@@ -294,4 +304,4 @@ class LandingPage extends React.Component {
   }
 }
 
-export default withConsumer(LandingPage);
+export default withNotificationConsumer(withConsumer(LandingPage));

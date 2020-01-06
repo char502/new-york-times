@@ -3,7 +3,6 @@ import styled from "styled-components/macro";
 import moment from "moment";
 import Slider from "react-slick";
 import Card from "../Card";
-// import { withRouter } from "react-router-dom";
 import { CustomArrow } from "./CarouselButton";
 import { withNotificationConsumer } from "../../notificationContext";
 
@@ -58,7 +57,6 @@ class MainCarousel extends React.Component {
       data: article,
       textWhenTrue: "already saved",
       textWhenFalse: "saved"
-      // messagesForSaving: isAlert
     });
 
   handleSaveItem = (article) => {
