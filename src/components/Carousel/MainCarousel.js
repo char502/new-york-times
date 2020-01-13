@@ -81,6 +81,9 @@ class MainCarousel extends React.Component {
         this.notificationMessage(article, true);
       }
     }
+    if (this.props.reloadLocalStorage) {
+      this.props.reloadLocalStorage();
+    }
   };
 
   render() {
