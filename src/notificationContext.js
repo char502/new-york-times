@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components/macro";
 import "react-loading-bar/dist/index.css";
-import AlertMessage from "./AlertMessage";
+import AlertMessage from "./alertMessage";
 // Set Up The Initial Context
 const NotificationContext = React.createContext();
 // Create an exportable consumer that can be injected into components
@@ -15,7 +15,7 @@ const AlertContainer = styled.div`
   position: fixed;
   top: 0;
   right: 0;
-  background: ${(props) => (props.color ? props.color : "red")};
+  background: ${props => (props.color ? props.color : "red")};
   z-index: 999;
   color: white;
 `;
@@ -27,7 +27,7 @@ class NotificationProvider extends Component {
     message: ""
   };
 
-  handleItemAction = (config) => {
+  handleItemAction = config => {
     this.setState({
       showNotification: true,
       color: config.color ? "rgba(255, 0, 0, 0.8)" : "rgba(0, 128, 0, 0.8)",
@@ -69,7 +69,7 @@ export function withNotificationConsumer(Component) {
     render() {
       return (
         <NotificationConsumer>
-          {(values) => {
+          {values => {
             return <Component {...values} {...this.props} />;
           }}
         </NotificationConsumer>

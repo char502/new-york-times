@@ -10,7 +10,7 @@ const StyledSlider = styled(Slider)`
   & {
     margin: 0 auto;
     position: relative;
-    max-width: ${(props) => props.limit};
+    max-width: ${props => props.limit};
   }
   .slick-list {
     height: 100%;
@@ -59,18 +59,20 @@ class MainCarousel extends React.Component {
       textWhenFalse: "saved"
     });
 
-  handleSaveItem = (article) => {
+  handleSaveItem = article => {
     const savedArticle = {
       ...article,
       savedAt: moment().format("YYYY-MM-DD")
     };
+
     let articleArr = [];
+
     if (!localStorage.getItem("savedNews")) {
       articleArr.push(savedArticle);
       localStorage.setItem("savedNews", JSON.stringify(articleArr));
     } else if (localStorage.getItem("savedNews")) {
       articleArr = JSON.parse(localStorage.getItem("savedNews"));
-      let alreadyInArr = articleArr.some((newsItem) => {
+      let alreadyInArr = articleArr.some(newsItem => {
         return newsItem.title === savedArticle.title;
       });
       if (!alreadyInArr) {
@@ -80,6 +82,9 @@ class MainCarousel extends React.Component {
       } else {
         this.notificationMessage(article, true);
       }
+    }
+    if (this.props.reloadLocalStorage) {
+      this.props.reloadLocalStorage();
     }
   };
 
@@ -98,7 +103,7 @@ class MainCarousel extends React.Component {
 
     return (
       <StyledSlider limit={this.props.limit} {...settings}>
-        {newsData.map((article) => (
+        {newsData.map(article => (
           <Card
             key={article.url}
             data={article}

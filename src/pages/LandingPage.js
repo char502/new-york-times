@@ -160,10 +160,10 @@ class LandingPage extends React.Component {
       textWhenFalse: "saved"
     });
 
-  handleRemoveItem = (topNewsItem) => {
+  handleRemoveItem = topNewsItem => {
     const { topTenSaved } = this.state;
 
-    const resultWhenItemRemoved = topTenSaved.filter((arrItem) => {
+    const resultWhenItemRemoved = topTenSaved.filter(arrItem => {
       return arrItem !== topNewsItem;
     });
 
@@ -175,7 +175,7 @@ class LandingPage extends React.Component {
     }
   };
 
-  handleSaveItem = (result) => {
+  handleSaveItem = result => {
     const savedResult = {
       ...result,
       savedAt: moment().format("YYYY-MM-DD") //format: "2019-08-15"
@@ -189,7 +189,7 @@ class LandingPage extends React.Component {
     } else if (localStorage.getItem("savedNews")) {
       newsArr = JSON.parse(localStorage.getItem("savedNews"));
 
-      let alreadyInArr = newsArr.some((newsItem) => {
+      let alreadyInArr = newsArr.some(newsItem => {
         return newsItem.title === savedResult.title;
       });
       if (!alreadyInArr) {
@@ -203,8 +203,13 @@ class LandingPage extends React.Component {
 
     // Updates top ten saved straight after clicking saved button
     // This works for the additional news items not MainCarousel in landing page
+
+    this.reloadLocalStorage();
+  };
+
+  reloadLocalStorage = () => {
     const newsArticles = JSON.parse(localStorage.getItem("savedNews"));
-    console.log(newsArticles);
+
     this.setState({
       topTenSaved: newsArticles
     });
@@ -240,7 +245,11 @@ class LandingPage extends React.Component {
               <H1>BBC News Top Headlines</H1>
             </StyledTitle>
             <CarouselContainer>
-              <Carousel newsData={newsSourceMainSlider} />
+              <Carousel
+                handleClick={this.handleSaveItem}
+                newsData={newsSourceMainSlider}
+                reloadLocalStorage={this.reloadLocalStorage}
+              />
             </CarouselContainer>
             <LandingPageNewsItem
               data={newsSourceSecond}
