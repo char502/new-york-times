@@ -86,8 +86,6 @@ class MainCarousel extends React.Component {
     }
   };
 
-  //change to push
-
   render() {
     const { newsData } = this.props;
     const settings = {
