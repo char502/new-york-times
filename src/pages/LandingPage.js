@@ -234,7 +234,7 @@ class LandingPage extends React.Component {
               <Carousel
                 handleClick={this.handleSaveItem}
                 newsData={newsSourceMainSlider}
-                reloadLocalStorage={this.reloadLocalStorage}
+                cb={this.reloadLocalStorage}
               />
             </CarouselContainer>
             <LandingPageNewsItem
