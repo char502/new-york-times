@@ -16,3 +16,28 @@ const NoSearchResults = () => {
 };
 
 export default NoSearchResults;
+
+// let query = queryString.parse(this.props.location.search);
+// if (!query.searchTerm) return null;
+// if (results.length) {
+//   return (
+//     <SearchResultsContainer>
+//       <SearchResultsContainerInner>
+//         {results.map(result => (
+//           <CardContainer key={result.url}>
+//             <Card
+//               data={result}
+//               text="Save"
+//               handleClick={this.handleSaveItem}
+//               extended
+//               showSource
+//             />
+//           </CardContainer>
+//         ))}
+//       </SearchResultsContainerInner>
+//     </SearchResultsContainer>
+//   );
+// }
+
+// if (!results.length && !loading) return <NoSearchResults />;
+// return "";

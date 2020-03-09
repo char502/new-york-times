@@ -1,4 +1,5 @@
-import React from "react";
+// import React from "react";
+import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 import styled from "styled-components/macro";
 import magGlass2 from "../../Images/magGlass2.png";
@@ -58,64 +59,55 @@ const MagGlass = styled.img`
   height: 20px;
 `;
 
-class SearchInput extends React.Component {
-  state = {
-    searchTerm: "",
-    isshown: false,
-    toggleInput: false
+const SearchInput = (props) => {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchToggle, setSearchToggle] = useState(false);
+
+  const inputRef = React.createRef();
+
+  const handleChange = (e) => {
+    setSearchTerm(e.target.value);
   };
 
-  inputRef = React.createRef();
-
-  handleChange = (e) => {
-    this.setState({ searchTerm: e.target.value });
-  };
-
-  handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    const { searchTerm } = this.state;
-
     if (!searchTerm) {
-      this.props.history.push(`/search?searchTerm`);
-      console.log(this.props.history);
+      props.history.push(`/search?searchTerm`);
+      console.log(props.history);
     } else {
-      this.props.history.push(
-        `/search?searchTerm=${this.state.searchTerm}`.trim()
-      );
-      this.setState({ searchTerm: "", toggleInput: false });
-      this.inputRef.current.blur();
+      props.history.push(`/search?searchTerm=${searchTerm}`.trim());
+      setSearchTerm(searchTerm);
+      setSearchToggle({ searchToggle: false });
+      inputRef.current.blur();
     }
   };
 
-  handleToggle = () => {
-    this.setState(({ toggleInput }) => ({ toggleInput: !toggleInput }));
-    this.inputRef.current.focus();
+  const handleToggle = () => {
+    setSearchToggle(!searchToggle);
+    inputRef.current.focus();
   };
 
-  render() {
-    const { toggleInput } = this.state;
-    return (
-      <FormContainer>
-        <Form onSubmit={this.handleSubmit}>
-          <InputWrapper>
-            <StyledIcon onClick={this.handleToggle} isshown={toggleInput}>
-              <MagGlass src={magGlass2} />
-            </StyledIcon>
-            <Input
-              type="text"
-              name="searchTerm"
-              value={this.state.searchTerm}
-              onChange={this.handleChange}
-              placeholder={"Enter Search"}
-              isshown={toggleInput}
-              ref={this.inputRef}
-            />
-          </InputWrapper>
-        </Form>
-      </FormContainer>
-    );
-  }
-}
+  return (
+    <FormContainer>
+      <Form onSubmit={handleSubmit}>
+        <InputWrapper>
+          <StyledIcon onClick={handleToggle} isshown={searchToggle}>
+            <MagGlass src={magGlass2} />
+          </StyledIcon>
+          <Input
+            type="text"
+            name="searchTerm"
+            value={searchTerm}
+            onChange={handleChange}
+            placeholder={"Enter Search"}
+            isshown={searchToggle}
+            ref={inputRef}
+          />
+        </InputWrapper>
+      </Form>
+    </FormContainer>
+  );
+};
 
 export default withRouter(SearchInput);

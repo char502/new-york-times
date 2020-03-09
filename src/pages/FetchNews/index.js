@@ -1,4 +1,5 @@
-import React from "react";
+// import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components/macro";
 import { getNews } from "../../utils/api";
 import MainCarousel from "../../components/Carousel/MainCarousel";
@@ -33,44 +34,36 @@ const StyledTitle = styled.div`
   }
 `;
 
-class FetchNews extends React.Component {
-  state = {
-    news: [],
-    show: false
-  };
+const FetchNews = ({ loading, setLoadingValue, location }) => {
+  const [news, setNews] = useState([]);
 
-  fetchApi = async () => {
-    this.props.setLoadingValue(true);
+  console.log(loading);
+  useEffect(() => {
+    async function fetchApi() {
+      setLoadingValue(true);
 
-    const response = await getNews(this.props.location.pathname.split("/")[1]);
-    const news = response.data.articles;
-    this.setState({
-      news
-    });
-    this.props.setLoadingValue(false);
-  };
+      const response = await getNews(location.pathname.split("/")[1]);
+      const news = response.data.articles;
 
-  componentDidMount() {
-    this.fetchApi();
-  }
+      setNews(news);
+      setLoadingValue(false);
+    }
+    fetchApi();
+  }, [setLoadingValue, location.pathname]);
 
-  render() {
-    const { news } = this.state;
-    const { loading } = this.props;
-    return (
-      <MainBodyContainer>
-        <MainBodyContainerInner loading={loading}>
-          <StyledTitle>
-            {this.props.location.pathname
-              .split("/")
-              .join(" ")
-              .toUpperCase()}
-          </StyledTitle>
-          <MainCarousel limit={"800px"} newsData={news} />
-        </MainBodyContainerInner>
-      </MainBodyContainer>
-    );
-  }
-}
+  return (
+    <MainBodyContainer>
+      <MainBodyContainerInner loading={loading}>
+        <StyledTitle>
+          {location.pathname
+            .split("/")
+            .join(" ")
+            .toUpperCase()}
+        </StyledTitle>
+        <MainCarousel limit={"800px"} newsData={news} />
+      </MainBodyContainerInner>
+    </MainBodyContainer>
+  );
+};
 
 export default withConsumer(FetchNews);
