@@ -1,12 +1,12 @@
 // import React from "react";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import queryString from "query-string";
 import styled from "styled-components/macro";
 import moment from "moment";
 import { getSearchNews } from "../../utils/api";
 import NoSearchResults from "../../components/NoSearchResults";
 import Card from "../../components/Card";
-import { withConsumer } from "../../loadingContext";
+import { LoadingContext } from "../../loadingContext";
 import { withNotificationConsumer } from "../../notificationContext";
 
 const SearchResultsContainer = styled.div`
@@ -24,29 +24,31 @@ const CardContainer = styled.div`
   padding: 10px;
 `;
 
-const SearchResults = ({ location, setNotificationValue, setLoadingValue }) => {
+const SearchResults = ({ location, setNotificationValue }) => {
   const [results, setResults] = useState([]);
   const [error, setError] = useState(false);
+
+  const loader = useContext(LoadingContext);
 
   useEffect(() => {
     async function getData() {
       try {
         let query = queryString.parse(location.search);
-        setLoadingValue(true);
+        loader.setLoadingValue(true);
         if (!query.searchTerm) {
-          return setLoadingValue(false);
+          return loader.setLoadingValue(false);
         }
         const news = await getSearchNews(query.searchTerm, query.sources);
         setResults(news.data.articles);
-        setLoadingValue(false);
+        loader.setLoadingValue(false);
       } catch (err) {
         console.error(error);
         setError(true);
-        setLoadingValue(false);
+        loader.setLoadingValue(false);
       }
     }
     getData();
-  }, [location.search, setLoadingValue, error]);
+  }, [location.search, error]);
 
   const notificationMessage = (article, isAlert) =>
     setNotificationValue({
@@ -108,4 +110,4 @@ const SearchResults = ({ location, setNotificationValue, setLoadingValue }) => {
   );
 };
 
-export default withNotificationConsumer(withConsumer(SearchResults));
+export default withNotificationConsumer(SearchResults);

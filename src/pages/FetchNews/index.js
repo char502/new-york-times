@@ -1,9 +1,9 @@
 // import React from "react";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components/macro";
 import { getNews } from "../../utils/api";
 import MainCarousel from "../../components/Carousel/MainCarousel";
-import { withConsumer } from "../../loadingContext";
+import { LoadingContext } from "../../loadingContext";
 
 const MainBodyContainer = styled.div`
   width: 100vw;
@@ -34,26 +34,28 @@ const StyledTitle = styled.div`
   }
 `;
 
-const FetchNews = ({ loading, setLoadingValue, location }) => {
+const FetchNews = ({ location }) => {
   const [news, setNews] = useState([]);
 
-  console.log(loading);
+  const loader = useContext(LoadingContext);
+  console.log(loader);
+
   useEffect(() => {
     async function fetchApi() {
-      setLoadingValue(true);
+      loader.setLoadingValue(true);
 
       const response = await getNews(location.pathname.split("/")[1]);
       const news = response.data.articles;
 
       setNews(news);
-      setLoadingValue(false);
+      loader.setLoadingValue(false);
     }
     fetchApi();
-  }, [setLoadingValue, location.pathname]);
+  }, [location.pathname]);
 
   return (
     <MainBodyContainer>
-      <MainBodyContainerInner loading={loading}>
+      <MainBodyContainerInner loading={loader.loading.toString()}>
         <StyledTitle>
           {location.pathname
             .split("/")
@@ -66,4 +68,4 @@ const FetchNews = ({ loading, setLoadingValue, location }) => {
   );
 };
 
-export default withConsumer(FetchNews);
+export default FetchNews;

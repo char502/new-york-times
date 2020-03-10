@@ -1,5 +1,5 @@
 // import React from "react";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components/macro";
 import moment from "moment";
 import { landingPageNews } from "../newsSources";
@@ -9,7 +9,7 @@ import Carousel from "../components/Carousel/MainCarousel";
 import imagePlaceholder from "../Images/imagePlaceholder.png";
 import { Button } from "../components/Button";
 import LandingPageNewsItem from "../components/LandingPageNewsItem";
-import { withConsumer } from "../loadingContext";
+import { LoadingContext } from "../loadingContext";
 import { withNotificationConsumer } from "../notificationContext";
 
 const LandingPageBodyContainer = styled.div`
@@ -112,17 +112,17 @@ const NoNewsItems = styled.div`
 `;
 // === End of SideBar styling ===
 
-const LandingPage = ({ setNotificationValue, setLoadingValue }) => {
+const LandingPage = ({ setNotificationValue }) => {
   const [newsSourceMainSlider, setNewsSourceMainSlider] = useState([]);
   const [newsSourceSecond, setNewsSourceSecond] = useState([]);
   const [newsSourceThird, setNewsSourceThird] = useState([]);
   const [topTenSaved, setTopTenSaved] = useState([]);
 
-  // console.log(props);
+  const loader = useContext(LoadingContext);
 
   useEffect(() => {
     async function getArrayNewsData() {
-      setLoadingValue(true);
+      loader.setLoadingValue(true);
       const [ResponseOne, ResponseTwo, ResponseThree] = await Promise.all(
         landingPageNews.map(({ path }) => getNews(path))
       );
@@ -139,10 +139,10 @@ const LandingPage = ({ setNotificationValue, setLoadingValue }) => {
 
         setTopTenSaved(topTenSaved);
       }
-      setLoadingValue(false);
+      loader.setLoadingValue(false);
     }
     getArrayNewsData();
-  }, [setLoadingValue]);
+  }, []);
 
   const notificationMessage = (article, isAlert) =>
     setNotificationValue({
@@ -279,4 +279,4 @@ const LandingPage = ({ setNotificationValue, setLoadingValue }) => {
   );
 };
 
-export default withNotificationConsumer(withConsumer(LandingPage));
+export default withNotificationConsumer(LandingPage);
