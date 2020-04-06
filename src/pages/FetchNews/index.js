@@ -1,8 +1,9 @@
-import React from "react";
+// import React from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components/macro";
 import { getNews } from "../../utils/api";
 import MainCarousel from "../../components/Carousel/MainCarousel";
-import { withConsumer } from "../../loadingContext";
+import { LoadingContext } from "../../loadingContext";
 
 const MainBodyContainer = styled.div`
   width: 100vw;
@@ -33,44 +34,35 @@ const StyledTitle = styled.div`
   }
 `;
 
-class FetchNews extends React.Component {
-  state = {
-    news: [],
-    show: false
-  };
+const FetchNews = ({ location }) => {
+  const [news, setNews] = useState([]);
 
-  fetchApi = async () => {
-    this.props.setLoadingValue(true);
+  const loader = useContext(LoadingContext);
+  console.log(loader);
 
-    const response = await getNews(this.props.location.pathname.split("/")[1]);
-    const news = response.data.articles;
-    this.setState({
-      news
-    });
-    this.props.setLoadingValue(false);
-  };
+  useEffect(() => {
+    async function fetchApi() {
+      loader.setLoadingValue(true);
 
-  componentDidMount() {
-    this.fetchApi();
-  }
+      const response = await getNews(location.pathname.split("/")[1]);
+      const news = response.data.articles;
 
-  render() {
-    const { news } = this.state;
-    const { loading } = this.props;
-    return (
-      <MainBodyContainer>
-        <MainBodyContainerInner loading={loading}>
-          <StyledTitle>
-            {this.props.location.pathname
-              .split("/")
-              .join(" ")
-              .toUpperCase()}
-          </StyledTitle>
-          <MainCarousel limit={"800px"} newsData={news} />
-        </MainBodyContainerInner>
-      </MainBodyContainer>
-    );
-  }
-}
+      setNews(news);
+      loader.setLoadingValue(false);
+    }
+    fetchApi();
+  }, [location.pathname]);
 
-export default withConsumer(FetchNews);
+  return (
+    <MainBodyContainer>
+      <MainBodyContainerInner loading={loader.loading.toString()}>
+        <StyledTitle>
+          {location.pathname.split("/").join(" ").toUpperCase()}
+        </StyledTitle>
+        <MainCarousel limit={"800px"} newsData={news} />
+      </MainBodyContainerInner>
+    </MainBodyContainer>
+  );
+};
+
+export default FetchNews;

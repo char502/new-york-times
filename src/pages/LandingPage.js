@@ -1,4 +1,5 @@
-import React from "react";
+// import React from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components/macro";
 import moment from "moment";
 import { landingPageNews } from "../newsSources";
@@ -8,7 +9,7 @@ import Carousel from "../components/Carousel/MainCarousel";
 import imagePlaceholder from "../Images/imagePlaceholder.png";
 import { Button } from "../components/Button";
 import LandingPageNewsItem from "../components/LandingPageNewsItem";
-import { withConsumer } from "../loadingContext";
+import { LoadingContext } from "../loadingContext";
 import { withNotificationConsumer } from "../notificationContext";
 
 const LandingPageBodyContainer = styled.div`
@@ -111,63 +112,54 @@ const NoNewsItems = styled.div`
 `;
 // === End of SideBar styling ===
 
-class LandingPage extends React.Component {
-  state = {
-    newsSourceMainSlider: [],
-    newsSourceSecond: [],
-    newsSourceThird: [],
-    topTenSaved: []
-  };
+const LandingPage = ({ setNotificationValue }) => {
+  const [newsSourceMainSlider, setNewsSourceMainSlider] = useState([]);
+  const [newsSourceSecond, setNewsSourceSecond] = useState([]);
+  const [newsSourceThird, setNewsSourceThird] = useState([]);
+  const [topTenSaved, setTopTenSaved] = useState([]);
 
-  async componentDidMount() {
-    this.props.setLoadingValue(true);
+  const loader = useContext(LoadingContext);
 
-    const [ResponseOne, ResponseTwo, ResponseThree] = await Promise.all(
-      landingPageNews.map(({ path }) => getNews(path))
-    );
+  useEffect(() => {
+    async function getArrayNewsData() {
+      loader.setLoadingValue(true);
+      const [ResponseOne, ResponseTwo, ResponseThree] = await Promise.all(
+        landingPageNews.map(({ path }) => getNews(path))
+      );
 
-    this.props.setLoadingValue(false);
+      setNewsSourceMainSlider(ResponseOne.data.articles);
+      setNewsSourceSecond(ResponseTwo.data.articles);
+      setNewsSourceThird(ResponseThree.data.articles);
 
-    let newsSourceMainSlider = ResponseOne.data.articles;
-    let newsSourceSecond = ResponseTwo.data.articles;
-    let newsSourceThird = ResponseThree.data.articles;
+      // Data for sidebar
+      if (localStorage.getItem("savedNews")) {
+        const topSaved = JSON.parse(localStorage.getItem("savedNews"));
 
-    // Data for sidebar
-    if (localStorage.getItem("savedNews")) {
-      const topSaved = JSON.parse(localStorage.getItem("savedNews"));
+        const topTenSaved = topSaved.filter((item, index) => index <= 9);
 
-      const topTenSaved = topSaved.filter((item, index) => index <= 9);
-
-      this.setState({
-        topTenSaved
-      });
+        setTopTenSaved(topTenSaved);
+      }
+      loader.setLoadingValue(false);
     }
+    getArrayNewsData();
+  }, []);
 
-    this.setState({
-      show: false,
-      newsSourceMainSlider,
-      newsSourceSecond,
-      newsSourceThird
-    });
-  }
-
-  notificationMessage = (article, isAlert) =>
-    this.props.setNotificationValue({
+  const notificationMessage = (article, isAlert) =>
+    setNotificationValue({
       color: isAlert,
       alertMessage: isAlert,
       data: article,
       textWhenTrue: "already saved",
-      textWhenFalse: "saved"
+      textWhenFalse: "saved",
     });
 
-  handleRemoveItem = (topNewsItem) => {
-    const { topTenSaved } = this.state;
-
+  const handleRemoveItem = (topNewsItem) => {
     const resultWhenItemRemoved = topTenSaved.filter((arrItem) => {
       return arrItem !== topNewsItem;
     });
 
-    this.setState({ topTenSaved: resultWhenItemRemoved });
+    //Does this need to be an array?
+    setTopTenSaved(resultWhenItemRemoved);
 
     const savedResults = JSON.parse(localStorage.getItem("savedNews"));
     if (resultWhenItemRemoved !== savedResults) {
@@ -175,10 +167,10 @@ class LandingPage extends React.Component {
     }
   };
 
-  handleSaveItem = (result) => {
+  const handleSaveItem = (result) => {
     const savedResult = {
       ...result,
-      savedAt: moment().format("YYYY-MM-DD") //format: "2019-08-15"
+      savedAt: moment().format("YYYY-MM-DD"), //format: "2019-08-15"
     };
 
     let newsArr = [];
@@ -195,108 +187,96 @@ class LandingPage extends React.Component {
       if (!alreadyInArr) {
         newsArr.push(savedResult);
         localStorage.setItem("savedNews", JSON.stringify(newsArr));
-        this.notificationMessage(savedResult, false);
+        notificationMessage(savedResult, false);
       } else {
-        this.notificationMessage(savedResult, true);
+        notificationMessage(savedResult, true);
       }
     }
 
     // Updates top ten saved straight after clicking saved button
     // This works for the additional news items not MainCarousel in landing page
-    this.reloadLocalStorage();
+    reloadLocalStorage();
   };
 
-  reloadLocalStorage = () => {
+  const reloadLocalStorage = () => {
     const newsArticles = JSON.parse(localStorage.getItem("savedNews"));
 
-    this.setState({
-      topTenSaved: newsArticles
-    });
+    // Does this need to be an array
+    setTopTenSaved(newsArticles);
   };
 
-  render() {
-    const {
-      newsSourceMainSlider,
-      newsSourceSecond,
-      newsSourceThird,
-      topTenSaved
-    } = this.state;
+  return (
+    <LandingPageBodyContainer>
+      <LandingPageBodyContainerInner>
+        <Container>
+          <StyledTitle>
+            <H1>BBC News Top Headlines</H1>
+          </StyledTitle>
+          <CarouselContainer>
+            <Carousel
+              handleClick={handleSaveItem}
+              newsData={newsSourceMainSlider}
+              cb={reloadLocalStorage}
+            />
+          </CarouselContainer>
+          <LandingPageNewsItem
+            data={newsSourceSecond}
+            key={newsSourceSecond.url}
+            /* key={state.newsSourceSecond.url} */
+            title="The Next Web - Top Headlines"
+            handleClick={handleSaveItem}
+          />
+          <LandingPageNewsItem
+            data={newsSourceThird}
+            key={newsSourceThird.url}
+            /* key={state.newsSourceSecond.url} */
+            title="National Geographic - Top Headlines"
+            handleClick={handleSaveItem}
+          />
+        </Container>
 
-    // console.log(topTenSaved);
-    return (
-      <LandingPageBodyContainer>
-        <LandingPageBodyContainerInner>
-          <Container>
-            <StyledTitle>
-              <H1>BBC News Top Headlines</H1>
-            </StyledTitle>
-            <CarouselContainer>
-              <Carousel
-                handleClick={this.handleSaveItem}
-                newsData={newsSourceMainSlider}
-                cb={this.reloadLocalStorage}
-              />
-            </CarouselContainer>
-            <LandingPageNewsItem
-              data={newsSourceSecond}
-              key={newsSourceSecond.url}
-              title="The Next Web - Top Headlines"
-              handleClick={this.handleSaveItem}
-            />
-            <LandingPageNewsItem
-              data={newsSourceThird}
-              key={newsSourceSecond.url}
-              title="National Geographic - Top Headlines"
-              handleClick={this.handleSaveItem}
-            />
-          </Container>
-          <SideBar>
-            <H3>
-              <StyledHeader>Top 10 Saved News Articles</StyledHeader>
-            </H3>
-            {topTenSaved.length > 0 ? (
-              topTenSaved.map((topNewsItem, index) => {
-                return (
-                  <TopNewsContainer key={topNewsItem.title}>
-                    <ImageAndTitle>
-                      <SavedImage
-                        src={
-                          topNewsItem.urlToImage
-                            ? topNewsItem.urlToImage
-                            : imagePlaceholder
-                        }
-                      />
-                      <TopNewsTitle
-                        as="a"
-                        href={topNewsItem.url}
-                        target="_blank"
+        <SideBar>
+          <H3>
+            <StyledHeader>Top 10 Saved News Articles</StyledHeader>
+          </H3>
+          {topTenSaved.length > 0 ? (
+            topTenSaved.map((topNewsItem, index) => {
+              return (
+                <TopNewsContainer key={topNewsItem.title}>
+                  <ImageAndTitle>
+                    <SavedImage
+                      src={
+                        topNewsItem.urlToImage
+                          ? topNewsItem.urlToImage
+                          : imagePlaceholder
+                      }
+                    />
+                    <TopNewsTitle as="a" href={topNewsItem.url} target="_blank">
+                      {topNewsItem.title}
+                      <SourceContainer>
+                        Source: {topNewsItem.source.name}
+                      </SourceContainer>
+                    </TopNewsTitle>
+                    <ButtonContainer>
+                      <Button
+                        delete
+                        small
+                        onClick={() => handleRemoveItem(topNewsItem)}
                       >
-                        {topNewsItem.title}
-                        <SourceContainer>
-                          Source: {topNewsItem.source.name}
-                        </SourceContainer>
-                      </TopNewsTitle>
-                      <ButtonContainer>
-                        <Button
-                          delete
-                          small
-                          onClick={() => this.handleRemoveItem(topNewsItem)}
-                        >
-                          X
-                        </Button>
-                      </ButtonContainer>
-                    </ImageAndTitle>
-                  </TopNewsContainer>
-                );
-              })
-            ) : (
-              <NoNewsItems>No News Items Saved</NoNewsItems>
-            )}
-          </SideBar>
-        </LandingPageBodyContainerInner>
-      </LandingPageBodyContainer>
-    );
-  }
-}
+                        X
+                      </Button>
+                    </ButtonContainer>
+                  </ImageAndTitle>
+                </TopNewsContainer>
+              );
+            })
+          ) : (
+            <NoNewsItems>No News Items Saved</NoNewsItems>
+          )}
+        </SideBar>
+      </LandingPageBodyContainerInner>
+    </LandingPageBodyContainer>
+  );
+};
 
-export default withNotificationConsumer(withConsumer(LandingPage));
+export default withNotificationConsumer(LandingPage);

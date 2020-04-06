@@ -1,10 +1,12 @@
-import React from "react";
+// import React from "react";
+import React, { useState, useEffect, useContext } from "react";
 import queryString from "query-string";
 import styled from "styled-components/macro";
 import moment from "moment";
 import { getSearchNews } from "../../utils/api";
+import NoSearchResults from "../../components/NoSearchResults";
 import Card from "../../components/Card";
-import { withConsumer } from "../../loadingContext";
+import { LoadingContext } from "../../loadingContext";
 import { withNotificationConsumer } from "../../notificationContext";
 
 const SearchResultsContainer = styled.div`
@@ -22,53 +24,45 @@ const CardContainer = styled.div`
   padding: 10px;
 `;
 
-export class SearchResults extends React.Component {
-  state = {
-    results: []
-  };
+const SearchResults = ({ location, setNotificationValue }) => {
+  const [results, setResults] = useState([]);
+  const [error, setError] = useState(false);
 
-  getData = async () => {
-    try {
-      let query = queryString.parse(this.props.location.search);
-      this.props.setLoadingValue(true);
-      if (!query.searchTerm) {
-        return this.props.setLoadingValue(false);
+  const loader = useContext(LoadingContext);
+
+  useEffect(() => {
+    async function getData() {
+      try {
+        let query = queryString.parse(location.search);
+        loader.setLoadingValue(true);
+        if (!query.searchTerm) {
+          return loader.setLoadingValue(false);
+        }
+        const news = await getSearchNews(query.searchTerm, query.sources);
+        setResults(news.data.articles);
+        loader.setLoadingValue(false);
+      } catch (err) {
+        console.error(error);
+        setError(true);
+        loader.setLoadingValue(false);
       }
-      const news = await getSearchNews(query.searchTerm, query.sources);
-      this.setState({
-        results: news.data.articles
-      });
-      this.props.setLoadingValue(false);
-    } catch (err) {
-      this.setState({ error: true });
-      this.props.setLoadingValue(false);
     }
-  };
+    getData();
+  }, [location.search, error]);
 
-  componentDidMount() {
-    this.getData();
-  }
-
-  componentDidUpdate(prevProps) {
-    //Used here because want something to happen after the state is updated?
-    if (prevProps.location.search !== this.props.location.search) {
-      this.getData();
-    }
-  }
-
-  notificationMessage = (article, isAlert) =>
-    this.props.setNotificationValue({
+  const notificationMessage = (article, isAlert) =>
+    setNotificationValue({
       color: isAlert,
       alertMessage: isAlert,
       data: article,
       textWhenTrue: "already saved",
-      textWhenFalse: "saved"
+      textWhenFalse: "saved",
     });
 
-  handleSaveItem = (result) => {
+  const handleSaveItem = (result) => {
     const savedResult = {
       ...result,
-      savedAt: moment().format("YYYY-MM-DD") // format: "2019-08-15"
+      savedAt: moment().format("YYYY-MM-DD"), // format: "2019-08-15"
     };
 
     let newsArr = [];
@@ -85,34 +79,35 @@ export class SearchResults extends React.Component {
       if (!alreadyInArr) {
         newsArr.push(savedResult);
         localStorage.setItem("savedNews", JSON.stringify(newsArr));
-        this.notificationMessage(savedResult, false);
+        notificationMessage(savedResult, false);
       } else {
-        this.notificationMessage(savedResult, true);
+        notificationMessage(savedResult, true);
       }
     }
   };
 
-  render() {
-    const { results } = this.state;
+  let query = queryString.parse(location.search);
+  console.log(query.searchTerm);
 
-    return (
-      <SearchResultsContainer>
-        <SearchResultsContainerInner>
-          {results.map((result) => (
-            <CardContainer key={result.url}>
-              <Card
-                data={result}
-                text="Save"
-                handleClick={this.handleSaveItem}
-                extended
-                showSource
-              />
-            </CardContainer>
-          ))}
-        </SearchResultsContainerInner>
-      </SearchResultsContainer>
-    );
-  }
-}
+  return results.length > 0 ? (
+    <SearchResultsContainer>
+      <SearchResultsContainerInner>
+        {results.map((result) => (
+          <CardContainer key={result.url}>
+            <Card
+              data={result}
+              text="Save"
+              handleClick={handleSaveItem}
+              extended
+              showSource
+            />
+          </CardContainer>
+        ))}
+      </SearchResultsContainerInner>
+    </SearchResultsContainer>
+  ) : (
+    <NoSearchResults />
+  );
+};
 
-export default withNotificationConsumer(withConsumer(SearchResults));
+export default withNotificationConsumer(SearchResults);

@@ -81,6 +81,7 @@ const SavedNews = (props) => {
   };
 
   const handleRemoveItem = (itemToRemove) => {
+    console.log(itemToRemove);
     const newSavedNews = savedNews.filter((newsItem) => {
       return newsItem !== itemToRemove;
     });
@@ -112,6 +113,8 @@ const SavedNews = (props) => {
     localStorage.clear("savedNews");
     setSavedNews([]);
   };
+
+  console.log(savedNews);
 
   return (
     <SavedNewsContainer>
