@@ -57,10 +57,7 @@ const FetchNews = ({ location }) => {
     <MainBodyContainer>
       <MainBodyContainerInner loading={loader.loading.toString()}>
         <StyledTitle>
-          {location.pathname
-            .split("/")
-            .join(" ")
-            .toUpperCase()}
+          {location.pathname.split("/").join(" ").toUpperCase()}
         </StyledTitle>
         <MainCarousel limit={"800px"} newsData={news} />
       </MainBodyContainerInner>

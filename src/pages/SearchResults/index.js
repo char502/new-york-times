@@ -56,13 +56,13 @@ const SearchResults = ({ location, setNotificationValue }) => {
       alertMessage: isAlert,
       data: article,
       textWhenTrue: "already saved",
-      textWhenFalse: "saved"
+      textWhenFalse: "saved",
     });
 
   const handleSaveItem = (result) => {
     const savedResult = {
       ...result,
-      savedAt: moment().format("YYYY-MM-DD") // format: "2019-08-15"
+      savedAt: moment().format("YYYY-MM-DD"), // format: "2019-08-15"
     };
 
     let newsArr = [];
