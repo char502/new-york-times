@@ -5,7 +5,7 @@ import Dropdown from "../../Dropdown";
 import { SearchAndFilterButton } from "../../Button";
 import { H2 } from "../../Typography";
 import magGlass2 from "../../../Images/magGlass2.png";
-// import ValidationMessage from "../../ValidationMessage";
+import ValidationMessage from "../../ValidationMessage";
 
 const MainContainer = styled.div`
   width: 100%;
@@ -97,10 +97,10 @@ class NavSearchAndFilter extends React.Component {
               </StyledIcon>
             </div>
             <div>
-              {/* <ValidationMessage
+              <ValidationMessage
                 invalid={this.props.searchTermError}
                 message={this.props.errorMsg.searchTerm}
-              /> */}
+              />
             </div>
           </FilterAndSearchContainer>
         </Inner>
