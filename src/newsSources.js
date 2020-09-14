@@ -1,75 +1,75 @@
 export default [
   {
     path: "abc-news",
-    name: "ABC News"
+    name: "ABC News",
   },
   {
     path: "ars-technica",
-    name: "Ars Technica"
+    name: "Ars Technica",
   },
   {
     path: "cnbc",
-    name: "CNBC"
+    name: "CNBC",
   },
   {
     path: "cnn",
-    name: "CNN"
+    name: "CNN",
   },
   {
     path: "crypto-coins-news",
-    name: "Crypto Coins News"
+    name: "Crypto Coins News",
   },
   {
     path: "hacker-news",
-    name: "Hacker News"
+    name: "Hacker News",
   },
   {
     path: "ign",
-    name: "IGN"
+    name: "IGN",
   },
   {
     path: "medical-news-today",
-    name: "Medical News Today"
+    name: "Medical News Today",
   },
   {
     path: "newsweek",
-    name: "Newsweek"
+    name: "Newsweek",
   },
   {
     path: "new-scientist",
-    name: "New Scientist"
+    name: "New Scientist",
   },
   {
     path: "next-big-future",
-    name: "Next Big Future"
+    name: "Next Big Future",
   },
   {
     path: "polygon",
-    name: "Polygon"
+    name: "Polygon",
   },
   {
     path: "recode",
-    name: "Recode"
+    name: "Recode",
   },
   {
     path: "the-verge",
-    name: "The Verge"
-  }
+    name: "The Verge",
+  },
 ];
 
 const landingPageNews = [
   {
     path: "bbc-news",
-    name: "BBC News"
+    name: "BBC News",
   },
   {
     path: "the-next-web",
-    name: "The Next Web"
+    name: "The Next Web",
   },
   {
     path: "national-geographic",
-    name: "National Geographic"
-  }
+    name: "National Geographic",
+  },
 ];
 
 export { landingPageNews };
