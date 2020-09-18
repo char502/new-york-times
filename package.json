@@ -2,6 +2,7 @@
   "name": "new-york-times",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:5000",
   "dependencies": {
     "@babel/runtime": "^7.6.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.25",

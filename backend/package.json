@@ -1,0 +1,23 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "backend to enable api requests",
+  "main": "index.js",
+  "scripts": {
+    "test": "This is a test"
+  },
+  "keywords": [
+    "backend",
+    "api"
+  ],
+  "author": "Charlotte Ellwood",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.20.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "node-fetch": "^2.6.1",
+    "request": "^2.88.2"
+  }
+}
