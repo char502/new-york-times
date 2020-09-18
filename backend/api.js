@@ -1,8 +1,6 @@
 const axios = require("axios");
 require("dotenv").config();
 
-console.log(process.env);
-
 const baseUrl = "https://newsapi.org/v2";
 
 const getNews = (path) => {

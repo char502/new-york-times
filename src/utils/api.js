@@ -1,14 +1,14 @@
-const axios = require("axios");
-// import axios from "axios";
+// const axios = require("axios");
+import axios from "axios";
 
 const baseUrl = "https://newsapi.org/v2";
 
-const getNews = (path) => {
+export const getNews = (path) => {
   const link = `${baseUrl}/top-headlines?sources=${path}&apiKey=${process.env.react_app_api_key}`;
   return axios.get(link);
 };
 
-const getSearchNews = (searchTerm, sources) => {
+export const getSearchNews = (searchTerm, sources) => {
   let link = "";
   if (sources) {
     link = `${baseUrl}/everything?q=${searchTerm}&sources=${sources}&apiKey=${process.env.react_app_api_key}`;
@@ -18,10 +18,10 @@ const getSearchNews = (searchTerm, sources) => {
   return axios.get(link);
 };
 
-module.exports = {
-  getNews,
-  getSearchNews,
-};
+// module.exports = {
+//   getNews,
+//   getSearchNews,
+// };
 
 // import axios from "axios";
 

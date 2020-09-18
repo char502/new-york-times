@@ -14,6 +14,8 @@ import NotificationProvider from "./notificationContext";
 import Footer from "../src/components/Footer";
 import "./index.css";
 
+import Test from "./Test";
+
 import newsSources from "./newsSources";
 
 // const GlobalStyle = createGlobalStyle`
@@ -44,7 +46,7 @@ class App extends React.Component {
             <Router>
               <AppContainer>
                 <Nav />
-                <Switch>
+                {/* <Switch>
                   <Route exact path="/" component={LandingPage} />
                   {newsSources.map((route) => (
                     <Route
@@ -57,8 +59,9 @@ class App extends React.Component {
                   <Route path="/search" component={SearchResults} />
                   <Route path="/savedNews" component={SavedNews} />
                   <Route path="*" component={FourOhFour} />
-                </Switch>
+                </Switch> */}
               </AppContainer>
+              <Test />
               <Footer />
             </Router>
           </LoadingProvider>

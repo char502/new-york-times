@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
-const axios = require("axios");
+const port = 5000;
+// const axios = require("axios");
 
 const { getNews, getSearchNews } = require("./api");
 
@@ -10,6 +11,8 @@ app.use(cors());
 
 app.get("/api", (req, res) => {
   const { sources, search } = req.query;
+
+  console.log(req);
 
   if (search) {
     getSearchNews(search, sources).then(({ data }) => {
@@ -23,6 +26,8 @@ app.get("/api", (req, res) => {
 });
 
 app.listen();
+
+// app.listen(port, () => console.log(`Example app listening on port ${port} `));
 
 // const express = require("express");
 // const fetch = require("node-fetch");
