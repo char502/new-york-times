@@ -46,7 +46,7 @@ class App extends React.Component {
             <Router>
               <AppContainer>
                 <Nav />
-                {/* <Switch>
+                <Switch>
                   <Route exact path="/" component={LandingPage} />
                   {newsSources.map((route) => (
                     <Route
@@ -59,7 +59,7 @@ class App extends React.Component {
                   <Route path="/search" component={SearchResults} />
                   <Route path="/savedNews" component={SavedNews} />
                   <Route path="*" component={FourOhFour} />
-                </Switch> */}
+                </Switch>
               </AppContainer>
               <Test />
               <Footer />

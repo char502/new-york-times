@@ -1,33 +1,55 @@
 const express = require("express");
-const cors = require("cors");
-const port = 5000;
-// const axios = require("axios");
-
-const { getNews, getSearchNews } = require("./api");
-
+const { createProxyMiddleware } = require("http-proxy-middleware");
 const app = express();
 
-app.use(cors());
+app.use(
+  "/newsapi",
+  createProxyMiddleware({
+    target: "https://newsapi.org/v2",
+    changeOrigin: true,
+    onProxyRes: function (proxyRes, req, res) {
+      proxyRes.headers["X-Api-Key"] = process.env.react_app_api_key;
+    },
+  })
+);
 
-app.get("/api", (req, res) => {
-  const { sources, search } = req.query;
+app.listen(5000);
 
-  console.log(req);
+// const express = require("express");
+// const cors = require("cors");
+// // const port = 5000;
+// const port = process.env.PORT || 5000;
+// // const axios = require("axios");
 
-  if (search) {
-    getSearchNews(search, sources).then(({ data }) => {
-      return res.json({ data: data.articles });
-    });
-  } else {
-    getNews(req.query.sources).then(({ data }) => {
-      return res.json({ data: data.articles });
-    });
-  }
-});
+// const { getNews, getSearchNews } = require("./api");
 
-app.listen();
+// const app = express();
 
-// app.listen(port, () => console.log(`Example app listening on port ${port} `));
+// app.use(cors());
+
+// app.get("/api", (req, res) => {
+//   const { sources, search } = req.query;
+
+//   console.log(req);
+
+//   if (search) {
+//     getSearchNews(search, sources).then(({ data }) => {
+//       return res.json({ data: data.articles });
+//     });
+//   } else {
+//     getNews(req.query.sources).then(({ data }) => {
+//       return res.json({ data: data.articles });
+//     });
+//   }
+// });
+
+// app.listen();
+
+// // app.listen(port, () => console.log(`Example app listening on port ${port} `));
+
+// app.listen(port, () => {
+//   console.log(`Starting server at ${port} `);
+// });
 
 // const express = require("express");
 // const fetch = require("node-fetch");

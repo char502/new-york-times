@@ -2,13 +2,15 @@
 
 import React, { useState, useEffect, useContext } from "react";
 
+const port = process.env.PORT || 5000;
+
 const Test = () => {
   const [articles, setArticles] = React.useState([]);
   const [sources, setSources] = React.useState("engadget");
 
   const fetchNews = () => {
     setArticles([]);
-    fetch(`http://localhost:5000/api?sources=${sources}`)
+    fetch(`http://localhost:${port}/newsapi?sources=${sources}`)
       .then((res) => res.json())
       .then(({ data }) => {
         setArticles(data);
