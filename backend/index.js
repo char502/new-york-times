@@ -1,117 +1,32 @@
-const express = require("express");
-const { createProxyMiddleware } = require("http-proxy-middleware");
+const express = require('express');
 const app = express();
+const axios = require('axios')
 
-app.use(
-  "/newsapi",
-  createProxyMiddleware({
-    target: "https://newsapi.org/v2",
-    changeOrigin: true,
-    onProxyRes: function (proxyRes, req, res) {
-      proxyRes.headers["X-Api-Key"] = process.env.react_app_api_key;
-    },
-  })
-);
 
-app.listen(5000);
+app.get('/top-headlines', async (req, res) => {
 
-// const express = require("express");
-// const cors = require("cors");
-// // const port = 5000;
-// const port = process.env.PORT || 5000;
-// // const axios = require("axios");
+  const query = req.query;
 
-// const { getNews, getSearchNews } = require("./api");
+  const apiHeadlines = await axios(`https://newsapi.org/v2/top-headlines?sources=${path}&apiKey=e536074ef7c645008d563c828c8d4354`);
 
-// const app = express();
+  res.json(apiHeadlines.data);
+})
 
-// app.use(cors());
+app.get('/everything', async (req, res) => {
+    const query = req.query;
+    
+    const api = await axios(`https://newsapi.org/v2/everything?q=${'dog'}&apiKey=e536074ef7c645008d563c828c8d4354`);
 
-// app.get("/api", (req, res) => {
-//   const { sources, search } = req.query;
+    res.json(api.data);
+})
 
-//   console.log(req);
 
-//   if (search) {
-//     getSearchNews(search, sources).then(({ data }) => {
-//       return res.json({ data: data.articles });
-//     });
-//   } else {
-//     getNews(req.query.sources).then(({ data }) => {
-//       return res.json({ data: data.articles });
-//     });
-//   }
-// });
 
-// app.listen();
+app.listen(5000, () =>  console.log('Live'))
 
-// // app.listen(port, () => console.log(`Example app listening on port ${port} `));
 
-// app.listen(port, () => {
-//   console.log(`Starting server at ${port} `);
-// });
 
-// const express = require("express");
-// const fetch = require("node-fetch");
-// // let request = require("request");
-// var apiCalls = require("../src/utils/api");
-// const app = express();
-// const port = 5000;
 
-// app.get('/wf', wf.foo );
+// React zone
 
-// app.get("/apiCalls", apiCalls.getNews);
-// app.get("/apiCalls", apiCalls.getSearchNews);
 
-// app.get("/apiCalls", (req, res) => {
-//   console.log(`request object is ${req}, response object is ${res}`);
-// });
-
-// app.get("//newsapi/everything", (req, res) => {
-//   request(
-//     "https://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey=The key here",
-//     function (error, response, body) {
-//       if (!error && response.statusCode === 200) {
-//         // console.log(body);
-//         // let parsedBody = JSON.parse(body);
-//         res.send(body);
-//       }
-//     }
-//   );
-// });
-
-// res.send("Hello World"));
-
-// app
-//   .route("/newsapi")
-//   .all((req, res, next) => {
-//     //Any auth method required
-//     next();
-//   })
-//   .get(async (req, res, next) => {
-//     const url = req.originalUrl.replace("/newsapi", "");
-//     return fetch(
-//       `${news_api_host}${url}&apiKey=${process.env.react_app_api_key}`
-//     );
-//   })
-//   .post(async (req, res, next) => {
-//     // whatever post API instructions you might have
-//   });
-
-// app.get("/", (req, res) => res.send("Hello World"));
-// app.get("//newsapi/everything", (req, res) => {
-//   request(
-//     "https://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey=The key here",
-//     function (error, response, body) {
-//       if (!error && response.statusCode === 200) {
-//         // console.log(body);
-//         // let parsedBody = JSON.parse(body);
-//         res.send(body);
-//       }
-//     }
-//   );
-// });
-
-// res.send("Hello World"));
-
-// app.listen(port, () => console.log(`Example app listening on port ${port} `));
