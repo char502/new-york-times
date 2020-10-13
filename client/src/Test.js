@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useContext } from "react";
 
-const port = process.env.PORT || 5000;
+// const port = process.env.PORT || 5000;
 
 const Test = () => {
   const [articles, setArticles] = React.useState([]);
@@ -10,12 +10,21 @@ const Test = () => {
 
   const fetchNews = () => {
     setArticles([]);
-    fetch(`http://localhost:${port}/newsapi?sources=${sources}`)
+    fetch('/top-headlines')
       .then((res) => res.json())
       .then(({ data }) => {
         setArticles(data);
       });
   };
+
+  // const fetchNews = () => {
+  //   setArticles([]);
+  //   fetch(`http://localhost:${port}/newsapi?sources=${sources}`)
+  //     .then((res) => res.json())
+  //     .then(({ data }) => {
+  //       setArticles(data);
+  //     });
+  // };
 
   console.log(articles);
 

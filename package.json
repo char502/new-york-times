@@ -4,7 +4,9 @@
   "description": "backend to enable api requests",
   "main": "index.js",
   "scripts": {
-    "test": "This is a test"
+    "client": "cd client && npm start",
+    "server": "nodemon index.js",
+    "dev": "concurrently --kill-others-on-fail \"npm:server\" \"npm:client\""
   },
   "keywords": [
     "backend",

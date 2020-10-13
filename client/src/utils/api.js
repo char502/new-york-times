@@ -1,4 +1,3 @@
-// const axios = require("axios");
 import axios from "axios";
 
 const baseUrl = "https://newsapi.org/v2";
@@ -19,3 +18,5 @@ export const getSearchNews = (searchTerm, sources) => {
   }
   return axios.get(link);
 };
+
+
