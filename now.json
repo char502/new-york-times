@@ -1,7 +1,0 @@
-{
-  "build": {
-    "env": {
-      "react_app_api_key": "@react_app_api_key"
-    }
-  }
-}
