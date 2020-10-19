@@ -5,14 +5,5 @@
     }
   },
   "version": 2,
-  "public": false,
-  "builds": [
-    { "src": "/client/package.json", "use": "@now/static-build" },
-    { "src": "/index.js", "use": "@now/node-server" }
-  ],
-  "routes": [
-    { "src": "/.*", "dest": "/index.js" },
-    { "src": "^/static/(.*)", "dest": "/static/$1" },
-    { "src": ".*", "dest": "/index.html" }
-  ]
+  "public": false
 }
