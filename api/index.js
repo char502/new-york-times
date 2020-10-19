@@ -1,5 +1,5 @@
 const express = require('express')
-// const bodyParser = require('body-parser');
+const path = require("path");
 const cors = require('cors')
 // const axios = require('axios')
 
@@ -30,6 +30,7 @@ app.get('/newsDataApi', (req, res) => {
 
 })
 
+<<<<<<< HEAD:api/index.js
 if (process.env.NODE_ENV === 'production') {
   // Serve any static files
   app.use(express.static(path.join(__dirname, 'client/build')));
@@ -40,6 +41,13 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
+=======
+// app.use(express.static(path.resolve(__dirname, "client", "build")));
+
+// app.get("/", (req, res) => {
+//   res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+// }); 
+>>>>>>> old-working-locally-state:index.js
 
 
 
