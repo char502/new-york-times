@@ -1,11 +1,11 @@
 const express = require('express')
-// const bodyParser = require('body-parser');
+const path = require("path");
 const cors = require('cors')
-const axios = require('axios')
+// const axios = require('axios')
 
 const port = process.env.PORT || 5000;
 
-const {getNews, getSearchNews} = require('./api')
+const {getNews, getSearchNews} = require('./apiData')
 
 // app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({ extended: true }));
@@ -30,6 +30,11 @@ app.get('/', (req, res) => {
 
 })
 
+// app.use(express.static(path.resolve(__dirname, "client", "build")));
+
+// app.get("/", (req, res) => {
+//   res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+// }); 
 
 
 
