@@ -127,9 +127,9 @@ const LandingPage = ({ setNotificationValue }) => {
         landingPageNews.map(({ path }) => getNews(path))
       );
 
-      setNewsSourceMainSlider(ResponseOne.data.articles);
-      setNewsSourceSecond(ResponseTwo.data.articles);
-      setNewsSourceThird(ResponseThree.data.articles);
+      setNewsSourceMainSlider(ResponseOne.data);
+      setNewsSourceSecond(ResponseTwo.data);
+      setNewsSourceThird(ResponseThree.data);
 
       // Data for sidebar
       if (localStorage.getItem("savedNews")) {

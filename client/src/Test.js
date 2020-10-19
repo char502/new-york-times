@@ -1,21 +1,31 @@
 // http://localhost:5000/api
 
+
+
 import React, { useState, useEffect, useContext } from "react";
 
+// import { getNews } from "../src/utils/api";
+
+// import { getNews } from "../src/utils/api";
+
 // const port = process.env.PORT || 5000;
+
+
 
 const Test = () => {
   const [articles, setArticles] = React.useState([]);
   const [sources, setSources] = React.useState("engadget");
 
-  const fetchNews = () => {
-    setArticles([]);
-    fetch('/top-headlines')
+ const fetchNews = () => {
+    setArticles([])
+    fetch(`http://localhost:5000?sources=${sources}`)
       .then((res) => res.json())
       .then(({ data }) => {
         setArticles(data);
       });
   };
+
+  // getNews('abc-news')
 
   // const fetchNews = () => {
   //   setArticles([]);
@@ -26,9 +36,29 @@ const Test = () => {
   //     });
   // };
 
+  // let result = articles.map((article) => {
+  //   console.log(article)
+  // })
+ 
+  // for (let item in articles.array) {
+  //   console.log(item)
+  //   }
+  
+
+  
+  
+
   console.log(articles);
 
+  // let result = articles[2].map((item) => {
+  //   return item
+  // })
+
+  // console.log(result)
+
+
   return (
+    
     <div>
       <h3>This is a test</h3>
       Sources:

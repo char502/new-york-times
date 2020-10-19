@@ -45,7 +45,11 @@ const FetchNews = ({ location }) => {
       loader.setLoadingValue(true);
 
       const response = await getNews(location.pathname.split("/")[1]);
-      const news = response.data.articles;
+      const news = response.data;
+      console.log(news)
+      // const response = await getNews('abc-news');
+      // console.log(response.data)
+      // const news = response.data.articles;
 
       setNews(news);
       loader.setLoadingValue(false);

@@ -39,7 +39,8 @@ const SearchResults = ({ location, setNotificationValue }) => {
           return loader.setLoadingValue(false);
         }
         const news = await getSearchNews(query.searchTerm, query.sources);
-        setResults(news.data.articles);
+        console.log(news.data)
+        setResults(news.data);
         loader.setLoadingValue(false);
       } catch (err) {
         console.error(error);
