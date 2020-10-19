@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components/macro";
-import { Title } from "../components/Typography";
-import { ModH3 } from "../components/Typography";
+import { Title } from "./Typography";
+import { ModH3 } from "./Typography";
 import moment from "moment";
 import imagePlaceholder from "../Images/imagePlaceholder.png";
-import { Button } from "../components/Button";
+import { Button } from "./Button";
 import { withNotificationConsumer } from "../notificationContext";
 
 const NewsSourceSecondaryContainer = styled.div`

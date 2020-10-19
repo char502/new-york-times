@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components/macro";
 import { Link } from "react-router-dom";
-import { AltButton } from "../components/Button";
+import { AltButton } from "./Button";
 
 const ButtonContainer = styled.div`
   margin-right: 12px;

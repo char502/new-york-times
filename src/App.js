@@ -11,7 +11,7 @@ import SearchResults from "./pages/SearchResults";
 import SavedNews from "./pages/SavedNews";
 import LoadingProvider from "./loadingContext";
 import NotificationProvider from "./notificationContext";
-import Footer from "../src/components/Footer";
+import Footer from "./components/Footer";
 import "./index.css";
 
 import Test from "./Test";

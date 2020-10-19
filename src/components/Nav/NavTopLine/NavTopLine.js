@@ -1,7 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import styled from "styled-components/macro";
-import NavHomeButton from "../../../components/NavHomeButton";
+import NavHomeButton from "../../NavHomeButton";
 import SavedItemsButton from "../../SavedItemsButton";
 import SearchInput from "../../SearchInput";
 

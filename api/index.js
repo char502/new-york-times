@@ -1,11 +1,11 @@
 const express = require('express')
 // const bodyParser = require('body-parser');
 const cors = require('cors')
-const axios = require('axios')
+// const axios = require('axios')
 
 const port = process.env.PORT || 5000;
 
-const {getNews, getSearchNews} = require('./api')
+const {getNews, getSearchNews} = require('./apiData')
 
 // app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({ extended: true }));
@@ -14,7 +14,7 @@ const app = express()
 
 app.use(cors())
 
-app.get('/', (req, res) => {
+app.get('/newsDataApi', (req, res) => {
   const {sources, search} = req.query
 
   if (search) {
@@ -23,12 +23,22 @@ app.get('/', (req, res) => {
       return res.json({data: data.articles})
     })
   } else {
-    getNews(req.query.sources).then(({data}) => {
+    getNews(sources).then(({data}) => {
       return res.json({data: data.articles})
     })
   }
 
 })
+
+if (process.env.NODE_ENV === 'production') {
+  // Serve any static files
+  app.use(express.static(path.join(__dirname, 'client/build')));
+    
+  // Handle React routing, return all requests to React app
+  app.get('*', function(req, res) {
+    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+  });
+}
 
 
 

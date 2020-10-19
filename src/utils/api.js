@@ -4,7 +4,9 @@ import axios from "axios";
 
 // const baseUrl = "http://localhost:5000/everything"
 
-const baseUrl = "http://localhost:5000"
+// const baseUrl = "http://localhost:5000"
+
+const baseUrl = "/newsDataApi"
 
 
 export const getNews = (path) => {
@@ -14,6 +16,8 @@ export const getNews = (path) => {
   const link = `${baseUrl}?sources=${path}`
 
   return axios.get(link).then(response => response.data);
+
+  
 };
 
 export const getSearchNews = (searchTerm, sources) => {

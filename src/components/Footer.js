@@ -3,7 +3,7 @@ import styled from "styled-components/macro";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
 import { faLinkedin, faGithubSquare } from "@fortawesome/free-brands-svg-icons";
-import { H4, H5 } from "../components/Typography";
+import { H4, H5 } from "./Typography";
 
 const FooterContainer = styled.div`
   width: 100vw;
