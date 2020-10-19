@@ -5,7 +5,7 @@ const cors = require('cors')
 
 const port = process.env.PORT || 5000;
 
-const {getNews, getSearchNews} = require('./api/apiData')
+const {getNews, getSearchNews} = require('./apiData')
 
 // app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({ extended: true }));
