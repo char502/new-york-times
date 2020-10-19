@@ -37,7 +37,6 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-<<<<<<< HEAD
     "client": "npm start",
     "server": "cd api && nodemon index.js",
     "dev": "concurrently --kill-others-on-fail \"npm:server\" \"npm:client\""
@@ -56,29 +55,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-=======
-    "client": "cd client && npm start",
-    "server": "nodemon index.js",
-    "dev": "concurrently --kill-others-on-fail \"npm:server\" \"npm:client\""
-  },
-  "keywords": [
-    "backend",
-    "api"
-  ],
-  "author": "Charlotte Ellwood",
-  "license": "ISC",
-  "dependencies": {
-    "axios": "^0.20.0",
-    "body-parser": "^1.19.0",
-    "cors": "^2.8.5",
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "http-proxy-middleware": "^1.0.5",
-    "node-fetch": "^2.6.1",
-    "nodemon": "^2.0.4",
-    "path": "^0.12.7",
-    "request": "^2.88.2"
->>>>>>> old-working-locally-state
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^4.2.4",
