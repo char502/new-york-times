@@ -39,7 +39,8 @@
     "slick-carousel": "^1.8.1",
     "styled-components": "^4.3.2",
     "styled-icons": "^8.6.0",
-    "styled-reset": "^4.2.3"
+    "styled-reset": "^4.2.3",
+    "yarn": "^1.22.10"
   },
   "scripts": {
     "start": "react-scripts start",
