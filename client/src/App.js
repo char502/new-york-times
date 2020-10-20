@@ -14,8 +14,6 @@ import NotificationProvider from "./notificationContext";
 import Footer from "./components/Footer";
 import "./index.css";
 
-import Test from "./Test";
-
 import newsSources from "./newsSources";
 
 // const GlobalStyle = createGlobalStyle`
@@ -61,7 +59,6 @@ class App extends React.Component {
                   <Route path="*" component={FourOhFour} />
                 </Switch>
               </AppContainer>
-              <Test />
               <Footer />
             </Router>
           </LoadingProvider>
