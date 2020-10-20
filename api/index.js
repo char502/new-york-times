@@ -3,6 +3,7 @@ const path = require("path");
 const cors = require('cors')
 // const axios = require('axios')
 
+const app = express()
 const port = process.env.PORT || 5000;
 
 const {getNews, getSearchNews} = require('./apiData')
@@ -10,7 +11,7 @@ const {getNews, getSearchNews} = require('./apiData')
 // app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({ extended: true }));
 
-const app = express()
+
 
 app.use(cors())
 
@@ -40,11 +41,11 @@ app.get('/newsDataApi', (req, res) => {
 //   });
 // }
 
-app.use(express.static(path.resolve(__dirname, "client", "build")));
+// app.use(express.static(path.resolve(__dirname, "client", "build")));
 
-app.get("/", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-}); 
+// app.get("/", (req, res) => {
+//   res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+// }); 
 
 
 

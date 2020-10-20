@@ -6,7 +6,7 @@ import axios from "axios";
 
 // const baseUrl = "http://localhost:5000"
 
-const baseUrl = "/newsDataApi"
+const baseUrl = "/newsDataApi/"
 
 
 export const getNews = (path) => {

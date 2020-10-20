@@ -1,0 +1,30 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "backend to enable api requests",
+  "main": "index.js",
+  "homepage": "/build",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "keywords": [
+    "backend",
+    "api"
+  ],
+  "author": "Charlotte Ellwood",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.20.0",
+    "axios-cancel": "^0.2.2",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "http-proxy-middleware": "^1.0.5",
+    "node-fetch": "^2.6.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  },
+  "now-build": "react-scripts build && mv build dist"
+}
