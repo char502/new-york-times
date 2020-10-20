@@ -5,7 +5,7 @@
   "main": "server.js",
   "homepage": "/build",
   "scripts": {
-   "dev": "run-p dev:**",
+    "dev": "run-p dev:**",
     "dev:server": "nodemon server.js",
     "dev:app": "cd client && yarn start",
     "build:app": "cd client && yarn build",
