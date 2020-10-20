@@ -2,10 +2,10 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "backend to enable api requests",
-  "main": "index.js",
+  "main": "server.js",
   "homepage": "/build",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "nodemon server.js"
   },
   "keywords": [
     "backend",
