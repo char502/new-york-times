@@ -20,5 +20,3 @@ export const getSearchNews = (searchTerm, sources) => {
   }
   return axios.get(link).then(response => response.data);
 };
-
-
