@@ -12,10 +12,12 @@ const {getNews, getSearchNews} = require('./apiData')
 app.use(cors())
 
 app.get('/newsDataApi', (req, res) => {
-  const {sources, search} = req.query
+  const {sources, q} = req.query
 
-  if (search) {
-    getSearchNews(search, sources)
+  console.log(sources, q)
+
+  if (q) {
+    getSearchNews(q, sources)
     .then(({data}) => {
       return res.json({data: data.articles})
     })
