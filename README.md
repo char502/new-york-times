@@ -1,6 +1,7 @@
 1. **To install the express backend for this app (for api calls) - 'npm install'**
 2. **To install the frontend for this app - 'cd client' - 'npm install'**
 3. **Then to run the app - 'yarn dev'**
+4. **Note: An api key from https://newsapi.org/ is required to run this app locally**
 
 ## New York Times Clone
 
